@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\rcDominiosDataTransfers\rcDominiosDataTransfers.csproj" />
+    <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
+    <ProjectReference Include="..\rcDominiosDatas\rcDominiosDatas.csproj" />
+    <ProjectReference Include="..\rcDominiosDatabase\rcDominiosDatabase.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

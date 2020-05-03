@@ -1,0 +1,74 @@
+@model rcDominiosDataTransfers.PessoaTipoDataTransfer;
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div class="areaUtilMed">
+    <div class="fonteMedia"><i class="iconeMed fas fa-users"></i>&nbsp;
+        <a asp-controller="PessoaTipo" asp-action="Index">Tipo de Pessoa</a> &nbsp;/&nbsp; Formulário
+    </div>
+    <br>
+    <form asp-controller="PessoaTipo" asp-action="Incluir" asp-anti-forgery>
+        <div class="form-group">
+            <label asp-for="@Model.PessoaTipo.Id" class="txtCampoTitulo">Id</label>
+            <input class="form-control campoMin" type="text" asp-for="@Model.PessoaTipo.Id" disabled>
+        </div>
+        <div class="form-group campoMed">
+            <label asp-for="@Model.PessoaTipo.Descricao" class="txtCampoTitulo">Descrição</label>
+            <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Descricao">
+        </div>
+        <div class="form-group campoMed">
+            <label asp-for="@Model.PessoaTipo.Codigo" class="txtCampoTitulo">Código</label>
+            <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Codigo">
+        </div>
+        <br>
+        <div>
+            <div class="float-left">
+                <button class="btn btn-danger btn-lg" asp-controller="PessoaTipo" asp-action="Inclusao"><i class="fas fa-save"></i> 
+                    &nbsp;Incluir</button>
+                <button class="btn btn-warning btn-lg" asp-controller="PessoaTipo" asp-action="Index"><i class="fas fa-arrow-circle-left"></i> 
+                    &nbsp;Voltar</button>
+            </div>
+            <div class="float-right">
+                @if (@Model != null) {
+                    @if (@Model.Erro || !@Model.Validacao) {
+                        <a href="javascript:mostrarMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
+                    }
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (@Model != null) {
+    @if (@Model.Erro || !@Model.Validacao) {
+        <div class="text-danger">
+            @section Scripts {
+                <script>
+                    $('#modalMessages').modal('show');
+
+                    function mostrarMensagens() {
+                        $('#modalMessages').modal('show');
+                    }
+                </script>
+            }
+
+            @if (@Model.Erro) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ErroMensagens) {
+                            <li>@msg</li>
+                        }
+                    </ul>
+                }
+            } else if (!@Model.Validacao) {
+                @section Messages {
+                    @foreach (var msg in @Model.ValidacaoMensagens) {
+                        <span>@msg</span><br>
+                    }
+                }
+            }
+        </div>
+    }
+}
