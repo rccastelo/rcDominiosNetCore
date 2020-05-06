@@ -13,8 +13,8 @@ namespace rcDominiosBusiness
 
             try  {
                 pessoaTipoValidacao = new PessoaTipoDataTransfer(pessoaTipoDataTransfer);
-                pessoaTipoValidacao.PessoaTipo.Descricao = Tratamento.TratarNuloBranco(pessoaTipoValidacao.PessoaTipo.Descricao);
-                pessoaTipoValidacao.PessoaTipo.Codigo = Tratamento.TratarNuloBranco(pessoaTipoValidacao.PessoaTipo.Codigo);
+                pessoaTipoValidacao.PessoaTipo.Descricao = Tratamento.TratarStringNuloBranco(pessoaTipoValidacao.PessoaTipo.Descricao);
+                pessoaTipoValidacao.PessoaTipo.Codigo = Tratamento.TratarStringNuloBranco(pessoaTipoValidacao.PessoaTipo.Codigo);
 
                 //-- Descrição do Tipo de Pessoa
                 if (string.IsNullOrEmpty(pessoaTipoValidacao.PessoaTipo.Descricao)) {
@@ -27,13 +27,13 @@ namespace rcDominiosBusiness
                 }
 
                 //-- Código do Tipo de Pessoa
-                if (string.IsNullOrEmpty(pessoaTipoValidacao.PessoaTipo.Codigo)) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Necessário informar o Código do Tipo de Pessoa");
-                } else if (pessoaTipoValidacao.PessoaTipo.Codigo.Length > 10) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                } else if(!Validacao.ValidarCharCodigoAlfanum(pessoaTipoValidacao.PessoaTipo.Codigo)) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
+                if (!string.IsNullOrEmpty(pessoaTipoValidacao.PessoaTipo.Codigo)) {
+                    if (pessoaTipoValidacao.PessoaTipo.Codigo.Length > 10) {
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
+                    } else if(!Validacao.ValidarCharCodigoAlfanum(pessoaTipoValidacao.PessoaTipo.Codigo)) {
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
+                    }
                 }
 
                 //-- Data de Criação do Tipo de Pessoa
