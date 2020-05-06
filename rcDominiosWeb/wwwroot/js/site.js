@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function VerMensagens() {
+    $('#modalMessages').modal('show');
+}
 
-// Write your JavaScript code.
+function VerCharDescricao() {
+    $('#modalMessages').modal('show');
+}
+
+$(function(){
+    $('[data-toggle="popover"]').popover(
+        {
+            html : true,
+            content: function() {
+                var objContent = $(this).attr("data-object-content");
+                return $(objContent).html();
+            }
+        }
+    );
+});

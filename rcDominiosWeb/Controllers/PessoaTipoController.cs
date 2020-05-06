@@ -26,44 +26,47 @@ namespace rcDominiosWeb.Controllers
 
         public IActionResult Lista()
         {
-            PessoaTipoModel pessoaTipoMD = new PessoaTipoModel();
-            PessoaTipoDataTransfer pessoaTipoDT = new PessoaTipoDataTransfer();
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoLista;
 
-            pessoaTipoDT.PessoaTipoLista = new List<PessoaTipoEntity>();
-            PessoaTipoEntity ent = new PessoaTipoEntity();
-            ent.Id = 12;
-            ent.Descricao = "Descrição Um";
-            ent.Codigo = "D-U";
-            ent.Ativo = false;
-            ent.Criacao = new DateTime(2020, 3, 24, 22, 42, 0);
-            ent.Alteracao = new DateTime(2020, 3, 26, 22, 42, 0);
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
 
-            pessoaTipoDT.PessoaTipoLista.Add(ent);
+                pessoaTipoLista = pessoaTipoModel.Listar();
+            } catch (Exception ex) {
+                pessoaTipoLista = new PessoaTipoDataTransfer();
 
-            return View(pessoaTipoDT);
+                pessoaTipoLista.Validacao = false;
+                pessoaTipoLista.Erro = true;
+                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Lista [" + ex.Message + "]");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            return View(pessoaTipoLista);
         }
 
         public IActionResult Inclusao(PessoaTipoDataTransfer pessoaTipoDataTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoInclusao;
+            PessoaTipoDataTransfer pessoaTipoRetorno;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoInclusao = pessoaTipoModel.Incluir(pessoaTipoDataTransfer);
-            } catch {
-                pessoaTipoInclusao = new PessoaTipoDataTransfer();
+                pessoaTipoRetorno = pessoaTipoModel.Incluir(pessoaTipoDataTransfer);
+            } catch (Exception ex) {
+                pessoaTipoRetorno = new PessoaTipoDataTransfer();
 
-                pessoaTipoInclusao.Validacao = false;
-                pessoaTipoInclusao.Erro = true;
-                pessoaTipoInclusao.ErroMensagens.Add("Erro em PessoaTipoController Inclusao");
+                pessoaTipoRetorno.Validacao = false;
+                pessoaTipoRetorno.Erro = true;
+                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
 
-            if (pessoaTipoInclusao.Erro || pessoaTipoInclusao.Validacao) {
-                return View("Form", pessoaTipoInclusao);
+            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
+                return View("Form", pessoaTipoRetorno);
             } else {
                 return RedirectToAction("Lista");
             }

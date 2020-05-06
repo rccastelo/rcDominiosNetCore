@@ -1,4 +1,5 @@
-﻿using rcDominiosDatas;
+﻿using System;
+using rcDominiosDatas;
 using rcDominiosDataTransfers;
 using rcDominiosEntities;
 
@@ -22,12 +23,12 @@ namespace rcDominiosDataModels
                 PessoaTipoRetorno.PessoaTipo = new PessoaTipoEntity(pessoaTipoDataTransfer.PessoaTipo);
                 PessoaTipoRetorno.Validacao = true;
                 PessoaTipoRetorno.Erro = false;
-            } catch {
+            } catch (Exception ex) {
                 PessoaTipoRetorno = new PessoaTipoDataTransfer();
 
                 PessoaTipoRetorno.Validacao = false;
                 PessoaTipoRetorno.Erro = true;
-                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Incluir");
+                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoData = null;
             }
@@ -51,12 +52,12 @@ namespace rcDominiosDataModels
                 PessoaTipoRetorno.PessoaTipo = new PessoaTipoEntity(pessoaTipoDataTransfer.PessoaTipo);
                 PessoaTipoRetorno.Validacao = true;
                 PessoaTipoRetorno.Erro = false;
-            } catch {
+            } catch (Exception ex) {
                 PessoaTipoRetorno = new PessoaTipoDataTransfer();
 
                 PessoaTipoRetorno.Validacao = false;
                 PessoaTipoRetorno.Erro = true;
-                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Alterar");
+                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 pessoaTipoData = null;
             }
@@ -80,12 +81,12 @@ namespace rcDominiosDataModels
 
                 PessoaTipoRetorno.Validacao = true;
                 PessoaTipoRetorno.Erro = false;
-            } catch {
+            } catch (Exception ex) {
                 PessoaTipoRetorno = new PessoaTipoDataTransfer();
 
                 PessoaTipoRetorno.Validacao = false;
                 PessoaTipoRetorno.Erro = true;
-                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Excluir");
+                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoData = null;
             }
@@ -105,12 +106,12 @@ namespace rcDominiosDataModels
                 PessoaTipoRetorno.PessoaTipoLista = pessoaTipoData.Listar();
                 PessoaTipoRetorno.Validacao = true;
                 PessoaTipoRetorno.Erro = false;
-            } catch {
+            } catch (Exception ex) {
                 PessoaTipoRetorno = new PessoaTipoDataTransfer();
 
                 PessoaTipoRetorno.Validacao = false;
                 PessoaTipoRetorno.Erro = true;
-                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Listar");
+                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel Listar [" + ex.Message + "]");
             } finally {
                 pessoaTipoData = null;
             }
@@ -130,12 +131,12 @@ namespace rcDominiosDataModels
                 PessoaTipoRetorno.PessoaTipo = pessoaTipoData.ConsultarPorId(id);
                 PessoaTipoRetorno.Validacao = true;
                 PessoaTipoRetorno.Erro = false;
-            } catch {
+            } catch (Exception ex) {
                 PessoaTipoRetorno = new PessoaTipoDataTransfer();
 
                 PessoaTipoRetorno.Validacao = false;
                 PessoaTipoRetorno.Erro = true;
-                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel ConsultarPorId");
+                PessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 pessoaTipoData = null;
             }

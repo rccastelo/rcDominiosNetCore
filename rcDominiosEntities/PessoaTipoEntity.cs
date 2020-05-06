@@ -1,11 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace rcDominiosEntities
 {
     public class PessoaTipoEntity : Entity
     {
+        [StringLength(200)]
         public string Descricao { get; set; }
 
+        [StringLength(20)]
         public string Codigo { get; set; }
 
         public bool Ativo { get; set; }        

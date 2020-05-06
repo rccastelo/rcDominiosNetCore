@@ -12,15 +12,33 @@
     <form asp-controller="PessoaTipo" asp-action="Incluir" asp-anti-forgery>
         <div class="form-group">
             <label asp-for="@Model.PessoaTipo.Id" class="txtCampoTitulo">Id</label>
-            <input class="form-control campoMin" type="text" asp-for="@Model.PessoaTipo.Id" disabled>
+            <input class="form-control campoPeq" type="text" asp-for="@Model.PessoaTipo.Id" disabled>
         </div>
-        <div class="form-group campoMed">
-            <label asp-for="@Model.PessoaTipo.Descricao" class="txtCampoTitulo">Descrição</label>
-            <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Descricao">
+        <div class="form-group">
+            <label asp-for="@Model.PessoaTipo.Descricao" class="txtCampoTitulo">Descrição</label> &nbsp;
+            <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                data-object-content="#popDescricao">
+                <i class="iconePopObr fas fa-asterisk"></i>
+            </a>
+            <div id="popDescricao" class="popMsg">
+                &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
+                &bull; Tamanho máximo: <b>100</b> caracteres<br>
+                &bull; Caracteres válidos: <b>letras</b>, <b>acentos</b>, <b>números</b>, <b>traço</b> e <b>espaço em branco</b><br>
+            </div>
+            <input class="form-control campoMed" type="text" maxlength="100" asp-for="@Model.PessoaTipo.Descricao">
         </div>
-        <div class="form-group campoMed">
-            <label asp-for="@Model.PessoaTipo.Codigo" class="txtCampoTitulo">Código</label>
-            <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Codigo">
+        <div class="form-group areaUtilPeq">
+            <label asp-for="@Model.PessoaTipo.Codigo" class="txtCampoTitulo">Código</label> &nbsp;
+            <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                data-object-content="#popCodigo">
+                <i class="iconePopOpc fas fa-question"></i>
+            </a>
+            <div id="popCodigo" class="popMsg">
+                &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>traço</b><br>
+            </div>
+            <input class="form-control campoPeq d-inline" type="text" maxlength="10" asp-for="@Model.PessoaTipo.Codigo">
         </div>
         <br>
         <div>
@@ -33,7 +51,7 @@
             <div class="float-right">
                 @if (@Model != null) {
                     @if (@Model.Erro || !@Model.Validacao) {
-                        <a href="javascript:mostrarMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
+                        <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
                     }
                 }
             </div>
@@ -47,10 +65,6 @@
             @section Scripts {
                 <script>
                     $('#modalMessages').modal('show');
-
-                    function mostrarMensagens() {
-                        $('#modalMessages').modal('show');
-                    }
                 </script>
             }
 
@@ -58,15 +72,17 @@
                 @section Messages {
                     <ul>
                         @foreach (var msg in @Model.ErroMensagens) {
-                            <li>@msg</li>
+                            <li class="p-2">@msg</li>
                         }
                     </ul>
                 }
             } else if (!@Model.Validacao) {
                 @section Messages {
-                    @foreach (var msg in @Model.ValidacaoMensagens) {
-                        <span>@msg</span><br>
-                    }
+                    <ul>
+                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
                 }
             }
         </div>

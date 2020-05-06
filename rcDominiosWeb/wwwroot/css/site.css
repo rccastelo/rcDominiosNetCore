@@ -3,8 +3,9 @@ body { margin-bottom: 60px; background-color: #1e1e1e; }
 .footer { position: absolute; bottom: 0; width: 100%; white-space: nowrap; height: 60px; line-height: 60px; }
 a, a:visited { color: #fff; }
 a:hover { color: #fff; }
-.campoMed { max-width: 500px; }
-.campoMin { max-width: 200px; }
+.campoMed { max-width: 450px; }
+.campoPeq { max-width: 170px; }
+.areaUtilPeq { max-width: 250px; overflow: hidden; }
 .areaUtilMed { max-width: 500px; overflow: hidden; }
 .areaUtilGrd { max-width: 900px; overflow: hidden; }
 .iconeGrd { font-size: 64px; }
@@ -17,3 +18,9 @@ a:hover { color: #fff; }
 input[type="text"]:disabled { background-color : #aaa; color : #000; }
 input[type="text"] { color : #000; }
 .rodape { border-top: #606060 1px solid; }
+.iconePopObr { font-size: 24px; color: red; }
+.iconePopOpc { font-size: 24px; color: #ff6000; }
+.popMsg { visibility: hidden; width: 0px; height: 0px; }
+.popCampoObr { background-color: red; color: white; }
+.popCampoOpc { background-color: #ff6000; color: white; }
+.corOpcional { color: #ff6000; }
