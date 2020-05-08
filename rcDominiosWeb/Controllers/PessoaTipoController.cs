@@ -9,21 +9,42 @@ namespace rcDominiosWeb.Controllers
 {
     public class PessoaTipoController : Controller
     {
+        [HttpGet, HttpPost]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Form()
-        {
-            return View();
-        }
-
+        [HttpGet]
         public IActionResult Filtro()
         {
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Form(int id)
+        {
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoForm;
+
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
+
+                pessoaTipoForm = pessoaTipoModel.ConsultarPorId(id);
+            } catch {
+                pessoaTipoForm = new PessoaTipoDataTransfer();
+                
+                pessoaTipoForm.Validacao = false;
+                pessoaTipoForm.Erro = true;
+                pessoaTipoForm.ErroMensagens.Add("Erro em PessoaTipoController Form");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            return View(pessoaTipoForm);
+        }
+
+        [HttpGet]
         public IActionResult Lista()
         {
             PessoaTipoModel pessoaTipoModel;
@@ -46,6 +67,7 @@ namespace rcDominiosWeb.Controllers
             return View(pessoaTipoLista);
         }
 
+        [HttpPost]
         public IActionResult Inclusao(PessoaTipoDataTransfer pessoaTipoDataTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
@@ -72,19 +94,58 @@ namespace rcDominiosWeb.Controllers
             }
         }
 
-        public IActionResult Alteracao()
+        [HttpPost]
+        public IActionResult Alteracao(PessoaTipoDataTransfer pessoaTipoDataTransfer)
         {
-            return RedirectToAction("Lista");
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoRetorno;
+
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
+
+                pessoaTipoRetorno = pessoaTipoModel.Alterar(pessoaTipoDataTransfer);
+            } catch (Exception ex) {
+                pessoaTipoRetorno = new PessoaTipoDataTransfer();
+
+                pessoaTipoRetorno.Validacao = false;
+                pessoaTipoRetorno.Erro = true;
+                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Alteracao [" + ex.Message + "]");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
+                return View("Form", pessoaTipoRetorno);
+            } else {
+                return RedirectToAction("Lista");
+            }
         }
 
-        public IActionResult Exclusao()
+        [HttpGet]
+        public IActionResult Exclusao(int id)
         {
-            return RedirectToAction("Lista");
-        }
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoRetorno;
 
-        public IActionResult Consulta()
-        {
-            return RedirectToAction("Lista");
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
+
+                pessoaTipoRetorno = pessoaTipoModel.Excluir(id);
+            } catch (Exception ex) {
+                pessoaTipoRetorno = new PessoaTipoDataTransfer();
+
+                pessoaTipoRetorno.Validacao = false;
+                pessoaTipoRetorno.Erro = true;
+                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Exclusao [" + ex.Message + "]");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
+                return View("Form", pessoaTipoRetorno);
+            } else {
+                return RedirectToAction("Lista");
+            }
         }
     }
 }

@@ -11,8 +11,8 @@ namespace rcDominiosWeb.Models
         {
             PessoaTipoDataModel pessoaTipoDataModel;
             PessoaTipoBusiness pessoaTipoBusiness;
-            PessoaTipoDataTransfer pessoaTipoDataTransferValidacao;
-            PessoaTipoDataTransfer pessoaTipoDataTransferInclusao;
+            PessoaTipoDataTransfer pessoaTipoDTValidacao;
+            PessoaTipoDataTransfer pessoaTipoDTInclusao;
 
             try {
                 pessoaTipoBusiness = new PessoaTipoBusiness();
@@ -20,57 +20,138 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipoDataTransfer.PessoaTipo.Criacao = DateTime.Today;
                 pessoaTipoDataTransfer.PessoaTipo.Alteracao = DateTime.Today;
-                pessoaTipoDataTransfer.PessoaTipo.Ativo = true;
 
-                pessoaTipoDataTransferValidacao = pessoaTipoBusiness.Validar(pessoaTipoDataTransfer);
+                pessoaTipoDTValidacao = pessoaTipoBusiness.Validar(pessoaTipoDataTransfer);
 
-                if (!pessoaTipoDataTransferValidacao.Erro) {
-                    if (pessoaTipoDataTransferValidacao.Validacao) {
-                        pessoaTipoDataTransferInclusao = pessoaTipoDataModel.Incluir(pessoaTipoDataTransferValidacao);
+                if (!pessoaTipoDTValidacao.Erro) {
+                    if (pessoaTipoDTValidacao.Validacao) {
+                        pessoaTipoDTInclusao = pessoaTipoDataModel.Incluir(pessoaTipoDTValidacao);
                     } else {
-                        pessoaTipoDataTransferInclusao = new PessoaTipoDataTransfer(pessoaTipoDataTransferValidacao);
+                        pessoaTipoDTInclusao = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
                     }
                 } else {
-                    pessoaTipoDataTransferInclusao = new PessoaTipoDataTransfer(pessoaTipoDataTransferValidacao);
+                    pessoaTipoDTInclusao = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
                 }
             } catch (Exception ex) {
-                pessoaTipoDataTransferInclusao = new PessoaTipoDataTransfer();
+                pessoaTipoDTInclusao = new PessoaTipoDataTransfer();
 
-                pessoaTipoDataTransferInclusao.Validacao = false;
-                pessoaTipoDataTransferInclusao.Erro = true;
-                pessoaTipoDataTransferInclusao.ErroMensagens.Add("Erro em PessoaTipoModel Incluir [" + ex.Message + "]");
+                pessoaTipoDTInclusao.Validacao = false;
+                pessoaTipoDTInclusao.Erro = true;
+                pessoaTipoDTInclusao.ErroMensagens.Add("Erro em PessoaTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoDataModel = null;
                 pessoaTipoBusiness = null;
-                pessoaTipoDataTransferValidacao = null;
+                pessoaTipoDTValidacao = null;
             }
 
-            return pessoaTipoDataTransferInclusao;
+            return pessoaTipoDTInclusao;
+        }
+
+        public PessoaTipoDataTransfer Alterar(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        {
+            PessoaTipoDataModel pessoaTipoDataModel;
+            PessoaTipoBusiness pessoaTipoBusiness;
+            PessoaTipoDataTransfer pessoaTipoDTValidacao;
+            PessoaTipoDataTransfer pessoaTipoDTAlteracao;
+
+            try {
+                pessoaTipoBusiness = new PessoaTipoBusiness();
+                pessoaTipoDataModel = new PessoaTipoDataModel();
+
+                pessoaTipoDataTransfer.PessoaTipo.Alteracao = DateTime.Today;
+
+                pessoaTipoDTValidacao = pessoaTipoBusiness.Validar(pessoaTipoDataTransfer);
+
+                if (!pessoaTipoDTValidacao.Erro) {
+                    if (pessoaTipoDTValidacao.Validacao) {
+                        pessoaTipoDTAlteracao = pessoaTipoDataModel.Alterar(pessoaTipoDTValidacao);
+                    } else {
+                        pessoaTipoDTAlteracao = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
+                    }
+                } else {
+                    pessoaTipoDTAlteracao = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
+                }
+            } catch (Exception ex) {
+                pessoaTipoDTAlteracao = new PessoaTipoDataTransfer();
+
+                pessoaTipoDTAlteracao.Validacao = false;
+                pessoaTipoDTAlteracao.Erro = true;
+                pessoaTipoDTAlteracao.ErroMensagens.Add("Erro em PessoaTipoModel Alterar [" + ex.Message + "]");
+            } finally {
+                pessoaTipoDataModel = null;
+                pessoaTipoBusiness = null;
+                pessoaTipoDTValidacao = null;
+            }
+
+            return pessoaTipoDTAlteracao;
+        }
+
+        public PessoaTipoDataTransfer Excluir(int id)
+        {
+            PessoaTipoDataModel pessoaTipoDataModel;
+            PessoaTipoDataTransfer pessoaTipoDTExclusao;
+
+            try {
+                pessoaTipoDataModel = new PessoaTipoDataModel();
+
+                pessoaTipoDTExclusao = pessoaTipoDataModel.Excluir(id);
+            } catch (Exception ex) {
+                pessoaTipoDTExclusao = new PessoaTipoDataTransfer();
+
+                pessoaTipoDTExclusao.Validacao = false;
+                pessoaTipoDTExclusao.Erro = true;
+                pessoaTipoDTExclusao.ErroMensagens.Add("Erro em PessoaTipoModel Excluir [" + ex.Message + "]");
+            } finally {
+                pessoaTipoDataModel = null;
+            }
+
+            return pessoaTipoDTExclusao;
         }
 
         public PessoaTipoDataTransfer Listar()
         {
             PessoaTipoDataModel pessoaTipoDataModel;
             PessoaTipoBusiness pessoaTipoBusiness;
-            PessoaTipoDataTransfer pessoaTipoDataTransferLista;
+            PessoaTipoDataTransfer pessoaTipoDTLista;
 
             try {
                 pessoaTipoBusiness = new PessoaTipoBusiness();
                 pessoaTipoDataModel = new PessoaTipoDataModel();
 
-                pessoaTipoDataTransferLista = pessoaTipoDataModel.Listar();
+                pessoaTipoDTLista = pessoaTipoDataModel.Listar();
             } catch (Exception ex) {
-                pessoaTipoDataTransferLista = new PessoaTipoDataTransfer();
+                pessoaTipoDTLista = new PessoaTipoDataTransfer();
 
-                pessoaTipoDataTransferLista.Validacao = false;
-                pessoaTipoDataTransferLista.Erro = true;
-                pessoaTipoDataTransferLista.ErroMensagens.Add("Erro em PessoaTipoModel Listar [" + ex.Message + "]");
+                pessoaTipoDTLista.Validacao = false;
+                pessoaTipoDTLista.Erro = true;
+                pessoaTipoDTLista.ErroMensagens.Add("Erro em PessoaTipoModel Listar [" + ex.Message + "]");
             } finally {
                 pessoaTipoDataModel = null;
                 pessoaTipoBusiness = null;
             }
 
-            return pessoaTipoDataTransferLista;
+            return pessoaTipoDTLista;
+        }
+
+        public PessoaTipoDataTransfer ConsultarPorId(int id)
+        {
+            PessoaTipoDataModel pessoaTipoDataModel;
+            PessoaTipoDataTransfer pessoaTipoDTForm;
+            
+            try {
+                pessoaTipoDataModel = new PessoaTipoDataModel();
+
+                pessoaTipoDTForm = pessoaTipoDataModel.ConsultarPorId(id);
+            } catch {
+                pessoaTipoDTForm = new PessoaTipoDataTransfer();
+
+                pessoaTipoDTForm.Validacao = false;
+                pessoaTipoDTForm.ValidacaoMensagens.Add("Erro em PessoaTipoModel ConsultarPorId");
+            } finally {
+                pessoaTipoDataModel = null;
+            }
+
+            return pessoaTipoDTForm;
         }
     }
 }

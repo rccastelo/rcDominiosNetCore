@@ -36,12 +36,6 @@ namespace rcDominiosBusiness
                     }
                 }
 
-                //-- Data de Criação do Tipo de Pessoa
-
-
-                //-- Data de Alteração do Tipo de Pessoa
-
-
                 if (pessoaTipoValidacao.ValidacaoMensagens.Count > 0) {
                     pessoaTipoValidacao.Validacao = false;
                 } else {
