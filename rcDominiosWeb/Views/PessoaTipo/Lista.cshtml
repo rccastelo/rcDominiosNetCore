@@ -24,7 +24,7 @@
                         <td class="col-1"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Id</a></td>
                         <td class="col-5"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Descricao</a></td>
                         <td class="col-2"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Codigo</a></td>
-                        <td class="col-2"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Ativo</a></td>
+                        <td class="col-2"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
                         <td class="col-2"><a class="btn btn-primary" href="/PessoaTipo/Form/@item.Id"><i class="fas fa-search-plus"></i> 
                             &nbsp;Detalhe</a></td>
                     </tr>

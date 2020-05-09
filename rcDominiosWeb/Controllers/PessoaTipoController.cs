@@ -68,6 +68,33 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        public IActionResult Consulta(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        {
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoLista;
+
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
+
+                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipoDataTransfer);
+            } catch (Exception ex) {
+                pessoaTipoLista = new PessoaTipoDataTransfer();
+
+                pessoaTipoLista.Validacao = false;
+                pessoaTipoLista.Erro = true;
+                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            if (pessoaTipoLista.Erro || !pessoaTipoLista.Validacao) {
+                return View("Filtro", pessoaTipoLista);
+            } else {
+                return View("Lista", pessoaTipoLista);
+            }
+        }
+
+        [HttpPost]
         public IActionResult Inclusao(PessoaTipoDataTransfer pessoaTipoDataTransfer)
         {
             PessoaTipoModel pessoaTipoModel;

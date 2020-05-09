@@ -142,16 +142,54 @@ namespace rcDominiosWeb.Models
                 pessoaTipoDataModel = new PessoaTipoDataModel();
 
                 pessoaTipoDTForm = pessoaTipoDataModel.ConsultarPorId(id);
-            } catch {
+            } catch (Exception ex) {
                 pessoaTipoDTForm = new PessoaTipoDataTransfer();
 
                 pessoaTipoDTForm.Validacao = false;
-                pessoaTipoDTForm.ValidacaoMensagens.Add("Erro em PessoaTipoModel ConsultarPorId");
+                pessoaTipoDTForm.Erro = true;
+                pessoaTipoDTForm.ErroMensagens.Add("Erro em PessoaTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 pessoaTipoDataModel = null;
             }
 
             return pessoaTipoDTForm;
+        }
+
+        public PessoaTipoDataTransfer Consultar(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        {
+            PessoaTipoDataModel pessoaTipoDataModel;
+            PessoaTipoBusiness pessoaTipoBusiness;
+            PessoaTipoDataTransfer pessoaTipoDTValidacao;
+            PessoaTipoDataTransfer pessoaTipoDTConsulta;
+
+            try {
+                pessoaTipoBusiness = new PessoaTipoBusiness();
+                pessoaTipoDataModel = new PessoaTipoDataModel();
+
+                pessoaTipoDTValidacao = pessoaTipoBusiness.ValidarConsulta(pessoaTipoDataTransfer);
+
+                if (!pessoaTipoDTValidacao.Erro) {
+                    if (pessoaTipoDTValidacao.Validacao) {
+                        pessoaTipoDTConsulta = pessoaTipoDataModel.Consultar(pessoaTipoDTValidacao);
+                    } else {
+                        pessoaTipoDTConsulta = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
+                    }
+                } else {
+                    pessoaTipoDTConsulta = new PessoaTipoDataTransfer(pessoaTipoDTValidacao);
+                }
+            } catch (Exception ex) {
+                pessoaTipoDTConsulta = new PessoaTipoDataTransfer();
+
+                pessoaTipoDTConsulta.Validacao = false;
+                pessoaTipoDTConsulta.Erro = true;
+                pessoaTipoDTConsulta.ErroMensagens.Add("Erro em PessoaTipoModel Consultar [" + ex.Message + "]");
+            } finally {
+                pessoaTipoDataModel = null;
+                pessoaTipoBusiness = null;
+                pessoaTipoDTValidacao = null;
+            }
+
+            return pessoaTipoDTConsulta;
         }
     }
 }

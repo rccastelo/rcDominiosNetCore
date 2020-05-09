@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\rcDominiosDatabase\rcDominiosDatabase.csproj" />
     <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
+    <ProjectReference Include="..\rcDominiosDataTransfers\rcDominiosDataTransfers.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

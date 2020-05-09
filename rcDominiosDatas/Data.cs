@@ -7,7 +7,7 @@ namespace rcDominiosDatas
 {
     public class Data<EntityType> : IData<EntityType> where EntityType : Entity
     {
-        protected readonly DominiosDbContext _contexto;
+        public readonly DominiosDbContext _contexto;
 
         public Data(DominiosDbContext contexto)
         {
