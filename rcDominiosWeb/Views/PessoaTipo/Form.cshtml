@@ -21,7 +21,7 @@
         <a class="txtPadraoGrd" asp-controller="PessoaTipo" asp-action="Index">Tipo de Pessoa</a> &nbsp;/&nbsp; @ViewData["PageName"]
     </div>
     <br>
-    <form asp-controller="PessoaTipo" asp-action='@ViewData["Action"]' asp-anti-forgery>
+    <form asp-controller="PessoaTipo" asp-action='@ViewData["Action"]' asp-anti-forgery method="POST">
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
@@ -101,7 +101,7 @@
                         &bull; Campo <span class="text-success"><b>informativo</b></span><br>
                         &bull; Apenas leitura<br>
                     </div>
-                    <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Criacao" readonly>
+                    <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Criacao" asp-format="{0:dd/MM/yyyy}" readonly>
                 </div>
             </div>
             <div class="col-2"></div>
@@ -116,7 +116,7 @@
                         &bull; Campo <span class="text-success"><b>informativo</b></span><br>
                         &bull; Apenas leitura<br>
                     </div>
-                    <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Alteracao" readonly>
+                    <input class="form-control" type="text" asp-for="@Model.PessoaTipo.Alteracao" asp-format="{0:dd/MM/yyyy}" readonly>
                 </div>
             </div>
         </div>

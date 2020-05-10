@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using rcDominiosEntities;
 
 namespace rcDominiosDataTransfers
@@ -16,12 +17,16 @@ namespace rcDominiosDataTransfers
 
         public string AtivoFiltro { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CriacaoDe { get; set; }
         
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CriacaoAte { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AlteracaoDe { get; set; }
         
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AlteracaoAte { get; set; }
 
         public PessoaTipoDataTransfer() 

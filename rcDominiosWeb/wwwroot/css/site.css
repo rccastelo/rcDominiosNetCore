@@ -4,7 +4,7 @@ body { margin-bottom: 60px; background-color: #1e1e1e; }
 .areaUtilPeq { width: 300px; }
 .areaUtilMed { width: 600px; }
 .areaUtilGrd { width: 900px; }
-.areaMaxGrd { max-width: 900px; }
+.areaMaxGrd { max-width: 900px; padding: 0; margin: 0; }
 .campoGrd { width: 600px; }
 .campoMed { width: 400px; }
 .campoPeq { width: 200px; }
@@ -19,10 +19,11 @@ body { margin-bottom: 60px; background-color: #1e1e1e; }
 .iconePopInf { font-size: 20px; color: green; }
 .iconePopObr { font-size: 20px; color: red; }
 .iconePopOpc { font-size: 20px; color: #ff6000; }
-.popMsg { visibility: hidden; width: 0px; height: 0px; }
+.popMsg { visibility: hidden; position: absolute; overflow: hidden; width: 0px; height: 0px; }
 .popCampoObr { background-color: red; color: white; }
 .popCampoOpc { background-color: #ff6000; color: white; }
 .corOpcional { color: #ff6000; }
+.tabLinha { margin: 0; }
 
 /* -------------- */
 

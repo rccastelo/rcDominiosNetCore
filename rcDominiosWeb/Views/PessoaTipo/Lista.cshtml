@@ -10,22 +10,24 @@
     </div>
     <br>
     <table class="table border-bottom">
-        <thead class="txtEtiqueta">
-            <th>Id</th>
-            <th>Descrição</th>
-            <th>Código</th>
-            <th>Ativo</th>
-            <th></th>
+        <thead class="thead-dark">
+            <tr class="row tabLinha">
+                <th class="col">Id</th>
+                <th class="col">Descrição</th>
+                <th class="col">Código</th>
+                <th class="col">Ativo</th>
+                <th class="col"></th>
+            </tr>
         </thead>
         <tbody>
             @if (@Model.PessoaTipoLista != null) {
                 @foreach (var item in @Model.PessoaTipoLista) {
-                    <tr>
-                        <td class="col-1"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Id</a></td>
-                        <td class="col-5"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Descricao</a></td>
-                        <td class="col-2"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Codigo</a></td>
-                        <td class="col-2"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
-                        <td class="col-2"><a class="btn btn-primary" href="/PessoaTipo/Form/@item.Id"><i class="fas fa-search-plus"></i> 
+                    <tr class="row tabLinha">
+                        <td class="col"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Id</a></td>
+                        <td class="col"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Descricao</a></td>
+                        <td class="col"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@item.Codigo</a></td>
+                        <td class="col"><a class="txtPadrao" href="/PessoaTipo/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
+                        <td class="col"><a class="btn btn-primary" href="/PessoaTipo/Form/@item.Id"><i class="fas fa-search-plus"></i> 
                             &nbsp;Detalhe</a></td>
                     </tr>
                 }

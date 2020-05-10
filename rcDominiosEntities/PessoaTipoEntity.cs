@@ -13,8 +13,10 @@ namespace rcDominiosEntities
 
         public bool Ativo { get; set; }        
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Criacao { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Alteracao { get; set; }
 
         public PessoaTipoEntity() : base()

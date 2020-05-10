@@ -65,7 +65,11 @@ namespace rcDominiosBusiness
 
                 //-- Id
                 if ((pessoaTipoValidacao.IdDe <= 0) && (pessoaTipoValidacao.IdAte > 0)) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas o Id(De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
+                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
+                } else if ((pessoaTipoValidacao.IdDe > 0) && (pessoaTipoValidacao.IdAte > 0)) {
+                    if (pessoaTipoValidacao.IdDe >= pessoaTipoValidacao.IdAte) {
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
+                    }
                 }
 
                 //-- Descrição do Tipo de Pessoa
@@ -90,12 +94,20 @@ namespace rcDominiosBusiness
 
                 //-- Data de Criação
                 if ((pessoaTipoValidacao.CriacaoDe == DateTime.MinValue) && (pessoaTipoValidacao.CriacaoAte != DateTime.MinValue)) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas a Data de Criação(De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                } else if ((pessoaTipoValidacao.CriacaoDe > DateTime.MinValue) && (pessoaTipoValidacao.CriacaoAte > DateTime.MinValue)) {
+                    if (pessoaTipoValidacao.CriacaoDe >= pessoaTipoValidacao.CriacaoAte) {
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
+                    }
                 }
 
                 //-- Data de Alteração
                 if ((pessoaTipoValidacao.AlteracaoDe == DateTime.MinValue) && (pessoaTipoValidacao.AlteracaoAte != DateTime.MinValue)) {
-                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas a Data de Alteração(De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                    pessoaTipoValidacao.ValidacaoMensagens.Add("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                } else if ((pessoaTipoValidacao.AlteracaoDe > DateTime.MinValue) && (pessoaTipoValidacao.AlteracaoAte > DateTime.MinValue)) {
+                    if (pessoaTipoValidacao.AlteracaoDe >= pessoaTipoValidacao.AlteracaoAte) {
+                        pessoaTipoValidacao.ValidacaoMensagens.Add("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
+                    }
                 }
 
                 if (pessoaTipoValidacao.ValidacaoMensagens.Count > 0) {
