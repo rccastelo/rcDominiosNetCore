@@ -10,5 +10,7 @@ namespace rcDominiosDatabase
         }
 
         public DbSet<PessoaTipoEntity> PessoaTipo { get; set; }
+
+        public DbSet<ProfissaoEntity> Profissao { get; set; }
     }
 }
