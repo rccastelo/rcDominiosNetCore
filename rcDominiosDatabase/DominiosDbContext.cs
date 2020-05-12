@@ -18,5 +18,7 @@ namespace rcDominiosDatabase
         public DbSet<ContaBancariaEntity> ContaBancaria { get; set; }
 
         public DbSet<EnderecoTipoEntity> EnderecoTipo { get; set; }
+
+        public DbSet<EstadoCivilEntity> EstadoCivil { get; set; }
     }
 }
