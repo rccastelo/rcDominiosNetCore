@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosDataTransfers;
-using rcDominiosEntities;
 using rcDominiosWeb.Models;
 
 namespace rcDominiosWeb.Controllers
@@ -30,7 +28,11 @@ namespace rcDominiosWeb.Controllers
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoForm = pessoaTipoModel.ConsultarPorId(id);
+                if (id > 0) {
+                    pessoaTipoForm = pessoaTipoModel.ConsultarPorId(id);
+                } else {
+                    pessoaTipoForm = null;
+                }
             } catch {
                 pessoaTipoForm = new PessoaTipoDataTransfer();
                 

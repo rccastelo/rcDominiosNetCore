@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosDataTransfers;
-using rcDominiosEntities;
 using rcDominiosWeb.Models;
 
 namespace rcDominiosWeb.Controllers
@@ -30,7 +28,11 @@ namespace rcDominiosWeb.Controllers
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoForm = profissaoModel.ConsultarPorId(id);
+                if (id > 0) {
+                    profissaoForm = profissaoModel.ConsultarPorId(id);
+                } else {
+                    profissaoForm = null;
+                }
             } catch {
                 profissaoForm = new ProfissaoDataTransfer();
                 
