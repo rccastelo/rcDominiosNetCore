@@ -1,0 +1,42 @@
+@model rcDominiosDataTransfers.EnderecoTipoDataTransfer;
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div class="areaMaxGrd">
+    <div class="txtPadraoGrd"><i class="iconeMed fas fa-map-marked-alt"></i>&nbsp;
+        <a class="txtPadraoGrd" asp-controller="EnderecoTipo" asp-action="Index">Tipo de Endereço</a> &nbsp;/&nbsp; Lista
+    </div>
+    <br>
+    <table class="table border-bottom">
+        <thead class="thead-dark">
+            <tr class="row tabLinha">
+                <th class="col-1">Id</th>
+                <th class="col-5">Descrição</th>
+                <th class="col-2">Código</th>
+                <th class="col-2">Ativo</th>
+                <th class="col-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model.EnderecoTipoLista != null) {
+                @foreach (var item in @Model.EnderecoTipoLista) {
+                    <tr class="row tabLinha">
+                        <td class="col-1"><a class="txtPadrao" href="/EnderecoTipo/Form/@item.Id">@item.Id</a></td>
+                        <td class="col-5"><a class="txtPadrao" href="/EnderecoTipo/Form/@item.Id">@item.Descricao</a></td>
+                        <td class="col-2"><a class="txtPadrao" href="/EnderecoTipo/Form/@item.Id">@item.Codigo</a></td>
+                        <td class="col-2"><a class="txtPadrao" href="/EnderecoTipo/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
+                        <td class="col-2"><a class="btn btn-primary" href="/EnderecoTipo/Form/@item.Id"><i class="fas fa-search-plus"></i> 
+                            &nbsp;Detalhe</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br>
+    <div>
+        <a href="/EnderecoTipo"><button class="btn btn-secondary btn-lg mr-2"><i class="fas fa-arrow-circle-left"></i> 
+                    &nbsp;Voltar</button></a>
+    </div>
+</div>
