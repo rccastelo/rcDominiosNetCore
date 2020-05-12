@@ -22,129 +22,129 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Form(int id)
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoForm;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilForm;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
                 if (id > 0) {
-                    profissaoForm = profissaoModel.ConsultarPorId(id);
+                    estadoCivilForm = estadoCivilModel.ConsultarPorId(id);
                 } else {
-                    profissaoForm = null;
+                    estadoCivilForm = null;
                 }
             } catch {
-                profissaoForm = new EstadoCivilDataTransfer();
+                estadoCivilForm = new EstadoCivilDataTransfer();
                 
-                profissaoForm.Validacao = false;
-                profissaoForm.Erro = true;
-                profissaoForm.ErroMensagens.Add("Erro em EstadoCivilController Form");
+                estadoCivilForm.Validacao = false;
+                estadoCivilForm.Erro = true;
+                estadoCivilForm.ErroMensagens.Add("Erro em EstadoCivilController Form");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            return View(profissaoForm);
+            return View(estadoCivilForm);
         }
 
         [HttpGet]
         public IActionResult Lista()
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoLista;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilLista;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
-                profissaoLista = profissaoModel.Listar();
+                estadoCivilLista = estadoCivilModel.Listar();
             } catch (Exception ex) {
-                profissaoLista = new EstadoCivilDataTransfer();
+                estadoCivilLista = new EstadoCivilDataTransfer();
 
-                profissaoLista.Validacao = false;
-                profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em EstadoCivilController Lista [" + ex.Message + "]");
+                estadoCivilLista.Validacao = false;
+                estadoCivilLista.Erro = true;
+                estadoCivilLista.ErroMensagens.Add("Erro em EstadoCivilController Lista [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            return View(profissaoLista);
+            return View(estadoCivilLista);
         }
 
         [HttpPost]
-        public IActionResult Consulta(EstadoCivilDataTransfer profissaoDataTransfer)
+        public IActionResult Consulta(EstadoCivilDataTransfer estadoCivilDataTransfer)
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoLista;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilLista;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
-                profissaoLista = profissaoModel.Consultar(profissaoDataTransfer);
+                estadoCivilLista = estadoCivilModel.Consultar(estadoCivilDataTransfer);
             } catch (Exception ex) {
-                profissaoLista = new EstadoCivilDataTransfer();
+                estadoCivilLista = new EstadoCivilDataTransfer();
 
-                profissaoLista.Validacao = false;
-                profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em EstadoCivilController Consulta [" + ex.Message + "]");
+                estadoCivilLista.Validacao = false;
+                estadoCivilLista.Erro = true;
+                estadoCivilLista.ErroMensagens.Add("Erro em EstadoCivilController Consulta [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            if (profissaoLista.Erro || !profissaoLista.Validacao) {
-                return View("Filtro", profissaoLista);
+            if (estadoCivilLista.Erro || !estadoCivilLista.Validacao) {
+                return View("Filtro", estadoCivilLista);
             } else {
-                return View("Lista", profissaoLista);
+                return View("Lista", estadoCivilLista);
             }
         }
 
         [HttpPost]
-        public IActionResult Inclusao(EstadoCivilDataTransfer profissaoDataTransfer)
+        public IActionResult Inclusao(EstadoCivilDataTransfer estadoCivilDataTransfer)
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoRetorno;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilRetorno;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
-                profissaoRetorno = profissaoModel.Incluir(profissaoDataTransfer);
+                estadoCivilRetorno = estadoCivilModel.Incluir(estadoCivilDataTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new EstadoCivilDataTransfer();
+                estadoCivilRetorno = new EstadoCivilDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em EstadoCivilController Inclusao [" + ex.Message + "]");
+                estadoCivilRetorno.Validacao = false;
+                estadoCivilRetorno.Erro = true;
+                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Inclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
+                return View("Form", estadoCivilRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(EstadoCivilDataTransfer profissaoDataTransfer)
+        public IActionResult Alteracao(EstadoCivilDataTransfer estadoCivilDataTransfer)
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoRetorno;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilRetorno;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
-                profissaoRetorno = profissaoModel.Alterar(profissaoDataTransfer);
+                estadoCivilRetorno = estadoCivilModel.Alterar(estadoCivilDataTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new EstadoCivilDataTransfer();
+                estadoCivilRetorno = new EstadoCivilDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em EstadoCivilController Alteracao [" + ex.Message + "]");
+                estadoCivilRetorno.Validacao = false;
+                estadoCivilRetorno.Erro = true;
+                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Alteracao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
+                return View("Form", estadoCivilRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
@@ -153,25 +153,25 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Exclusao(int id)
         {
-            EstadoCivilModel profissaoModel;
-            EstadoCivilDataTransfer profissaoRetorno;
+            EstadoCivilModel estadoCivilModel;
+            EstadoCivilDataTransfer estadoCivilRetorno;
 
             try {
-                profissaoModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel();
 
-                profissaoRetorno = profissaoModel.Excluir(id);
+                estadoCivilRetorno = estadoCivilModel.Excluir(id);
             } catch (Exception ex) {
-                profissaoRetorno = new EstadoCivilDataTransfer();
+                estadoCivilRetorno = new EstadoCivilDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em EstadoCivilController Exclusao [" + ex.Message + "]");
+                estadoCivilRetorno.Validacao = false;
+                estadoCivilRetorno.Erro = true;
+                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Exclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                estadoCivilModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
+                return View("Form", estadoCivilRetorno);
             } else {
                 return RedirectToAction("Lista");
             }

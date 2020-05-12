@@ -22,5 +22,7 @@ namespace rcDominiosDatabase
         public DbSet<EstadoCivilEntity> EstadoCivil { get; set; }
 
         public DbSet<GeneroSocialEntity> GeneroSocial { get; set; }
+
+        public DbSet<SexoEntity> Sexo { get; set; }
     }
 }

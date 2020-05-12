@@ -22,129 +22,129 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Form(int id)
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoForm;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialForm;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
                 if (id > 0) {
-                    profissaoForm = profissaoModel.ConsultarPorId(id);
+                    generoSocialForm = generoSocialModel.ConsultarPorId(id);
                 } else {
-                    profissaoForm = null;
+                    generoSocialForm = null;
                 }
             } catch {
-                profissaoForm = new GeneroSocialDataTransfer();
+                generoSocialForm = new GeneroSocialDataTransfer();
                 
-                profissaoForm.Validacao = false;
-                profissaoForm.Erro = true;
-                profissaoForm.ErroMensagens.Add("Erro em GeneroSocialController Form");
+                generoSocialForm.Validacao = false;
+                generoSocialForm.Erro = true;
+                generoSocialForm.ErroMensagens.Add("Erro em GeneroSocialController Form");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            return View(profissaoForm);
+            return View(generoSocialForm);
         }
 
         [HttpGet]
         public IActionResult Lista()
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoLista;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialLista;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
-                profissaoLista = profissaoModel.Listar();
+                generoSocialLista = generoSocialModel.Listar();
             } catch (Exception ex) {
-                profissaoLista = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialDataTransfer();
 
-                profissaoLista.Validacao = false;
-                profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em GeneroSocialController Lista [" + ex.Message + "]");
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.ErroMensagens.Add("Erro em GeneroSocialController Lista [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            return View(profissaoLista);
+            return View(generoSocialLista);
         }
 
         [HttpPost]
-        public IActionResult Consulta(GeneroSocialDataTransfer profissaoDataTransfer)
+        public IActionResult Consulta(GeneroSocialDataTransfer generoSocialDataTransfer)
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoLista;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialLista;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
-                profissaoLista = profissaoModel.Consultar(profissaoDataTransfer);
+                generoSocialLista = generoSocialModel.Consultar(generoSocialDataTransfer);
             } catch (Exception ex) {
-                profissaoLista = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialDataTransfer();
 
-                profissaoLista.Validacao = false;
-                profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em GeneroSocialController Consulta [" + ex.Message + "]");
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.ErroMensagens.Add("Erro em GeneroSocialController Consulta [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            if (profissaoLista.Erro || !profissaoLista.Validacao) {
-                return View("Filtro", profissaoLista);
+            if (generoSocialLista.Erro || !generoSocialLista.Validacao) {
+                return View("Filtro", generoSocialLista);
             } else {
-                return View("Lista", profissaoLista);
+                return View("Lista", generoSocialLista);
             }
         }
 
         [HttpPost]
-        public IActionResult Inclusao(GeneroSocialDataTransfer profissaoDataTransfer)
+        public IActionResult Inclusao(GeneroSocialDataTransfer generoSocialDataTransfer)
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoRetorno;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialRetorno;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
-                profissaoRetorno = profissaoModel.Incluir(profissaoDataTransfer);
+                generoSocialRetorno = generoSocialModel.Incluir(generoSocialDataTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new GeneroSocialDataTransfer();
+                generoSocialRetorno = new GeneroSocialDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em GeneroSocialController Inclusao [" + ex.Message + "]");
+                generoSocialRetorno.Validacao = false;
+                generoSocialRetorno.Erro = true;
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Inclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
+                return View("Form", generoSocialRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(GeneroSocialDataTransfer profissaoDataTransfer)
+        public IActionResult Alteracao(GeneroSocialDataTransfer generoSocialDataTransfer)
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoRetorno;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialRetorno;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
-                profissaoRetorno = profissaoModel.Alterar(profissaoDataTransfer);
+                generoSocialRetorno = generoSocialModel.Alterar(generoSocialDataTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new GeneroSocialDataTransfer();
+                generoSocialRetorno = new GeneroSocialDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em GeneroSocialController Alteracao [" + ex.Message + "]");
+                generoSocialRetorno.Validacao = false;
+                generoSocialRetorno.Erro = true;
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Alteracao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
+                return View("Form", generoSocialRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
@@ -153,25 +153,25 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Exclusao(int id)
         {
-            GeneroSocialModel profissaoModel;
-            GeneroSocialDataTransfer profissaoRetorno;
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialDataTransfer generoSocialRetorno;
 
             try {
-                profissaoModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel();
 
-                profissaoRetorno = profissaoModel.Excluir(id);
+                generoSocialRetorno = generoSocialModel.Excluir(id);
             } catch (Exception ex) {
-                profissaoRetorno = new GeneroSocialDataTransfer();
+                generoSocialRetorno = new GeneroSocialDataTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em GeneroSocialController Exclusao [" + ex.Message + "]");
+                generoSocialRetorno.Validacao = false;
+                generoSocialRetorno.Erro = true;
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Exclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                generoSocialModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
+                return View("Form", generoSocialRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
