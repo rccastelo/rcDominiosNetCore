@@ -20,5 +20,7 @@ namespace rcDominiosDatabase
         public DbSet<EnderecoTipoEntity> EnderecoTipo { get; set; }
 
         public DbSet<EstadoCivilEntity> EstadoCivil { get; set; }
+
+        public DbSet<GeneroSocialEntity> GeneroSocial { get; set; }
     }
 }
