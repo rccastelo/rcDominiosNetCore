@@ -1,0 +1,216 @@
+@model rcDominiosDataTransfers.ContaBancariaDataTransfer;
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div class="areaMaxGrd">
+    <div class="txtPadraoGrd"><i class="iconeMed fas fa-money-check-alt"></i>&nbsp;
+        <a class="txtPadraoGrd" asp-controller="ContaBancaria" asp-action="Index">Tipo de Conta Bancária</a> &nbsp;/&nbsp; Consulta
+    </div>
+    <br>
+    <form asp-controller="ContaBancaria" asp-action="Consulta" asp-anti-forgery method="POST">
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.IdDe">Id / De</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popIdDe">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popIdDe" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>6</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>números</b><br>
+                        &bull; Aqui pode ser informado um <b>id específico</b> ou o <b>valor mínimo</b> de uma faixa de id para ser utilizado em conjunto com o campo <b>Até</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="6" asp-for="@Model.IdDe">
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.IdAte">Até</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popIdAte">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popIdAte" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>6</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>números</b><br>
+                        &bull; Aqui pode ser informado o <b>valor máximo</b> de uma faixa de id para ser utilizado em conjunto com o campo <b>De</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="6" asp-for="@Model.IdAte">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.ContaBancaria.Descricao">Descrição</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popDescricao">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popDescricao" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>100</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>letras</b>, <b>acentos</b>, <b>números</b>, <b>traço</b> e <b>espaço em branco</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.ContaBancaria.Descricao">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.ContaBancaria.Codigo">Código</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popCodigo">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popCodigo" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>traço</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.ContaBancaria.Codigo">
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.AtivoFiltro">Ativo</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popAtivo">
+                        <i class="iconePopObr fas fa-asterisk"></i>
+                    </a>
+                    <div id="popAtivo" class="popMsg">
+                        &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
+                    </div>
+                    <select class="form-control" asp-for="@Model.AtivoFiltro">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                        <option value="" selected>Todos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.CriacaoDe">Data de criação / De</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popCriacaoDe">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popCriacaoDe" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Formato: Data <b>dd/mm/aaaa</b><br>
+                        &bull; Aqui pode ser informado uma <b>data específica</b> ou o <b>valor mínimo</b> de uma faixa de datas para ser utilizado em conjunto com o campo <b>Até</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" readonly asp-for="@Model.CriacaoDe">
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.CriacaoAte">Até</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popCriacaoAte">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popCriacaoAte" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Formato: Data <b>dd/mm/aaaa</b><br>
+                        &bull; Aqui pode ser informado o <b>valor máximo</b> de uma faixa de datas para ser utilizado em conjunto com o campo <b>De</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" readonly asp-for="@Model.CriacaoAte">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.AlteracaoDe">Data de alteração / De</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popAlteracaoDe">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popAlteracaoDe" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Formato: Data <b>dd/mm/aaaa</b><br>
+                        &bull; Aqui pode ser informado uma <b>data específica</b> ou o <b>valor mínimo</b> de uma faixa de datas<br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" readonly asp-for="@Model.AlteracaoDe">
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.AlteracaoAte">Até</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popAlteracaoAte">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popAlteracaoAte" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Formato: Data <b>dd/mm/aaaa</b><br>
+                        &bull; Aqui pode ser informado o <b>valor máximo</b> de uma faixa de datas para ser utilizado em conjunto com o campo <b>De</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" readonly asp-for="@Model.AlteracaoAte">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-10">
+                <button class="btn btn-lg mr-2 btn-warning"><i class="fas fa-search"></i> &nbsp;Consultar</button>
+                <a class="btn btn-secondary btn-lg m-2" href="/ContaBancaria"><i class="fas fa-arrow-circle-left"></i> 
+                    &nbsp;Voltar</a>
+            </div>
+            <div class="col-2 text-right">
+                @if (@Model != null) {
+                    @if (@Model.Erro || !@Model.Validacao) {
+                        <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
+                    }
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (@Model != null) {
+    @if (@Model.Erro || !@Model.Validacao) {
+        <div class="text-danger">
+            @section Scripts {
+                <script>
+                    $('#modalMessages').modal('show');
+                </script>
+            }
+
+            @if (@Model.Erro) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ErroMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            } else if (!@Model.Validacao) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    }
+}

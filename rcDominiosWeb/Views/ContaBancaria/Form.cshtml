@@ -1,0 +1,175 @@
+@model rcDominiosDataTransfers.ContaBancariaDataTransfer;
+
+@{
+    ViewData["Title"] = "";
+
+    ViewData["Action"] = "Inclusao";
+    ViewData["PageName"] = "Novo";
+
+    @if(@Model != null) {
+        @if(@Model.ContaBancaria != null) {
+            if (@Model.ContaBancaria.Id > 0) {
+                ViewData["Action"] = "Alteracao";
+                ViewData["PageName"] = "Detalhe";
+            }
+        }
+    }
+}
+
+<div class="areaMaxGrd">
+    <div class="txtPadraoGrd"><i class="iconeMed fas fa-money-check-alt"></i>&nbsp;
+        <a class="txtPadraoGrd" asp-controller="ContaBancaria" asp-action="Index">Tipo de Conta Bancária</a> &nbsp;/&nbsp; @ViewData["PageName"]
+    </div>
+    <br>
+    <form asp-controller="ContaBancaria" asp-action='@ViewData["Action"]' asp-anti-forgery method="POST">
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="@Model.ContaBancaria.Id" class="txtEtiqueta">Id</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popId">
+                        <i class="iconePopInf fas fa-info-circle"></i>
+                    </a>
+                    <div id="popId" class="popMsg">
+                        &bull; Campo <span class="text-success"><b>informativo</b></span><br>
+                        &bull; Apenas leitura<br>
+                    </div>
+                    <input class="form-control" type="text" asp-for="@Model.ContaBancaria.Id" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="@Model.ContaBancaria.Descricao" class="txtEtiqueta">Descrição</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popDescricao">
+                        <i class="iconePopObr fas fa-asterisk"></i>
+                    </a>
+                    <div id="popDescricao" class="popMsg">
+                        &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
+                        &bull; Tamanho máximo: <b>100</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>letras</b>, <b>acentos</b>, <b>números</b>, <b>traço</b> e <b>espaço em branco</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.ContaBancaria.Descricao">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="@Model.ContaBancaria.Codigo" class="txtEtiqueta">Código</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popCodigo">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popCodigo" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>10</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>traço</b><br>
+                    </div>
+                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.ContaBancaria.Codigo">
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.ContaBancaria.Ativo">Ativo</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popAtivo">
+                        <i class="iconePopObr fas fa-asterisk"></i>
+                    </a>
+                    <div id="popAtivo" class="popMsg">
+                        &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
+                    </div>
+                    <select class="form-control" asp-for="@Model.ContaBancaria.Ativo">
+                        <option value="true" selected>Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="@Model.ContaBancaria.Criacao" class="txtEtiqueta">Data de criação</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popCriacao">
+                        <i class="iconePopInf fas fa-info-circle"></i>
+                    </a>
+                    <div id="popCriacao" class="popMsg">
+                        &bull; Campo <span class="text-success"><b>informativo</b></span><br>
+                        &bull; Apenas leitura<br>
+                    </div>
+                    <input class="form-control" type="text" asp-for="@Model.ContaBancaria.Criacao" asp-format="{0:dd/MM/yyyy}" readonly>
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="@Model.ContaBancaria.Alteracao" class="txtEtiqueta">Data de alteração</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popAlteracao">
+                        <i class="iconePopInf fas fa-info-circle"></i>
+                    </a>
+                    <div id="popAlteracao" class="popMsg">
+                        &bull; Campo <span class="text-success"><b>informativo</b></span><br>
+                        &bull; Apenas leitura<br>
+                    </div>
+                    <input class="form-control" type="text" asp-for="@Model.ContaBancaria.Alteracao" asp-format="{0:dd/MM/yyyy}" readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-10">
+                @if (ViewData["Action"].ToString() == "Inclusao") {
+                    <button class="btn btn-lg mr-2 btn-success"><i class="fas fa-save"></i> &nbsp;Incluir</button>
+                } else if(ViewData["Action"].ToString() == "Alteracao") {
+                    <button class="btn btn-lg mr-2 btn-alternative"><i class="fas fa-sync-alt"></i> &nbsp;Alterar</button>
+                    <a class="btn btn-danger btn-lg m-2" href="/ContaBancaria/Exclusao/@Model.ContaBancaria.Id"><i class="fas fa-trash"></i> 
+                        &nbsp;Excluir</a>
+                }
+                <a class="btn btn-secondary btn-lg m-2" href="/ContaBancaria"><i class="fas fa-arrow-circle-left"></i> 
+                    &nbsp;Voltar</a>
+            </div>
+            <div class="col-2 text-right">
+                @if (@Model != null) {
+                    @if (@Model.Erro || !@Model.Validacao) {
+                        <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
+                    }
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (@Model != null) {
+    @if (@Model.Erro || !@Model.Validacao) {
+        <div class="text-danger">
+            @section Scripts {
+                <script>
+                    $('#modalMessages').modal('show');
+                </script>
+            }
+
+            @if (@Model.Erro) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ErroMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            } else if (!@Model.Validacao) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    }
+}

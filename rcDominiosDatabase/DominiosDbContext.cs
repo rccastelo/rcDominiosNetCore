@@ -14,5 +14,7 @@ namespace rcDominiosDatabase
         public DbSet<ProfissaoEntity> Profissao { get; set; }
 
         public DbSet<CorEntity> Cor { get; set; }
+
+        public DbSet<ContaBancariaEntity> ContaBancaria { get; set; }
     }
 }
