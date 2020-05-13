@@ -43,7 +43,8 @@ namespace rcDominiosWeb.Controllers
                 pessoaTipoModel = null;
             }
 
-            return View(pessoaTipoForm);
+            //return View(pessoaTipoForm);
+            return Json(pessoaTipoForm);
         }
 
         [HttpGet]
