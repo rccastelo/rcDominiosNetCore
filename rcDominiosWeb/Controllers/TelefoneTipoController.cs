@@ -22,129 +22,129 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Form(int id)
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoForm;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoForm;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
                 if (id > 0) {
-                    enderecoForm = enderecoModel.ConsultarPorId(id);
+                    telefoneTipoForm = telefoneTipoModel.ConsultarPorId(id);
                 } else {
-                    enderecoForm = null;
+                    telefoneTipoForm = null;
                 }
             } catch {
-                enderecoForm = new TelefoneTipoDataTransfer();
+                telefoneTipoForm = new TelefoneTipoDataTransfer();
                 
-                enderecoForm.Validacao = false;
-                enderecoForm.Erro = true;
-                enderecoForm.ErroMensagens.Add("Erro em TelefoneTipoController Form");
+                telefoneTipoForm.Validacao = false;
+                telefoneTipoForm.Erro = true;
+                telefoneTipoForm.ErroMensagens.Add("Erro em TelefoneTipoController Form");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            return View(enderecoForm);
+            return View(telefoneTipoForm);
         }
 
         [HttpGet]
         public IActionResult Lista()
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoLista;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoLista;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
-                enderecoLista = enderecoModel.Listar();
+                telefoneTipoLista = telefoneTipoModel.Listar();
             } catch (Exception ex) {
-                enderecoLista = new TelefoneTipoDataTransfer();
+                telefoneTipoLista = new TelefoneTipoDataTransfer();
 
-                enderecoLista.Validacao = false;
-                enderecoLista.Erro = true;
-                enderecoLista.ErroMensagens.Add("Erro em TelefoneTipoController Lista [" + ex.Message + "]");
+                telefoneTipoLista.Validacao = false;
+                telefoneTipoLista.Erro = true;
+                telefoneTipoLista.ErroMensagens.Add("Erro em TelefoneTipoController Lista [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            return View(enderecoLista);
+            return View(telefoneTipoLista);
         }
 
         [HttpPost]
-        public IActionResult Consulta(TelefoneTipoDataTransfer enderecoDataTransfer)
+        public IActionResult Consulta(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoLista;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoLista;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
-                enderecoLista = enderecoModel.Consultar(enderecoDataTransfer);
+                telefoneTipoLista = telefoneTipoModel.Consultar(telefoneTipoDataTransfer);
             } catch (Exception ex) {
-                enderecoLista = new TelefoneTipoDataTransfer();
+                telefoneTipoLista = new TelefoneTipoDataTransfer();
 
-                enderecoLista.Validacao = false;
-                enderecoLista.Erro = true;
-                enderecoLista.ErroMensagens.Add("Erro em TelefoneTipoController Consulta [" + ex.Message + "]");
+                telefoneTipoLista.Validacao = false;
+                telefoneTipoLista.Erro = true;
+                telefoneTipoLista.ErroMensagens.Add("Erro em TelefoneTipoController Consulta [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            if (enderecoLista.Erro || !enderecoLista.Validacao) {
-                return View("Filtro", enderecoLista);
+            if (telefoneTipoLista.Erro || !telefoneTipoLista.Validacao) {
+                return View("Filtro", telefoneTipoLista);
             } else {
-                return View("Lista", enderecoLista);
+                return View("Lista", telefoneTipoLista);
             }
         }
 
         [HttpPost]
-        public IActionResult Inclusao(TelefoneTipoDataTransfer enderecoDataTransfer)
+        public IActionResult Inclusao(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoRetorno;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoRetorno;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
-                enderecoRetorno = enderecoModel.Incluir(enderecoDataTransfer);
+                telefoneTipoRetorno = telefoneTipoModel.Incluir(telefoneTipoDataTransfer);
             } catch (Exception ex) {
-                enderecoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Inclusao [" + ex.Message + "]");
+                telefoneTipoRetorno.Validacao = false;
+                telefoneTipoRetorno.Erro = true;
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Inclusao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
+                return View("Form", telefoneTipoRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(TelefoneTipoDataTransfer enderecoDataTransfer)
+        public IActionResult Alteracao(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoRetorno;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoRetorno;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
-                enderecoRetorno = enderecoModel.Alterar(enderecoDataTransfer);
+                telefoneTipoRetorno = telefoneTipoModel.Alterar(telefoneTipoDataTransfer);
             } catch (Exception ex) {
-                enderecoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Alteracao [" + ex.Message + "]");
+                telefoneTipoRetorno.Validacao = false;
+                telefoneTipoRetorno.Erro = true;
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Alteracao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
+                return View("Form", telefoneTipoRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
@@ -153,25 +153,25 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public IActionResult Exclusao(int id)
         {
-            TelefoneTipoModel enderecoModel;
-            TelefoneTipoDataTransfer enderecoRetorno;
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoDataTransfer telefoneTipoRetorno;
 
             try {
-                enderecoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel();
 
-                enderecoRetorno = enderecoModel.Excluir(id);
+                telefoneTipoRetorno = telefoneTipoModel.Excluir(id);
             } catch (Exception ex) {
-                enderecoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Exclusao [" + ex.Message + "]");
+                telefoneTipoRetorno.Validacao = false;
+                telefoneTipoRetorno.Erro = true;
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Exclusao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                telefoneTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
+                return View("Form", telefoneTipoRetorno);
             } else {
                 return RedirectToAction("Lista");
             }
