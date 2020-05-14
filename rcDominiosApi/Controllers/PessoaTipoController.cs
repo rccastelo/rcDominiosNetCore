@@ -33,7 +33,11 @@ namespace rcDominiosApi.Controllers
                 pessoaTipoModel = null;
             }
 
-            return Ok(pessoaTipoForm);
+            if (pessoaTipoForm.Erro || !pessoaTipoForm.Validacao) {
+                return BadRequest(pessoaTipoForm);
+            } else {
+                return Ok(pessoaTipoForm);
+            }
         }
 
         [HttpGet]
@@ -56,7 +60,11 @@ namespace rcDominiosApi.Controllers
                 pessoaTipoModel = null;
             }
 
-            return Ok(pessoaTipoLista);
+            if (pessoaTipoLista.Erro || !pessoaTipoLista.Validacao) {
+                return BadRequest(pessoaTipoLista);
+            } else {
+                return Ok(pessoaTipoLista);
+            }
         }
 
         [HttpPost]
