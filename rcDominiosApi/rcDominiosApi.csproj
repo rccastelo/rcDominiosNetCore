@@ -10,4 +10,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\rcDominiosDataTransfers\rcDominiosDataTransfers.csproj" />
+    <ProjectReference Include="..\rcDominiosDataModels\rcDominiosDataModels.csproj" />
+    <ProjectReference Include="..\rcDominiosBusiness\rcDominiosBusiness.csproj" />
+    <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
+  </ItemGroup>
+
 </Project>
