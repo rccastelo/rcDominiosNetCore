@@ -1,10 +1,12 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosDataTransfers;
 
 namespace rcDominiosApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class EnderecoTipoController : ControllerBase
