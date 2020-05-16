@@ -1,8 +1,5 @@
 using System;
-using System.Xml;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using rcDominiosApi.Models;
 using rcDominiosDataTransfers;
 
