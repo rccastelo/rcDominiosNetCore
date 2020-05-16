@@ -3,14 +3,14 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:5700",
+      "applicationUrl": "http://localhost:5500",
       "sslPort": 44304
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -18,7 +18,7 @@
     "rcDominiosAutentica": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5700",
+      "applicationUrl": "http://localhost:5500",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
