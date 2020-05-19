@@ -12,7 +12,7 @@ namespace rcDominiosAutentica.Controllers
     public class AutenticaController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Index(UsuarioRequest usuario) 
+        public IActionResult Autoriza(UsuarioRequest usuario) 
         {
             bool valido = false;
 

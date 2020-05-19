@@ -20,7 +20,7 @@ namespace rcDominiosBusiness
                     sexoValidacao.ValidacaoMensagens.Add("Necessário informar a Descrição do Sexo");
                 } else if (sexoValidacao.Sexo.Descricao.Length > 100) {
                     sexoValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                } else if (!Validacao.ValidarCharDescricao(sexoValidacao.Sexo.Descricao)) {
+                } else if (!Validacao.ValidarCharAaBCcNT(sexoValidacao.Sexo.Descricao)) {
                     sexoValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                     sexoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
@@ -29,7 +29,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(sexoValidacao.Sexo.Codigo)) {
                     if (sexoValidacao.Sexo.Codigo.Length > 10) {
                         sexoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(sexoValidacao.Sexo.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(sexoValidacao.Sexo.Codigo)) {
                         sexoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         sexoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
@@ -75,7 +75,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(sexoValidacao.Sexo.Descricao)) {
                     if (sexoValidacao.Sexo.Descricao.Length > 100) {
                         sexoValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                    } else if (!Validacao.ValidarCharDescricao(sexoValidacao.Sexo.Descricao)) {
+                    } else if (!Validacao.ValidarCharAaBCcNT(sexoValidacao.Sexo.Descricao)) {
                         sexoValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                         sexoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                     }
@@ -85,7 +85,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(sexoValidacao.Sexo.Codigo)) {
                     if (sexoValidacao.Sexo.Codigo.Length > 10) {
                         sexoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(sexoValidacao.Sexo.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(sexoValidacao.Sexo.Codigo)) {
                         sexoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         sexoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }

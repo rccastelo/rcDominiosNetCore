@@ -28,5 +28,7 @@ namespace rcDominiosDatabase
         public DbSet<TelefoneTipoEntity> TelefoneTipo { get; set; }
 
         public DbSet<UsuarioTipoEntity> UsuarioTipo { get; set; }
+
+        public DbSet<UsuarioEntity> Usuario { get; set; }
     }
 }

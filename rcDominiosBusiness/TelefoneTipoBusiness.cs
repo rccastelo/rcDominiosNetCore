@@ -20,7 +20,7 @@ namespace rcDominiosBusiness
                     telefoneTipoValidacao.ValidacaoMensagens.Add("Necessário informar a Descrição do tipo de Telefone");
                 } else if (telefoneTipoValidacao.TelefoneTipo.Descricao.Length > 100) {
                     telefoneTipoValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                } else if (!Validacao.ValidarCharDescricao(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
+                } else if (!Validacao.ValidarCharAaBCcNT(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
                     telefoneTipoValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                     telefoneTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
@@ -29,7 +29,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
                     if (telefoneTipoValidacao.TelefoneTipo.Codigo.Length > 10) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
@@ -75,7 +75,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
                     if (telefoneTipoValidacao.TelefoneTipo.Descricao.Length > 100) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                    } else if (!Validacao.ValidarCharDescricao(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
+                    } else if (!Validacao.ValidarCharAaBCcNT(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                     }
@@ -85,7 +85,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
                     if (telefoneTipoValidacao.TelefoneTipo.Codigo.Length > 10) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         telefoneTipoValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }

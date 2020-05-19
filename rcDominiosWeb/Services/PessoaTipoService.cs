@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,12 +13,15 @@ namespace rcDominiosWeb.Services
     {
         private string enderecoServico = "http://localhost:5600/";
         private string nomeServico = "PessoaTipo";
-        private HttpClient httpClient;
+        private HttpClient httpClient = null;
+        AutenticaService autenticaService = null;
+        private string autorizacao = null;
 
         public PessoaTipoService()
         {
             httpClient = new HttpClient();
             httpClient.BaseAddress = new System.Uri(enderecoServico);
+            autenticaService = new AutenticaService();
         }
 
         public async Task<PessoaTipoDataTransfer> Incluir(PessoaTipoDataTransfer pessoaTipoForm)
@@ -28,6 +32,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
 
                 resposta = await httpClient.PostAsync($"{nomeServico}", conteudoHttp);
@@ -70,6 +77,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
 
                 resposta = await httpClient.PutAsync($"{nomeServico}", conteudoHttp);
@@ -111,6 +121,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
@@ -150,6 +163,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 resposta = await httpClient.GetAsync($"{nomeServico}");
 
                 if (resposta.IsSuccessStatusCode) {
@@ -189,6 +205,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
@@ -229,6 +248,9 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
+                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
                 conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
 
                 resposta = await httpClient.PostAsync($"{nomeServico}/filtro", conteudoHttp);

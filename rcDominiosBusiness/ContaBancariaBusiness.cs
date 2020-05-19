@@ -20,7 +20,7 @@ namespace rcDominiosBusiness
                     contaBancariaValidacao.ValidacaoMensagens.Add("Necessário informar a Descrição do tipo de Conta Bancária");
                 } else if (contaBancariaValidacao.ContaBancaria.Descricao.Length > 100) {
                     contaBancariaValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                } else if (!Validacao.ValidarCharDescricao(contaBancariaValidacao.ContaBancaria.Descricao)) {
+                } else if (!Validacao.ValidarCharAaBCcNT(contaBancariaValidacao.ContaBancaria.Descricao)) {
                     contaBancariaValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                     contaBancariaValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
@@ -29,7 +29,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(contaBancariaValidacao.ContaBancaria.Codigo)) {
                     if (contaBancariaValidacao.ContaBancaria.Codigo.Length > 10) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(contaBancariaValidacao.ContaBancaria.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(contaBancariaValidacao.ContaBancaria.Codigo)) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         contaBancariaValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
@@ -75,7 +75,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(contaBancariaValidacao.ContaBancaria.Descricao)) {
                     if (contaBancariaValidacao.ContaBancaria.Descricao.Length > 100) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                    } else if (!Validacao.ValidarCharDescricao(contaBancariaValidacao.ContaBancaria.Descricao)) {
+                    } else if (!Validacao.ValidarCharAaBCcNT(contaBancariaValidacao.ContaBancaria.Descricao)) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                         contaBancariaValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                     }
@@ -85,7 +85,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(contaBancariaValidacao.ContaBancaria.Codigo)) {
                     if (contaBancariaValidacao.ContaBancaria.Codigo.Length > 10) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(contaBancariaValidacao.ContaBancaria.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(contaBancariaValidacao.ContaBancaria.Codigo)) {
                         contaBancariaValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         contaBancariaValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }

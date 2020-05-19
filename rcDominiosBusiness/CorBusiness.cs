@@ -20,7 +20,7 @@ namespace rcDominiosBusiness
                     corValidacao.ValidacaoMensagens.Add("Necessário informar a Descrição da Cor");
                 } else if (corValidacao.Cor.Descricao.Length > 100) {
                     corValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                } else if (!Validacao.ValidarCharDescricao(corValidacao.Cor.Descricao)) {
+                } else if (!Validacao.ValidarCharAaBCcNT(corValidacao.Cor.Descricao)) {
                     corValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                     corValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
@@ -29,7 +29,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(corValidacao.Cor.Codigo)) {
                     if (corValidacao.Cor.Codigo.Length > 10) {
                         corValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(corValidacao.Cor.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(corValidacao.Cor.Codigo)) {
                         corValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         corValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
@@ -75,7 +75,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(corValidacao.Cor.Descricao)) {
                     if (corValidacao.Cor.Descricao.Length > 100) {
                         corValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                    } else if (!Validacao.ValidarCharDescricao(corValidacao.Cor.Descricao)) {
+                    } else if (!Validacao.ValidarCharAaBCcNT(corValidacao.Cor.Descricao)) {
                         corValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                         corValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                     }
@@ -85,7 +85,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(corValidacao.Cor.Codigo)) {
                     if (corValidacao.Cor.Codigo.Length > 10) {
                         corValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(corValidacao.Cor.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(corValidacao.Cor.Codigo)) {
                         corValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         corValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }

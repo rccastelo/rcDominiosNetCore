@@ -20,7 +20,7 @@ namespace rcDominiosBusiness
                     generoSocialValidacao.ValidacaoMensagens.Add("Necessário informar a Descrição do Gênero Social");
                 } else if (generoSocialValidacao.GeneroSocial.Descricao.Length > 100) {
                     generoSocialValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                } else if (!Validacao.ValidarCharDescricao(generoSocialValidacao.GeneroSocial.Descricao)) {
+                } else if (!Validacao.ValidarCharAaBCcNT(generoSocialValidacao.GeneroSocial.Descricao)) {
                     generoSocialValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                     generoSocialValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
@@ -29,7 +29,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(generoSocialValidacao.GeneroSocial.Codigo)) {
                     if (generoSocialValidacao.GeneroSocial.Codigo.Length > 10) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(generoSocialValidacao.GeneroSocial.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(generoSocialValidacao.GeneroSocial.Codigo)) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         generoSocialValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
@@ -75,7 +75,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(generoSocialValidacao.GeneroSocial.Descricao)) {
                     if (generoSocialValidacao.GeneroSocial.Descricao.Length > 100) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Descrição deve ter no máximo 100 caracteres");
-                    } else if (!Validacao.ValidarCharDescricao(generoSocialValidacao.GeneroSocial.Descricao)) {
+                    } else if (!Validacao.ValidarCharAaBCcNT(generoSocialValidacao.GeneroSocial.Descricao)) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Descrição possui caracteres inválidos");
                         generoSocialValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                     }
@@ -85,7 +85,7 @@ namespace rcDominiosBusiness
                 if (!string.IsNullOrEmpty(generoSocialValidacao.GeneroSocial.Codigo)) {
                     if (generoSocialValidacao.GeneroSocial.Codigo.Length > 10) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Código deve ter no máximo 10 caracteres");
-                    } else if(!Validacao.ValidarCharCodigoAlfanum(generoSocialValidacao.GeneroSocial.Codigo)) {
+                    } else if(!Validacao.ValidarCharAaNT(generoSocialValidacao.GeneroSocial.Codigo)) {
                         generoSocialValidacao.ValidacaoMensagens.Add("Código possui caracteres inválidos");
                         generoSocialValidacao.ValidacaoMensagens.Add("Caracteres válidos: letras, números e traço");
                     }
