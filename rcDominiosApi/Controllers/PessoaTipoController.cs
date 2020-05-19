@@ -6,7 +6,7 @@ using rcDominiosDataTransfers;
 
 namespace rcDominiosApi.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PessoaTipoController : ControllerBase
@@ -148,7 +148,7 @@ namespace rcDominiosApi.Controllers
             if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
                 return BadRequest(pessoaTipoRetorno);
             } else {
-                return NoContent();
+                return Ok(pessoaTipoRetorno);
             }
         }
     }
