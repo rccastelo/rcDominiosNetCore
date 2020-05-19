@@ -18,16 +18,14 @@ namespace rcDominiosWeb.Services
             httpClient.BaseAddress = new System.Uri(enderecoServico);
         }
         
-        public async Task<string> Autorizar(UsuarioRequest usuario)
+        public async Task<string> Autorizar()
         {
             string autorizacao = null;
             HttpResponseMessage resposta = null;
-            HttpContent conteudoHttp = null;
+            UsuarioRequest usuarioRequest = new UsuarioRequest() { Apelido = "admin", Senha = "senha" };
             
             try {
-                conteudoHttp = new StringContent(JsonConvert.SerializeObject(usuario), Encoding.UTF8, "text/json");
-
-                resposta = await httpClient.PostAsync($"{nomeServico}", conteudoHttp);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", usuarioRequest);
 
                 if (resposta.IsSuccessStatusCode) {
                     autorizacao = await resposta.Content.ReadAsStringAsync();
@@ -36,7 +34,6 @@ namespace rcDominiosWeb.Services
                 autorizacao = null;
             } finally {
                 resposta = null;
-                conteudoHttp = null;
             }
 
             return autorizacao;

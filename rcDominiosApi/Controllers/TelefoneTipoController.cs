@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class TelefoneTipoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             TelefoneTipoModel telefoneTipoModel;
             TelefoneTipoDataTransfer telefoneTipoForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 telefoneTipoForm.Validacao = false;
                 telefoneTipoForm.Erro = true;
-                telefoneTipoForm.ErroMensagens.Add("Erro em TelefoneTipoController Form [" + ex.Message + "]");
+                telefoneTipoForm.ErroMensagens.Add("Erro em TelefoneTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             TelefoneTipoModel telefoneTipoModel;
             TelefoneTipoDataTransfer telefoneTipoLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.ErroMensagens.Add("Erro em TelefoneTipoController Lista [" + ex.Message + "]");
+                telefoneTipoLista.ErroMensagens.Add("Erro em TelefoneTipoController Listar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public IActionResult Incluir(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
             TelefoneTipoDataTransfer telefoneTipoRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Inclusao [" + ex.Message + "]");
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
                 return BadRequest(telefoneTipoRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = telefoneTipoRetorno.TelefoneTipo.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = telefoneTipoRetorno.TelefoneTipo.Id });
 
                 return Created(uri, telefoneTipoRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public IActionResult Alterar(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
             TelefoneTipoDataTransfer telefoneTipoRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Alteracao [" + ex.Message + "]");
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             TelefoneTipoModel telefoneTipoModel;
             TelefoneTipoDataTransfer telefoneTipoRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Exclusao [" + ex.Message + "]");
+                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }

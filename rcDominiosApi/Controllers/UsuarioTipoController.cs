@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class UsuarioTipoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             UsuarioTipoModel usuarioTipoModel;
             UsuarioTipoDataTransfer usuarioTipoForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 usuarioTipoForm.Validacao = false;
                 usuarioTipoForm.Erro = true;
-                usuarioTipoForm.ErroMensagens.Add("Erro em UsuarioTipoController Form [" + ex.Message + "]");
+                usuarioTipoForm.ErroMensagens.Add("Erro em UsuarioTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             UsuarioTipoModel usuarioTipoModel;
             UsuarioTipoDataTransfer usuarioTipoLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.ErroMensagens.Add("Erro em UsuarioTipoController Lista [" + ex.Message + "]");
+                usuarioTipoLista.ErroMensagens.Add("Erro em UsuarioTipoController Listar [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public IActionResult Incluir(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
             UsuarioTipoDataTransfer usuarioTipoRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoRetorno.Validacao = false;
                 usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Inclusao [" + ex.Message + "]");
+                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (usuarioTipoRetorno.Erro || !usuarioTipoRetorno.Validacao) {
                 return BadRequest(usuarioTipoRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = usuarioTipoRetorno.UsuarioTipo.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = usuarioTipoRetorno.UsuarioTipo.Id });
 
                 return Created(uri, usuarioTipoRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public IActionResult Alterar(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
             UsuarioTipoDataTransfer usuarioTipoRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoRetorno.Validacao = false;
                 usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Alteracao [" + ex.Message + "]");
+                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             UsuarioTipoModel usuarioTipoModel;
             UsuarioTipoDataTransfer usuarioTipoRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoRetorno.Validacao = false;
                 usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Exclusao [" + ex.Message + "]");
+                usuarioTipoRetorno.ErroMensagens.Add("Erro em UsuarioTipoController Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }

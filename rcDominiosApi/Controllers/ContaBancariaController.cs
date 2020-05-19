@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class ContaBancariaController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             ContaBancariaModel contaBancariaModel;
             ContaBancariaDataTransfer contaBancariaForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 contaBancariaForm.Validacao = false;
                 contaBancariaForm.Erro = true;
-                contaBancariaForm.ErroMensagens.Add("Erro em ContaBancariaController Form [" + ex.Message + "]");
+                contaBancariaForm.ErroMensagens.Add("Erro em ContaBancariaController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             ContaBancariaModel contaBancariaModel;
             ContaBancariaDataTransfer contaBancariaLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.ErroMensagens.Add("Erro em ContaBancariaController Lista [" + ex.Message + "]");
+                contaBancariaLista.ErroMensagens.Add("Erro em ContaBancariaController Listar [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public IActionResult Incluir(ContaBancariaDataTransfer contaBancariaDataTransfer)
         {
             ContaBancariaModel contaBancariaModel;
             ContaBancariaDataTransfer contaBancariaRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 contaBancariaRetorno.Validacao = false;
                 contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Inclusao [" + ex.Message + "]");
+                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
                 return BadRequest(contaBancariaRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = contaBancariaRetorno.ContaBancaria.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = contaBancariaRetorno.ContaBancaria.Id });
 
                 return Created(uri, contaBancariaRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public IActionResult Alterar(ContaBancariaDataTransfer contaBancariaDataTransfer)
         {
             ContaBancariaModel contaBancariaModel;
             ContaBancariaDataTransfer contaBancariaRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 contaBancariaRetorno.Validacao = false;
                 contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Alteracao [" + ex.Message + "]");
+                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             ContaBancariaModel contaBancariaModel;
             ContaBancariaDataTransfer contaBancariaRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 contaBancariaRetorno.Validacao = false;
                 contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Exclusao [" + ex.Message + "]");
+                contaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaController Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }

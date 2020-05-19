@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class ProfissaoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             ProfissaoModel profissaoModel;
             ProfissaoDataTransfer profissaoForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 profissaoForm.Validacao = false;
                 profissaoForm.Erro = true;
-                profissaoForm.ErroMensagens.Add("Erro em ProfissaoController Form [" + ex.Message + "]");
+                profissaoForm.ErroMensagens.Add("Erro em ProfissaoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             ProfissaoModel profissaoModel;
             ProfissaoDataTransfer profissaoLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em ProfissaoController Lista [" + ex.Message + "]");
+                profissaoLista.ErroMensagens.Add("Erro em ProfissaoController Listar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(ProfissaoDataTransfer profissaoDataTransfer)
+        public IActionResult Incluir(ProfissaoDataTransfer profissaoDataTransfer)
         {
             ProfissaoModel profissaoModel;
             ProfissaoDataTransfer profissaoRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoRetorno.Validacao = false;
                 profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
+                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Incluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
                 return BadRequest(profissaoRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = profissaoRetorno.Profissao.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = profissaoRetorno.Profissao.Id });
 
                 return Created(uri, profissaoRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(ProfissaoDataTransfer profissaoDataTransfer)
+        public IActionResult Alterar(ProfissaoDataTransfer profissaoDataTransfer)
         {
             ProfissaoModel profissaoModel;
             ProfissaoDataTransfer profissaoRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoRetorno.Validacao = false;
                 profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
+                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Alterar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             ProfissaoModel profissaoModel;
             ProfissaoDataTransfer profissaoRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoRetorno.Validacao = false;
                 profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
+                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Excluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }

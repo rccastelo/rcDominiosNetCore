@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class GeneroSocialController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             GeneroSocialModel generoSocialModel;
             GeneroSocialDataTransfer generoSocialForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 generoSocialForm.Validacao = false;
                 generoSocialForm.Erro = true;
-                generoSocialForm.ErroMensagens.Add("Erro em GeneroSocialController Form [" + ex.Message + "]");
+                generoSocialForm.ErroMensagens.Add("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             GeneroSocialModel generoSocialModel;
             GeneroSocialDataTransfer generoSocialLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.ErroMensagens.Add("Erro em GeneroSocialController Lista [" + ex.Message + "]");
+                generoSocialLista.ErroMensagens.Add("Erro em GeneroSocialController Listar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public IActionResult Incluir(GeneroSocialDataTransfer generoSocialDataTransfer)
         {
             GeneroSocialModel generoSocialModel;
             GeneroSocialDataTransfer generoSocialRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Inclusao [" + ex.Message + "]");
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
                 return BadRequest(generoSocialRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = generoSocialRetorno.GeneroSocial.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = generoSocialRetorno.GeneroSocial.Id });
 
                 return Created(uri, generoSocialRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public IActionResult Alterar(GeneroSocialDataTransfer generoSocialDataTransfer)
         {
             GeneroSocialModel generoSocialModel;
             GeneroSocialDataTransfer generoSocialRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Alteracao [" + ex.Message + "]");
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             GeneroSocialModel generoSocialModel;
             GeneroSocialDataTransfer generoSocialRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Exclusao [" + ex.Message + "]");
+                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }

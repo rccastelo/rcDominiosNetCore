@@ -2,14 +2,12 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using rcDominiosDataTransfers;
 
 namespace rcDominiosWeb.Services
 {
-    public class PessoaTipoService
+  public class PessoaTipoService
     {
         private string enderecoServico = "http://localhost:5600/";
         private string nomeServico = "PessoaTipo";
@@ -28,21 +26,18 @@ namespace rcDominiosWeb.Services
         {
             PessoaTipoDataTransfer pessoaTipoInclusao = null;
             HttpResponseMessage resposta = null;
-            HttpContent conteudoHttp = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
-
-                resposta = await httpClient.PostAsync($"{nomeServico}", conteudoHttp);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", pessoaTipoForm);
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Incluir [{resposta.ReasonPhrase}]";
+                    pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Incluir não autorizado";
                 } else {
@@ -73,21 +68,18 @@ namespace rcDominiosWeb.Services
         {
             PessoaTipoDataTransfer pessoaTipoAlteracao = null;
             HttpResponseMessage resposta = null;
-            HttpContent conteudoHttp = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
-
-                resposta = await httpClient.PutAsync($"{nomeServico}", conteudoHttp);
+                resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", pessoaTipoForm);
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipoAlteracao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Alterar [{resposta.ReasonPhrase}]";
+                    pessoaTipoAlteracao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Alterar não autorizado";
                 } else {
@@ -121,7 +113,7 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -129,7 +121,7 @@ namespace rcDominiosWeb.Services
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Excluir [{resposta.ReasonPhrase}]";
+                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Excluir não autorizado";
                 } else {
@@ -163,7 +155,7 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}");
@@ -171,7 +163,7 @@ namespace rcDominiosWeb.Services
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Listar [{resposta.ReasonPhrase}]";
+                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Listar não autorizado";
                 } else {
@@ -205,7 +197,7 @@ namespace rcDominiosWeb.Services
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -213,7 +205,7 @@ namespace rcDominiosWeb.Services
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} ConsultarPorId [{resposta.ReasonPhrase}]";
+                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} ConsultarPorId não autorizado";
                 } else {
@@ -244,21 +236,18 @@ namespace rcDominiosWeb.Services
         {
             PessoaTipoDataTransfer pessoaTipoConsulta = null;
             HttpResponseMessage resposta = null;
-            HttpContent conteudoHttp = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar(new UsuarioRequest() { Apelido = "admin", Senha = "senha" });
+                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
-
-                resposta = await httpClient.PostAsync($"{nomeServico}/filtro", conteudoHttp);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/filtro", pessoaTipoForm);
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipoConsulta = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Consultar [{resposta.ReasonPhrase}]";
+                    pessoaTipoConsulta = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Consultar não autorizado";
                 } else {

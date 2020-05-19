@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class EnderecoTipoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             EnderecoTipoModel enderecoTipoModel;
             EnderecoTipoDataTransfer enderecoTipoForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 enderecoTipoForm.Validacao = false;
                 enderecoTipoForm.Erro = true;
-                enderecoTipoForm.ErroMensagens.Add("Erro em EnderecoTipoController Form [" + ex.Message + "]");
+                enderecoTipoForm.ErroMensagens.Add("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             EnderecoTipoModel enderecoTipoModel;
             EnderecoTipoDataTransfer enderecoTipoLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.ErroMensagens.Add("Erro em EnderecoTipoController Lista [" + ex.Message + "]");
+                enderecoTipoLista.ErroMensagens.Add("Erro em EnderecoTipoController Listar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public IActionResult Incluir(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
             EnderecoTipoDataTransfer enderecoTipoRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Inclusao [" + ex.Message + "]");
+                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (enderecoTipoRetorno.Erro || !enderecoTipoRetorno.Validacao) {
                 return BadRequest(enderecoTipoRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = enderecoTipoRetorno.EnderecoTipo.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = enderecoTipoRetorno.EnderecoTipo.Id });
 
                 return Created(uri, enderecoTipoRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public IActionResult Alterar(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
             EnderecoTipoDataTransfer enderecoTipoRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Alteracao [" + ex.Message + "]");
+                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             EnderecoTipoModel enderecoTipoModel;
             EnderecoTipoDataTransfer enderecoTipoRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Exclusao [" + ex.Message + "]");
+                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }

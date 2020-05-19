@@ -12,7 +12,7 @@ namespace rcDominiosApi.Controllers
     public class SexoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             SexoModel sexoModel;
             SexoDataTransfer sexoForm;
@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 sexoForm.Validacao = false;
                 sexoForm.Erro = true;
-                sexoForm.ErroMensagens.Add("Erro em SexoController Form [" + ex.Message + "]");
+                sexoForm.ErroMensagens.Add("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -43,7 +43,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public IActionResult Listar()
         {
             SexoModel sexoModel;
             SexoDataTransfer sexoLista;
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.ErroMensagens.Add("Erro em SexoController Lista [" + ex.Message + "]");
+                sexoLista.ErroMensagens.Add("Erro em SexoController Listar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -70,7 +70,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(SexoDataTransfer sexoDataTransfer)
+        public IActionResult Incluir(SexoDataTransfer sexoDataTransfer)
         {
             SexoModel sexoModel;
             SexoDataTransfer sexoRetorno;
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Inclusao [" + ex.Message + "]");
+                sexoRetorno.ErroMensagens.Add("Erro em SexoController Incluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -92,14 +92,14 @@ namespace rcDominiosApi.Controllers
             if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
                 return BadRequest(sexoRetorno);
             } else {
-                string uri = Url.Action("Form", new { id = sexoRetorno.Sexo.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = sexoRetorno.Sexo.Id });
 
                 return Created(uri, sexoRetorno);
             }
         }
 
         [HttpPut]
-        public IActionResult Alteracao(SexoDataTransfer sexoDataTransfer)
+        public IActionResult Alterar(SexoDataTransfer sexoDataTransfer)
         {
             SexoModel sexoModel;
             SexoDataTransfer sexoRetorno;
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Alteracao [" + ex.Message + "]");
+                sexoRetorno.ErroMensagens.Add("Erro em SexoController Alterar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -126,7 +126,7 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Exclusao(int id)
+        public IActionResult Excluir(int id)
         {
             SexoModel sexoModel;
             SexoDataTransfer sexoRetorno;
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Exclusao [" + ex.Message + "]");
+                sexoRetorno.ErroMensagens.Add("Erro em SexoController Excluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
