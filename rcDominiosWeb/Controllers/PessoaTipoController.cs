@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosDataTransfers;
-using rcDominiosWeb.Models;
 using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Controllers
@@ -71,15 +70,15 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        public async Task<IActionResult> Consulta(PessoaTipoDataTransfer pessoaTipoDataTransfer)
         {
-            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoService pessoaTipoService;
             PessoaTipoDataTransfer pessoaTipoLista;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoService = new PessoaTipoService();
 
-                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipoDataTransfer);
+                pessoaTipoLista = await pessoaTipoService.Consultar(pessoaTipoDataTransfer);
             } catch (Exception ex) {
                 pessoaTipoLista = new PessoaTipoDataTransfer();
 
@@ -87,7 +86,7 @@ namespace rcDominiosWeb.Controllers
                 pessoaTipoLista.Erro = true;
                 pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
             } finally {
-                pessoaTipoModel = null;
+                pessoaTipoService = null;
             }
 
             if (pessoaTipoLista.Erro || !pessoaTipoLista.Validacao) {

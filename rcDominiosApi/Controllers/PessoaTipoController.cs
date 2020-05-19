@@ -6,13 +6,13 @@ using rcDominiosDataTransfers;
 
 namespace rcDominiosApi.Controllers
 {
-    // [Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PessoaTipoController : ControllerBase
     {
         [HttpGet("{id}")]
-        public IActionResult Form(int id)
+        public IActionResult ConsultarPorId(int id)
         {
             PessoaTipoModel pessoaTipoModel;
             PessoaTipoDataTransfer pessoaTipoForm;
@@ -52,6 +52,33 @@ namespace rcDominiosApi.Controllers
                 pessoaTipoModel = new PessoaTipoModel();
 
                 pessoaTipoLista = pessoaTipoModel.Listar();
+            } catch (Exception ex) {
+                pessoaTipoLista = new PessoaTipoDataTransfer();
+
+                pessoaTipoLista.Validacao = false;
+                pessoaTipoLista.Erro = true;
+                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Lista [" + ex.Message + "]");
+            } finally {
+                pessoaTipoModel = null;
+            }
+
+            if (pessoaTipoLista.Erro || !pessoaTipoLista.Validacao) {
+                return BadRequest(pessoaTipoLista);
+            } else {
+                return Ok(pessoaTipoLista);
+            }
+        }
+
+        [HttpPost("filtro")]
+        public IActionResult Consulta(PessoaTipoDataTransfer pessoaTipo)
+        {
+            PessoaTipoModel pessoaTipoModel;
+            PessoaTipoDataTransfer pessoaTipoLista;
+
+            try {
+                pessoaTipoModel = new PessoaTipoModel();
+
+                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipo);
             } catch (Exception ex) {
                 pessoaTipoLista = new PessoaTipoDataTransfer();
 

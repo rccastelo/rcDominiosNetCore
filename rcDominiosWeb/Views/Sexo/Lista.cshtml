@@ -40,3 +40,33 @@
                     &nbsp;Voltar</button></a>
     </div>
 </div>
+
+@if (@Model != null) {
+    @if (@Model.Erro || !@Model.Validacao) {
+        <div class="text-danger">
+            @section Scripts {
+                <script>
+                    $('#modalMessages').modal('show');
+                </script>
+            }
+
+            @if (@Model.Erro) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ErroMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            } else if (!@Model.Validacao) {
+                @section Messages {
+                    <ul>
+                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                            <li class="p-2">@msg</li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    }
+}

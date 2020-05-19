@@ -25,6 +25,7 @@ namespace rcDominiosWeb.Services
             PessoaTipoDataTransfer pessoaTipoInclusao = null;
             HttpResponseMessage resposta = null;
             HttpContent conteudoHttp = null;
+            string mensagemRetono = null;
             
             try {
                 conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
@@ -34,15 +35,20 @@ namespace rcDominiosWeb.Services
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Incluir [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} Incluir não autorizado";
                 } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Incluir";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
                     pessoaTipoInclusao = new PessoaTipoDataTransfer();
                     
                     pessoaTipoInclusao.Validacao = false;
                     pessoaTipoInclusao.Erro = true;
-                    pessoaTipoInclusao.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} Incluir");
+                    pessoaTipoInclusao.ErroMensagens.Add(mensagemRetono);
                 }
-                
             } catch (Exception ex) {
                 pessoaTipoInclusao = new PessoaTipoDataTransfer();
 
@@ -58,9 +64,10 @@ namespace rcDominiosWeb.Services
 
         public async Task<PessoaTipoDataTransfer> Alterar(PessoaTipoDataTransfer pessoaTipoForm)
         {
-            PessoaTipoDataTransfer pessoaTipoInclusao = null;
+            PessoaTipoDataTransfer pessoaTipoAlteracao = null;
             HttpResponseMessage resposta = null;
             HttpContent conteudoHttp = null;
+            string mensagemRetono = null;
             
             try {
                 conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
@@ -68,46 +75,60 @@ namespace rcDominiosWeb.Services
                 resposta = await httpClient.PutAsync($"{nomeServico}", conteudoHttp);
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                    pessoaTipoAlteracao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipoInclusao = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Alterar [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} Alterar não autorizado";
                 } else {
-                    pessoaTipoInclusao = new PessoaTipoDataTransfer();
-                    
-                    pessoaTipoInclusao.Validacao = false;
-                    pessoaTipoInclusao.Erro = true;
-                    pessoaTipoInclusao.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} Alterar");
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Alterar";
                 }
-                
-            } catch (Exception ex) {
-                pessoaTipoInclusao = new PessoaTipoDataTransfer();
 
-                pessoaTipoInclusao.Validacao = false;
-                pessoaTipoInclusao.Erro = true;
-                pessoaTipoInclusao.ErroMensagens.Add("Erro em PessoaTipoService Alterar [" + ex.Message + "]");
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
+                    pessoaTipoAlteracao = new PessoaTipoDataTransfer();
+                    
+                    pessoaTipoAlteracao.Validacao = false;
+                    pessoaTipoAlteracao.Erro = true;
+                    pessoaTipoAlteracao.ErroMensagens.Add(mensagemRetono);
+                }
+            } catch (Exception ex) {
+                pessoaTipoAlteracao = new PessoaTipoDataTransfer();
+
+                pessoaTipoAlteracao.Validacao = false;
+                pessoaTipoAlteracao.Erro = true;
+                pessoaTipoAlteracao.ErroMensagens.Add("Erro em PessoaTipoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipoInclusao;
+            return pessoaTipoAlteracao;
         }
 
         public async Task<PessoaTipoDataTransfer> Excluir(int id)
         {
             PessoaTipoDataTransfer pessoaTipo = null;
             HttpResponseMessage resposta = null;
+            string mensagemRetono = null;
             
             try {
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Excluir [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} Excluir não autorizado";
                 } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Excluir";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
                     pessoaTipo = new PessoaTipoDataTransfer();
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} Excluir");
+                    pessoaTipo.ErroMensagens.Add(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoDataTransfer();
@@ -126,18 +147,27 @@ namespace rcDominiosWeb.Services
         {
             PessoaTipoDataTransfer pessoaTipo = null;
             HttpResponseMessage resposta = null;
+            string mensagemRetono = null;
             
             try {
                 resposta = await httpClient.GetAsync($"{nomeServico}");
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Listar [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} Listar não autorizado";
                 } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Listar";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
                     pessoaTipo = new PessoaTipoDataTransfer();
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} Listar");
+                    pessoaTipo.ErroMensagens.Add(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoDataTransfer();
@@ -156,18 +186,27 @@ namespace rcDominiosWeb.Services
         {
             PessoaTipoDataTransfer pessoaTipo = null;
             HttpResponseMessage resposta = null;
+            string mensagemRetono = null;
             
             try {
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
                     pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} ConsultarPorId [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} ConsultarPorId não autorizado";
                 } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} ConsultarPorId";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
                     pessoaTipo = new PessoaTipoDataTransfer();
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} ConsultarPorId");
+                    pessoaTipo.ErroMensagens.Add(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoDataTransfer();
@@ -182,34 +221,46 @@ namespace rcDominiosWeb.Services
             return pessoaTipo;
         }
 
-        // public async Task<PessoaTipoDataTransfer> Consultar(PessoaTipoDataTransfer pessoaTipoDataTransfer)
-        // {
-        //     PessoaTipoDataTransfer pessoaTipo = null;
-        //     HttpResponseMessage resposta = null;
+        public async Task<PessoaTipoDataTransfer> Consultar(PessoaTipoDataTransfer pessoaTipoForm)
+        {
+            PessoaTipoDataTransfer pessoaTipoConsulta = null;
+            HttpResponseMessage resposta = null;
+            HttpContent conteudoHttp = null;
+            string mensagemRetono = null;
             
-        //     try {
-        //         resposta = await httpClient.GetAsync($"{nomeServico}");
+            try {
+                conteudoHttp = new StringContent(JsonConvert.SerializeObject(pessoaTipoForm), Encoding.UTF8, "text/json");
 
-        //         if (resposta.IsSuccessStatusCode) {
-        //             pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
-        //         } else {
-        //             pessoaTipo = new PessoaTipoDataTransfer();
+                resposta = await httpClient.PostAsync($"{nomeServico}/filtro", conteudoHttp);
+
+                if (resposta.IsSuccessStatusCode) {
+                    pessoaTipoConsulta = resposta.Content.ReadAsAsync<PessoaTipoDataTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Consultar [{resposta.ReasonPhrase}]";
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} Consultar não autorizado";
+                } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Consultar";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
+                    pessoaTipoConsulta = new PessoaTipoDataTransfer();
                     
-        //             pessoaTipo.Validacao = false;
-        //             pessoaTipo.Erro = true;
-        //             pessoaTipo.ErroMensagens.Add($"Não foi possível acessar o serviço {nomeServico} ConsultarPorId");
-        //         }
-        //     } catch (Exception ex) {
-        //         pessoaTipo = new PessoaTipoDataTransfer();
+                    pessoaTipoConsulta.Validacao = false;
+                    pessoaTipoConsulta.Erro = true;
+                    pessoaTipoConsulta.ErroMensagens.Add(mensagemRetono);
+                }
+            } catch (Exception ex) {
+                pessoaTipoConsulta = new PessoaTipoDataTransfer();
 
-        //         pessoaTipo.Validacao = false;
-        //         pessoaTipo.Erro = true;
-        //         pessoaTipo.ErroMensagens.Add("Erro em PessoaTipoService ConsultarPorId [" + ex.Message + "]");
-        //     } finally {
-        //         resposta = null;
-        //     }
+                pessoaTipoConsulta.Validacao = false;
+                pessoaTipoConsulta.Erro = true;
+                pessoaTipoConsulta.ErroMensagens.Add("Erro em PessoaTipoService Consultar [" + ex.Message + "]");
+            } finally {
+                resposta = null;
+            }
 
-        //     return pessoaTipo;
-        // }
+            return pessoaTipoConsulta;
+        }
     }
 }
