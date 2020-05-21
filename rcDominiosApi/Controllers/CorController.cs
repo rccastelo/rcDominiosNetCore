@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 corForm.Validacao = false;
                 corForm.Erro = true;
-                corForm.ErroMensagens.Add("Erro em CorController ConsultarPorId [" + ex.Message + "]");
+                corForm.IncluirErroMensagem("Erro em CorController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.ErroMensagens.Add("Erro em CorController Listar [" + ex.Message + "]");
+                corLista.IncluirErroMensagem("Erro em CorController Listar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Incluir [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Incluir [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Alterar [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Alterar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Excluir [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Excluir [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }

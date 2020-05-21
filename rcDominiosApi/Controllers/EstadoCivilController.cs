@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 estadoCivilForm.Validacao = false;
                 estadoCivilForm.Erro = true;
-                estadoCivilForm.ErroMensagens.Add("Erro em EstadoCivilController ConsultarPorId [" + ex.Message + "]");
+                estadoCivilForm.IncluirErroMensagem("Erro em EstadoCivilController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
-                estadoCivilLista.ErroMensagens.Add("Erro em EstadoCivilController Listar [" + ex.Message + "]");
+                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilController Listar [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilRetorno.Validacao = false;
                 estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Incluir [" + ex.Message + "]");
+                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilRetorno.Validacao = false;
                 estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Alterar [" + ex.Message + "]");
+                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilRetorno.Validacao = false;
                 estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilController Excluir [" + ex.Message + "]");
+                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }

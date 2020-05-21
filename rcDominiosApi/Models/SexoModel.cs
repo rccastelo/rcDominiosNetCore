@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 sexoDTInclusao.Validacao = false;
                 sexoDTInclusao.Erro = true;
-                sexoDTInclusao.ErroMensagens.Add("Erro em SexoModel Incluir [" + ex.Message + "]");
+                sexoDTInclusao.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 sexoDTAlteracao.Validacao = false;
                 sexoDTAlteracao.Erro = true;
-                sexoDTAlteracao.ErroMensagens.Add("Erro em SexoModel Alterar [" + ex.Message + "]");
+                sexoDTAlteracao.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 sexoDTExclusao.Validacao = false;
                 sexoDTExclusao.Erro = true;
-                sexoDTExclusao.ErroMensagens.Add("Erro em SexoModel Excluir [" + ex.Message + "]");
+                sexoDTExclusao.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 sexoDTLista.Validacao = false;
                 sexoDTLista.Erro = true;
-                sexoDTLista.ErroMensagens.Add("Erro em SexoModel Listar [" + ex.Message + "]");
+                sexoDTLista.IncluirErroMensagem("Erro em SexoModel Listar [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 sexoDTForm.Validacao = false;
                 sexoDTForm.Erro = true;
-                sexoDTForm.ErroMensagens.Add("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
+                sexoDTForm.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }

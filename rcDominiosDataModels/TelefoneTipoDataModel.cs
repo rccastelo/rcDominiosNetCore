@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel Incluir [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel Alterar [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel Excluir [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel Listar [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel Listar [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel ConsultarPorId [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 TelefoneTipoRetorno.Validacao = false;
                 TelefoneTipoRetorno.Erro = true;
-                TelefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoDataModel Consultar [" + ex.Message + "]");
+                TelefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 telefoneTipoData = null;
             }

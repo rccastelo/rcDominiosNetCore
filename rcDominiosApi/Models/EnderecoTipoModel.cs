@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoDTInclusao.Validacao = false;
                 enderecoTipoDTInclusao.Erro = true;
-                enderecoTipoDTInclusao.ErroMensagens.Add("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
+                enderecoTipoDTInclusao.IncluirErroMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoDTAlteracao.Validacao = false;
                 enderecoTipoDTAlteracao.Erro = true;
-                enderecoTipoDTAlteracao.ErroMensagens.Add("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
+                enderecoTipoDTAlteracao.IncluirErroMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoDTExclusao.Validacao = false;
                 enderecoTipoDTExclusao.Erro = true;
-                enderecoTipoDTExclusao.ErroMensagens.Add("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
+                enderecoTipoDTExclusao.IncluirErroMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoDTLista.Validacao = false;
                 enderecoTipoDTLista.Erro = true;
-                enderecoTipoDTLista.ErroMensagens.Add("Erro em EnderecoTipoModel Listar [" + ex.Message + "]");
+                enderecoTipoDTLista.IncluirErroMensagem("Erro em EnderecoTipoModel Listar [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoDTForm.Validacao = false;
                 enderecoTipoDTForm.Erro = true;
-                enderecoTipoDTForm.ErroMensagens.Add("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
+                enderecoTipoDTForm.IncluirErroMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
             }

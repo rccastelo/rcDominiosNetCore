@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTInclusao.Validacao = false;
                 generoSocialDTInclusao.Erro = true;
-                generoSocialDTInclusao.ErroMensagens.Add("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
+                generoSocialDTInclusao.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTAlteracao.Validacao = false;
                 generoSocialDTAlteracao.Erro = true;
-                generoSocialDTAlteracao.ErroMensagens.Add("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
+                generoSocialDTAlteracao.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTExclusao.Validacao = false;
                 generoSocialDTExclusao.Erro = true;
-                generoSocialDTExclusao.ErroMensagens.Add("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
+                generoSocialDTExclusao.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTLista.Validacao = false;
                 generoSocialDTLista.Erro = true;
-                generoSocialDTLista.ErroMensagens.Add("Erro em GeneroSocialModel Listar [" + ex.Message + "]");
+                generoSocialDTLista.IncluirErroMensagem("Erro em GeneroSocialModel Listar [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTForm.Validacao = false;
                 generoSocialDTForm.Erro = true;
-                generoSocialDTForm.ErroMensagens.Add("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
+                generoSocialDTForm.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
             }
@@ -182,7 +182,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialDTConsulta.Validacao = false;
                 generoSocialDTConsulta.Erro = true;
-                generoSocialDTConsulta.ErroMensagens.Add("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
+                generoSocialDTConsulta.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;

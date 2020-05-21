@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTInclusao.Validacao = false;
                 contaBancariaDTInclusao.Erro = true;
-                contaBancariaDTInclusao.ErroMensagens.Add("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
+                contaBancariaDTInclusao.IncluirErroMensagem("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTAlteracao.Validacao = false;
                 contaBancariaDTAlteracao.Erro = true;
-                contaBancariaDTAlteracao.ErroMensagens.Add("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
+                contaBancariaDTAlteracao.IncluirErroMensagem("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTExclusao.Validacao = false;
                 contaBancariaDTExclusao.Erro = true;
-                contaBancariaDTExclusao.ErroMensagens.Add("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
+                contaBancariaDTExclusao.IncluirErroMensagem("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTLista.Validacao = false;
                 contaBancariaDTLista.Erro = true;
-                contaBancariaDTLista.ErroMensagens.Add("Erro em ContaBancariaModel Listar [" + ex.Message + "]");
+                contaBancariaDTLista.IncluirErroMensagem("Erro em ContaBancariaModel Listar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTForm.Validacao = false;
                 contaBancariaDTForm.Erro = true;
-                contaBancariaDTForm.ErroMensagens.Add("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
+                contaBancariaDTForm.IncluirErroMensagem("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }
@@ -182,7 +182,7 @@ namespace rcDominiosWeb.Models
 
                 contaBancariaDTConsulta.Validacao = false;
                 contaBancariaDTConsulta.Erro = true;
-                contaBancariaDTConsulta.ErroMensagens.Add("Erro em ContaBancariaModel Consultar [" + ex.Message + "]");
+                contaBancariaDTConsulta.IncluirErroMensagem("Erro em ContaBancariaModel Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;

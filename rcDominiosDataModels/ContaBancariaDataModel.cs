@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel Incluir [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel Alterar [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel Excluir [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel Listar [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel Listar [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel ConsultarPorId [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 ContaBancariaRetorno.Validacao = false;
                 ContaBancariaRetorno.Erro = true;
-                ContaBancariaRetorno.ErroMensagens.Add("Erro em ContaBancariaDataModel Consultar [" + ex.Message + "]");
+                ContaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaDataModel Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }

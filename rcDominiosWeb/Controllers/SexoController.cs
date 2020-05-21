@@ -38,7 +38,7 @@ namespace rcDominiosWeb.Controllers
                 
                 sexoForm.Validacao = false;
                 sexoForm.Erro = true;
-                sexoForm.ErroMensagens.Add("Erro em SexoController Form");
+                sexoForm.IncluirErroMensagem("Erro em SexoController Form");
             } finally {
                 sexoModel = null;
             }
@@ -61,7 +61,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.ErroMensagens.Add("Erro em SexoController Lista [" + ex.Message + "]");
+                sexoLista.IncluirErroMensagem("Erro em SexoController Lista [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.ErroMensagens.Add("Erro em SexoController Consulta [" + ex.Message + "]");
+                sexoLista.IncluirErroMensagem("Erro em SexoController Consulta [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Inclusao [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Inclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -138,7 +138,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Alteracao [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Alteracao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -165,7 +165,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Exclusao [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Exclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }

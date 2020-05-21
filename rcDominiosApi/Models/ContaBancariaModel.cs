@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaDTInclusao.Validacao = false;
                 contaBancariaDTInclusao.Erro = true;
-                contaBancariaDTInclusao.ErroMensagens.Add("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
+                contaBancariaDTInclusao.IncluirErroMensagem("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaDTAlteracao.Validacao = false;
                 contaBancariaDTAlteracao.Erro = true;
-                contaBancariaDTAlteracao.ErroMensagens.Add("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
+                contaBancariaDTAlteracao.IncluirErroMensagem("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaDTExclusao.Validacao = false;
                 contaBancariaDTExclusao.Erro = true;
-                contaBancariaDTExclusao.ErroMensagens.Add("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
+                contaBancariaDTExclusao.IncluirErroMensagem("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaDTLista.Validacao = false;
                 contaBancariaDTLista.Erro = true;
-                contaBancariaDTLista.ErroMensagens.Add("Erro em ContaBancariaModel Listar [" + ex.Message + "]");
+                contaBancariaDTLista.IncluirErroMensagem("Erro em ContaBancariaModel Listar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaDTForm.Validacao = false;
                 contaBancariaDTForm.Erro = true;
-                contaBancariaDTForm.ErroMensagens.Add("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
+                contaBancariaDTForm.IncluirErroMensagem("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }

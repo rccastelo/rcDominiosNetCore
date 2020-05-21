@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel Incluir [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel Alterar [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel Excluir [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel Listar [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel Listar [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel ConsultarPorId [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 EnderecoTipoRetorno.Validacao = false;
                 EnderecoTipoRetorno.Erro = true;
-                EnderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoDataModel Consultar [" + ex.Message + "]");
+                EnderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 enderecoTipoData = null;
             }

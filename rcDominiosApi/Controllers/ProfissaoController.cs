@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoForm;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
                 if (id > 0) {
-                    profissaoForm = profissaoModel.ConsultarPorId(id);
+                    profissao = profissaoModel.ConsultarPorId(id);
                 } else {
-                    profissaoForm = null;
+                    profissao = null;
                 }
             } catch (Exception ex) {
-                profissaoForm = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
                 
-                profissaoForm.Validacao = false;
-                profissaoForm.Erro = true;
-                profissaoForm.ErroMensagens.Add("Erro em ProfissaoController ConsultarPorId [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
 
-            if (profissaoForm.Erro || !profissaoForm.Validacao) {
-                return BadRequest(profissaoForm);
+            if (profissao.Erro || !profissao.Validacao) {
+                return BadRequest(profissao);
             } else {
-                return Ok(profissaoForm);
+                return Ok(profissao);
             }
         }
 
@@ -46,18 +46,45 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoLista;
+            ProfissaoListaTransfer profissaoLista;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoLista = profissaoModel.Listar();
+                profissaoLista = profissaoModel.Consultar(new ProfissaoListaTransfer());
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoDataTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em ProfissaoController Listar [" + ex.Message + "]");
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Listar [" + ex.Message + "]");
+            } finally {
+                profissaoModel = null;
+            }
+
+            if (profissaoLista.Erro || !profissaoLista.Validacao) {
+                return BadRequest(profissaoLista);
+            } else {
+                return Ok(profissaoLista);
+            }
+        }
+
+        [HttpPost("lista")]
+        public IActionResult Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        {
+            ProfissaoModel profissaoModel;
+            ProfissaoListaTransfer profissaoLista;
+
+            try {
+                profissaoModel = new ProfissaoModel();
+
+                profissaoLista = profissaoModel.Consultar(profissaoListaTransfer);
+            } catch (Exception ex) {
+                profissaoLista = new ProfissaoListaTransfer();
+
+                profissaoLista.Validacao = false;
+                profissaoLista.Erro = true;
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Consultar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -70,58 +97,58 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Incluir(ProfissaoDataTransfer profissaoDataTransfer)
+        public IActionResult Incluir(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoRetorno = profissaoModel.Incluir(profissaoDataTransfer);
+                profissao = profissaoModel.Incluir(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Incluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Incluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return BadRequest(profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return BadRequest(profissao);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = profissaoRetorno.Profissao.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = profissao.Profissao.Id });
 
-                return Created(uri, profissaoRetorno);
+                return Created(uri, profissao);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(ProfissaoDataTransfer profissaoDataTransfer)
+        public IActionResult Alterar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoRetorno = profissaoModel.Alterar(profissaoDataTransfer);
+                profissao = profissaoModel.Alterar(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Alterar [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Alterar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return BadRequest(profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return BadRequest(profissao);
             } else {
-                return Ok(profissaoRetorno);
+                return Ok(profissao);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoRetorno = profissaoModel.Excluir(id);
+                profissao = profissaoModel.Excluir(id);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Excluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Excluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return BadRequest(profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return BadRequest(profissao);
             } else {
-                return NoContent();
+                return Ok(profissao);
             }
         }
     }

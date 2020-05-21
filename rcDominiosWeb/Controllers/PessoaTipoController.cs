@@ -23,22 +23,23 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Form(int id)
         {
-            PessoaTipoService pessoaTipoService = null;
-            PessoaTipoDataTransfer pessoaTipo = null;
+            PessoaTipoService pessoaTipoService;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
+                pessoaTipoService = new PessoaTipoService();
+
                 if (id > 0) {
-                    pessoaTipoService = new PessoaTipoService();
                     pessoaTipo = await pessoaTipoService.ConsultarPorId(id);
                 } else {
                     pessoaTipo = null;
                 }
-            } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoDataTransfer();
+            } catch {
+                pessoaTipo = new PessoaTipoTransfer();
                 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.ErroMensagens.Add("Erro em PessoaTipoController Form [" + ex.Message + "]");
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Form");
             } finally {
                 pessoaTipoService = null;
             }
@@ -50,41 +51,41 @@ namespace rcDominiosWeb.Controllers
         public async Task<IActionResult> Lista()
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoDataTransfer pessoaTipo;
+            PessoaTipoListaTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoService = new PessoaTipoService();
 
-                pessoaTipo = await pessoaTipoService.Listar();
+                pessoaTipoLista = await pessoaTipoService.Consultar(new PessoaTipoListaTransfer());
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoDataTransfer();
+                pessoaTipoLista = new PessoaTipoListaTransfer();
 
-                pessoaTipo.Validacao = false;
-                pessoaTipo.Erro = true;
-                pessoaTipo.ErroMensagens.Add("Erro em PessoaTipoController Lista [" + ex.Message + "]");
+                pessoaTipoLista.Validacao = false;
+                pessoaTipoLista.Erro = true;
+                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Lista [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
             }
 
-            return View(pessoaTipo);
+            return View(pessoaTipoLista);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Consulta(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        public async Task<IActionResult> Consulta(PessoaTipoListaTransfer pessoaTipoListaTransfer)
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoDataTransfer pessoaTipoLista;
+            PessoaTipoListaTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoService = new PessoaTipoService();
 
-                pessoaTipoLista = await pessoaTipoService.Consultar(pessoaTipoDataTransfer);
+                pessoaTipoLista = await pessoaTipoService.Consultar(pessoaTipoListaTransfer);
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoDataTransfer();
+                pessoaTipoLista = new PessoaTipoListaTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
+                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
             }
@@ -97,54 +98,54 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Inclusao(PessoaTipoDataTransfer pessoaTipoForm)
+        public async Task<IActionResult> Inclusao(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoDataTransfer pessoaTipoInclusao;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoService = new PessoaTipoService();
 
-                pessoaTipoInclusao = await pessoaTipoService.Incluir(pessoaTipoForm);
+                pessoaTipo = await pessoaTipoService.Incluir(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoInclusao = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
-                pessoaTipoInclusao.Validacao = false;
-                pessoaTipoInclusao.Erro = true;
-                pessoaTipoInclusao.ErroMensagens.Add("Erro em PessoaTipoController Inclusao [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
             }
 
-            if (pessoaTipoInclusao.Erro || !pessoaTipoInclusao.Validacao) {
-                return View("Form", pessoaTipoInclusao);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return View("Form", pessoaTipo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Alteracao(PessoaTipoDataTransfer pessoaTipoForm)
+        public async Task<IActionResult> Alteracao(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoDataTransfer pessoaTipoInclusao;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoService = new PessoaTipoService();
 
-                pessoaTipoInclusao = await pessoaTipoService.Alterar(pessoaTipoForm);
+                pessoaTipo = await pessoaTipoService.Alterar(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoInclusao = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
-                pessoaTipoInclusao.Validacao = false;
-                pessoaTipoInclusao.Erro = true;
-                pessoaTipoInclusao.ErroMensagens.Add("Erro em PessoaTipoController Alteracao [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Alteracao [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
             }
 
-            if (pessoaTipoInclusao.Erro || !pessoaTipoInclusao.Validacao) {
-                return View("Form", pessoaTipoInclusao);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return View("Form", pessoaTipo);
             } else {
                 return RedirectToAction("Lista");
             }
@@ -154,18 +155,18 @@ namespace rcDominiosWeb.Controllers
         public async Task<IActionResult> Exclusao(int id)
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoDataTransfer pessoaTipo;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoService = new PessoaTipoService();
 
                 pessoaTipo = await pessoaTipoService.Excluir(id);
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.ErroMensagens.Add("Erro em PessoaTipoController Exclusao [" + ex.Message + "]");
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Exclusao [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
             }

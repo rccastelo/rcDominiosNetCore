@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 telefoneTipoDTInclusao.Validacao = false;
                 telefoneTipoDTInclusao.Erro = true;
-                telefoneTipoDTInclusao.ErroMensagens.Add("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
+                telefoneTipoDTInclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
                 telefoneTipoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 telefoneTipoDTAlteracao.Validacao = false;
                 telefoneTipoDTAlteracao.Erro = true;
-                telefoneTipoDTAlteracao.ErroMensagens.Add("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
+                telefoneTipoDTAlteracao.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
                 telefoneTipoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 telefoneTipoDTExclusao.Validacao = false;
                 telefoneTipoDTExclusao.Erro = true;
-                telefoneTipoDTExclusao.ErroMensagens.Add("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
+                telefoneTipoDTExclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 telefoneTipoDTLista.Validacao = false;
                 telefoneTipoDTLista.Erro = true;
-                telefoneTipoDTLista.ErroMensagens.Add("Erro em TelefoneTipoModel Listar [" + ex.Message + "]");
+                telefoneTipoDTLista.IncluirErroMensagem("Erro em TelefoneTipoModel Listar [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
                 telefoneTipoBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 telefoneTipoDTForm.Validacao = false;
                 telefoneTipoDTForm.Erro = true;
-                telefoneTipoDTForm.ErroMensagens.Add("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
+                telefoneTipoDTForm.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
             }

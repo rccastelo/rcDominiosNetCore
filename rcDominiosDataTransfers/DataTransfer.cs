@@ -12,26 +12,65 @@ namespace rcDominiosDataTransfers
 
         public IList<string> ErroMensagens { get; set; }
 
-        public string Sistema { get; set; }
+        public bool Info { get; set; }
 
-        public string BaseDados { get; set; }
+        public IList<string> InfoMensagens { get; set; }
 
         public DataTransfer()
         {
-            this.ValidacaoMensagens = new List<string>();
-            this.ErroMensagens = new List<string>();
         }
 
-        public DataTransfer(DataTransfer dataTransfer)
+        public DataTransfer(DataTransfer transfer)
         {
-            if (dataTransfer != null) {
-                this.Validacao = dataTransfer.Validacao;
-                this.ValidacaoMensagens = new List<string>(dataTransfer.ValidacaoMensagens);
-                this.Erro = dataTransfer.Erro;
-                this.ErroMensagens = new List<string>(dataTransfer.ErroMensagens);
-                this.Sistema = dataTransfer.Sistema;
-                this.BaseDados = dataTransfer.BaseDados;
+            if (transfer != null) {
+                this.Validacao = transfer.Validacao;
+                if (transfer.ValidacaoMensagens != null) {
+                    this.ValidacaoMensagens = new List<string>(transfer.ValidacaoMensagens);
+                }
+                
+                this.Erro = transfer.Erro;
+                if (transfer.ErroMensagens != null) {
+                    this.ErroMensagens = new List<string>(transfer.ErroMensagens);
+                }
+                
+                this.Info = transfer.Info;
+                if (transfer.InfoMensagens != null) {
+                    this.InfoMensagens = new List<string>(transfer.InfoMensagens);
+                }
             }
-        }  
+        }
+
+        public void IncluirValidacaoMensagem(string mensagem)
+        {
+            if (!string.IsNullOrEmpty(mensagem)) {
+                if (this.ValidacaoMensagens == null) {
+                    this.ValidacaoMensagens = new List<string>();
+                }
+
+                this.ValidacaoMensagens.Add(mensagem);
+            }
+        }
+
+        public void IncluirErroMensagem(string mensagem)
+        {
+            if (!string.IsNullOrEmpty(mensagem)) {
+                if (this.ErroMensagens == null) {
+                    this.ErroMensagens = new List<string>();
+                }
+
+                this.ErroMensagens.Add(mensagem);
+            }
+        }
+
+        public void IncluirInfoMensagem(string mensagem)
+        {
+            if (!string.IsNullOrEmpty(mensagem)) {
+                if (this.InfoMensagens == null) {
+                    this.InfoMensagens = new List<string>();
+                }
+
+                this.InfoMensagens.Add(mensagem);
+            }
+        }
     }
 }

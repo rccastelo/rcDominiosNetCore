@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel Incluir [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel Alterar [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel Excluir [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel Listar [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel Listar [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel ConsultarPorId [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 EstadoCivilRetorno.Validacao = false;
                 EstadoCivilRetorno.Erro = true;
-                EstadoCivilRetorno.ErroMensagens.Add("Erro em EstadoCivilDataModel Consultar [" + ex.Message + "]");
+                EstadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilDataModel Consultar [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }

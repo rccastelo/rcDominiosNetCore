@@ -7,24 +7,24 @@ using rcDominiosDataTransfers;
 
 namespace rcDominiosWeb.Services
 {
-  public class PessoaTipoService
+  public class ProfissaoService
     {
         private string enderecoServico = "http://localhost:5600/";
-        private string nomeServico = "PessoaTipo";
+        private string nomeServico = "Profissao";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
         private string autorizacao = null;
 
-        public PessoaTipoService()
+        public ProfissaoService()
         {
             httpClient = new HttpClient();
             httpClient.BaseAddress = new System.Uri(enderecoServico);
             autenticaService = new AutenticaService();
         }
 
-        public async Task<PessoaTipoTransfer> Incluir(PessoaTipoTransfer pessoaTipoTransfer)
+        public async Task<ProfissaoTransfer> Incluir(ProfissaoTransfer profissaoTransfer)
         {
-            PessoaTipoTransfer pessoaTipo = null;
+            ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -32,12 +32,12 @@ namespace rcDominiosWeb.Services
                 autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", pessoaTipoTransfer);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", profissaoTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Incluir não autorizado";
                 } else {
@@ -45,28 +45,28 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipo = new PessoaTipoTransfer();
+                    profissao = new ProfissaoTransfer();
                     
-                    pessoaTipo.Validacao = false;
-                    pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    profissao.Validacao = false;
+                    profissao.Erro = true;
+                    profissao.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoTransfer();
+                profissao = new ProfissaoTransfer();
 
-                pessoaTipo.Validacao = false;
-                pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Incluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipo;
+            return profissao;
         }
 
-        public async Task<PessoaTipoTransfer> Alterar(PessoaTipoTransfer pessoaTipoTransfer)
+        public async Task<ProfissaoTransfer> Alterar(ProfissaoTransfer profissaoTransfer)
         {
-            PessoaTipoTransfer pessoaTipo = null;
+            ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -74,12 +74,12 @@ namespace rcDominiosWeb.Services
                 autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", pessoaTipoTransfer);
+                resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", profissaoTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Alterar não autorizado";
                 } else {
@@ -87,28 +87,28 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipo = new PessoaTipoTransfer();
+                    profissao = new ProfissaoTransfer();
                     
-                    pessoaTipo.Validacao = false;
-                    pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    profissao.Validacao = false;
+                    profissao.Erro = true;
+                    profissao.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoTransfer();
+                profissao = new ProfissaoTransfer();
 
-                pessoaTipo.Validacao = false;
-                pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Alterar [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipo;
+            return profissao;
         }
 
-        public async Task<PessoaTipoTransfer> Excluir(int id)
+        public async Task<ProfissaoTransfer> Excluir(int id)
         {
-            PessoaTipoTransfer pessoaTipo = null;
+            ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -119,9 +119,9 @@ namespace rcDominiosWeb.Services
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Excluir não autorizado";
                 } else {
@@ -129,28 +129,28 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipo = new PessoaTipoTransfer();
+                    profissao = new ProfissaoTransfer();
                     
-                    pessoaTipo.Validacao = false;
-                    pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    profissao.Validacao = false;
+                    profissao.Erro = true;
+                    profissao.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoTransfer();
+                profissao = new ProfissaoTransfer();
 
-                pessoaTipo.Validacao = false;
-                pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Excluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipo;
+            return profissao;
         }
 
-        public async Task<PessoaTipoTransfer> ConsultarPorId(int id)
+        public async Task<ProfissaoTransfer> ConsultarPorId(int id)
         {
-            PessoaTipoTransfer pessoaTipo = null;
+            ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -161,9 +161,9 @@ namespace rcDominiosWeb.Services
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipo = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
+                    profissao = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} ConsultarPorId não autorizado";
                 } else {
@@ -171,28 +171,28 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipo = new PessoaTipoTransfer();
+                    profissao = new ProfissaoTransfer();
                     
-                    pessoaTipo.Validacao = false;
-                    pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    profissao.Validacao = false;
+                    profissao.Erro = true;
+                    profissao.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipo = new PessoaTipoTransfer();
+                profissao = new ProfissaoTransfer();
 
-                pessoaTipo.Validacao = false;
-                pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService ConsultarPorId [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipo;
+            return profissao;
         }
 
-        public async Task<PessoaTipoListaTransfer> Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public async Task<ProfissaoListaTransfer> Consultar(ProfissaoListaTransfer profissaoListaTransfer)
         {
-            PessoaTipoListaTransfer pessoaTipoLista = null;
+            ProfissaoListaTransfer profissaoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -200,12 +200,12 @@ namespace rcDominiosWeb.Services
                 autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
-                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", pessoaTipoListaTransfer);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", profissaoListaTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoListaTransfer>().Result;
+                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoListaTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoListaTransfer>().Result;
+                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoListaTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Consultar não autorizado";
                 } else {
@@ -213,23 +213,23 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipoLista = new PessoaTipoListaTransfer();
+                    profissaoLista = new ProfissaoListaTransfer();
                     
-                    pessoaTipoLista.Validacao = false;
-                    pessoaTipoLista.Erro = true;
-                    pessoaTipoLista.IncluirErroMensagem(mensagemRetono);
+                    profissaoLista.Validacao = false;
+                    profissaoLista.Erro = true;
+                    profissaoLista.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
-                pessoaTipoLista.Validacao = false;
-                pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoService Consultar [" + ex.Message + "]");
+                profissaoLista.Validacao = false;
+                profissaoLista.Erro = true;
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return pessoaTipoLista;
+            return profissaoLista;
         }
     }
 }

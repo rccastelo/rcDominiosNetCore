@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel Incluir [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel Alterar [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel Excluir [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel Listar [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Listar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 SexoRetorno.Validacao = false;
                 SexoRetorno.Erro = true;
-                SexoRetorno.ErroMensagens.Add("Erro em SexoDataModel Consultar [" + ex.Message + "]");
+                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }

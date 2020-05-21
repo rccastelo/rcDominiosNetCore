@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel Listar [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Listar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 UsuarioRetorno.Validacao = false;
                 UsuarioRetorno.Erro = true;
-                UsuarioRetorno.ErroMensagens.Add("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
+                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }

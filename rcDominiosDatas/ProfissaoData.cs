@@ -14,38 +14,40 @@ namespace rcDominiosDatas
         {
         }
 
-        public IList<ProfissaoEntity> Consultar(ProfissaoDataTransfer profissaoDataTransfer)
+        public IList<ProfissaoEntity> Consultar(ProfissaoListaTransfer transfer)
         {
             IQueryable<ProfissaoEntity> query = _contexto.Set<ProfissaoEntity>();
+            int pular = 0;
+            int quantidade = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (profissaoDataTransfer.IdAte <= 0) {
-                if (profissaoDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == profissaoDataTransfer.IdDe);
+            if (transfer.IdAte <= 0) {
+                if (transfer.IdDe > 0) {
+                    query = query.Where(et => et.Id == transfer.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (profissaoDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= profissaoDataTransfer.IdDe);
-                    query = query.Where(et => et.Id <= profissaoDataTransfer.IdAte);
+                if (transfer.IdDe > 0) {
+                    query = query.Where(et => et.Id >= transfer.IdDe);
+                    query = query.Where(et => et.Id <= transfer.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(profissaoDataTransfer.Profissao.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(profissaoDataTransfer.Profissao.Descricao));
+            if (!string.IsNullOrEmpty(transfer.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(transfer.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(profissaoDataTransfer.Profissao.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(profissaoDataTransfer.Profissao.Codigo));
+            if (!string.IsNullOrEmpty(transfer.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(transfer.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(profissaoDataTransfer.AtivoFiltro)) {
+            if (!string.IsNullOrEmpty(transfer.Ativo)) {
                 bool ativo = true;
 
-                if (profissaoDataTransfer.AtivoFiltro == "false") {
+                if (transfer.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -53,32 +55,40 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (profissaoDataTransfer.CriacaoAte == DateTime.MinValue) {
-                if (profissaoDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == profissaoDataTransfer.CriacaoDe);
+            if (transfer.CriacaoAte == DateTime.MinValue) {
+                if (transfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == transfer.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (profissaoDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= profissaoDataTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= profissaoDataTransfer.CriacaoAte);
+                if (transfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= transfer.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= transfer.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (profissaoDataTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (profissaoDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == profissaoDataTransfer.AlteracaoDe);
+            if (transfer.AlteracaoAte == DateTime.MinValue) {
+                if (transfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == transfer.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (profissaoDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= profissaoDataTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= profissaoDataTransfer.AlteracaoAte);
+                if (transfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= transfer.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= transfer.AlteracaoAte);
                 }
             }
-
-            return query.ToList();
+            
+            pular = (transfer.Pagina < 2 ? 0 : transfer.Pagina - 1);
+            
+            if (transfer.Quantidade < 1) {
+                quantidade = 30;
+            } else if (transfer.Quantidade > 1000) {
+                quantidade = 30;
+            }
+            
+            return query.Skip(pular).Take(quantidade).ToList();
         }
     }
 }

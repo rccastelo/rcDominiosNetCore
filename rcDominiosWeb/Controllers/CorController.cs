@@ -38,7 +38,7 @@ namespace rcDominiosWeb.Controllers
                 
                 corForm.Validacao = false;
                 corForm.Erro = true;
-                corForm.ErroMensagens.Add("Erro em CorController Form");
+                corForm.IncluirErroMensagem("Erro em CorController Form");
             } finally {
                 corModel = null;
             }
@@ -61,7 +61,7 @@ namespace rcDominiosWeb.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.ErroMensagens.Add("Erro em CorController Lista [" + ex.Message + "]");
+                corLista.IncluirErroMensagem("Erro em CorController Lista [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosWeb.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.ErroMensagens.Add("Erro em CorController Consulta [" + ex.Message + "]");
+                corLista.IncluirErroMensagem("Erro em CorController Consulta [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosWeb.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Inclusao [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Inclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -138,7 +138,7 @@ namespace rcDominiosWeb.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Alteracao [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Alteracao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -165,7 +165,7 @@ namespace rcDominiosWeb.Controllers
 
                 corRetorno.Validacao = false;
                 corRetorno.Erro = true;
-                corRetorno.ErroMensagens.Add("Erro em CorController Exclusao [" + ex.Message + "]");
+                corRetorno.IncluirErroMensagem("Erro em CorController Exclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }

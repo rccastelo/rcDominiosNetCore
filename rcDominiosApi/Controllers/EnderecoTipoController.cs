@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 enderecoTipoForm.Validacao = false;
                 enderecoTipoForm.Erro = true;
-                enderecoTipoForm.ErroMensagens.Add("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
+                enderecoTipoForm.IncluirErroMensagem("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.ErroMensagens.Add("Erro em EnderecoTipoController Listar [" + ex.Message + "]");
+                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Listar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
+                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
+                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoRetorno.Validacao = false;
                 enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.ErroMensagens.Add("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
+                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }

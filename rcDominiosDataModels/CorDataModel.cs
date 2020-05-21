@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel Incluir [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Incluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel Alterar [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Alterar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel Excluir [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Excluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel Listar [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Listar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -136,7 +136,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -161,7 +161,7 @@ namespace rcDominiosDataModels
 
                 CorRetorno.Validacao = false;
                 CorRetorno.Erro = true;
-                CorRetorno.ErroMensagens.Add("Erro em CorDataModel Consultar [" + ex.Message + "]");
+                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Consultar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }

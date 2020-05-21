@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 corDTInclusao.Validacao = false;
                 corDTInclusao.Erro = true;
-                corDTInclusao.ErroMensagens.Add("Erro em CorModel Incluir [" + ex.Message + "]");
+                corDTInclusao.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 corDTAlteracao.Validacao = false;
                 corDTAlteracao.Erro = true;
-                corDTAlteracao.ErroMensagens.Add("Erro em CorModel Alterar [" + ex.Message + "]");
+                corDTAlteracao.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 corDTExclusao.Validacao = false;
                 corDTExclusao.Erro = true;
-                corDTExclusao.ErroMensagens.Add("Erro em CorModel Excluir [" + ex.Message + "]");
+                corDTExclusao.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 corDTLista.Validacao = false;
                 corDTLista.Erro = true;
-                corDTLista.ErroMensagens.Add("Erro em CorModel Listar [" + ex.Message + "]");
+                corDTLista.IncluirErroMensagem("Erro em CorModel Listar [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 corDTForm.Validacao = false;
                 corDTForm.Erro = true;
-                corDTForm.ErroMensagens.Add("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
+                corDTForm.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }

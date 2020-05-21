@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 telefoneTipoForm.Validacao = false;
                 telefoneTipoForm.Erro = true;
-                telefoneTipoForm.ErroMensagens.Add("Erro em TelefoneTipoController ConsultarPorId [" + ex.Message + "]");
+                telefoneTipoForm.IncluirErroMensagem("Erro em TelefoneTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.ErroMensagens.Add("Erro em TelefoneTipoController Listar [" + ex.Message + "]");
+                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoController Listar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Incluir [" + ex.Message + "]");
+                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Alterar [" + ex.Message + "]");
+                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 telefoneTipoRetorno.Validacao = false;
                 telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.ErroMensagens.Add("Erro em TelefoneTipoController Excluir [" + ex.Message + "]");
+                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }

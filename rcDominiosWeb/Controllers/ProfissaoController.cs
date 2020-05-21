@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosDataTransfers;
-using rcDominiosWeb.Models;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class ProfissaoController : Controller
+  public class ProfissaoController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,73 +21,73 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoForm;
+            ProfissaoService profissaoService;
+            ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
                 if (id > 0) {
-                    profissaoForm = profissaoModel.ConsultarPorId(id);
+                    profissao = await profissaoService.ConsultarPorId(id);
                 } else {
-                    profissaoForm = null;
+                    profissao = null;
                 }
             } catch {
-                profissaoForm = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
                 
-                profissaoForm.Validacao = false;
-                profissaoForm.Erro = true;
-                profissaoForm.ErroMensagens.Add("Erro em ProfissaoController Form");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Form");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
-            return View(profissaoForm);
+            return View(profissao);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoLista;
+            ProfissaoService profissaoService;
+            ProfissaoListaTransfer profissaoLista;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
-                profissaoLista = profissaoModel.Listar();
+                profissaoLista = await profissaoService.Consultar(new ProfissaoListaTransfer());
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoDataTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em ProfissaoController Lista [" + ex.Message + "]");
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Lista [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
             return View(profissaoLista);
         }
 
         [HttpPost]
-        public IActionResult Consulta(ProfissaoDataTransfer profissaoDataTransfer)
+        public async Task<IActionResult> Consulta(ProfissaoListaTransfer profissaoListaTransfer)
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoLista;
+            ProfissaoService profissaoService;
+            ProfissaoListaTransfer profissaoLista;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
-                profissaoLista = profissaoModel.Consultar(profissaoDataTransfer);
+                profissaoLista = await profissaoService.Consultar(profissaoListaTransfer);
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoDataTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.ErroMensagens.Add("Erro em ProfissaoController Consulta [" + ex.Message + "]");
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Consulta [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
             if (profissaoLista.Erro || !profissaoLista.Validacao) {
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(ProfissaoDataTransfer profissaoDataTransfer)
+        public async Task<IActionResult> Inclusao(ProfissaoTransfer profissaoTransfer)
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoService profissaoService;
+            ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
-                profissaoRetorno = profissaoModel.Incluir(profissaoDataTransfer);
+                profissao = await profissaoService.Incluir(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return View("Form", profissao);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(ProfissaoDataTransfer profissaoDataTransfer)
+        public async Task<IActionResult> Alteracao(ProfissaoTransfer profissaoTransfer)
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoService profissaoService;
+            ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
-                profissaoRetorno = profissaoModel.Alterar(profissaoDataTransfer);
+                profissao = await profissaoService.Alterar(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return View("Form", profissao);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
-            ProfissaoModel profissaoModel;
-            ProfissaoDataTransfer profissaoRetorno;
+            ProfissaoService profissaoService;
+            ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoService = new ProfissaoService();
 
-                profissaoRetorno = profissaoModel.Excluir(id);
+                profissao = await profissaoService.Excluir(id);
             } catch (Exception ex) {
-                profissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoRetorno.Validacao = false;
-                profissaoRetorno.Erro = true;
-                profissaoRetorno.ErroMensagens.Add("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
             } finally {
-                profissaoModel = null;
+                profissaoService = null;
             }
 
-            if (profissaoRetorno.Erro || !profissaoRetorno.Validacao) {
-                return View("Form", profissaoRetorno);
+            if (profissao.Erro || !profissao.Validacao) {
+                return View("Form", profissao);
             } else {
                 return RedirectToAction("Lista");
             }

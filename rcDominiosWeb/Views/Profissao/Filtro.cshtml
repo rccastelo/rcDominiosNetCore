@@ -1,4 +1,4 @@
-@model rcDominiosDataTransfers.ProfissaoDataTransfer;
+@model rcDominiosDataTransfers.ProfissaoListaTransfer;
 
 @{
     ViewData["Title"] = "";
@@ -48,7 +48,7 @@
         <div class="form-row">
             <div class="col-12">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Profissao.Descricao">Descrição</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Descricao">Descrição</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popDescricao">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -58,14 +58,14 @@
                         &bull; Tamanho máximo: <b>100</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>acentos</b>, <b>números</b>, <b>traço</b> e <b>espaço em branco</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.Profissao.Descricao">
+                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.Descricao">
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Profissao.Codigo">Código</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Codigo">Código</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popCodigo">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -75,13 +75,13 @@
                         &bull; Tamanho máximo: <b>10</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>traço</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.Profissao.Codigo">
+                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.Codigo">
                 </div>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.AtivoFiltro">Ativo</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Ativo">Ativo</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popAtivo">
                         <i class="iconePopObr fas fa-asterisk"></i>
@@ -89,7 +89,7 @@
                     <div id="popAtivo" class="popMsg">
                         &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
                     </div>
-                    <select class="form-control" asp-for="@Model.AtivoFiltro">
+                    <select class="form-control" asp-for="@Model.Ativo">
                         <option value="true">Sim</option>
                         <option value="false">Não</option>
                         <option value="" selected>Todos</option>

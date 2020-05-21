@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 estadoCivilDTInclusao.Validacao = false;
                 estadoCivilDTInclusao.Erro = true;
-                estadoCivilDTInclusao.ErroMensagens.Add("Erro em EstadoCivilModel Incluir [" + ex.Message + "]");
+                estadoCivilDTInclusao.IncluirErroMensagem("Erro em EstadoCivilModel Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilDataModel = null;
                 estadoCivilBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 estadoCivilDTAlteracao.Validacao = false;
                 estadoCivilDTAlteracao.Erro = true;
-                estadoCivilDTAlteracao.ErroMensagens.Add("Erro em EstadoCivilModel Alterar [" + ex.Message + "]");
+                estadoCivilDTAlteracao.IncluirErroMensagem("Erro em EstadoCivilModel Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilDataModel = null;
                 estadoCivilBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 estadoCivilDTExclusao.Validacao = false;
                 estadoCivilDTExclusao.Erro = true;
-                estadoCivilDTExclusao.ErroMensagens.Add("Erro em EstadoCivilModel Excluir [" + ex.Message + "]");
+                estadoCivilDTExclusao.IncluirErroMensagem("Erro em EstadoCivilModel Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosApi.Models
 
                 estadoCivilDTLista.Validacao = false;
                 estadoCivilDTLista.Erro = true;
-                estadoCivilDTLista.ErroMensagens.Add("Erro em EstadoCivilModel Listar [" + ex.Message + "]");
+                estadoCivilDTLista.IncluirErroMensagem("Erro em EstadoCivilModel Listar [" + ex.Message + "]");
             } finally {
                 estadoCivilDataModel = null;
                 estadoCivilBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosApi.Models
 
                 estadoCivilDTForm.Validacao = false;
                 estadoCivilDTForm.Erro = true;
-                estadoCivilDTForm.ErroMensagens.Add("Erro em EstadoCivilModel ConsultarPorId [" + ex.Message + "]");
+                estadoCivilDTForm.IncluirErroMensagem("Erro em EstadoCivilModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilDataModel = null;
             }

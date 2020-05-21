@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoForm;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
                 if (id > 0) {
-                    pessoaTipoForm = pessoaTipoModel.ConsultarPorId(id);
+                    pessoaTipo = pessoaTipoModel.ConsultarPorId(id);
                 } else {
-                    pessoaTipoForm = null;
+                    pessoaTipo = null;
                 }
             } catch (Exception ex) {
-                pessoaTipoForm = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
                 
-                pessoaTipoForm.Validacao = false;
-                pessoaTipoForm.Erro = true;
-                pessoaTipoForm.ErroMensagens.Add("Erro em PessoaTipoController ConsultarPorId [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
 
-            if (pessoaTipoForm.Erro || !pessoaTipoForm.Validacao) {
-                return BadRequest(pessoaTipoForm);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return BadRequest(pessoaTipo);
             } else {
-                return Ok(pessoaTipoForm);
+                return Ok(pessoaTipo);
             }
         }
 
@@ -46,18 +46,18 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoLista;
+            PessoaTipoListaTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = pessoaTipoModel.Listar();
+                pessoaTipoLista = pessoaTipoModel.Consultar(new PessoaTipoListaTransfer());
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoDataTransfer();
+                pessoaTipoLista = new PessoaTipoListaTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Listar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Listar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -69,22 +69,22 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost("filtro")]
-        public IActionResult Consultar(PessoaTipoDataTransfer pessoaTipo)
+        [HttpPost("lista")]
+        public IActionResult Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoLista;
+            PessoaTipoListaTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipo);
+                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipoListaTransfer);
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoDataTransfer();
+                pessoaTipoLista = new PessoaTipoListaTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.ErroMensagens.Add("Erro em PessoaTipoController Consultar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Consultar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -97,58 +97,58 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Incluir(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        public IActionResult Incluir(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoRetorno;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoRetorno = pessoaTipoModel.Incluir(pessoaTipoDataTransfer);
+                pessoaTipo = pessoaTipoModel.Incluir(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoRetorno = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
-                pessoaTipoRetorno.Validacao = false;
-                pessoaTipoRetorno.Erro = true;
-                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Incluir [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Incluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
 
-            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
-                return BadRequest(pessoaTipoRetorno);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return BadRequest(pessoaTipo);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = pessoaTipoRetorno.PessoaTipo.Id });
+                string uri = Url.Action("ConsultarPorId", new { id = pessoaTipo.PessoaTipo.Id });
 
-                return Created(uri, pessoaTipoRetorno);
+                return Created(uri, pessoaTipo);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(PessoaTipoDataTransfer pessoaTipoDataTransfer)
+        public IActionResult Alterar(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoRetorno;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoRetorno = pessoaTipoModel.Alterar(pessoaTipoDataTransfer);
+                pessoaTipo = pessoaTipoModel.Alterar(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoRetorno = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
-                pessoaTipoRetorno.Validacao = false;
-                pessoaTipoRetorno.Erro = true;
-                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Alterar [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Alterar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
 
-            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
-                return BadRequest(pessoaTipoRetorno);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return BadRequest(pessoaTipo);
             } else {
-                return Ok(pessoaTipoRetorno);
+                return Ok(pessoaTipo);
             }
         }
 
@@ -156,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoDataTransfer pessoaTipoRetorno;
+            PessoaTipoTransfer pessoaTipo;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoRetorno = pessoaTipoModel.Excluir(id);
+                pessoaTipo = pessoaTipoModel.Excluir(id);
             } catch (Exception ex) {
-                pessoaTipoRetorno = new PessoaTipoDataTransfer();
+                pessoaTipo = new PessoaTipoTransfer();
 
-                pessoaTipoRetorno.Validacao = false;
-                pessoaTipoRetorno.Erro = true;
-                pessoaTipoRetorno.ErroMensagens.Add("Erro em PessoaTipoController Excluir [" + ex.Message + "]");
+                pessoaTipo.Validacao = false;
+                pessoaTipo.Erro = true;
+                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Excluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
 
-            if (pessoaTipoRetorno.Erro || !pessoaTipoRetorno.Validacao) {
-                return BadRequest(pessoaTipoRetorno);
+            if (pessoaTipo.Erro || !pessoaTipo.Validacao) {
+                return BadRequest(pessoaTipo);
             } else {
-                return Ok(pessoaTipoRetorno);
+                return Ok(pessoaTipo);
             }
         }
     }

@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 sexoForm.Validacao = false;
                 sexoForm.Erro = true;
-                sexoForm.ErroMensagens.Add("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
+                sexoForm.IncluirErroMensagem("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.ErroMensagens.Add("Erro em SexoController Listar [" + ex.Message + "]");
+                sexoLista.IncluirErroMensagem("Erro em SexoController Listar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Incluir [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Incluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Alterar [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Alterar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoRetorno.Validacao = false;
                 sexoRetorno.Erro = true;
-                sexoRetorno.ErroMensagens.Add("Erro em SexoController Excluir [" + ex.Message + "]");
+                sexoRetorno.IncluirErroMensagem("Erro em SexoController Excluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }

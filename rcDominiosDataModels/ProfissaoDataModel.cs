@@ -7,166 +7,141 @@ namespace rcDominiosDataModels
 {
     public class ProfissaoDataModel : DataModel
     {
-        public ProfissaoDataTransfer Incluir(ProfissaoDataTransfer profissaoDataTransfer)
+        public ProfissaoTransfer Incluir(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer(profissaoDataTransfer);
+                profissao = new ProfissaoTransfer(profissaoTransfer);
 
-                profissaoData.Incluir(profissaoDataTransfer.Profissao);
+                profissaoData.Incluir(profissaoTransfer.Profissao);
 
                 _contexto.SaveChanges();
 
-                ProfissaoRetorno.Profissao = new ProfissaoEntity(profissaoDataTransfer.Profissao);
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
+                profissao.Profissao = new ProfissaoEntity(profissaoTransfer.Profissao);
+                profissao.Validacao = true;
+                profissao.Erro = false;
             } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel Incluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
 
-            return ProfissaoRetorno;
+            return profissao;
         }
 
-        public ProfissaoDataTransfer Alterar(ProfissaoDataTransfer profissaoDataTransfer)
+        public ProfissaoTransfer Alterar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoData.Alterar(profissaoDataTransfer.Profissao);
+                profissaoData.Alterar(profissaoTransfer.Profissao);
 
                 _contexto.SaveChanges();
 
-                ProfissaoRetorno.Profissao = new ProfissaoEntity(profissaoDataTransfer.Profissao);
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
+                profissao.Profissao = new ProfissaoEntity(profissaoTransfer.Profissao);
+                profissao.Validacao = true;
+                profissao.Erro = false;
             } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel Alterar [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
 
-            return ProfissaoRetorno;
+            return profissao;
         }
 
-        public ProfissaoDataTransfer Excluir(int id)
+        public ProfissaoTransfer Excluir(int id)
         {
             ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.Profissao = profissaoData.ConsultarPorId(id);
-                profissaoData.Excluir(ProfissaoRetorno.Profissao);
+                profissao.Profissao = profissaoData.ConsultarPorId(id);
+                profissaoData.Excluir(profissao.Profissao);
 
                 _contexto.SaveChanges();
 
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
+                profissao.Validacao = true;
+                profissao.Erro = false;
             } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel Excluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
 
-            return ProfissaoRetorno;
+            return profissao;
         }
 
-        public ProfissaoDataTransfer Listar()
+        public ProfissaoTransfer ConsultarPorId(int id)
         {
             ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.ProfissaoLista = profissaoData.Listar();
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
+                profissao.Profissao = profissaoData.ConsultarPorId(id);
+                profissao.Validacao = true;
+                profissao.Erro = false;
             } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel Listar [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
 
-            return ProfissaoRetorno;
+            return profissao;
         }
 
-        public ProfissaoDataTransfer ConsultarPorId(int id)
+        public ProfissaoListaTransfer Consultar(ProfissaoListaTransfer profissaoListaTransfer)
         {
             ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
+            ProfissaoListaTransfer profissaoLista;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
-                ProfissaoRetorno.Profissao = profissaoData.ConsultarPorId(id);
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
+                profissaoLista.ProfissaoLista = profissaoData.Consultar(profissaoListaTransfer);
+                profissaoLista.Validacao = true;
+                profissaoLista.Erro = false;
             } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
+                profissaoLista = new ProfissaoListaTransfer();
 
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel ConsultarPorId [" + ex.Message + "]");
+                profissaoLista.Validacao = false;
+                profissaoLista.Erro = true;
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
 
-            return ProfissaoRetorno;
-        }
-
-        public ProfissaoDataTransfer Consultar(ProfissaoDataTransfer profissaoDataTransfer)
-        {
-            ProfissaoData profissaoData;
-            ProfissaoDataTransfer ProfissaoRetorno;
-
-            try {
-                profissaoData = new ProfissaoData(_contexto);
-                ProfissaoRetorno = new ProfissaoDataTransfer();
-
-                ProfissaoRetorno.ProfissaoLista = profissaoData.Consultar(profissaoDataTransfer);
-                ProfissaoRetorno.Validacao = true;
-                ProfissaoRetorno.Erro = false;
-            } catch (Exception ex) {
-                ProfissaoRetorno = new ProfissaoDataTransfer();
-
-                ProfissaoRetorno.Validacao = false;
-                ProfissaoRetorno.Erro = true;
-                ProfissaoRetorno.ErroMensagens.Add("Erro em ProfissaoDataModel Consultar [" + ex.Message + "]");
-            } finally {
-                profissaoData = null;
-            }
-
-            return ProfissaoRetorno;
+            return profissaoLista;
         }
     }
 }

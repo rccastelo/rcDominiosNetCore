@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 generoSocialForm.Validacao = false;
                 generoSocialForm.Erro = true;
-                generoSocialForm.ErroMensagens.Add("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
+                generoSocialForm.IncluirErroMensagem("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.ErroMensagens.Add("Erro em GeneroSocialController Listar [" + ex.Message + "]");
+                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Listar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
+                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -113,7 +113,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
+                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialRetorno.Validacao = false;
                 generoSocialRetorno.Erro = true;
-                generoSocialRetorno.ErroMensagens.Add("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
+                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }

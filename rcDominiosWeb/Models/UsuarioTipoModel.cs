@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTInclusao.Validacao = false;
                 usuarioTipoDTInclusao.Erro = true;
-                usuarioTipoDTInclusao.ErroMensagens.Add("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
+                usuarioTipoDTInclusao.IncluirErroMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTAlteracao.Validacao = false;
                 usuarioTipoDTAlteracao.Erro = true;
-                usuarioTipoDTAlteracao.ErroMensagens.Add("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
+                usuarioTipoDTAlteracao.IncluirErroMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTExclusao.Validacao = false;
                 usuarioTipoDTExclusao.Erro = true;
-                usuarioTipoDTExclusao.ErroMensagens.Add("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
+                usuarioTipoDTExclusao.IncluirErroMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTLista.Validacao = false;
                 usuarioTipoDTLista.Erro = true;
-                usuarioTipoDTLista.ErroMensagens.Add("Erro em UsuarioTipoModel Listar [" + ex.Message + "]");
+                usuarioTipoDTLista.IncluirErroMensagem("Erro em UsuarioTipoModel Listar [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;
@@ -147,7 +147,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTForm.Validacao = false;
                 usuarioTipoDTForm.Erro = true;
-                usuarioTipoDTForm.ErroMensagens.Add("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
+                usuarioTipoDTForm.IncluirErroMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
             }
@@ -182,7 +182,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoDTConsulta.Validacao = false;
                 usuarioTipoDTConsulta.Erro = true;
-                usuarioTipoDTConsulta.ErroMensagens.Add("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
+                usuarioTipoDTConsulta.IncluirErroMensagem("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;

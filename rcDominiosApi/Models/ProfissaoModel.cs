@@ -7,152 +7,164 @@ namespace rcDominiosApi.Models
 {
     public class ProfissaoModel
     {
-        public ProfissaoDataTransfer Incluir(ProfissaoDataTransfer profissaoDataTransfer)
+        public ProfissaoTransfer Incluir(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoDataModel profissaoDataModel;
             ProfissaoBusiness profissaoBusiness;
-            ProfissaoDataTransfer profissaoDTValidacao;
-            ProfissaoDataTransfer profissaoDTInclusao;
+            ProfissaoTransfer profissaoValidacao;
+            ProfissaoTransfer profissaoInclusao;
 
             try {
                 profissaoBusiness = new ProfissaoBusiness();
                 profissaoDataModel = new ProfissaoDataModel();
 
-                profissaoDataTransfer.Profissao.Criacao = DateTime.Today;
-                profissaoDataTransfer.Profissao.Alteracao = DateTime.Today;
+                profissaoTransfer.Profissao.Criacao = DateTime.Today;
+                profissaoTransfer.Profissao.Alteracao = DateTime.Today;
 
-                profissaoDTValidacao = profissaoBusiness.Validar(profissaoDataTransfer);
+                profissaoValidacao = profissaoBusiness.Validar(profissaoTransfer);
 
-                if (!profissaoDTValidacao.Erro) {
-                    if (profissaoDTValidacao.Validacao) {
-                        profissaoDTInclusao = profissaoDataModel.Incluir(profissaoDTValidacao);
+                if (!profissaoValidacao.Erro) {
+                    if (profissaoValidacao.Validacao) {
+                        profissaoInclusao = profissaoDataModel.Incluir(profissaoValidacao);
                     } else {
-                        profissaoDTInclusao = new ProfissaoDataTransfer(profissaoDTValidacao);
+                        profissaoInclusao = new ProfissaoTransfer(profissaoValidacao);
                     }
                 } else {
-                    profissaoDTInclusao = new ProfissaoDataTransfer(profissaoDTValidacao);
+                    profissaoInclusao = new ProfissaoTransfer(profissaoValidacao);
                 }
             } catch (Exception ex) {
-                profissaoDTInclusao = new ProfissaoDataTransfer();
+                profissaoInclusao = new ProfissaoTransfer();
 
-                profissaoDTInclusao.Validacao = false;
-                profissaoDTInclusao.Erro = true;
-                profissaoDTInclusao.ErroMensagens.Add("Erro em ProfissaoModel Incluir [" + ex.Message + "]");
+                profissaoInclusao.Validacao = false;
+                profissaoInclusao.Erro = true;
+                profissaoInclusao.IncluirErroMensagem("Erro em ProfissaoModel Incluir [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
                 profissaoBusiness = null;
-                profissaoDTValidacao = null;
+                profissaoValidacao = null;
             }
 
-            return profissaoDTInclusao;
+            return profissaoInclusao;
         }
 
-        public ProfissaoDataTransfer Alterar(ProfissaoDataTransfer profissaoDataTransfer)
+        public ProfissaoTransfer Alterar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoDataModel profissaoDataModel;
             ProfissaoBusiness profissaoBusiness;
-            ProfissaoDataTransfer profissaoDTValidacao;
-            ProfissaoDataTransfer profissaoDTAlteracao;
+            ProfissaoTransfer profissaoValidacao;
+            ProfissaoTransfer profissaoAlteracao;
 
             try {
                 profissaoBusiness = new ProfissaoBusiness();
                 profissaoDataModel = new ProfissaoDataModel();
 
-                profissaoDataTransfer.Profissao.Alteracao = DateTime.Today;
+                profissaoTransfer.Profissao.Alteracao = DateTime.Today;
 
-                profissaoDTValidacao = profissaoBusiness.Validar(profissaoDataTransfer);
+                profissaoValidacao = profissaoBusiness.Validar(profissaoTransfer);
 
-                if (!profissaoDTValidacao.Erro) {
-                    if (profissaoDTValidacao.Validacao) {
-                        profissaoDTAlteracao = profissaoDataModel.Alterar(profissaoDTValidacao);
+                if (!profissaoValidacao.Erro) {
+                    if (profissaoValidacao.Validacao) {
+                        profissaoAlteracao = profissaoDataModel.Alterar(profissaoValidacao);
                     } else {
-                        profissaoDTAlteracao = new ProfissaoDataTransfer(profissaoDTValidacao);
+                        profissaoAlteracao = new ProfissaoTransfer(profissaoValidacao);
                     }
                 } else {
-                    profissaoDTAlteracao = new ProfissaoDataTransfer(profissaoDTValidacao);
+                    profissaoAlteracao = new ProfissaoTransfer(profissaoValidacao);
                 }
             } catch (Exception ex) {
-                profissaoDTAlteracao = new ProfissaoDataTransfer();
+                profissaoAlteracao = new ProfissaoTransfer();
 
-                profissaoDTAlteracao.Validacao = false;
-                profissaoDTAlteracao.Erro = true;
-                profissaoDTAlteracao.ErroMensagens.Add("Erro em ProfissaoModel Alterar [" + ex.Message + "]");
+                profissaoAlteracao.Validacao = false;
+                profissaoAlteracao.Erro = true;
+                profissaoAlteracao.IncluirErroMensagem("Erro em ProfissaoModel Alterar [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
                 profissaoBusiness = null;
-                profissaoDTValidacao = null;
+                profissaoValidacao = null;
             }
 
-            return profissaoDTAlteracao;
+            return profissaoAlteracao;
         }
 
-        public ProfissaoDataTransfer Excluir(int id)
+        public ProfissaoTransfer Excluir(int id)
         {
             ProfissaoDataModel profissaoDataModel;
-            ProfissaoDataTransfer profissaoDTExclusao;
+            ProfissaoTransfer profissao;
 
             try {
                 profissaoDataModel = new ProfissaoDataModel();
 
-                profissaoDTExclusao = profissaoDataModel.Excluir(id);
+                profissao = profissaoDataModel.Excluir(id);
             } catch (Exception ex) {
-                profissaoDTExclusao = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoDTExclusao.Validacao = false;
-                profissaoDTExclusao.Erro = true;
-                profissaoDTExclusao.ErroMensagens.Add("Erro em ProfissaoModel Excluir [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoModel Excluir [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
             }
 
-            return profissaoDTExclusao;
+            return profissao;
         }
 
-        public ProfissaoDataTransfer Listar()
+        public ProfissaoTransfer ConsultarPorId(int id)
         {
             ProfissaoDataModel profissaoDataModel;
-            ProfissaoBusiness profissaoBusiness;
-            ProfissaoDataTransfer profissaoDTLista;
-
-            try {
-                profissaoBusiness = new ProfissaoBusiness();
-                profissaoDataModel = new ProfissaoDataModel();
-
-                profissaoDTLista = profissaoDataModel.Listar();
-            } catch (Exception ex) {
-                profissaoDTLista = new ProfissaoDataTransfer();
-
-                profissaoDTLista.Validacao = false;
-                profissaoDTLista.Erro = true;
-                profissaoDTLista.ErroMensagens.Add("Erro em ProfissaoModel Listar [" + ex.Message + "]");
-            } finally {
-                profissaoDataModel = null;
-                profissaoBusiness = null;
-            }
-
-            return profissaoDTLista;
-        }
-
-        public ProfissaoDataTransfer ConsultarPorId(int id)
-        {
-            ProfissaoDataModel profissaoDataModel;
-            ProfissaoDataTransfer profissaoDTForm;
+            ProfissaoTransfer profissao;
             
             try {
                 profissaoDataModel = new ProfissaoDataModel();
 
-                profissaoDTForm = profissaoDataModel.ConsultarPorId(id);
+                profissao = profissaoDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                profissaoDTForm = new ProfissaoDataTransfer();
+                profissao = new ProfissaoTransfer();
 
-                profissaoDTForm.Validacao = false;
-                profissaoDTForm.Erro = true;
-                profissaoDTForm.ErroMensagens.Add("Erro em ProfissaoModel ConsultarPorId [" + ex.Message + "]");
+                profissao.Validacao = false;
+                profissao.Erro = true;
+                profissao.IncluirErroMensagem("Erro em ProfissaoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
             }
 
-            return profissaoDTForm;
+            return profissao;
+        }
+
+        public ProfissaoListaTransfer Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        {
+            ProfissaoDataModel profissaoDataModel;
+            ProfissaoBusiness profissaoBusiness;
+            ProfissaoListaTransfer profissaoValidacao;
+            ProfissaoListaTransfer profissaoLista;
+
+            try {
+                profissaoBusiness = new ProfissaoBusiness();
+                profissaoDataModel = new ProfissaoDataModel();
+
+                profissaoValidacao = profissaoBusiness.ValidarConsulta(profissaoListaTransfer);
+
+                if (!profissaoValidacao.Erro) {
+                    if (profissaoValidacao.Validacao) {
+                        profissaoLista = profissaoDataModel.Consultar(profissaoValidacao);
+                    } else {
+                        profissaoLista = new ProfissaoListaTransfer(profissaoValidacao);
+                    }
+                } else {
+                    profissaoLista = new ProfissaoListaTransfer(profissaoValidacao);
+                }
+            } catch (Exception ex) {
+                profissaoLista = new ProfissaoListaTransfer();
+
+                profissaoLista.Validacao = false;
+                profissaoLista.Erro = true;
+                profissaoLista.IncluirErroMensagem("Erro em ProfissaoModel Consultar [" + ex.Message + "]");
+            } finally {
+                profissaoDataModel = null;
+                profissaoBusiness = null;
+                profissaoValidacao = null;
+            }
+
+            return profissaoLista;
         }
     }
 }
