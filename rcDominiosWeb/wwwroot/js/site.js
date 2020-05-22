@@ -34,3 +34,12 @@ $('#CriacaoDe').datepicker(cfgCalendar);
 $('#CriacaoAte').datepicker(cfgCalendar);
 $('#AlteracaoDe').datepicker(cfgCalendar);
 $('#AlteracaoAte').datepicker(cfgCalendar);
+
+function paginar(pagina) {
+    var form = document.getElementById("form");
+    var paginaAtual = document.getElementById("PaginaAtual");
+
+    paginaAtual.value = pagina;
+    
+    form.submit();
+}

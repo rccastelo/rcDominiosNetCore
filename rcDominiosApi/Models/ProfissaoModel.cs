@@ -146,6 +146,13 @@ namespace rcDominiosApi.Models
                 if (!profissaoValidacao.Erro) {
                     if (profissaoValidacao.Validacao) {
                         profissaoLista = profissaoDataModel.Consultar(profissaoValidacao);
+
+                        if (profissaoLista != null) {
+                            profissaoLista.PaginaAtual = (profissaoListaTransfer.PaginaAtual < 1 ? 1 : profissaoListaTransfer.PaginaAtual);
+                            profissaoLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.TotalRegistros) 
+                                / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
+                        }
                     } else {
                         profissaoLista = new ProfissaoListaTransfer(profissaoValidacao);
                     }

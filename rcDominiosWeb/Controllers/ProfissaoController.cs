@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using rcDominiosWeb.Models;
 using rcDominiosDataTransfers;
-using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Controllers
 {
@@ -23,14 +23,14 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Form(int id)
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoTransfer profissao;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
                 if (id > 0) {
-                    profissao = await profissaoService.ConsultarPorId(id);
+                    profissao = await profissaoModel.ConsultarPorId(id);
                 } else {
                     profissao = null;
                 }
@@ -41,7 +41,7 @@ namespace rcDominiosWeb.Controllers
                 profissao.Erro = true;
                 profissao.IncluirErroMensagem("Erro em ProfissaoController Form");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             return View(profissao);
@@ -50,13 +50,13 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Lista()
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoListaTransfer profissaoLista;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
-                profissaoLista = await profissaoService.Consultar(new ProfissaoListaTransfer());
+                profissaoLista = await profissaoModel.Consultar(new ProfissaoListaTransfer());
             } catch (Exception ex) {
                 profissaoLista = new ProfissaoListaTransfer();
 
@@ -64,7 +64,7 @@ namespace rcDominiosWeb.Controllers
                 profissaoLista.Erro = true;
                 profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Lista [" + ex.Message + "]");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             return View(profissaoLista);
@@ -73,13 +73,13 @@ namespace rcDominiosWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Consulta(ProfissaoListaTransfer profissaoListaTransfer)
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoListaTransfer profissaoLista;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
-                profissaoLista = await profissaoService.Consultar(profissaoListaTransfer);
+                profissaoLista = await profissaoModel.Consultar(profissaoListaTransfer);
             } catch (Exception ex) {
                 profissaoLista = new ProfissaoListaTransfer();
 
@@ -87,7 +87,7 @@ namespace rcDominiosWeb.Controllers
                 profissaoLista.Erro = true;
                 profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Consulta [" + ex.Message + "]");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             if (profissaoLista.Erro || !profissaoLista.Validacao) {
@@ -100,13 +100,13 @@ namespace rcDominiosWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Inclusao(ProfissaoTransfer profissaoTransfer)
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoTransfer profissao;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
-                profissao = await profissaoService.Incluir(profissaoTransfer);
+                profissao = await profissaoModel.Incluir(profissaoTransfer);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -114,7 +114,7 @@ namespace rcDominiosWeb.Controllers
                 profissao.Erro = true;
                 profissao.IncluirErroMensagem("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             if (profissao.Erro || !profissao.Validacao) {
@@ -127,13 +127,13 @@ namespace rcDominiosWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Alteracao(ProfissaoTransfer profissaoTransfer)
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoTransfer profissao;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
-                profissao = await profissaoService.Alterar(profissaoTransfer);
+                profissao = await profissaoModel.Alterar(profissaoTransfer);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -141,7 +141,7 @@ namespace rcDominiosWeb.Controllers
                 profissao.Erro = true;
                 profissao.IncluirErroMensagem("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             if (profissao.Erro || !profissao.Validacao) {
@@ -154,13 +154,13 @@ namespace rcDominiosWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Exclusao(int id)
         {
-            ProfissaoService profissaoService;
+            ProfissaoModel profissaoModel;
             ProfissaoTransfer profissao;
 
             try {
-                profissaoService = new ProfissaoService();
+                profissaoModel = new ProfissaoModel();
 
-                profissao = await profissaoService.Excluir(id);
+                profissao = await profissaoModel.Excluir(id);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -168,7 +168,7 @@ namespace rcDominiosWeb.Controllers
                 profissao.Erro = true;
                 profissao.IncluirErroMensagem("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
             } finally {
-                profissaoService = null;
+                profissaoModel = null;
             }
 
             if (profissao.Erro || !profissao.Validacao) {

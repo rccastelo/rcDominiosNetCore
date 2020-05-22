@@ -146,6 +146,13 @@ namespace rcDominiosApi.Models
                 if (!pessoaTipoValidacao.Erro) {
                     if (pessoaTipoValidacao.Validacao) {
                         pessoaTipoLista = pessoaTipoDataModel.Consultar(pessoaTipoValidacao);
+
+                        if (pessoaTipoLista != null) {
+                            pessoaTipoLista.PaginaAtual = (pessoaTipoListaTransfer.PaginaAtual < 1 ? 1 : pessoaTipoListaTransfer.PaginaAtual);
+                            pessoaTipoLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(pessoaTipoLista.TotalRegistros) 
+                                / @Convert.ToDecimal(pessoaTipoLista.RegistrosPorPagina)));
+                        }
                     } else {
                         pessoaTipoLista = new PessoaTipoListaTransfer(pessoaTipoValidacao);
                     }

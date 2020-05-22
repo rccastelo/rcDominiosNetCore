@@ -9,10 +9,18 @@ namespace rcDominiosDataTransfers
     {
         public IList<ProfissaoEntity> ProfissaoLista { get; set; }
 
-        public int Pagina { get; set; }
-        
-        public int Quantidade { get; set; }
-        
+        public int PaginaAtual { get; set; }
+
+        public int PaginaInicial { get; set; }
+
+        public int PaginaFinal { get; set; }
+
+        public int RegistrosPorPagina { get; set; }
+
+        public int TotalRegistros { get; set; }
+
+        public int TotalPaginas { get; set; }
+
         public int IdDe { get; set; }
 
         public int IdAte { get; set; }
@@ -47,6 +55,12 @@ namespace rcDominiosDataTransfers
                 if (transfer.ProfissaoLista != null) {
                     this.ProfissaoLista = new List<ProfissaoEntity>(transfer.ProfissaoLista);
                 }
+                this.PaginaAtual = transfer.PaginaAtual;
+                this.PaginaInicial = transfer.PaginaInicial;
+                this.PaginaFinal = transfer.PaginaFinal;
+                this.RegistrosPorPagina = transfer.RegistrosPorPagina;
+                this.TotalRegistros = transfer.TotalRegistros;
+                this.TotalPaginas = transfer.TotalPaginas;
                 this.IdDe = transfer.IdDe;
                 this.IdAte = transfer.IdAte;
                 this.Descricao = transfer.Descricao;

@@ -126,9 +126,8 @@ namespace rcDominiosDataModels
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
-                profissaoLista = new ProfissaoListaTransfer();
 
-                profissaoLista.ProfissaoLista = profissaoData.Consultar(profissaoListaTransfer);
+                profissaoLista = profissaoData.Consultar(profissaoListaTransfer);
                 profissaoLista.Validacao = true;
                 profissaoLista.Erro = false;
             } catch (Exception ex) {

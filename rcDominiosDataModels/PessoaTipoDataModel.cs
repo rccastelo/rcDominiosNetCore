@@ -126,9 +126,8 @@ namespace rcDominiosDataModels
 
             try {
                 pessoaTipoData = new PessoaTipoData(_contexto);
-                pessoaTipoLista = new PessoaTipoListaTransfer();
 
-                pessoaTipoLista.PessoaTipoLista = pessoaTipoData.Consultar(pessoaTipoListaTransfer);
+                pessoaTipoLista = pessoaTipoData.Consultar(pessoaTipoListaTransfer);
                 pessoaTipoLista.Validacao = true;
                 pessoaTipoLista.Erro = false;
             } catch (Exception ex) {
