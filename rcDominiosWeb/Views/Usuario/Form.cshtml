@@ -41,40 +41,40 @@
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Apelido">Nome de Usuário</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Usuario.Apelido">Nome de Usuário</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popApelido">
-                        <i class="iconePopOpc fas fa-question"></i>
+                        <i class="iconePopObr fas fa-asterisk"></i>
                     </a>
                     <div id="popApelido" class="popMsg">
-                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
                         &bull; Tamanho máximo: <b>20</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b> e <b>números</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="20" asp-for="@Model.Apelido">
+                    <input class="form-control" type="text" maxlength="20" asp-for="@Model.Usuario.Apelido">
                 </div>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Senha">Senha</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Usuario.Senha">Senha</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popSenha">
-                        <i class="iconePopOpc fas fa-asterisk"></i>
+                        <i class="iconePopObr fas fa-asterisk"></i>
                     </a>
                     <div id="popSenha" class="popMsg">
                         &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
                         &bull; Tamanho máximo: <b>20</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>números</b>, <b>espaço em branco</b> e <b>especiais</b><br>
                     </div>
-                    <input class="form-control" type="password" maxlength="20" asp-for="@Model.Senha">
+                    <input class="form-control" type="text" maxlength="20" asp-for="@Model.Usuario.Senha">
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-12">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.NomeCompleto">Nome Completo</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Usuario.NomeCompleto">Nome Completo</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popNomeCompleto">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -84,14 +84,14 @@
                         &bull; Tamanho máximo: <b>100</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b> e <b>espaço em branco</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.NomeCompleto">
+                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.Usuario.NomeCompleto">
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.NomeApresentacao">Nome de Apresentação</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Usuario.NomeApresentacao">Nome de Apresentação</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popNomeApresentacao">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -101,13 +101,13 @@
                         &bull; Tamanho máximo: <b>20</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>espaço em branco</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="20" asp-for="@Model.NomeApresentacao">
+                    <input class="form-control" type="text" maxlength="20" asp-for="@Model.Usuario.NomeApresentacao">
                 </div>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Ativo">Ativo</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Usuario.Ativo">Ativo</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popAtivo">
                         <i class="iconePopObr fas fa-asterisk"></i>
@@ -115,10 +115,9 @@
                     <div id="popAtivo" class="popMsg">
                         &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
                     </div>
-                    <select class="form-control" asp-for="@Model.Ativo">
-                        <option value="true">Sim</option>
+                    <select class="form-control" asp-for="@Model.Usuario.Ativo">
+                        <option value="true" selected>Sim</option>
                         <option value="false">Não</option>
-                        <option value="" selected>Todos</option>
                     </select>
                 </div>
             </div>
@@ -168,6 +167,7 @@
                     &nbsp;Voltar</a>
             </div>
             <div class="col-2 text-right">
+                <a href="javascript:VerCaracs();"><i class="iconeCaracs fas fa-info-circle"></i></a>
                 @if (@Model != null) {
                     @if (@Model.Erro || !@Model.Validacao) {
                         <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
@@ -181,12 +181,6 @@
 @if (@Model != null) {
     @if (@Model.Erro || !@Model.Validacao) {
         <div class="text-danger">
-            @section Scripts {
-                <script>
-                    $('#modalMessages').modal('show');
-                </script>
-            }
-
             @if (@Model.Erro) {
                 @section Messages {
                     <ul>
@@ -205,5 +199,11 @@
                 }
             }
         </div>
+
+        @section Scripts {
+            <script>
+                $('#modalMessages').modal('show');
+            </script>
+        }
     }
 }

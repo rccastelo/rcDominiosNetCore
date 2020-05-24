@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 estadoCivilLista = await estadoCivilService.Consultar(estadoCivilListaTransfer);
 
                 if (estadoCivilLista != null) {
-                    if (estadoCivilLista.TotalRegistros > 1) {
+                    if (estadoCivilLista.TotalRegistros > 0) {
                         if (estadoCivilLista.RegistrosPorPagina < 1) {
                             estadoCivilLista.RegistrosPorPagina = 30;
                         } else if (estadoCivilLista.RegistrosPorPagina > 200) {

@@ -5,23 +5,28 @@ namespace rcDominiosUtils
 {
     public static class Validacao
     {
-        /*
-        A = letras maiúsculas (A-Z)
-        a = letras minúsculas (a-z)
-        B = espaço em branco (\s)
-        C = acentuação maiúscula (ÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ)
-        c = acentuação minúscula (áàâãéèêíïóôõöúçñ)
-        E = especiais (\!"#\$%'\(\)\*\+´-\./:;<=>\?@\[\]\^\\_`\{\}\|~)
-        N = números (0-9)
-        T = traços = sublinhado e hífen (_\-)
-        */
+        //-- A = letras maiúsculas (A-Z)
         static string mai = "A-Z";
+
+        //-- a = letras minúsculas (a-z)
         static string min = "a-z";
+
+        //-- B = espaço em branco (\s)
         static string bra = @"\s";
+
+        //-- C = acentuação maiúscula (ÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ)
         static string ama = "ÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ";
+
+        //-- c = acentuação minúscula (áàâãéèêíïóôõöúçñ)
         static string ami = "áàâãéèêíïóôõöúçñ";
-        static string esp = @"\!""#\$%'\(\)\*\+´-\./:;<=>\?@\[\]\^\\_`\{\}\|~";
+
+        //-- E = especiais !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~´
+        static string esp = @"\!""#\$%&'\(\)\*\+,\-\./:;<=>\?@\[\\\]\^_`\{\|\}~´";
+
+        //-- N = números (0-9)
         static string num = "0-9";
+
+        //-- T = traços = sublinhado e hífen (_\-)
         static string tra = @"_\-";
 
         public static bool ValidarCharAaBCcNT(string valor) {

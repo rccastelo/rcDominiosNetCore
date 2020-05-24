@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipoLista = await enderecoTipoService.Consultar(enderecoTipoListaTransfer);
 
                 if (enderecoTipoLista != null) {
-                    if (enderecoTipoLista.TotalRegistros > 1) {
+                    if (enderecoTipoLista.TotalRegistros > 0) {
                         if (enderecoTipoLista.RegistrosPorPagina < 1) {
                             enderecoTipoLista.RegistrosPorPagina = 30;
                         } else if (enderecoTipoLista.RegistrosPorPagina > 200) {

@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         enderecoTipoLista = enderecoTipoDataModel.Consultar(enderecoTipoValidacao);
 
                         if (enderecoTipoLista != null) {
-                            enderecoTipoLista.PaginaAtual = (enderecoTipoListaTransfer.PaginaAtual < 1 ? 1 : enderecoTipoListaTransfer.PaginaAtual);
-                            enderecoTipoLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.TotalRegistros) 
-                                / @Convert.ToDecimal(enderecoTipoLista.RegistrosPorPagina)));
+                            if (enderecoTipoLista.TotalRegistros > 0) {
+                                if (enderecoTipoLista.RegistrosPorPagina < 1) {
+                                    enderecoTipoLista.RegistrosPorPagina = 30;
+                                } else if (enderecoTipoLista.RegistrosPorPagina > 200) {
+                                    enderecoTipoLista.RegistrosPorPagina = 30;
+                                }
+                                enderecoTipoLista.PaginaAtual = (enderecoTipoListaTransfer.PaginaAtual < 1 ? 1 : enderecoTipoListaTransfer.PaginaAtual);
+                                enderecoTipoLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(enderecoTipoLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         enderecoTipoLista = new EnderecoTipoTransfer(enderecoTipoValidacao);

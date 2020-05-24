@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         generoSocialLista = generoSocialDataModel.Consultar(generoSocialValidacao);
 
                         if (generoSocialLista != null) {
-                            generoSocialLista.PaginaAtual = (generoSocialListaTransfer.PaginaAtual < 1 ? 1 : generoSocialListaTransfer.PaginaAtual);
-                            generoSocialLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.TotalRegistros) 
-                                / @Convert.ToDecimal(generoSocialLista.RegistrosPorPagina)));
+                            if (generoSocialLista.TotalRegistros > 0) {
+                                if (generoSocialLista.RegistrosPorPagina < 1) {
+                                    generoSocialLista.RegistrosPorPagina = 30;
+                                } else if (generoSocialLista.RegistrosPorPagina > 200) {
+                                    generoSocialLista.RegistrosPorPagina = 30;
+                                }
+                                generoSocialLista.PaginaAtual = (generoSocialListaTransfer.PaginaAtual < 1 ? 1 : generoSocialListaTransfer.PaginaAtual);
+                                generoSocialLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(generoSocialLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         generoSocialLista = new GeneroSocialTransfer(generoSocialValidacao);

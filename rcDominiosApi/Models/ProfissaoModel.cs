@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         profissaoLista = profissaoDataModel.Consultar(profissaoValidacao);
 
                         if (profissaoLista != null) {
-                            profissaoLista.PaginaAtual = (profissaoListaTransfer.PaginaAtual < 1 ? 1 : profissaoListaTransfer.PaginaAtual);
-                            profissaoLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.TotalRegistros) 
-                                / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
+                            if (profissaoLista.TotalRegistros > 0) {
+                                if (profissaoLista.RegistrosPorPagina < 1) {
+                                    profissaoLista.RegistrosPorPagina = 30;
+                                } else if (profissaoLista.RegistrosPorPagina > 200) {
+                                    profissaoLista.RegistrosPorPagina = 30;
+                                }
+                                profissaoLista.PaginaAtual = (profissaoListaTransfer.PaginaAtual < 1 ? 1 : profissaoListaTransfer.PaginaAtual);
+                                profissaoLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         profissaoLista = new ProfissaoTransfer(profissaoValidacao);

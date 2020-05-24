@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dominios</title>
+    <title>Domínios</title>
     <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
@@ -26,11 +26,36 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalCaracs" tabindex="-2" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered caixaCaracs" role="document">
+            <div class="modal-content caixaCaracs">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="modalTitle">Atenção</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body caixaCaracs">
+                    &bull; <i class="iconePopInf fas fa-info-circle"></i> Campo informativo<br>
+                    &bull; <i class="iconePopOpc fas fa-question"></i> Campo opcional<br>
+                    &bull; <i class="iconePopObr fas fa-asterisk"></i> Campo obrigatório<br><br>
+                    &bull; Tipos de caracteres... <br>
+                    &bull; Letras: &nbsp; A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>
+                    &nbsp; a b c d e f g h i j k l m n o p q r s t u v w x y z<br>
+                    &bull; Números: &nbsp; 0 1 2 3 4 5 6 7 8 9<br>
+                    &bull; Acentos: &nbsp; Á À Â Ã É È Í Ï Ó Ô Õ Ö Ú Ç Ñ á à â ã é è ê í ï ó ô õ ö ú ç ñ<br>
+                    &bull; Traços: &nbsp; - _<br>
+                    &bull; Especiais: &nbsp; ! " # $ % & ' ( ) * + , - . / \ : ; = < > ? @@ [ ] ^ _ ` ´ | { } ~<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar navbar-dark bg-dark border-bottom mb-3">
             <div class="container">
                 <div>
-                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Dominios</a> &nbsp; 
+                    <a class="navbar-brand" asp-controller="Dominios" asp-action="Index">Domínios</a> &nbsp; 
                     <a class="navbar-brand" asp-controller="Usuario" asp-action="Index">Usuários</a>
                 </div>
             </div>

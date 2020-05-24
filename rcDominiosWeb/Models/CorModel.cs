@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 corLista = await corService.Consultar(corListaTransfer);
 
                 if (corLista != null) {
-                    if (corLista.TotalRegistros > 1) {
+                    if (corLista.TotalRegistros > 0) {
                         if (corLista.RegistrosPorPagina < 1) {
                             corLista.RegistrosPorPagina = 30;
                         } else if (corLista.RegistrosPorPagina > 200) {

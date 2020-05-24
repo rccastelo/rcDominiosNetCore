@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         telefoneTipoLista = telefoneTipoDataModel.Consultar(telefoneTipoValidacao);
 
                         if (telefoneTipoLista != null) {
-                            telefoneTipoLista.PaginaAtual = (telefoneTipoListaTransfer.PaginaAtual < 1 ? 1 : telefoneTipoListaTransfer.PaginaAtual);
-                            telefoneTipoLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.TotalRegistros) 
-                                / @Convert.ToDecimal(telefoneTipoLista.RegistrosPorPagina)));
+                            if (telefoneTipoLista.TotalRegistros > 0) {
+                                if (telefoneTipoLista.RegistrosPorPagina < 1) {
+                                    telefoneTipoLista.RegistrosPorPagina = 30;
+                                } else if (telefoneTipoLista.RegistrosPorPagina > 200) {
+                                    telefoneTipoLista.RegistrosPorPagina = 30;
+                                }
+                                telefoneTipoLista.PaginaAtual = (telefoneTipoListaTransfer.PaginaAtual < 1 ? 1 : telefoneTipoListaTransfer.PaginaAtual);
+                                telefoneTipoLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(telefoneTipoLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         telefoneTipoLista = new TelefoneTipoTransfer(telefoneTipoValidacao);

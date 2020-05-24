@@ -24,7 +24,7 @@
         <input type="hidden" asp-for="@Model.AlteracaoDe">
         <input type="hidden" asp-for="@Model.AlteracaoAte">
         @* Se retornou registro(s), mostrar paginação *@
-        @if (Model.TotalRegistros > 1) {
+        @if (Model.TotalRegistros > 0) {
             <nav class="navBarra">
                 @if (Model.PaginaAtual < 2) {
                     <span class="navCaixaGr">Primeira</span>
@@ -65,8 +65,8 @@
             <thead class="thead-dark">
                 <tr class="row tabLinha">
                     <th class="col-1">Id</th>
-                    <th class="col-5">Descrição</th>
-                    <th class="col-2">Código</th>
+                    <th class="col-2">Apelido</th>
+                    <th class="col-5">Nome Completo</th>
                     <th class="col-2">Ativo</th>
                     <th class="col-2"></th>
                 </tr>
@@ -93,7 +93,7 @@
         </div>
         <br>
         @* Se retornou registro(s), mostrar paginação *@
-        @if (Model.TotalRegistros > 1) {
+        @if (Model.TotalRegistros > 0) {
             <nav class="navBarra">
                 @if (Model.PaginaAtual < 2) {
                     <span class="navCaixaGr">Primeira</span>

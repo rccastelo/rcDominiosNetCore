@@ -2,7 +2,7 @@
 
 namespace rcDominiosWeb.Controllers
 {
-    public class HomeController : Controller
+    public class DominiosController : Controller
     {
         public IActionResult Index()
         {

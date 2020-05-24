@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipoLista = await telefoneTipoService.Consultar(telefoneTipoListaTransfer);
 
                 if (telefoneTipoLista != null) {
-                    if (telefoneTipoLista.TotalRegistros > 1) {
+                    if (telefoneTipoLista.TotalRegistros > 0) {
                         if (telefoneTipoLista.RegistrosPorPagina < 1) {
                             telefoneTipoLista.RegistrosPorPagina = 30;
                         } else if (telefoneTipoLista.RegistrosPorPagina > 200) {

@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 sexoLista = await sexoService.Consultar(sexoListaTransfer);
 
                 if (sexoLista != null) {
-                    if (sexoLista.TotalRegistros > 1) {
+                    if (sexoLista.TotalRegistros > 0) {
                         if (sexoLista.RegistrosPorPagina < 1) {
                             sexoLista.RegistrosPorPagina = 30;
                         } else if (sexoLista.RegistrosPorPagina > 200) {

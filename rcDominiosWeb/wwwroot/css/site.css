@@ -12,6 +12,7 @@ body { margin-bottom: 60px; background-color: #1e1e1e; }
 .iconeGrd { font-size: 64px; }
 .iconeMed { font-size: 32px; padding: 6px; }
 .iconeMsg { font-size: 48px; color: red; }
+.iconeCaracs { font-size: 48px; color: green; }
 .txtEtiqueta { font-size: 20px; color: #fff; }
 .txtPadrao, .txtPadrao:hover, .txtPadrao:visited { font-size: 16px; color: #fff; }
 .txtPadraoGrd, .txtPadraoGrd:hover, .txtPadraoGrd:visited { font-size: 32px; color: #fff; }
@@ -26,6 +27,7 @@ body { margin-bottom: 60px; background-color: #1e1e1e; }
 .popCampoOpc { background-color: #ff6000; color: #fff; }
 .corOpcional { color: #ff6000; }
 .tabLinha { margin: 0; }
+.caixaCaracs { min-width: 600px; line-height: 30px; }
 
 /* -- Paginacao -- */
 .navBarra { width: 100%; text-align: center; color: #fff; }

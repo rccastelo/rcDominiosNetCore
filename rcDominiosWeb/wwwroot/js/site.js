@@ -2,8 +2,8 @@
     $('#modalMessages').modal('show');
 }
 
-function VerCharDescricao() {
-    $('#modalMessages').modal('show');
+function VerCaracs() {
+    $('#modalCaracs').modal('show');
 }
 
 $('[data-toggle="popover"]').popover(

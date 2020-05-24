@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 contaBancariaLista = await contaBancariaService.Consultar(contaBancariaListaTransfer);
 
                 if (contaBancariaLista != null) {
-                    if (contaBancariaLista.TotalRegistros > 1) {
+                    if (contaBancariaLista.TotalRegistros > 0) {
                         if (contaBancariaLista.RegistrosPorPagina < 1) {
                             contaBancariaLista.RegistrosPorPagina = 30;
                         } else if (contaBancariaLista.RegistrosPorPagina > 200) {

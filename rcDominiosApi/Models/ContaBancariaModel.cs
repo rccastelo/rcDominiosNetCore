@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         contaBancariaLista = contaBancariaDataModel.Consultar(contaBancariaValidacao);
 
                         if (contaBancariaLista != null) {
-                            contaBancariaLista.PaginaAtual = (contaBancariaListaTransfer.PaginaAtual < 1 ? 1 : contaBancariaListaTransfer.PaginaAtual);
-                            contaBancariaLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.TotalRegistros) 
-                                / @Convert.ToDecimal(contaBancariaLista.RegistrosPorPagina)));
+                            if (contaBancariaLista.TotalRegistros > 0) {
+                                if (contaBancariaLista.RegistrosPorPagina < 1) {
+                                    contaBancariaLista.RegistrosPorPagina = 30;
+                                } else if (contaBancariaLista.RegistrosPorPagina > 200) {
+                                    contaBancariaLista.RegistrosPorPagina = 30;
+                                }
+                                contaBancariaLista.PaginaAtual = (contaBancariaListaTransfer.PaginaAtual < 1 ? 1 : contaBancariaListaTransfer.PaginaAtual);
+                                contaBancariaLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(contaBancariaLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         contaBancariaLista = new ContaBancariaTransfer(contaBancariaValidacao);

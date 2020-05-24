@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 profissaoLista = await profissaoService.Consultar(profissaoListaTransfer);
 
                 if (profissaoLista != null) {
-                    if (profissaoLista.TotalRegistros > 1) {
+                    if (profissaoLista.TotalRegistros > 0) {
                         if (profissaoLista.RegistrosPorPagina < 1) {
                             profissaoLista.RegistrosPorPagina = 30;
                         } else if (profissaoLista.RegistrosPorPagina > 200) {

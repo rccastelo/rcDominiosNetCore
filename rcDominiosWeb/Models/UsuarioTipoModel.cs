@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipoLista = await usuarioTipoService.Consultar(usuarioTipoListaTransfer);
 
                 if (usuarioTipoLista != null) {
-                    if (usuarioTipoLista.TotalRegistros > 1) {
+                    if (usuarioTipoLista.TotalRegistros > 0) {
                         if (usuarioTipoLista.RegistrosPorPagina < 1) {
                             usuarioTipoLista.RegistrosPorPagina = 30;
                         } else if (usuarioTipoLista.RegistrosPorPagina > 200) {

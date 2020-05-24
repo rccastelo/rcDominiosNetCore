@@ -38,23 +38,23 @@ namespace rcDominiosDatas
             }
 
             //-- Apelido
-            if (!string.IsNullOrEmpty(usuarioTransfer.Usuario.Apelido)) {
-                query = query.Where(et => et.Apelido.Contains(usuarioTransfer.Usuario.Apelido));
+            if (!string.IsNullOrEmpty(usuarioTransfer.Apelido)) {
+                query = query.Where(et => et.Apelido.Contains(usuarioTransfer.Apelido));
             }
 
             //-- Senha
-            if (!string.IsNullOrEmpty(usuarioTransfer.Usuario.Senha)) {
-                query = query.Where(et => et.Senha.Contains(usuarioTransfer.Usuario.Senha));
+            if (!string.IsNullOrEmpty(usuarioTransfer.Senha)) {
+                query = query.Where(et => et.Senha.Contains(usuarioTransfer.Senha));
             }
             
             //-- Nome de apresentação
-            if (!string.IsNullOrEmpty(usuarioTransfer.Usuario.NomeApresentacao)) {
-                query = query.Where(et => et.NomeApresentacao.Contains(usuarioTransfer.Usuario.NomeApresentacao));
+            if (!string.IsNullOrEmpty(usuarioTransfer.NomeApresentacao)) {
+                query = query.Where(et => et.NomeApresentacao.Contains(usuarioTransfer.NomeApresentacao));
             }
 
             //-- Nome completo
-            if (!string.IsNullOrEmpty(usuarioTransfer.Usuario.NomeCompleto)) {
-                query = query.Where(et => et.NomeCompleto.Contains(usuarioTransfer.Usuario.NomeCompleto));
+            if (!string.IsNullOrEmpty(usuarioTransfer.NomeCompleto)) {
+                query = query.Where(et => et.NomeCompleto.Contains(usuarioTransfer.NomeCompleto));
             }
             
             //-- Ativo

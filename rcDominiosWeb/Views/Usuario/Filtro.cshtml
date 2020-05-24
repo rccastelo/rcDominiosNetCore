@@ -226,6 +226,7 @@
                     &nbsp;Voltar</a>
             </div>
             <div class="col-2 text-right">
+                <a href="javascript:VerCaracs();"><i class="iconeCaracs fas fa-info-circle"></i></a>
                 @if (@Model != null) {
                     @if (@Model.Erro || !@Model.Validacao) {
                         <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>

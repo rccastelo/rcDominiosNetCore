@@ -38,13 +38,13 @@ namespace rcDominiosBusiness
                 }
 
                 //-- Nome de apresentação
-                if (string.IsNullOrEmpty(usuarioValidacao.Usuario.NomeApresentacao)) {
-                    usuarioValidacao.IncluirValidacaoMensagem("Necessário informar o Nome de Apresentacao");
-                } else if (usuarioValidacao.Usuario.NomeApresentacao.Length > 20) {
-                    usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao deve ter no máximo 20 caracteres");
-                } else if (!Validacao.ValidarCharAaBN(usuarioValidacao.Usuario.NomeApresentacao)) {
-                    usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao possui caracteres inválidos");
-                    usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e espaço em branco");
+                if (!string.IsNullOrEmpty(usuarioValidacao.Usuario.NomeApresentacao)) {
+                    if (usuarioValidacao.Usuario.NomeApresentacao.Length > 20) {
+                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao deve ter no máximo 20 caracteres");
+                    } else if (!Validacao.ValidarCharAaBN(usuarioValidacao.Usuario.NomeApresentacao)) {
+                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao possui caracteres inválidos");
+                        usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e espaço em branco");
+                    }
                 }
 
                 //-- Nome Completo
@@ -100,33 +100,33 @@ namespace rcDominiosBusiness
                     }
 
                     //-- Apelido (Nome de usuário)
-                    if (string.IsNullOrEmpty(usuarioValidacao.Apelido)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Necessário informar o Nome de Usuário");
-                    } else if (usuarioValidacao.Apelido.Length > 20) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Usuário deve ter no máximo 20 caracteres");
-                    } else if (!Validacao.ValidarCharAaN(usuarioValidacao.Apelido)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Usuário possui caracteres inválidos");
-                        usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras e números");
+                    if (!string.IsNullOrEmpty(usuarioValidacao.Apelido)) {
+                        if (usuarioValidacao.Apelido.Length > 20) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Nome de Usuário deve ter no máximo 20 caracteres");
+                        } else if (!Validacao.ValidarCharAaN(usuarioValidacao.Apelido)) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Nome de Usuário possui caracteres inválidos");
+                            usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras e números");
+                        }
                     }
 
                     //-- Senha
-                    if (string.IsNullOrEmpty(usuarioValidacao.Senha)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Necessário informar a Senha");
-                    } else if (usuarioValidacao.Senha.Length > 20) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Senha deve ter no máximo 20 caracteres");
-                    } else if (!Validacao.ValidarCharAaBEN(usuarioValidacao.Senha)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Senha possui caracteres inválidos");
-                        usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números, espaço em branco e especiais");
+                    if (!string.IsNullOrEmpty(usuarioValidacao.Senha)) {
+                        if (usuarioValidacao.Senha.Length > 20) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Senha deve ter no máximo 20 caracteres");
+                        } else if (!Validacao.ValidarCharAaBEN(usuarioValidacao.Senha)) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Senha possui caracteres inválidos");
+                            usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números, espaço em branco e especiais");
+                        }
                     }
 
                     //-- Nome de apresentação
-                    if (string.IsNullOrEmpty(usuarioValidacao.NomeApresentacao)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Necessário informar o Nome de Apresentacao");
-                    } else if (usuarioValidacao.NomeApresentacao.Length > 20) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao deve ter no máximo 20 caracteres");
-                    } else if (!Validacao.ValidarCharAaBN(usuarioValidacao.NomeApresentacao)) {
-                        usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao possui caracteres inválidos");
-                        usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e espaço em branco");
+                    if (!string.IsNullOrEmpty(usuarioValidacao.NomeApresentacao)) {
+                        if (usuarioValidacao.NomeApresentacao.Length > 20) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao deve ter no máximo 20 caracteres");
+                        } else if (!Validacao.ValidarCharAaBN(usuarioValidacao.NomeApresentacao)) {
+                            usuarioValidacao.IncluirValidacaoMensagem("Nome de Apresentacao possui caracteres inválidos");
+                            usuarioValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e espaço em branco");
+                        }
                     }
 
                     //-- Nome Completo

@@ -49,7 +49,7 @@ namespace rcDominiosWeb
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Dominios}/{action=Index}/{id?}");
             });
         }
     }

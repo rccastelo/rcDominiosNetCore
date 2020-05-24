@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         estadoCivilLista = estadoCivilDataModel.Consultar(estadoCivilValidacao);
 
                         if (estadoCivilLista != null) {
-                            estadoCivilLista.PaginaAtual = (estadoCivilListaTransfer.PaginaAtual < 1 ? 1 : estadoCivilListaTransfer.PaginaAtual);
-                            estadoCivilLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(estadoCivilLista.TotalRegistros) 
-                                / @Convert.ToDecimal(estadoCivilLista.RegistrosPorPagina)));
+                            if (estadoCivilLista.TotalRegistros > 0) {
+                                if (estadoCivilLista.RegistrosPorPagina < 1) {
+                                    estadoCivilLista.RegistrosPorPagina = 30;
+                                } else if (estadoCivilLista.RegistrosPorPagina > 200) {
+                                    estadoCivilLista.RegistrosPorPagina = 30;
+                                }
+                                estadoCivilLista.PaginaAtual = (estadoCivilListaTransfer.PaginaAtual < 1 ? 1 : estadoCivilListaTransfer.PaginaAtual);
+                                estadoCivilLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(estadoCivilLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(estadoCivilLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         estadoCivilLista = new EstadoCivilTransfer(estadoCivilValidacao);

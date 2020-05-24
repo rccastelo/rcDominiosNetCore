@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         corLista = corDataModel.Consultar(corValidacao);
 
                         if (corLista != null) {
-                            corLista.PaginaAtual = (corListaTransfer.PaginaAtual < 1 ? 1 : corListaTransfer.PaginaAtual);
-                            corLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.TotalRegistros) 
-                                / @Convert.ToDecimal(corLista.RegistrosPorPagina)));
+                            if (corLista.TotalRegistros > 0) {
+                                if (corLista.RegistrosPorPagina < 1) {
+                                    corLista.RegistrosPorPagina = 30;
+                                } else if (corLista.RegistrosPorPagina > 200) {
+                                    corLista.RegistrosPorPagina = 30;
+                                }
+                                corLista.PaginaAtual = (corListaTransfer.PaginaAtual < 1 ? 1 : corListaTransfer.PaginaAtual);
+                                corLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(corLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         corLista = new CorTransfer(corValidacao);

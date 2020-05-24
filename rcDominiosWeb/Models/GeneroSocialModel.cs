@@ -113,7 +113,7 @@ namespace rcDominiosWeb.Models
                 generoSocialLista = await generoSocialService.Consultar(generoSocialListaTransfer);
 
                 if (generoSocialLista != null) {
-                    if (generoSocialLista.TotalRegistros > 1) {
+                    if (generoSocialLista.TotalRegistros > 0) {
                         if (generoSocialLista.RegistrosPorPagina < 1) {
                             generoSocialLista.RegistrosPorPagina = 30;
                         } else if (generoSocialLista.RegistrosPorPagina > 200) {

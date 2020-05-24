@@ -148,10 +148,17 @@ namespace rcDominiosApi.Models
                         usuarioTipoLista = usuarioTipoDataModel.Consultar(usuarioTipoValidacao);
 
                         if (usuarioTipoLista != null) {
-                            usuarioTipoLista.PaginaAtual = (usuarioTipoListaTransfer.PaginaAtual < 1 ? 1 : usuarioTipoListaTransfer.PaginaAtual);
-                            usuarioTipoLista.TotalPaginas = 
-                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioTipoLista.TotalRegistros) 
-                                / @Convert.ToDecimal(usuarioTipoLista.RegistrosPorPagina)));
+                            if (usuarioTipoLista.TotalRegistros > 0) {
+                                if (usuarioTipoLista.RegistrosPorPagina < 1) {
+                                    usuarioTipoLista.RegistrosPorPagina = 30;
+                                } else if (usuarioTipoLista.RegistrosPorPagina > 200) {
+                                    usuarioTipoLista.RegistrosPorPagina = 30;
+                                }
+                                usuarioTipoLista.PaginaAtual = (usuarioTipoListaTransfer.PaginaAtual < 1 ? 1 : usuarioTipoListaTransfer.PaginaAtual);
+                                usuarioTipoLista.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioTipoLista.TotalRegistros) 
+                                    / @Convert.ToDecimal(usuarioTipoLista.RegistrosPorPagina)));
+                            }
                         }
                     } else {
                         usuarioTipoLista = new UsuarioTipoTransfer(usuarioTipoValidacao);
