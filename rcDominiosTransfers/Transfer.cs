@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace rcDominiosDataTransfers
+namespace rcDominiosTransfers
 {
-    public abstract class DataTransfer
+    public abstract class Transfer
     {
         public bool Validacao { get; set; } 
 
@@ -16,11 +16,11 @@ namespace rcDominiosDataTransfers
 
         public IList<string> InfoMensagens { get; set; }
 
-        public DataTransfer()
+        public Transfer()
         {
         }
 
-        public DataTransfer(DataTransfer transfer)
+        public Transfer(Transfer transfer)
         {
             if (transfer != null) {
                 this.Validacao = transfer.Validacao;

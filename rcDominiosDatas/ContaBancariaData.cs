@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using rcDominiosDatabase;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDatas
@@ -14,38 +14,44 @@ namespace rcDominiosDatas
         {
         }
 
-        public IList<ContaBancariaEntity> Consultar(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public ContaBancariaTransfer Consultar(ContaBancariaTransfer contaBancariaTransfer)
         {
             IQueryable<ContaBancariaEntity> query = _contexto.Set<ContaBancariaEntity>();
+            ContaBancariaTransfer contaBancariaLista = new ContaBancariaTransfer(contaBancariaTransfer);
+            IList<ContaBancariaEntity> lista = new List<ContaBancariaEntity>();
+
+            int pular = 0;
+            int registrosPorPagina = 0;
+            int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (contaBancariaDataTransfer.IdAte <= 0) {
-                if (contaBancariaDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == contaBancariaDataTransfer.IdDe);
+            if (contaBancariaTransfer.IdAte <= 0) {
+                if (contaBancariaTransfer.IdDe > 0) {
+                    query = query.Where(et => et.Id == contaBancariaTransfer.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (contaBancariaDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= contaBancariaDataTransfer.IdDe);
-                    query = query.Where(et => et.Id <= contaBancariaDataTransfer.IdAte);
+                if (contaBancariaTransfer.IdDe > 0) {
+                    query = query.Where(et => et.Id >= contaBancariaTransfer.IdDe);
+                    query = query.Where(et => et.Id <= contaBancariaTransfer.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(contaBancariaDataTransfer.ContaBancaria.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(contaBancariaDataTransfer.ContaBancaria.Descricao));
+            if (!string.IsNullOrEmpty(contaBancariaTransfer.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(contaBancariaTransfer.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(contaBancariaDataTransfer.ContaBancaria.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(contaBancariaDataTransfer.ContaBancaria.Codigo));
+            if (!string.IsNullOrEmpty(contaBancariaTransfer.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(contaBancariaTransfer.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(contaBancariaDataTransfer.AtivoFiltro)) {
+            if (!string.IsNullOrEmpty(contaBancariaTransfer.Ativo)) {
                 bool ativo = true;
 
-                if (contaBancariaDataTransfer.AtivoFiltro == "false") {
+                if (contaBancariaTransfer.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -53,32 +59,50 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (contaBancariaDataTransfer.CriacaoAte == DateTime.MinValue) {
-                if (contaBancariaDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == contaBancariaDataTransfer.CriacaoDe);
+            if (contaBancariaTransfer.CriacaoAte == DateTime.MinValue) {
+                if (contaBancariaTransfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == contaBancariaTransfer.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (contaBancariaDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= contaBancariaDataTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= contaBancariaDataTransfer.CriacaoAte);
+                if (contaBancariaTransfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= contaBancariaTransfer.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= contaBancariaTransfer.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (contaBancariaDataTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (contaBancariaDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == contaBancariaDataTransfer.AlteracaoDe);
+            if (contaBancariaTransfer.AlteracaoAte == DateTime.MinValue) {
+                if (contaBancariaTransfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == contaBancariaTransfer.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (contaBancariaDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= contaBancariaDataTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= contaBancariaDataTransfer.AlteracaoAte);
+                if (contaBancariaTransfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= contaBancariaTransfer.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= contaBancariaTransfer.AlteracaoAte);
                 }
             }
+            
+            if (contaBancariaTransfer.RegistrosPorPagina < 1) {
+                registrosPorPagina = 30;
+            } else if (contaBancariaTransfer.RegistrosPorPagina > 200) {
+                registrosPorPagina = 30;
+            } else {
+                registrosPorPagina = contaBancariaTransfer.RegistrosPorPagina;
+            }
 
-            return query.ToList();
+            pular = (contaBancariaTransfer.PaginaAtual < 2 ? 0 : contaBancariaTransfer.PaginaAtual - 1);
+            pular *= registrosPorPagina;
+            
+            totalRegistros = query.Count();
+            lista = query.Skip(pular).Take(registrosPorPagina).ToList();
+
+            contaBancariaLista.RegistrosPorPagina = registrosPorPagina;
+            contaBancariaLista.TotalRegistros = totalRegistros;
+            contaBancariaLista.ContaBancariaLista = lista;
+
+            return contaBancariaLista;
         }
     }
 }

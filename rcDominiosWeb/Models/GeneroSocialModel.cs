@@ -1,195 +1,165 @@
 using System;
-using rcDominiosBusiness;
-using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using System.Threading.Tasks;
+using rcDominiosTransfers;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
     public class GeneroSocialModel
     {
-        public GeneroSocialDataTransfer Incluir(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public async Task<GeneroSocialTransfer> Incluir(GeneroSocialTransfer generoSocialTransfer)
         {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTValidacao;
-            GeneroSocialDataTransfer generoSocialDTInclusao;
+            GeneroSocialService generoSocialService;
+            GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialBusiness = new GeneroSocialBusiness();
-                generoSocialDataModel = new GeneroSocialDataModel();
+                generoSocialService = new GeneroSocialService();
 
-                generoSocialDataTransfer.GeneroSocial.Criacao = DateTime.Today;
-                generoSocialDataTransfer.GeneroSocial.Alteracao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Criacao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocialDTValidacao = generoSocialBusiness.Validar(generoSocialDataTransfer);
-
-                if (!generoSocialDTValidacao.Erro) {
-                    if (generoSocialDTValidacao.Validacao) {
-                        generoSocialDTInclusao = generoSocialDataModel.Incluir(generoSocialDTValidacao);
-                    } else {
-                        generoSocialDTInclusao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
-                    }
-                } else {
-                    generoSocialDTInclusao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
-                }
+                generoSocial = await generoSocialService.Incluir(generoSocialTransfer);
             } catch (Exception ex) {
-                generoSocialDTInclusao = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTInclusao.Validacao = false;
-                generoSocialDTInclusao.Erro = true;
-                generoSocialDTInclusao.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
             } finally {
-                generoSocialDataModel = null;
-                generoSocialBusiness = null;
-                generoSocialDTValidacao = null;
+                generoSocialService = null;
             }
 
-            return generoSocialDTInclusao;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Alterar(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public async Task<GeneroSocialTransfer> Alterar(GeneroSocialTransfer generoSocialTransfer)
         {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTValidacao;
-            GeneroSocialDataTransfer generoSocialDTAlteracao;
+            GeneroSocialService generoSocialService;
+            GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialBusiness = new GeneroSocialBusiness();
-                generoSocialDataModel = new GeneroSocialDataModel();
+                generoSocialService = new GeneroSocialService();
 
-                generoSocialDataTransfer.GeneroSocial.Alteracao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocialDTValidacao = generoSocialBusiness.Validar(generoSocialDataTransfer);
-
-                if (!generoSocialDTValidacao.Erro) {
-                    if (generoSocialDTValidacao.Validacao) {
-                        generoSocialDTAlteracao = generoSocialDataModel.Alterar(generoSocialDTValidacao);
-                    } else {
-                        generoSocialDTAlteracao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
-                    }
-                } else {
-                    generoSocialDTAlteracao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
-                }
+                generoSocial = await generoSocialService.Alterar(generoSocialTransfer);
             } catch (Exception ex) {
-                generoSocialDTAlteracao = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTAlteracao.Validacao = false;
-                generoSocialDTAlteracao.Erro = true;
-                generoSocialDTAlteracao.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
             } finally {
-                generoSocialDataModel = null;
-                generoSocialBusiness = null;
-                generoSocialDTValidacao = null;
+                generoSocialService = null;
             }
 
-            return generoSocialDTAlteracao;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Excluir(int id)
+        public async Task<GeneroSocialTransfer> Excluir(int id)
         {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialDataTransfer generoSocialDTExclusao;
+            GeneroSocialService generoSocialService;
+            GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialDataModel = new GeneroSocialDataModel();
+                generoSocialService = new GeneroSocialService();
 
-                generoSocialDTExclusao = generoSocialDataModel.Excluir(id);
+                generoSocial = await generoSocialService.Excluir(id);
             } catch (Exception ex) {
-                generoSocialDTExclusao = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTExclusao.Validacao = false;
-                generoSocialDTExclusao.Erro = true;
-                generoSocialDTExclusao.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
             } finally {
-                generoSocialDataModel = null;
+                generoSocialService = null;
             }
 
-            return generoSocialDTExclusao;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Listar()
+        public async Task<GeneroSocialTransfer> ConsultarPorId(int id)
         {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTLista;
-
-            try {
-                generoSocialBusiness = new GeneroSocialBusiness();
-                generoSocialDataModel = new GeneroSocialDataModel();
-
-                generoSocialDTLista = generoSocialDataModel.Listar();
-            } catch (Exception ex) {
-                generoSocialDTLista = new GeneroSocialDataTransfer();
-
-                generoSocialDTLista.Validacao = false;
-                generoSocialDTLista.Erro = true;
-                generoSocialDTLista.IncluirErroMensagem("Erro em GeneroSocialModel Listar [" + ex.Message + "]");
-            } finally {
-                generoSocialDataModel = null;
-                generoSocialBusiness = null;
-            }
-
-            return generoSocialDTLista;
-        }
-
-        public GeneroSocialDataTransfer ConsultarPorId(int id)
-        {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialDataTransfer generoSocialDTForm;
+            GeneroSocialService generoSocialService;
+            GeneroSocialTransfer generoSocial;
             
             try {
-                generoSocialDataModel = new GeneroSocialDataModel();
+                generoSocialService = new GeneroSocialService();
 
-                generoSocialDTForm = generoSocialDataModel.ConsultarPorId(id);
+                generoSocial = await generoSocialService.ConsultarPorId(id);
             } catch (Exception ex) {
-                generoSocialDTForm = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTForm.Validacao = false;
-                generoSocialDTForm.Erro = true;
-                generoSocialDTForm.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
             } finally {
-                generoSocialDataModel = null;
+                generoSocialService = null;
             }
 
-            return generoSocialDTForm;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Consultar(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public async Task<GeneroSocialTransfer> Consultar(GeneroSocialTransfer generoSocialListaTransfer)
         {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTValidacao;
-            GeneroSocialDataTransfer generoSocialDTConsulta;
+            GeneroSocialService generoSocialService;
+            GeneroSocialTransfer generoSocialLista;
+            int dif = 0;
+            int qtdExibe = 5;
 
             try {
-                generoSocialBusiness = new GeneroSocialBusiness();
-                generoSocialDataModel = new GeneroSocialDataModel();
+                generoSocialService = new GeneroSocialService();
 
-                generoSocialDTValidacao = generoSocialBusiness.ValidarConsulta(generoSocialDataTransfer);
+                generoSocialLista = await generoSocialService.Consultar(generoSocialListaTransfer);
 
-                if (!generoSocialDTValidacao.Erro) {
-                    if (generoSocialDTValidacao.Validacao) {
-                        generoSocialDTConsulta = generoSocialDataModel.Consultar(generoSocialDTValidacao);
-                    } else {
-                        generoSocialDTConsulta = new GeneroSocialDataTransfer(generoSocialDTValidacao);
+                if (generoSocialLista != null) {
+                    if (generoSocialLista.TotalRegistros > 1) {
+                        if (generoSocialLista.RegistrosPorPagina < 1) {
+                            generoSocialLista.RegistrosPorPagina = 30;
+                        } else if (generoSocialLista.RegistrosPorPagina > 200) {
+                            generoSocialLista.RegistrosPorPagina = 30;
+                        }
+
+                        generoSocialLista.PaginaAtual = (generoSocialLista.PaginaAtual < 1 ? 1 : generoSocialLista.PaginaAtual);
+                        generoSocialLista.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.TotalRegistros) 
+                            / @Convert.ToDecimal(generoSocialLista.RegistrosPorPagina)));
+                        generoSocialLista.TotalPaginas = (generoSocialLista.TotalPaginas < 1 ? 1 : generoSocialLista.TotalPaginas);
+
+                        qtdExibe = (qtdExibe > generoSocialLista.TotalPaginas ? generoSocialLista.TotalPaginas : qtdExibe);
+
+                        generoSocialLista.PaginaInicial = generoSocialLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        generoSocialLista.PaginaFinal = generoSocialLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        generoSocialLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (generoSocialLista.PaginaFinal - 1) : generoSocialLista.PaginaFinal);
+
+                        if (generoSocialLista.PaginaInicial < 1) {
+                            dif = 1 - generoSocialLista.PaginaInicial;
+                            generoSocialLista.PaginaInicial += dif;
+                            generoSocialLista.PaginaFinal += dif;
+                        }
+
+                        if (generoSocialLista.PaginaFinal > generoSocialLista.TotalPaginas) {
+                            dif = generoSocialLista.PaginaFinal - generoSocialLista.TotalPaginas;
+                            generoSocialLista.PaginaInicial -= dif;
+                            generoSocialLista.PaginaFinal -= dif;
+                        }
+
+                        generoSocialLista.PaginaInicial = (generoSocialLista.PaginaInicial < 1 ? 1 : generoSocialLista.PaginaInicial);
+                        generoSocialLista.PaginaFinal = (generoSocialLista.PaginaFinal > generoSocialLista.TotalPaginas ? 
+                            generoSocialLista.TotalPaginas : generoSocialLista.PaginaFinal);
                     }
-                } else {
-                    generoSocialDTConsulta = new GeneroSocialDataTransfer(generoSocialDTValidacao);
                 }
             } catch (Exception ex) {
-                generoSocialDTConsulta = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialTransfer();
 
-                generoSocialDTConsulta.Validacao = false;
-                generoSocialDTConsulta.Erro = true;
-                generoSocialDTConsulta.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
             } finally {
-                generoSocialDataModel = null;
-                generoSocialBusiness = null;
-                generoSocialDTValidacao = null;
+                generoSocialService = null;
             }
 
-            return generoSocialDTConsulta;
+            return generoSocialLista;
         }
     }
 }

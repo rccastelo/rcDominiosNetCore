@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
@@ -51,14 +51,14 @@ namespace rcDominiosWeb.Controllers
         public async Task<IActionResult> Lista()
         {
             ProfissaoModel profissaoModel;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoLista = await profissaoModel.Consultar(new ProfissaoListaTransfer());
+                profissaoLista = await profissaoModel.Consultar(new ProfissaoTransfer());
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
@@ -71,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Consulta(ProfissaoListaTransfer profissaoListaTransfer)
+        public async Task<IActionResult> Consulta(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoLista = await profissaoModel.Consultar(profissaoListaTransfer);
+                profissaoLista = await profissaoModel.Consultar(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

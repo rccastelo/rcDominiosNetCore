@@ -1,7 +1,7 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
@@ -130,12 +130,12 @@ namespace rcDominiosApi.Models
             return profissao;
         }
 
-        public ProfissaoListaTransfer Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        public ProfissaoTransfer Consultar(ProfissaoTransfer profissaoListaTransfer)
         {
             ProfissaoDataModel profissaoDataModel;
             ProfissaoBusiness profissaoBusiness;
-            ProfissaoListaTransfer profissaoValidacao;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoValidacao;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoBusiness = new ProfissaoBusiness();
@@ -154,13 +154,13 @@ namespace rcDominiosApi.Models
                                 / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
                         }
                     } else {
-                        profissaoLista = new ProfissaoListaTransfer(profissaoValidacao);
+                        profissaoLista = new ProfissaoTransfer(profissaoValidacao);
                     }
                 } else {
-                    profissaoLista = new ProfissaoListaTransfer(profissaoValidacao);
+                    profissaoLista = new ProfissaoTransfer(profissaoValidacao);
                 }
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
@@ -51,14 +51,14 @@ namespace rcDominiosWeb.Controllers
         public async Task<IActionResult> Lista()
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = await pessoaTipoModel.Consultar(new PessoaTipoListaTransfer());
+                pessoaTipoLista = await pessoaTipoModel.Consultar(new PessoaTipoTransfer());
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
@@ -71,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Consulta(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public async Task<IActionResult> Consulta(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = await pessoaTipoModel.Consultar(pessoaTipoListaTransfer);
+                pessoaTipoLista = await pessoaTipoModel.Consultar(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

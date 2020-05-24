@@ -15,7 +15,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\rcDominiosDataTransfers\rcDominiosDataTransfers.csproj" />
+    <ProjectReference Include="..\rcDominiosTransfers\rcDominiosTransfers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using rcDominiosDatabase;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDatas
@@ -14,38 +14,44 @@ namespace rcDominiosDatas
         {
         }
 
-        public IList<UsuarioTipoEntity> Consultar(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public UsuarioTipoTransfer Consultar(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             IQueryable<UsuarioTipoEntity> query = _contexto.Set<UsuarioTipoEntity>();
+            UsuarioTipoTransfer usuarioTipoLista = new UsuarioTipoTransfer(usuarioTipoTransfer);
+            IList<UsuarioTipoEntity> lista = new List<UsuarioTipoEntity>();
+
+            int pular = 0;
+            int registrosPorPagina = 0;
+            int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (usuarioTipoDataTransfer.IdAte <= 0) {
-                if (usuarioTipoDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == usuarioTipoDataTransfer.IdDe);
+            if (usuarioTipoTransfer.IdAte <= 0) {
+                if (usuarioTipoTransfer.IdDe > 0) {
+                    query = query.Where(et => et.Id == usuarioTipoTransfer.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (usuarioTipoDataTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= usuarioTipoDataTransfer.IdDe);
-                    query = query.Where(et => et.Id <= usuarioTipoDataTransfer.IdAte);
+                if (usuarioTipoTransfer.IdDe > 0) {
+                    query = query.Where(et => et.Id >= usuarioTipoTransfer.IdDe);
+                    query = query.Where(et => et.Id <= usuarioTipoTransfer.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(usuarioTipoDataTransfer.UsuarioTipo.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(usuarioTipoDataTransfer.UsuarioTipo.Descricao));
+            if (!string.IsNullOrEmpty(usuarioTipoTransfer.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(usuarioTipoTransfer.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(usuarioTipoDataTransfer.UsuarioTipo.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(usuarioTipoDataTransfer.UsuarioTipo.Codigo));
+            if (!string.IsNullOrEmpty(usuarioTipoTransfer.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(usuarioTipoTransfer.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(usuarioTipoDataTransfer.AtivoFiltro)) {
+            if (!string.IsNullOrEmpty(usuarioTipoTransfer.Ativo)) {
                 bool ativo = true;
 
-                if (usuarioTipoDataTransfer.AtivoFiltro == "false") {
+                if (usuarioTipoTransfer.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -53,32 +59,50 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (usuarioTipoDataTransfer.CriacaoAte == DateTime.MinValue) {
-                if (usuarioTipoDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == usuarioTipoDataTransfer.CriacaoDe);
+            if (usuarioTipoTransfer.CriacaoAte == DateTime.MinValue) {
+                if (usuarioTipoTransfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == usuarioTipoTransfer.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (usuarioTipoDataTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= usuarioTipoDataTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= usuarioTipoDataTransfer.CriacaoAte);
+                if (usuarioTipoTransfer.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= usuarioTipoTransfer.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= usuarioTipoTransfer.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (usuarioTipoDataTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (usuarioTipoDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == usuarioTipoDataTransfer.AlteracaoDe);
+            if (usuarioTipoTransfer.AlteracaoAte == DateTime.MinValue) {
+                if (usuarioTipoTransfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == usuarioTipoTransfer.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (usuarioTipoDataTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= usuarioTipoDataTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= usuarioTipoDataTransfer.AlteracaoAte);
+                if (usuarioTipoTransfer.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= usuarioTipoTransfer.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= usuarioTipoTransfer.AlteracaoAte);
                 }
             }
+            
+            if (usuarioTipoTransfer.RegistrosPorPagina < 1) {
+                registrosPorPagina = 30;
+            } else if (usuarioTipoTransfer.RegistrosPorPagina > 200) {
+                registrosPorPagina = 30;
+            } else {
+                registrosPorPagina = usuarioTipoTransfer.RegistrosPorPagina;
+            }
 
-            return query.ToList();
+            pular = (usuarioTipoTransfer.PaginaAtual < 2 ? 0 : usuarioTipoTransfer.PaginaAtual - 1);
+            pular *= registrosPorPagina;
+            
+            totalRegistros = query.Count();
+            lista = query.Skip(pular).Take(registrosPorPagina).ToList();
+
+            usuarioTipoLista.RegistrosPorPagina = registrosPorPagina;
+            usuarioTipoLista.TotalRegistros = totalRegistros;
+            usuarioTipoLista.UsuarioTipoLista = lista;
+
+            return usuarioTipoLista;
         }
     }
 }

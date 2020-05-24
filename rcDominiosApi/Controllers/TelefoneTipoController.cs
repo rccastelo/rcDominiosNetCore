@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             TelefoneTipoModel telefoneTipoModel;
-            TelefoneTipoDataTransfer telefoneTipoForm;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
                 telefoneTipoModel = new TelefoneTipoModel();
 
                 if (id > 0) {
-                    telefoneTipoForm = telefoneTipoModel.ConsultarPorId(id);
+                    telefoneTipo = telefoneTipoModel.ConsultarPorId(id);
                 } else {
-                    telefoneTipoForm = null;
+                    telefoneTipo = null;
                 }
             } catch (Exception ex) {
-                telefoneTipoForm = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
                 
-                telefoneTipoForm.Validacao = false;
-                telefoneTipoForm.Erro = true;
-                telefoneTipoForm.IncluirErroMensagem("Erro em TelefoneTipoController ConsultarPorId [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
 
-            if (telefoneTipoForm.Erro || !telefoneTipoForm.Validacao) {
-                return BadRequest(telefoneTipoForm);
+            if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
+                return BadRequest(telefoneTipo);
             } else {
-                return Ok(telefoneTipoForm);
+                return Ok(telefoneTipo);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             TelefoneTipoModel telefoneTipoModel;
-            TelefoneTipoDataTransfer telefoneTipoLista;
+            TelefoneTipoTransfer telefoneTipoLista;
 
             try {
                 telefoneTipoModel = new TelefoneTipoModel();
 
-                telefoneTipoLista = telefoneTipoModel.Listar();
+                telefoneTipoLista = telefoneTipoModel.Consultar(new TelefoneTipoTransfer());
             } catch (Exception ex) {
-                telefoneTipoLista = new TelefoneTipoDataTransfer();
+                telefoneTipoLista = new TelefoneTipoTransfer();
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
-            TelefoneTipoDataTransfer telefoneTipoRetorno;
+            TelefoneTipoTransfer telefoneTipoLista;
 
             try {
                 telefoneTipoModel = new TelefoneTipoModel();
 
-                telefoneTipoRetorno = telefoneTipoModel.Incluir(telefoneTipoDataTransfer);
+                telefoneTipoLista = telefoneTipoModel.Consultar(telefoneTipoTransfer);
             } catch (Exception ex) {
-                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipoLista = new TelefoneTipoTransfer();
 
-                telefoneTipoRetorno.Validacao = false;
-                telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Incluir [" + ex.Message + "]");
+                telefoneTipoLista.Validacao = false;
+                telefoneTipoLista.Erro = true;
+                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoController Consultar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
 
-            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
-                return BadRequest(telefoneTipoRetorno);
+            if (telefoneTipoLista.Erro || !telefoneTipoLista.Validacao) {
+                return BadRequest(telefoneTipoLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = telefoneTipoRetorno.TelefoneTipo.Id });
+                return Ok(telefoneTipoLista);
+            }
+        }
 
-                return Created(uri, telefoneTipoRetorno);
+        [HttpPost]
+        public IActionResult Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
+        {
+            TelefoneTipoModel telefoneTipoModel;
+            TelefoneTipoTransfer telefoneTipo;
+
+            try {
+                telefoneTipoModel = new TelefoneTipoModel();
+
+                telefoneTipo = telefoneTipoModel.Incluir(telefoneTipoTransfer);
+            } catch (Exception ex) {
+                telefoneTipo = new TelefoneTipoTransfer();
+
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Incluir [" + ex.Message + "]");
+            } finally {
+                telefoneTipoModel = null;
+            }
+
+            if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
+                return BadRequest(telefoneTipo);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = telefoneTipo.TelefoneTipo.Id });
+
+                return Created(uri, telefoneTipo);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public IActionResult Alterar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
-            TelefoneTipoDataTransfer telefoneTipoRetorno;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
                 telefoneTipoModel = new TelefoneTipoModel();
 
-                telefoneTipoRetorno = telefoneTipoModel.Alterar(telefoneTipoDataTransfer);
+                telefoneTipo = telefoneTipoModel.Alterar(telefoneTipoTransfer);
             } catch (Exception ex) {
-                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoRetorno.Validacao = false;
-                telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Alterar [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
 
-            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
-                return BadRequest(telefoneTipoRetorno);
+            if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
+                return BadRequest(telefoneTipo);
             } else {
-                return Ok(telefoneTipoRetorno);
+                return Ok(telefoneTipo);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             TelefoneTipoModel telefoneTipoModel;
-            TelefoneTipoDataTransfer telefoneTipoRetorno;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
                 telefoneTipoModel = new TelefoneTipoModel();
 
-                telefoneTipoRetorno = telefoneTipoModel.Excluir(id);
+                telefoneTipo = telefoneTipoModel.Excluir(id);
             } catch (Exception ex) {
-                telefoneTipoRetorno = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoRetorno.Validacao = false;
-                telefoneTipoRetorno.Erro = true;
-                telefoneTipoRetorno.IncluirErroMensagem("Erro em TelefoneTipoController Excluir [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
 
-            if (telefoneTipoRetorno.Erro || !telefoneTipoRetorno.Validacao) {
-                return BadRequest(telefoneTipoRetorno);
+            if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
+                return BadRequest(telefoneTipo);
             } else {
-                return NoContent();
+                return Ok(telefoneTipo);
             }
         }
     }

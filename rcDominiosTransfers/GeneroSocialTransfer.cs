@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using rcDominiosEntities;
 
-namespace rcDominiosDataTransfers
+namespace rcDominiosTransfers
 {
-    public class ProfissaoListaTransfer : DataTransfer
+    public class GeneroSocialTransfer : Transfer
     {
-        public IList<ProfissaoEntity> ProfissaoLista { get; set; }
+        public GeneroSocialEntity GeneroSocial { get; set; }
+
+        public IList<GeneroSocialEntity> GeneroSocialLista { get; set; }
 
         public int PaginaAtual { get; set; }
 
@@ -43,17 +45,20 @@ namespace rcDominiosDataTransfers
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AlteracaoAte { get; set; }
 
-        public ProfissaoListaTransfer() 
+        public GeneroSocialTransfer() 
             : base()
         {
         }
 
-        public ProfissaoListaTransfer(ProfissaoListaTransfer transfer) 
+        public GeneroSocialTransfer(GeneroSocialTransfer transfer) 
             : base(transfer)
         {
             if (transfer != null) {
-                if (transfer.ProfissaoLista != null) {
-                    this.ProfissaoLista = new List<ProfissaoEntity>(transfer.ProfissaoLista);
+                if (transfer.GeneroSocialLista != null) {
+                    this.GeneroSocialLista = new List<GeneroSocialEntity>(transfer.GeneroSocialLista);
+                }
+                if (transfer.GeneroSocial != null) {
+                    this.GeneroSocial = new GeneroSocialEntity(transfer.GeneroSocial);
                 }
                 this.PaginaAtual = transfer.PaginaAtual;
                 this.PaginaInicial = transfer.PaginaInicial;
@@ -73,13 +78,13 @@ namespace rcDominiosDataTransfers
             }
         }
 
-        public void IncluirProfissao(ProfissaoEntity entity) {
+        public void IncluirGeneroSocial(GeneroSocialEntity entity) {
             if (entity != null) {
-                if (this.ProfissaoLista == null) {
-                    this.ProfissaoLista = new List<ProfissaoEntity>();
+                if (this.GeneroSocialLista == null) {
+                    this.GeneroSocialLista = new List<GeneroSocialEntity>();
                 }
 
-                this.ProfissaoLista.Add(entity);
+                this.GeneroSocialLista.Add(entity);
             }
         }
     }

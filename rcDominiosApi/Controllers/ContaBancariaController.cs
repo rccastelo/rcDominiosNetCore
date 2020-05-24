@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaForm;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
                 if (id > 0) {
-                    contaBancariaForm = contaBancariaModel.ConsultarPorId(id);
+                    contaBancaria = contaBancariaModel.ConsultarPorId(id);
                 } else {
-                    contaBancariaForm = null;
+                    contaBancaria = null;
                 }
             } catch (Exception ex) {
-                contaBancariaForm = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
                 
-                contaBancariaForm.Validacao = false;
-                contaBancariaForm.Erro = true;
-                contaBancariaForm.IncluirErroMensagem("Erro em ContaBancariaController ConsultarPorId [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaForm.Erro || !contaBancariaForm.Validacao) {
-                return BadRequest(contaBancariaForm);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return BadRequest(contaBancaria);
             } else {
-                return Ok(contaBancariaForm);
+                return Ok(contaBancaria);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaLista;
+            ContaBancariaTransfer contaBancariaLista;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaLista = contaBancariaModel.Listar();
+                contaBancariaLista = contaBancariaModel.Consultar(new ContaBancariaTransfer());
             } catch (Exception ex) {
-                contaBancariaLista = new ContaBancariaDataTransfer();
+                contaBancariaLista = new ContaBancariaTransfer();
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancariaLista;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Incluir(contaBancariaDataTransfer);
+                contaBancariaLista = contaBancariaModel.Consultar(contaBancariaTransfer);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancariaLista = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Incluir [" + ex.Message + "]");
+                contaBancariaLista.Validacao = false;
+                contaBancariaLista.Erro = true;
+                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaController Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return BadRequest(contaBancariaRetorno);
+            if (contaBancariaLista.Erro || !contaBancariaLista.Validacao) {
+                return BadRequest(contaBancariaLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = contaBancariaRetorno.ContaBancaria.Id });
+                return Ok(contaBancariaLista);
+            }
+        }
 
-                return Created(uri, contaBancariaRetorno);
+        [HttpPost]
+        public IActionResult Incluir(ContaBancariaTransfer contaBancariaTransfer)
+        {
+            ContaBancariaModel contaBancariaModel;
+            ContaBancariaTransfer contaBancaria;
+
+            try {
+                contaBancariaModel = new ContaBancariaModel();
+
+                contaBancaria = contaBancariaModel.Incluir(contaBancariaTransfer);
+            } catch (Exception ex) {
+                contaBancaria = new ContaBancariaTransfer();
+
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Incluir [" + ex.Message + "]");
+            } finally {
+                contaBancariaModel = null;
+            }
+
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return BadRequest(contaBancaria);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = contaBancaria.ContaBancaria.Id });
+
+                return Created(uri, contaBancaria);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public IActionResult Alterar(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Alterar(contaBancariaDataTransfer);
+                contaBancaria = contaBancariaModel.Alterar(contaBancariaTransfer);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Alterar [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return BadRequest(contaBancariaRetorno);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return BadRequest(contaBancaria);
             } else {
-                return Ok(contaBancariaRetorno);
+                return Ok(contaBancaria);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Excluir(id);
+                contaBancaria = contaBancariaModel.Excluir(id);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Excluir [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return BadRequest(contaBancariaRetorno);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return BadRequest(contaBancaria);
             } else {
-                return NoContent();
+                return Ok(contaBancaria);
             }
         }
     }

@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class CorController : Controller
+  public class CorController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,44 +21,44 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
             CorModel corModel;
-            CorDataTransfer corForm;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
                 if (id > 0) {
-                    corForm = corModel.ConsultarPorId(id);
+                    cor = await corModel.ConsultarPorId(id);
                 } else {
-                    corForm = null;
+                    cor = null;
                 }
             } catch {
-                corForm = new CorDataTransfer();
+                cor = new CorTransfer();
                 
-                corForm.Validacao = false;
-                corForm.Erro = true;
-                corForm.IncluirErroMensagem("Erro em CorController Form");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Form");
             } finally {
                 corModel = null;
             }
 
-            return View(corForm);
+            return View(cor);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
             CorModel corModel;
-            CorDataTransfer corLista;
+            CorTransfer corLista;
 
             try {
                 corModel = new CorModel();
 
-                corLista = corModel.Listar();
+                corLista = await corModel.Consultar(new CorTransfer());
             } catch (Exception ex) {
-                corLista = new CorDataTransfer();
+                corLista = new CorTransfer();
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
@@ -70,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(CorDataTransfer corDataTransfer)
+        public async Task<IActionResult> Consulta(CorTransfer corTransfer)
         {
             CorModel corModel;
-            CorDataTransfer corLista;
+            CorTransfer corLista;
 
             try {
                 corModel = new CorModel();
 
-                corLista = corModel.Consultar(corDataTransfer);
+                corLista = await corModel.Consultar(corTransfer);
             } catch (Exception ex) {
-                corLista = new CorDataTransfer();
+                corLista = new CorTransfer();
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(CorDataTransfer corDataTransfer)
+        public async Task<IActionResult> Inclusao(CorTransfer corTransfer)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Incluir(corDataTransfer);
+                cor = await corModel.Incluir(corTransfer);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Inclusao [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Inclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return View("Form", corRetorno);
+            if (cor.Erro || !cor.Validacao) {
+                return View("Form", cor);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(CorDataTransfer corDataTransfer)
+        public async Task<IActionResult> Alteracao(CorTransfer corTransfer)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Alterar(corDataTransfer);
+                cor = await corModel.Alterar(corTransfer);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Alteracao [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Alteracao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return View("Form", corRetorno);
+            if (cor.Erro || !cor.Validacao) {
+                return View("Form", cor);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Excluir(id);
+                cor = await corModel.Excluir(id);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Exclusao [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Exclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return View("Form", corRetorno);
+            if (cor.Erro || !cor.Validacao) {
+                return View("Form", cor);
             } else {
                 return RedirectToAction("Lista");
             }

@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             CorModel corModel;
-            CorDataTransfer corForm;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
                 if (id > 0) {
-                    corForm = corModel.ConsultarPorId(id);
+                    cor = corModel.ConsultarPorId(id);
                 } else {
-                    corForm = null;
+                    cor = null;
                 }
             } catch (Exception ex) {
-                corForm = new CorDataTransfer();
+                cor = new CorTransfer();
                 
-                corForm.Validacao = false;
-                corForm.Erro = true;
-                corForm.IncluirErroMensagem("Erro em CorController ConsultarPorId [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corForm.Erro || !corForm.Validacao) {
-                return BadRequest(corForm);
+            if (cor.Erro || !cor.Validacao) {
+                return BadRequest(cor);
             } else {
-                return Ok(corForm);
+                return Ok(cor);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             CorModel corModel;
-            CorDataTransfer corLista;
+            CorTransfer corLista;
 
             try {
                 corModel = new CorModel();
 
-                corLista = corModel.Listar();
+                corLista = corModel.Consultar(new CorTransfer());
             } catch (Exception ex) {
-                corLista = new CorDataTransfer();
+                corLista = new CorTransfer();
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(CorDataTransfer corDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(CorTransfer corTransfer)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer corLista;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Incluir(corDataTransfer);
+                corLista = corModel.Consultar(corTransfer);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                corLista = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Incluir [" + ex.Message + "]");
+                corLista.Validacao = false;
+                corLista.Erro = true;
+                corLista.IncluirErroMensagem("Erro em CorController Consultar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return BadRequest(corRetorno);
+            if (corLista.Erro || !corLista.Validacao) {
+                return BadRequest(corLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = corRetorno.Cor.Id });
+                return Ok(corLista);
+            }
+        }
 
-                return Created(uri, corRetorno);
+        [HttpPost]
+        public IActionResult Incluir(CorTransfer corTransfer)
+        {
+            CorModel corModel;
+            CorTransfer cor;
+
+            try {
+                corModel = new CorModel();
+
+                cor = corModel.Incluir(corTransfer);
+            } catch (Exception ex) {
+                cor = new CorTransfer();
+
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Incluir [" + ex.Message + "]");
+            } finally {
+                corModel = null;
+            }
+
+            if (cor.Erro || !cor.Validacao) {
+                return BadRequest(cor);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = cor.Cor.Id });
+
+                return Created(uri, cor);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(CorDataTransfer corDataTransfer)
+        public IActionResult Alterar(CorTransfer corTransfer)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Alterar(corDataTransfer);
+                cor = corModel.Alterar(corTransfer);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Alterar [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Alterar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return BadRequest(corRetorno);
+            if (cor.Erro || !cor.Validacao) {
+                return BadRequest(cor);
             } else {
-                return Ok(corRetorno);
+                return Ok(cor);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             CorModel corModel;
-            CorDataTransfer corRetorno;
+            CorTransfer cor;
 
             try {
                 corModel = new CorModel();
 
-                corRetorno = corModel.Excluir(id);
+                cor = corModel.Excluir(id);
             } catch (Exception ex) {
-                corRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corRetorno.Validacao = false;
-                corRetorno.Erro = true;
-                corRetorno.IncluirErroMensagem("Erro em CorController Excluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorController Excluir [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
 
-            if (corRetorno.Erro || !corRetorno.Validacao) {
-                return BadRequest(corRetorno);
+            if (cor.Erro || !cor.Validacao) {
+                return BadRequest(cor);
             } else {
-                return NoContent();
+                return Ok(cor);
             }
         }
     }

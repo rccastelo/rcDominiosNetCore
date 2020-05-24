@@ -1,172 +1,146 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
 {
     public class GeneroSocialDataModel : DataModel
     {
-        public GeneroSocialDataTransfer Incluir(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public GeneroSocialTransfer Incluir(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer(generoSocialDataTransfer);
+                generoSocial = new GeneroSocialTransfer(generoSocialTransfer);
 
-                generoSocialData.Incluir(generoSocialDataTransfer.GeneroSocial);
+                generoSocialData.Incluir(generoSocialTransfer.GeneroSocial);
 
                 _contexto.SaveChanges();
 
-                GeneroSocialRetorno.GeneroSocial = new GeneroSocialEntity(generoSocialDataTransfer.GeneroSocial);
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
+                generoSocial.GeneroSocial = new GeneroSocialEntity(generoSocialTransfer.GeneroSocial);
+                generoSocial.Validacao = true;
+                generoSocial.Erro = false;
             } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel Incluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
 
-            return GeneroSocialRetorno;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Alterar(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public GeneroSocialTransfer Alterar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialData.Alterar(generoSocialDataTransfer.GeneroSocial);
+                generoSocialData.Alterar(generoSocialTransfer.GeneroSocial);
 
                 _contexto.SaveChanges();
 
-                GeneroSocialRetorno.GeneroSocial = new GeneroSocialEntity(generoSocialDataTransfer.GeneroSocial);
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
+                generoSocial.GeneroSocial = new GeneroSocialEntity(generoSocialTransfer.GeneroSocial);
+                generoSocial.Validacao = true;
+                generoSocial.Erro = false;
             } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel Alterar [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
 
-            return GeneroSocialRetorno;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Excluir(int id)
+        public GeneroSocialTransfer Excluir(int id)
         {
             GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.GeneroSocial = generoSocialData.ConsultarPorId(id);
-                generoSocialData.Excluir(GeneroSocialRetorno.GeneroSocial);
+                generoSocial.GeneroSocial = generoSocialData.ConsultarPorId(id);
+                generoSocialData.Excluir(generoSocial.GeneroSocial);
 
                 _contexto.SaveChanges();
 
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
+                generoSocial.Validacao = true;
+                generoSocial.Erro = false;
             } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel Excluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
 
-            return GeneroSocialRetorno;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Listar()
+        public GeneroSocialTransfer ConsultarPorId(int id)
         {
             GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.GeneroSocialLista = generoSocialData.Listar();
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
+                generoSocial.GeneroSocial = generoSocialData.ConsultarPorId(id);
+                generoSocial.Validacao = true;
+                generoSocial.Erro = false;
             } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel Listar [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
 
-            return GeneroSocialRetorno;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer ConsultarPorId(int id)
+        public GeneroSocialTransfer Consultar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
+            GeneroSocialTransfer generoSocialLista;
 
             try {
                 generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
 
-                GeneroSocialRetorno.GeneroSocial = generoSocialData.ConsultarPorId(id);
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
+                generoSocialLista = generoSocialData.Consultar(generoSocialTransfer);
+                generoSocialLista.Validacao = true;
+                generoSocialLista.Erro = false;
             } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialTransfer();
 
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel ConsultarPorId [" + ex.Message + "]");
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialDataModel Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
 
-            return GeneroSocialRetorno;
-        }
-
-        public GeneroSocialDataTransfer Consultar(GeneroSocialDataTransfer generoSocialDataTransfer)
-        {
-            GeneroSocialData generoSocialData;
-            GeneroSocialDataTransfer GeneroSocialRetorno;
-
-            try {
-                generoSocialData = new GeneroSocialData(_contexto);
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
-
-                GeneroSocialRetorno.GeneroSocialLista = generoSocialData.Consultar(generoSocialDataTransfer);
-                GeneroSocialRetorno.Validacao = true;
-                GeneroSocialRetorno.Erro = false;
-            } catch (Exception ex) {
-                GeneroSocialRetorno = new GeneroSocialDataTransfer();
-
-                GeneroSocialRetorno.Validacao = false;
-                GeneroSocialRetorno.Erro = true;
-                GeneroSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialDataModel Consultar [" + ex.Message + "]");
-            } finally {
-                generoSocialData = null;
-            }
-
-            return GeneroSocialRetorno;
+            return generoSocialLista;
         }
     }
 }

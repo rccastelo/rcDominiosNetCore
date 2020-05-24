@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
@@ -100,10 +100,10 @@ namespace rcDominiosWeb.Models
             return profissao;
         }
 
-        public async Task<ProfissaoListaTransfer> Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        public async Task<ProfissaoTransfer> Consultar(ProfissaoTransfer profissaoListaTransfer)
         {
             ProfissaoService profissaoService;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
             int dif = 0;
             int qtdExibe = 5;
 
@@ -150,7 +150,7 @@ namespace rcDominiosWeb.Models
                     }
                 }
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

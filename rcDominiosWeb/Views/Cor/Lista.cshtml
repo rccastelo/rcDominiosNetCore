@@ -1,4 +1,4 @@
-@model rcDominiosDataTransfers.CorDataTransfer;
+@model rcDominiosTransfers.CorTransfer;
 
 @{
     ViewData["Title"] = "";
@@ -9,36 +9,130 @@
         <a class="txtPadraoGrd" asp-controller="Cor" asp-action="Index">Cor</a> &nbsp;/&nbsp; Lista
     </div>
     <br>
-    <table class="table border-bottom">
-        <thead class="thead-dark">
-            <tr class="row tabLinha">
-                <th class="col-1">Id</th>
-                <th class="col-5">Descrição</th>
-                <th class="col-2">Código</th>
-                <th class="col-2">Ativo</th>
-                <th class="col-2"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (@Model.CorLista != null) {
-                @foreach (var item in @Model.CorLista) {
-                    <tr class="row tabLinha">
-                        <td class="col-1"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Id</a></td>
-                        <td class="col-5"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Descricao</a></td>
-                        <td class="col-2"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Codigo</a></td>
-                        <td class="col-2"><a class="txtPadrao" href="/Cor/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
-                        <td class="col-2"><a class="btn btn-primary" href="/Cor/Form/@item.Id"><i class="fas fa-search-plus"></i> 
-                            &nbsp;Detalhe</a></td>
-                    </tr>
+    <form id="form" asp-controller="Cor" asp-action="Consulta" asp-anti-forgery method="post">
+        <input type="hidden" asp-for="@Model.PaginaAtual">
+        <input type="hidden" asp-for="@Model.RegistrosPorPagina">
+        <input type="hidden" asp-for="@Model.IdDe">
+        <input type="hidden" asp-for="@Model.IdAte">
+        <input type="hidden" asp-for="@Model.Descricao">
+        <input type="hidden" asp-for="@Model.Codigo">
+        <input type="hidden" asp-for="@Model.Ativo">
+        <input type="hidden" asp-for="@Model.CriacaoDe">
+        <input type="hidden" asp-for="@Model.CriacaoAte">
+        <input type="hidden" asp-for="@Model.AlteracaoDe">
+        <input type="hidden" asp-for="@Model.AlteracaoAte">
+        @* Se retornou registro(s), mostrar paginação *@
+        @if (Model.TotalRegistros > 1) {
+            <nav class="navBarra">
+                @if (Model.PaginaAtual < 2) {
+                    <span class="navCaixaGr">Primeira</span>
+                    <span class="navCaixaGr">Anterior</span>
+                } else {
+                    <a class="txtPadrao" href="javascript:paginar(1);"><span class="botaoGr">Primeira</span></a>
+                    <a class="txtPadrao" href="javascript:paginar(@(Model.PaginaAtual - 1));"><span class="botaoGr">Anterior</span></a>
                 }
-            }
-        </tbody>
-    </table>
-    <br>
-    <div>
-        <a href="/Cor"><button class="btn btn-secondary btn-lg mr-2"><i class="fas fa-arrow-circle-left"></i> 
-                    &nbsp;Voltar</button></a>
-    </div>
+                @if (Model.PaginaInicial > 1 ) {
+                    <span class="navCaixaPq">...</span>
+                } else {
+                    <span class="navCaixaPq"></span>
+                }
+                @for (int pag = Model.PaginaInicial; pag <= Model.PaginaFinal; pag++)
+                {
+                    @if (pag == Model.PaginaAtual) {
+                        <span class="navCaixaSel">@pag</span>
+                    } else {
+                        <a class="txtPadrao" href="javascript:paginar(@pag);"><span class="botaoPq">@pag</span></a>
+                    }
+                }
+                @if (Model.PaginaFinal < Model.TotalPaginas) {
+                    <span class="navCaixaPq">...</span>
+                } else {
+                    <span class="navCaixaPq"></span>
+                }
+                @if (Model.PaginaAtual < Model.TotalPaginas) {
+                    <a class="txtPadrao" href="javascript:paginar(@(Model.PaginaAtual + 1));"><span class="botaoGr">Próximo</span></a>
+                    <a class="txtPadrao" href="javascript:paginar(@Model.TotalPaginas);"><span class="botaoGr">Última</span></a>
+                } else {
+                    <span class="navCaixaGr">Próximo</span>
+                    <span class="navCaixaGr">Última</span>
+                }
+            </nav>
+        }
+        <br>
+        <table class="table border-bottom">
+            <thead class="thead-dark">
+                <tr class="row tabLinha">
+                    <th class="col-1">Id</th>
+                    <th class="col-5">Descrição</th>
+                    <th class="col-2">Código</th>
+                    <th class="col-2">Ativo</th>
+                    <th class="col-2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model.CorLista != null) {
+                    @foreach (var item in @Model.CorLista) {
+                        <tr class="row tabLinha">
+                            <td class="col-1"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Id</a></td>
+                            <td class="col-5"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Descricao</a></td>
+                            <td class="col-2"><a class="txtPadrao" href="/Cor/Form/@item.Id">@item.Codigo</a></td>
+                            <td class="col-2"><a class="txtPadrao" href="/Cor/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
+                            <td class="col-2"><a class="btn btn-primary" href="/Cor/Form/@item.Id"><i class="fas fa-search-plus"></i> 
+                                &nbsp;Detalhe</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="divInfo txtEsc">
+            <span>@Model.TotalRegistros registro(s)</span> &nbsp; | &nbsp;
+            <span>@Model.RegistrosPorPagina registro(s) por página</span> &nbsp; | &nbsp;
+            <span>@Model.TotalPaginas página(s)</span>
+        </div>
+        <br>
+        @* Se retornou registro(s), mostrar paginação *@
+        @if (Model.TotalRegistros > 1) {
+            <nav class="navBarra">
+                @if (Model.PaginaAtual < 2) {
+                    <span class="navCaixaGr">Primeira</span>
+                    <span class="navCaixaGr">Anterior</span>
+                } else {
+                    <a class="txtPadrao" href="javascript:paginar(1);"><span class="botaoGr">Primeira</span></a>
+                    <a class="txtPadrao" href="javascript:paginar(@(Model.PaginaAtual - 1));"><span class="botaoGr">Anterior</span></a>
+                }
+                @if (Model.PaginaInicial > 1 ) {
+                    <span class="navCaixaPq">...</span>
+                } else {
+                    <span class="navCaixaPq"></span>
+                }
+                @for (int pag = Model.PaginaInicial; pag <= Model.PaginaFinal; pag++)
+                {
+                    @if (pag == Model.PaginaAtual) {
+                        <span class="navCaixaSel">@pag</span>
+                    } else {
+                        <a class="txtPadrao" href="javascript:paginar(@pag);"><span class="botaoPq">@pag</span></a>
+                    }
+                }
+                @if (Model.PaginaFinal < Model.TotalPaginas) {
+                    <span class="navCaixaPq">...</span>
+                } else {
+                    <span class="navCaixaPq"></span>
+                }
+                @if (Model.PaginaAtual < Model.TotalPaginas) {
+                    <a class="txtPadrao" href="javascript:paginar(@(Model.PaginaAtual + 1));"><span class="botaoGr">Próximo</span></a>
+                    <a class="txtPadrao" href="javascript:paginar(@Model.TotalPaginas);"><span class="botaoGr">Última</span></a>
+                } else {
+                    <span class="navCaixaGr">Próximo</span>
+                    <span class="navCaixaGr">Última</span>
+                }
+            </nav>
+        }
+        <br>
+        <div>
+            <a class="btn btn-secondary btn-lg" href="/Cor"><i class="fas fa-arrow-circle-left"></i> 
+                    &nbsp;Voltar</a>
+        </div>
+    </form>
 </div>
 
 @if (@Model != null) {

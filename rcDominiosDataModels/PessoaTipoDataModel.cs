@@ -1,6 +1,6 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
@@ -119,19 +119,19 @@ namespace rcDominiosDataModels
             return pessoaTipo;
         }
 
-        public PessoaTipoListaTransfer Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public PessoaTipoTransfer Consultar(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoData pessoaTipoData;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoData = new PessoaTipoData(_contexto);
 
-                pessoaTipoLista = pessoaTipoData.Consultar(pessoaTipoListaTransfer);
+                pessoaTipoLista = pessoaTipoData.Consultar(pessoaTipoTransfer);
                 pessoaTipoLista.Validacao = true;
                 pessoaTipoLista.Erro = false;
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

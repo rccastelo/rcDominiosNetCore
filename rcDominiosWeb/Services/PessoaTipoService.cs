@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Services
 {
@@ -190,9 +190,9 @@ namespace rcDominiosWeb.Services
             return pessoaTipo;
         }
 
-        public async Task<PessoaTipoListaTransfer> Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public async Task<PessoaTipoTransfer> Consultar(PessoaTipoTransfer pessoaTipoListaTransfer)
         {
-            PessoaTipoListaTransfer pessoaTipoLista = null;
+            PessoaTipoTransfer pessoaTipoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -203,9 +203,9 @@ namespace rcDominiosWeb.Services
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", pessoaTipoListaTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoListaTransfer>().Result;
+                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoListaTransfer>().Result;
+                    pessoaTipoLista = resposta.Content.ReadAsAsync<PessoaTipoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Consultar não autorizado";
                 } else {
@@ -213,14 +213,14 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    pessoaTipoLista = new PessoaTipoListaTransfer();
+                    pessoaTipoLista = new PessoaTipoTransfer();
                     
                     pessoaTipoLista.Validacao = false;
                     pessoaTipoLista.Erro = true;
                     pessoaTipoLista.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

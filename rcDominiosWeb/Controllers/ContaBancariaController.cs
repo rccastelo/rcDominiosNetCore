@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class ContaBancariaController : Controller
+  public class ContaBancariaController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,44 +21,44 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaForm;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
                 if (id > 0) {
-                    contaBancariaForm = contaBancariaModel.ConsultarPorId(id);
+                    contaBancaria = await contaBancariaModel.ConsultarPorId(id);
                 } else {
-                    contaBancariaForm = null;
+                    contaBancaria = null;
                 }
             } catch {
-                contaBancariaForm = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
                 
-                contaBancariaForm.Validacao = false;
-                contaBancariaForm.Erro = true;
-                contaBancariaForm.IncluirErroMensagem("Erro em ContaBancariaController Form");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Form");
             } finally {
                 contaBancariaModel = null;
             }
 
-            return View(contaBancariaForm);
+            return View(contaBancaria);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaLista;
+            ContaBancariaTransfer contaBancariaLista;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaLista = contaBancariaModel.Listar();
+                contaBancariaLista = await contaBancariaModel.Consultar(new ContaBancariaTransfer());
             } catch (Exception ex) {
-                contaBancariaLista = new ContaBancariaDataTransfer();
+                contaBancariaLista = new ContaBancariaTransfer();
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
@@ -70,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public async Task<IActionResult> Consulta(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaLista;
+            ContaBancariaTransfer contaBancariaLista;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaLista = contaBancariaModel.Consultar(contaBancariaDataTransfer);
+                contaBancariaLista = await contaBancariaModel.Consultar(contaBancariaTransfer);
             } catch (Exception ex) {
-                contaBancariaLista = new ContaBancariaDataTransfer();
+                contaBancariaLista = new ContaBancariaTransfer();
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public async Task<IActionResult> Inclusao(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Incluir(contaBancariaDataTransfer);
+                contaBancaria = await contaBancariaModel.Incluir(contaBancariaTransfer);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Inclusao [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Inclusao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return View("Form", contaBancariaRetorno);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return View("Form", contaBancaria);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(ContaBancariaDataTransfer contaBancariaDataTransfer)
+        public async Task<IActionResult> Alteracao(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Alterar(contaBancariaDataTransfer);
+                contaBancaria = await contaBancariaModel.Alterar(contaBancariaTransfer);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Alteracao [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Alteracao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return View("Form", contaBancariaRetorno);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return View("Form", contaBancaria);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
             ContaBancariaModel contaBancariaModel;
-            ContaBancariaDataTransfer contaBancariaRetorno;
+            ContaBancariaTransfer contaBancaria;
 
             try {
                 contaBancariaModel = new ContaBancariaModel();
 
-                contaBancariaRetorno = contaBancariaModel.Excluir(id);
+                contaBancaria = await contaBancariaModel.Excluir(id);
             } catch (Exception ex) {
-                contaBancariaRetorno = new ContaBancariaDataTransfer();
+                contaBancaria = new ContaBancariaTransfer();
 
-                contaBancariaRetorno.Validacao = false;
-                contaBancariaRetorno.Erro = true;
-                contaBancariaRetorno.IncluirErroMensagem("Erro em ContaBancariaController Exclusao [" + ex.Message + "]");
+                contaBancaria.Validacao = false;
+                contaBancaria.Erro = true;
+                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Exclusao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
 
-            if (contaBancariaRetorno.Erro || !contaBancariaRetorno.Validacao) {
-                return View("Form", contaBancariaRetorno);
+            if (contaBancaria.Erro || !contaBancaria.Validacao) {
+                return View("Form", contaBancaria);
             } else {
                 return RedirectToAction("Lista");
             }

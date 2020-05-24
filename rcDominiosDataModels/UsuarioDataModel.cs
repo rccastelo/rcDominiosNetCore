@@ -1,172 +1,146 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
 {
     public class UsuarioDataModel : DataModel
     {
-        public UsuarioDataTransfer Incluir(UsuarioDataTransfer usuarioDataTransfer)
+        public UsuarioTransfer Incluir(UsuarioTransfer usuarioTransfer)
         {
             UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
+            UsuarioTransfer usuario;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer(usuarioDataTransfer);
+                usuario = new UsuarioTransfer(usuarioTransfer);
 
-                usuarioData.Incluir(usuarioDataTransfer.Usuario);
+                usuarioData.Incluir(usuarioTransfer.Usuario);
 
                 _contexto.SaveChanges();
 
-                UsuarioRetorno.Usuario = new UsuarioEntity(usuarioDataTransfer.Usuario);
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
+                usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
+                usuario.Validacao = true;
+                usuario.Erro = false;
             } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
 
-            return UsuarioRetorno;
+            return usuario;
         }
 
-        public UsuarioDataTransfer Alterar(UsuarioDataTransfer usuarioDataTransfer)
+        public UsuarioTransfer Alterar(UsuarioTransfer usuarioTransfer)
         {
             UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
+            UsuarioTransfer usuario;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                usuarioData.Alterar(usuarioDataTransfer.Usuario);
+                usuarioData.Alterar(usuarioTransfer.Usuario);
 
                 _contexto.SaveChanges();
 
-                UsuarioRetorno.Usuario = new UsuarioEntity(usuarioDataTransfer.Usuario);
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
+                usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
+                usuario.Validacao = true;
+                usuario.Erro = false;
             } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
 
-            return UsuarioRetorno;
+            return usuario;
         }
 
-        public UsuarioDataTransfer Excluir(int id)
+        public UsuarioTransfer Excluir(int id)
         {
             UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
+            UsuarioTransfer usuario;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.Usuario = usuarioData.ConsultarPorId(id);
-                usuarioData.Excluir(UsuarioRetorno.Usuario);
+                usuario.Usuario = usuarioData.ConsultarPorId(id);
+                usuarioData.Excluir(usuario.Usuario);
 
                 _contexto.SaveChanges();
 
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
+                usuario.Validacao = true;
+                usuario.Erro = false;
             } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
 
-            return UsuarioRetorno;
+            return usuario;
         }
 
-        public UsuarioDataTransfer Listar()
+        public UsuarioTransfer ConsultarPorId(int id)
         {
             UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
+            UsuarioTransfer usuario;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.UsuarioLista = usuarioData.Listar();
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
+                usuario.Usuario = usuarioData.ConsultarPorId(id);
+                usuario.Validacao = true;
+                usuario.Erro = false;
             } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuario = new UsuarioTransfer();
 
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Listar [" + ex.Message + "]");
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirErroMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
 
-            return UsuarioRetorno;
+            return usuario;
         }
 
-        public UsuarioDataTransfer ConsultarPorId(int id)
+        public UsuarioTransfer Consultar(UsuarioTransfer usuarioTransfer)
         {
             UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
+            UsuarioTransfer usuarioLista;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer();
 
-                UsuarioRetorno.Usuario = usuarioData.ConsultarPorId(id);
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
+                usuarioLista = usuarioData.Consultar(usuarioTransfer);
+                usuarioLista.Validacao = true;
+                usuarioLista.Erro = false;
             } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
+                usuarioLista = new UsuarioTransfer();
 
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
+                usuarioLista.Validacao = false;
+                usuarioLista.Erro = true;
+                usuarioLista.IncluirErroMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
 
-            return UsuarioRetorno;
-        }
-
-        public UsuarioDataTransfer Consultar(UsuarioDataTransfer usuarioDataTransfer)
-        {
-            UsuarioData usuarioData;
-            UsuarioDataTransfer UsuarioRetorno;
-
-            try {
-                usuarioData = new UsuarioData(_contexto);
-                UsuarioRetorno = new UsuarioDataTransfer();
-
-                UsuarioRetorno.UsuarioLista = usuarioData.Consultar(usuarioDataTransfer);
-                UsuarioRetorno.Validacao = true;
-                UsuarioRetorno.Erro = false;
-            } catch (Exception ex) {
-                UsuarioRetorno = new UsuarioDataTransfer();
-
-                UsuarioRetorno.Validacao = false;
-                UsuarioRetorno.Erro = true;
-                UsuarioRetorno.IncluirErroMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
-            } finally {
-                usuarioData = null;
-            }
-
-            return UsuarioRetorno;
+            return usuarioLista;
         }
     }
 }

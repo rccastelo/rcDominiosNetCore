@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class EnderecoTipoController : Controller
+  public class EnderecoTipoController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,158 +21,158 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoForm;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
                 if (id > 0) {
-                    enderecoForm = enderecoModel.ConsultarPorId(id);
+                    enderecoTipo = await enderecoTipoModel.ConsultarPorId(id);
                 } else {
-                    enderecoForm = null;
+                    enderecoTipo = null;
                 }
             } catch {
-                enderecoForm = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
                 
-                enderecoForm.Validacao = false;
-                enderecoForm.Erro = true;
-                enderecoForm.IncluirErroMensagem("Erro em EnderecoTipoController Form");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Form");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            return View(enderecoForm);
+            return View(enderecoTipo);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoLista;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipoLista;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoLista = enderecoModel.Listar();
+                enderecoTipoLista = await enderecoTipoModel.Consultar(new EnderecoTipoTransfer());
             } catch (Exception ex) {
-                enderecoLista = new EnderecoTipoDataTransfer();
+                enderecoTipoLista = new EnderecoTipoTransfer();
 
-                enderecoLista.Validacao = false;
-                enderecoLista.Erro = true;
-                enderecoLista.IncluirErroMensagem("Erro em EnderecoTipoController Lista [" + ex.Message + "]");
+                enderecoTipoLista.Validacao = false;
+                enderecoTipoLista.Erro = true;
+                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Lista [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            return View(enderecoLista);
+            return View(enderecoTipoLista);
         }
 
         [HttpPost]
-        public IActionResult Consulta(EnderecoTipoDataTransfer enderecoDataTransfer)
+        public async Task<IActionResult> Consulta(EnderecoTipoTransfer enderecoTipoTransfer)
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoLista;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipoLista;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoLista = enderecoModel.Consultar(enderecoDataTransfer);
+                enderecoTipoLista = await enderecoTipoModel.Consultar(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoLista = new EnderecoTipoDataTransfer();
+                enderecoTipoLista = new EnderecoTipoTransfer();
 
-                enderecoLista.Validacao = false;
-                enderecoLista.Erro = true;
-                enderecoLista.IncluirErroMensagem("Erro em EnderecoTipoController Consulta [" + ex.Message + "]");
+                enderecoTipoLista.Validacao = false;
+                enderecoTipoLista.Erro = true;
+                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Consulta [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            if (enderecoLista.Erro || !enderecoLista.Validacao) {
-                return View("Filtro", enderecoLista);
+            if (enderecoTipoLista.Erro || !enderecoTipoLista.Validacao) {
+                return View("Filtro", enderecoTipoLista);
             } else {
-                return View("Lista", enderecoLista);
+                return View("Lista", enderecoTipoLista);
             }
         }
 
         [HttpPost]
-        public IActionResult Inclusao(EnderecoTipoDataTransfer enderecoDataTransfer)
+        public async Task<IActionResult> Inclusao(EnderecoTipoTransfer enderecoTipoTransfer)
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoRetorno;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoRetorno = enderecoModel.Incluir(enderecoDataTransfer);
+                enderecoTipo = await enderecoTipoModel.Incluir(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Inclusao [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Inclusao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return View("Form", enderecoTipo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(EnderecoTipoDataTransfer enderecoDataTransfer)
+        public async Task<IActionResult> Alteracao(EnderecoTipoTransfer enderecoTipoTransfer)
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoRetorno;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoRetorno = enderecoModel.Alterar(enderecoDataTransfer);
+                enderecoTipo = await enderecoTipoModel.Alterar(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Alteracao [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Alteracao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return View("Form", enderecoTipo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
-            EnderecoTipoModel enderecoModel;
-            EnderecoTipoDataTransfer enderecoRetorno;
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoRetorno = enderecoModel.Excluir(id);
+                enderecoTipo = await enderecoTipoModel.Excluir(id);
             } catch (Exception ex) {
-                enderecoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoRetorno.Validacao = false;
-                enderecoRetorno.Erro = true;
-                enderecoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Exclusao [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Exclusao [" + ex.Message + "]");
             } finally {
-                enderecoModel = null;
+                enderecoTipoModel = null;
             }
 
-            if (enderecoRetorno.Erro || !enderecoRetorno.Validacao) {
-                return View("Form", enderecoRetorno);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return View("Form", enderecoTipo);
             } else {
                 return RedirectToAction("Lista");
             }

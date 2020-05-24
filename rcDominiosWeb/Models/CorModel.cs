@@ -1,195 +1,165 @@
 using System;
-using rcDominiosBusiness;
-using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using System.Threading.Tasks;
+using rcDominiosTransfers;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
     public class CorModel
     {
-        public CorDataTransfer Incluir(CorDataTransfer corDataTransfer)
+        public async Task<CorTransfer> Incluir(CorTransfer corTransfer)
         {
-            CorDataModel corDataModel;
-            CorBusiness corBusiness;
-            CorDataTransfer corDTValidacao;
-            CorDataTransfer corDTInclusao;
+            CorService corService;
+            CorTransfer cor;
 
             try {
-                corBusiness = new CorBusiness();
-                corDataModel = new CorDataModel();
+                corService = new CorService();
 
-                corDataTransfer.Cor.Criacao = DateTime.Today;
-                corDataTransfer.Cor.Alteracao = DateTime.Today;
+                corTransfer.Cor.Criacao = DateTime.Today;
+                corTransfer.Cor.Alteracao = DateTime.Today;
 
-                corDTValidacao = corBusiness.Validar(corDataTransfer);
-
-                if (!corDTValidacao.Erro) {
-                    if (corDTValidacao.Validacao) {
-                        corDTInclusao = corDataModel.Incluir(corDTValidacao);
-                    } else {
-                        corDTInclusao = new CorDataTransfer(corDTValidacao);
-                    }
-                } else {
-                    corDTInclusao = new CorDataTransfer(corDTValidacao);
-                }
+                cor = await corService.Incluir(corTransfer);
             } catch (Exception ex) {
-                corDTInclusao = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTInclusao.Validacao = false;
-                corDTInclusao.Erro = true;
-                corDTInclusao.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
             } finally {
-                corDataModel = null;
-                corBusiness = null;
-                corDTValidacao = null;
+                corService = null;
             }
 
-            return corDTInclusao;
+            return cor;
         }
 
-        public CorDataTransfer Alterar(CorDataTransfer corDataTransfer)
+        public async Task<CorTransfer> Alterar(CorTransfer corTransfer)
         {
-            CorDataModel corDataModel;
-            CorBusiness corBusiness;
-            CorDataTransfer corDTValidacao;
-            CorDataTransfer corDTAlteracao;
+            CorService corService;
+            CorTransfer cor;
 
             try {
-                corBusiness = new CorBusiness();
-                corDataModel = new CorDataModel();
+                corService = new CorService();
 
-                corDataTransfer.Cor.Alteracao = DateTime.Today;
+                corTransfer.Cor.Alteracao = DateTime.Today;
 
-                corDTValidacao = corBusiness.Validar(corDataTransfer);
-
-                if (!corDTValidacao.Erro) {
-                    if (corDTValidacao.Validacao) {
-                        corDTAlteracao = corDataModel.Alterar(corDTValidacao);
-                    } else {
-                        corDTAlteracao = new CorDataTransfer(corDTValidacao);
-                    }
-                } else {
-                    corDTAlteracao = new CorDataTransfer(corDTValidacao);
-                }
+                cor = await corService.Alterar(corTransfer);
             } catch (Exception ex) {
-                corDTAlteracao = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTAlteracao.Validacao = false;
-                corDTAlteracao.Erro = true;
-                corDTAlteracao.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
             } finally {
-                corDataModel = null;
-                corBusiness = null;
-                corDTValidacao = null;
+                corService = null;
             }
 
-            return corDTAlteracao;
+            return cor;
         }
 
-        public CorDataTransfer Excluir(int id)
+        public async Task<CorTransfer> Excluir(int id)
         {
-            CorDataModel corDataModel;
-            CorDataTransfer corDTExclusao;
+            CorService corService;
+            CorTransfer cor;
 
             try {
-                corDataModel = new CorDataModel();
+                corService = new CorService();
 
-                corDTExclusao = corDataModel.Excluir(id);
+                cor = await corService.Excluir(id);
             } catch (Exception ex) {
-                corDTExclusao = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTExclusao.Validacao = false;
-                corDTExclusao.Erro = true;
-                corDTExclusao.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
             } finally {
-                corDataModel = null;
+                corService = null;
             }
 
-            return corDTExclusao;
+            return cor;
         }
 
-        public CorDataTransfer Listar()
+        public async Task<CorTransfer> ConsultarPorId(int id)
         {
-            CorDataModel corDataModel;
-            CorBusiness corBusiness;
-            CorDataTransfer corDTLista;
-
-            try {
-                corBusiness = new CorBusiness();
-                corDataModel = new CorDataModel();
-
-                corDTLista = corDataModel.Listar();
-            } catch (Exception ex) {
-                corDTLista = new CorDataTransfer();
-
-                corDTLista.Validacao = false;
-                corDTLista.Erro = true;
-                corDTLista.IncluirErroMensagem("Erro em CorModel Listar [" + ex.Message + "]");
-            } finally {
-                corDataModel = null;
-                corBusiness = null;
-            }
-
-            return corDTLista;
-        }
-
-        public CorDataTransfer ConsultarPorId(int id)
-        {
-            CorDataModel corDataModel;
-            CorDataTransfer corDTForm;
+            CorService corService;
+            CorTransfer cor;
             
             try {
-                corDataModel = new CorDataModel();
+                corService = new CorService();
 
-                corDTForm = corDataModel.ConsultarPorId(id);
+                cor = await corService.ConsultarPorId(id);
             } catch (Exception ex) {
-                corDTForm = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTForm.Validacao = false;
-                corDTForm.Erro = true;
-                corDTForm.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
             } finally {
-                corDataModel = null;
+                corService = null;
             }
 
-            return corDTForm;
+            return cor;
         }
 
-        public CorDataTransfer Consultar(CorDataTransfer corDataTransfer)
+        public async Task<CorTransfer> Consultar(CorTransfer corListaTransfer)
         {
-            CorDataModel corDataModel;
-            CorBusiness corBusiness;
-            CorDataTransfer corDTValidacao;
-            CorDataTransfer corDTConsulta;
+            CorService corService;
+            CorTransfer corLista;
+            int dif = 0;
+            int qtdExibe = 5;
 
             try {
-                corBusiness = new CorBusiness();
-                corDataModel = new CorDataModel();
+                corService = new CorService();
 
-                corDTValidacao = corBusiness.ValidarConsulta(corDataTransfer);
+                corLista = await corService.Consultar(corListaTransfer);
 
-                if (!corDTValidacao.Erro) {
-                    if (corDTValidacao.Validacao) {
-                        corDTConsulta = corDataModel.Consultar(corDTValidacao);
-                    } else {
-                        corDTConsulta = new CorDataTransfer(corDTValidacao);
+                if (corLista != null) {
+                    if (corLista.TotalRegistros > 1) {
+                        if (corLista.RegistrosPorPagina < 1) {
+                            corLista.RegistrosPorPagina = 30;
+                        } else if (corLista.RegistrosPorPagina > 200) {
+                            corLista.RegistrosPorPagina = 30;
+                        }
+
+                        corLista.PaginaAtual = (corLista.PaginaAtual < 1 ? 1 : corLista.PaginaAtual);
+                        corLista.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.TotalRegistros) 
+                            / @Convert.ToDecimal(corLista.RegistrosPorPagina)));
+                        corLista.TotalPaginas = (corLista.TotalPaginas < 1 ? 1 : corLista.TotalPaginas);
+
+                        qtdExibe = (qtdExibe > corLista.TotalPaginas ? corLista.TotalPaginas : qtdExibe);
+
+                        corLista.PaginaInicial = corLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        corLista.PaginaFinal = corLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        corLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (corLista.PaginaFinal - 1) : corLista.PaginaFinal);
+
+                        if (corLista.PaginaInicial < 1) {
+                            dif = 1 - corLista.PaginaInicial;
+                            corLista.PaginaInicial += dif;
+                            corLista.PaginaFinal += dif;
+                        }
+
+                        if (corLista.PaginaFinal > corLista.TotalPaginas) {
+                            dif = corLista.PaginaFinal - corLista.TotalPaginas;
+                            corLista.PaginaInicial -= dif;
+                            corLista.PaginaFinal -= dif;
+                        }
+
+                        corLista.PaginaInicial = (corLista.PaginaInicial < 1 ? 1 : corLista.PaginaInicial);
+                        corLista.PaginaFinal = (corLista.PaginaFinal > corLista.TotalPaginas ? 
+                            corLista.TotalPaginas : corLista.PaginaFinal);
                     }
-                } else {
-                    corDTConsulta = new CorDataTransfer(corDTValidacao);
                 }
             } catch (Exception ex) {
-                corDTConsulta = new CorDataTransfer();
+                corLista = new CorTransfer();
 
-                corDTConsulta.Validacao = false;
-                corDTConsulta.Erro = true;
-                corDTConsulta.IncluirErroMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
+                corLista.Validacao = false;
+                corLista.Erro = true;
+                corLista.IncluirErroMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
             } finally {
-                corDataModel = null;
-                corBusiness = null;
-                corDTValidacao = null;
+                corService = null;
             }
 
-            return corDTConsulta;
+            return corLista;
         }
     }
 }

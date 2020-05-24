@@ -1,6 +1,6 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
@@ -119,19 +119,19 @@ namespace rcDominiosDataModels
             return profissao;
         }
 
-        public ProfissaoListaTransfer Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        public ProfissaoTransfer Consultar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoData profissaoData;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoData = new ProfissaoData(_contexto);
 
-                profissaoLista = profissaoData.Consultar(profissaoListaTransfer);
+                profissaoLista = profissaoData.Consultar(profissaoTransfer);
                 profissaoLista.Validacao = true;
                 profissaoLista.Erro = false;
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

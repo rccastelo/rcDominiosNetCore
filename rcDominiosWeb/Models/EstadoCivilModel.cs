@@ -1,195 +1,165 @@
 using System;
-using rcDominiosBusiness;
-using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using System.Threading.Tasks;
+using rcDominiosTransfers;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
     public class EstadoCivilModel
     {
-        public EstadoCivilDataTransfer Incluir(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<EstadoCivilTransfer> Incluir(EstadoCivilTransfer estadoCivilTransfer)
         {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilBusiness estadoCivilBusiness;
-            EstadoCivilDataTransfer estadoCivilDTValidacao;
-            EstadoCivilDataTransfer estadoCivilDTInclusao;
+            EstadoCivilService estadoCivilService;
+            EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilBusiness = new EstadoCivilBusiness();
-                estadoCivilDataModel = new EstadoCivilDataModel();
+                estadoCivilService = new EstadoCivilService();
 
-                estadoCivilDataTransfer.EstadoCivil.Criacao = DateTime.Today;
-                estadoCivilDataTransfer.EstadoCivil.Alteracao = DateTime.Today;
+                estadoCivilTransfer.EstadoCivil.Criacao = DateTime.Today;
+                estadoCivilTransfer.EstadoCivil.Alteracao = DateTime.Today;
 
-                estadoCivilDTValidacao = estadoCivilBusiness.Validar(estadoCivilDataTransfer);
-
-                if (!estadoCivilDTValidacao.Erro) {
-                    if (estadoCivilDTValidacao.Validacao) {
-                        estadoCivilDTInclusao = estadoCivilDataModel.Incluir(estadoCivilDTValidacao);
-                    } else {
-                        estadoCivilDTInclusao = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
-                    }
-                } else {
-                    estadoCivilDTInclusao = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
-                }
+                estadoCivil = await estadoCivilService.Incluir(estadoCivilTransfer);
             } catch (Exception ex) {
-                estadoCivilDTInclusao = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilDTInclusao.Validacao = false;
-                estadoCivilDTInclusao.Erro = true;
-                estadoCivilDTInclusao.IncluirErroMensagem("Erro em EstadoCivilModel Incluir [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Incluir [" + ex.Message + "]");
             } finally {
-                estadoCivilDataModel = null;
-                estadoCivilBusiness = null;
-                estadoCivilDTValidacao = null;
+                estadoCivilService = null;
             }
 
-            return estadoCivilDTInclusao;
+            return estadoCivil;
         }
 
-        public EstadoCivilDataTransfer Alterar(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<EstadoCivilTransfer> Alterar(EstadoCivilTransfer estadoCivilTransfer)
         {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilBusiness estadoCivilBusiness;
-            EstadoCivilDataTransfer estadoCivilDTValidacao;
-            EstadoCivilDataTransfer estadoCivilDTAlteracao;
+            EstadoCivilService estadoCivilService;
+            EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilBusiness = new EstadoCivilBusiness();
-                estadoCivilDataModel = new EstadoCivilDataModel();
+                estadoCivilService = new EstadoCivilService();
 
-                estadoCivilDataTransfer.EstadoCivil.Alteracao = DateTime.Today;
+                estadoCivilTransfer.EstadoCivil.Alteracao = DateTime.Today;
 
-                estadoCivilDTValidacao = estadoCivilBusiness.Validar(estadoCivilDataTransfer);
-
-                if (!estadoCivilDTValidacao.Erro) {
-                    if (estadoCivilDTValidacao.Validacao) {
-                        estadoCivilDTAlteracao = estadoCivilDataModel.Alterar(estadoCivilDTValidacao);
-                    } else {
-                        estadoCivilDTAlteracao = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
-                    }
-                } else {
-                    estadoCivilDTAlteracao = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
-                }
+                estadoCivil = await estadoCivilService.Alterar(estadoCivilTransfer);
             } catch (Exception ex) {
-                estadoCivilDTAlteracao = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilDTAlteracao.Validacao = false;
-                estadoCivilDTAlteracao.Erro = true;
-                estadoCivilDTAlteracao.IncluirErroMensagem("Erro em EstadoCivilModel Alterar [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Alterar [" + ex.Message + "]");
             } finally {
-                estadoCivilDataModel = null;
-                estadoCivilBusiness = null;
-                estadoCivilDTValidacao = null;
+                estadoCivilService = null;
             }
 
-            return estadoCivilDTAlteracao;
+            return estadoCivil;
         }
 
-        public EstadoCivilDataTransfer Excluir(int id)
+        public async Task<EstadoCivilTransfer> Excluir(int id)
         {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilDataTransfer estadoCivilDTExclusao;
+            EstadoCivilService estadoCivilService;
+            EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilDataModel = new EstadoCivilDataModel();
+                estadoCivilService = new EstadoCivilService();
 
-                estadoCivilDTExclusao = estadoCivilDataModel.Excluir(id);
+                estadoCivil = await estadoCivilService.Excluir(id);
             } catch (Exception ex) {
-                estadoCivilDTExclusao = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilDTExclusao.Validacao = false;
-                estadoCivilDTExclusao.Erro = true;
-                estadoCivilDTExclusao.IncluirErroMensagem("Erro em EstadoCivilModel Excluir [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Excluir [" + ex.Message + "]");
             } finally {
-                estadoCivilDataModel = null;
+                estadoCivilService = null;
             }
 
-            return estadoCivilDTExclusao;
+            return estadoCivil;
         }
 
-        public EstadoCivilDataTransfer Listar()
+        public async Task<EstadoCivilTransfer> ConsultarPorId(int id)
         {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilBusiness estadoCivilBusiness;
-            EstadoCivilDataTransfer estadoCivilDTLista;
-
-            try {
-                estadoCivilBusiness = new EstadoCivilBusiness();
-                estadoCivilDataModel = new EstadoCivilDataModel();
-
-                estadoCivilDTLista = estadoCivilDataModel.Listar();
-            } catch (Exception ex) {
-                estadoCivilDTLista = new EstadoCivilDataTransfer();
-
-                estadoCivilDTLista.Validacao = false;
-                estadoCivilDTLista.Erro = true;
-                estadoCivilDTLista.IncluirErroMensagem("Erro em EstadoCivilModel Listar [" + ex.Message + "]");
-            } finally {
-                estadoCivilDataModel = null;
-                estadoCivilBusiness = null;
-            }
-
-            return estadoCivilDTLista;
-        }
-
-        public EstadoCivilDataTransfer ConsultarPorId(int id)
-        {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilDataTransfer estadoCivilDTForm;
+            EstadoCivilService estadoCivilService;
+            EstadoCivilTransfer estadoCivil;
             
             try {
-                estadoCivilDataModel = new EstadoCivilDataModel();
+                estadoCivilService = new EstadoCivilService();
 
-                estadoCivilDTForm = estadoCivilDataModel.ConsultarPorId(id);
+                estadoCivil = await estadoCivilService.ConsultarPorId(id);
             } catch (Exception ex) {
-                estadoCivilDTForm = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilDTForm.Validacao = false;
-                estadoCivilDTForm.Erro = true;
-                estadoCivilDTForm.IncluirErroMensagem("Erro em EstadoCivilModel ConsultarPorId [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel ConsultarPorId [" + ex.Message + "]");
             } finally {
-                estadoCivilDataModel = null;
+                estadoCivilService = null;
             }
 
-            return estadoCivilDTForm;
+            return estadoCivil;
         }
 
-        public EstadoCivilDataTransfer Consultar(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<EstadoCivilTransfer> Consultar(EstadoCivilTransfer estadoCivilListaTransfer)
         {
-            EstadoCivilDataModel estadoCivilDataModel;
-            EstadoCivilBusiness estadoCivilBusiness;
-            EstadoCivilDataTransfer estadoCivilDTValidacao;
-            EstadoCivilDataTransfer estadoCivilDTConsulta;
+            EstadoCivilService estadoCivilService;
+            EstadoCivilTransfer estadoCivilLista;
+            int dif = 0;
+            int qtdExibe = 5;
 
             try {
-                estadoCivilBusiness = new EstadoCivilBusiness();
-                estadoCivilDataModel = new EstadoCivilDataModel();
+                estadoCivilService = new EstadoCivilService();
 
-                estadoCivilDTValidacao = estadoCivilBusiness.ValidarConsulta(estadoCivilDataTransfer);
+                estadoCivilLista = await estadoCivilService.Consultar(estadoCivilListaTransfer);
 
-                if (!estadoCivilDTValidacao.Erro) {
-                    if (estadoCivilDTValidacao.Validacao) {
-                        estadoCivilDTConsulta = estadoCivilDataModel.Consultar(estadoCivilDTValidacao);
-                    } else {
-                        estadoCivilDTConsulta = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
+                if (estadoCivilLista != null) {
+                    if (estadoCivilLista.TotalRegistros > 1) {
+                        if (estadoCivilLista.RegistrosPorPagina < 1) {
+                            estadoCivilLista.RegistrosPorPagina = 30;
+                        } else if (estadoCivilLista.RegistrosPorPagina > 200) {
+                            estadoCivilLista.RegistrosPorPagina = 30;
+                        }
+
+                        estadoCivilLista.PaginaAtual = (estadoCivilLista.PaginaAtual < 1 ? 1 : estadoCivilLista.PaginaAtual);
+                        estadoCivilLista.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(estadoCivilLista.TotalRegistros) 
+                            / @Convert.ToDecimal(estadoCivilLista.RegistrosPorPagina)));
+                        estadoCivilLista.TotalPaginas = (estadoCivilLista.TotalPaginas < 1 ? 1 : estadoCivilLista.TotalPaginas);
+
+                        qtdExibe = (qtdExibe > estadoCivilLista.TotalPaginas ? estadoCivilLista.TotalPaginas : qtdExibe);
+
+                        estadoCivilLista.PaginaInicial = estadoCivilLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        estadoCivilLista.PaginaFinal = estadoCivilLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        estadoCivilLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (estadoCivilLista.PaginaFinal - 1) : estadoCivilLista.PaginaFinal);
+
+                        if (estadoCivilLista.PaginaInicial < 1) {
+                            dif = 1 - estadoCivilLista.PaginaInicial;
+                            estadoCivilLista.PaginaInicial += dif;
+                            estadoCivilLista.PaginaFinal += dif;
+                        }
+
+                        if (estadoCivilLista.PaginaFinal > estadoCivilLista.TotalPaginas) {
+                            dif = estadoCivilLista.PaginaFinal - estadoCivilLista.TotalPaginas;
+                            estadoCivilLista.PaginaInicial -= dif;
+                            estadoCivilLista.PaginaFinal -= dif;
+                        }
+
+                        estadoCivilLista.PaginaInicial = (estadoCivilLista.PaginaInicial < 1 ? 1 : estadoCivilLista.PaginaInicial);
+                        estadoCivilLista.PaginaFinal = (estadoCivilLista.PaginaFinal > estadoCivilLista.TotalPaginas ? 
+                            estadoCivilLista.TotalPaginas : estadoCivilLista.PaginaFinal);
                     }
-                } else {
-                    estadoCivilDTConsulta = new EstadoCivilDataTransfer(estadoCivilDTValidacao);
                 }
             } catch (Exception ex) {
-                estadoCivilDTConsulta = new EstadoCivilDataTransfer();
+                estadoCivilLista = new EstadoCivilTransfer();
 
-                estadoCivilDTConsulta.Validacao = false;
-                estadoCivilDTConsulta.Erro = true;
-                estadoCivilDTConsulta.IncluirErroMensagem("Erro em EstadoCivilModel Consultar [" + ex.Message + "]");
+                estadoCivilLista.Validacao = false;
+                estadoCivilLista.Erro = true;
+                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilModel Consultar [" + ex.Message + "]");
             } finally {
-                estadoCivilDataModel = null;
-                estadoCivilBusiness = null;
-                estadoCivilDTValidacao = null;
+                estadoCivilService = null;
             }
 
-            return estadoCivilDTConsulta;
+            return estadoCivilLista;
         }
     }
 }

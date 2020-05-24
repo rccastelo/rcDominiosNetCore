@@ -1,158 +1,177 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
     public class TelefoneTipoModel
     {
-        public TelefoneTipoDataTransfer Incluir(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public TelefoneTipoTransfer Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoDataModel telefoneTipoDataModel;
             TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTValidacao;
-            TelefoneTipoDataTransfer telefoneTipoDTInclusao;
+            TelefoneTipoTransfer telefoneTipoValidacao;
+            TelefoneTipoTransfer telefoneTipoInclusao;
 
             try {
                 telefoneTipoBusiness = new TelefoneTipoBusiness();
                 telefoneTipoDataModel = new TelefoneTipoDataModel();
 
-                telefoneTipoDataTransfer.TelefoneTipo.Criacao = DateTime.Today;
-                telefoneTipoDataTransfer.TelefoneTipo.Alteracao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Criacao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipoDTValidacao = telefoneTipoBusiness.Validar(telefoneTipoDataTransfer);
+                telefoneTipoValidacao = telefoneTipoBusiness.Validar(telefoneTipoTransfer);
 
-                if (!telefoneTipoDTValidacao.Erro) {
-                    if (telefoneTipoDTValidacao.Validacao) {
-                        telefoneTipoDTInclusao = telefoneTipoDataModel.Incluir(telefoneTipoDTValidacao);
+                if (!telefoneTipoValidacao.Erro) {
+                    if (telefoneTipoValidacao.Validacao) {
+                        telefoneTipoInclusao = telefoneTipoDataModel.Incluir(telefoneTipoValidacao);
                     } else {
-                        telefoneTipoDTInclusao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
+                        telefoneTipoInclusao = new TelefoneTipoTransfer(telefoneTipoValidacao);
                     }
                 } else {
-                    telefoneTipoDTInclusao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
+                    telefoneTipoInclusao = new TelefoneTipoTransfer(telefoneTipoValidacao);
                 }
             } catch (Exception ex) {
-                telefoneTipoDTInclusao = new TelefoneTipoDataTransfer();
+                telefoneTipoInclusao = new TelefoneTipoTransfer();
 
-                telefoneTipoDTInclusao.Validacao = false;
-                telefoneTipoDTInclusao.Erro = true;
-                telefoneTipoDTInclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
+                telefoneTipoInclusao.Validacao = false;
+                telefoneTipoInclusao.Erro = true;
+                telefoneTipoInclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
                 telefoneTipoBusiness = null;
-                telefoneTipoDTValidacao = null;
+                telefoneTipoValidacao = null;
             }
 
-            return telefoneTipoDTInclusao;
+            return telefoneTipoInclusao;
         }
 
-        public TelefoneTipoDataTransfer Alterar(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public TelefoneTipoTransfer Alterar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoDataModel telefoneTipoDataModel;
             TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTValidacao;
-            TelefoneTipoDataTransfer telefoneTipoDTAlteracao;
+            TelefoneTipoTransfer telefoneTipoValidacao;
+            TelefoneTipoTransfer telefoneTipoAlteracao;
 
             try {
                 telefoneTipoBusiness = new TelefoneTipoBusiness();
                 telefoneTipoDataModel = new TelefoneTipoDataModel();
 
-                telefoneTipoDataTransfer.TelefoneTipo.Alteracao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipoDTValidacao = telefoneTipoBusiness.Validar(telefoneTipoDataTransfer);
+                telefoneTipoValidacao = telefoneTipoBusiness.Validar(telefoneTipoTransfer);
 
-                if (!telefoneTipoDTValidacao.Erro) {
-                    if (telefoneTipoDTValidacao.Validacao) {
-                        telefoneTipoDTAlteracao = telefoneTipoDataModel.Alterar(telefoneTipoDTValidacao);
+                if (!telefoneTipoValidacao.Erro) {
+                    if (telefoneTipoValidacao.Validacao) {
+                        telefoneTipoAlteracao = telefoneTipoDataModel.Alterar(telefoneTipoValidacao);
                     } else {
-                        telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
+                        telefoneTipoAlteracao = new TelefoneTipoTransfer(telefoneTipoValidacao);
                     }
                 } else {
-                    telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
+                    telefoneTipoAlteracao = new TelefoneTipoTransfer(telefoneTipoValidacao);
                 }
             } catch (Exception ex) {
-                telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer();
+                telefoneTipoAlteracao = new TelefoneTipoTransfer();
 
-                telefoneTipoDTAlteracao.Validacao = false;
-                telefoneTipoDTAlteracao.Erro = true;
-                telefoneTipoDTAlteracao.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
+                telefoneTipoAlteracao.Validacao = false;
+                telefoneTipoAlteracao.Erro = true;
+                telefoneTipoAlteracao.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
                 telefoneTipoBusiness = null;
-                telefoneTipoDTValidacao = null;
+                telefoneTipoValidacao = null;
             }
 
-            return telefoneTipoDTAlteracao;
+            return telefoneTipoAlteracao;
         }
 
-        public TelefoneTipoDataTransfer Excluir(int id)
+        public TelefoneTipoTransfer Excluir(int id)
         {
             TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoDataTransfer telefoneTipoDTExclusao;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
                 telefoneTipoDataModel = new TelefoneTipoDataModel();
 
-                telefoneTipoDTExclusao = telefoneTipoDataModel.Excluir(id);
+                telefoneTipo = telefoneTipoDataModel.Excluir(id);
             } catch (Exception ex) {
-                telefoneTipoDTExclusao = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTExclusao.Validacao = false;
-                telefoneTipoDTExclusao.Erro = true;
-                telefoneTipoDTExclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
             }
 
-            return telefoneTipoDTExclusao;
+            return telefoneTipo;
         }
 
-        public TelefoneTipoDataTransfer Listar()
+        public TelefoneTipoTransfer ConsultarPorId(int id)
         {
             TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTLista;
-
-            try {
-                telefoneTipoBusiness = new TelefoneTipoBusiness();
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
-
-                telefoneTipoDTLista = telefoneTipoDataModel.Listar();
-            } catch (Exception ex) {
-                telefoneTipoDTLista = new TelefoneTipoDataTransfer();
-
-                telefoneTipoDTLista.Validacao = false;
-                telefoneTipoDTLista.Erro = true;
-                telefoneTipoDTLista.IncluirErroMensagem("Erro em TelefoneTipoModel Listar [" + ex.Message + "]");
-            } finally {
-                telefoneTipoDataModel = null;
-                telefoneTipoBusiness = null;
-            }
-
-            return telefoneTipoDTLista;
-        }
-
-        public TelefoneTipoDataTransfer ConsultarPorId(int id)
-        {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoDataTransfer telefoneTipoDTForm;
+            TelefoneTipoTransfer telefoneTipo;
             
             try {
                 telefoneTipoDataModel = new TelefoneTipoDataModel();
 
-                telefoneTipoDTForm = telefoneTipoDataModel.ConsultarPorId(id);
+                telefoneTipo = telefoneTipoDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                telefoneTipoDTForm = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTForm.Validacao = false;
-                telefoneTipoDTForm.Erro = true;
-                telefoneTipoDTForm.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoDataModel = null;
             }
 
-            return telefoneTipoDTForm;
+            return telefoneTipo;
+        }
+
+        public TelefoneTipoTransfer Consultar(TelefoneTipoTransfer telefoneTipoListaTransfer)
+        {
+            TelefoneTipoDataModel telefoneTipoDataModel;
+            TelefoneTipoBusiness telefoneTipoBusiness;
+            TelefoneTipoTransfer telefoneTipoValidacao;
+            TelefoneTipoTransfer telefoneTipoLista;
+
+            try {
+                telefoneTipoBusiness = new TelefoneTipoBusiness();
+                telefoneTipoDataModel = new TelefoneTipoDataModel();
+
+                telefoneTipoValidacao = telefoneTipoBusiness.ValidarConsulta(telefoneTipoListaTransfer);
+
+                if (!telefoneTipoValidacao.Erro) {
+                    if (telefoneTipoValidacao.Validacao) {
+                        telefoneTipoLista = telefoneTipoDataModel.Consultar(telefoneTipoValidacao);
+
+                        if (telefoneTipoLista != null) {
+                            telefoneTipoLista.PaginaAtual = (telefoneTipoListaTransfer.PaginaAtual < 1 ? 1 : telefoneTipoListaTransfer.PaginaAtual);
+                            telefoneTipoLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.TotalRegistros) 
+                                / @Convert.ToDecimal(telefoneTipoLista.RegistrosPorPagina)));
+                        }
+                    } else {
+                        telefoneTipoLista = new TelefoneTipoTransfer(telefoneTipoValidacao);
+                    }
+                } else {
+                    telefoneTipoLista = new TelefoneTipoTransfer(telefoneTipoValidacao);
+                }
+            } catch (Exception ex) {
+                telefoneTipoLista = new TelefoneTipoTransfer();
+
+                telefoneTipoLista.Validacao = false;
+                telefoneTipoLista.Erro = true;
+                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
+            } finally {
+                telefoneTipoDataModel = null;
+                telefoneTipoBusiness = null;
+                telefoneTipoValidacao = null;
+            }
+
+            return telefoneTipoLista;
         }
     }
 }

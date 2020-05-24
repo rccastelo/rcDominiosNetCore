@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             ProfissaoModel profissaoModel;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoLista = profissaoModel.Consultar(new ProfissaoListaTransfer());
+                profissaoLista = profissaoModel.Consultar(new ProfissaoTransfer());
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
@@ -70,17 +70,17 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
-        public IActionResult Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        public IActionResult Consultar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
-            ProfissaoListaTransfer profissaoLista;
+            ProfissaoTransfer profissaoLista;
 
             try {
                 profissaoModel = new ProfissaoModel();
 
-                profissaoLista = profissaoModel.Consultar(profissaoListaTransfer);
+                profissaoLista = profissaoModel.Consultar(profissaoTransfer);
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

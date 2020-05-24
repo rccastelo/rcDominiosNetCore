@@ -1,158 +1,177 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
     public class SexoModel
     {
-        public SexoDataTransfer Incluir(SexoDataTransfer sexoDataTransfer)
+        public SexoTransfer Incluir(SexoTransfer sexoTransfer)
         {
             SexoDataModel sexoDataModel;
             SexoBusiness sexoBusiness;
-            SexoDataTransfer sexoDTValidacao;
-            SexoDataTransfer sexoDTInclusao;
+            SexoTransfer sexoValidacao;
+            SexoTransfer sexoInclusao;
 
             try {
                 sexoBusiness = new SexoBusiness();
                 sexoDataModel = new SexoDataModel();
 
-                sexoDataTransfer.Sexo.Criacao = DateTime.Today;
-                sexoDataTransfer.Sexo.Alteracao = DateTime.Today;
+                sexoTransfer.Sexo.Criacao = DateTime.Today;
+                sexoTransfer.Sexo.Alteracao = DateTime.Today;
 
-                sexoDTValidacao = sexoBusiness.Validar(sexoDataTransfer);
+                sexoValidacao = sexoBusiness.Validar(sexoTransfer);
 
-                if (!sexoDTValidacao.Erro) {
-                    if (sexoDTValidacao.Validacao) {
-                        sexoDTInclusao = sexoDataModel.Incluir(sexoDTValidacao);
+                if (!sexoValidacao.Erro) {
+                    if (sexoValidacao.Validacao) {
+                        sexoInclusao = sexoDataModel.Incluir(sexoValidacao);
                     } else {
-                        sexoDTInclusao = new SexoDataTransfer(sexoDTValidacao);
+                        sexoInclusao = new SexoTransfer(sexoValidacao);
                     }
                 } else {
-                    sexoDTInclusao = new SexoDataTransfer(sexoDTValidacao);
+                    sexoInclusao = new SexoTransfer(sexoValidacao);
                 }
             } catch (Exception ex) {
-                sexoDTInclusao = new SexoDataTransfer();
+                sexoInclusao = new SexoTransfer();
 
-                sexoDTInclusao.Validacao = false;
-                sexoDTInclusao.Erro = true;
-                sexoDTInclusao.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
+                sexoInclusao.Validacao = false;
+                sexoInclusao.Erro = true;
+                sexoInclusao.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
-                sexoDTValidacao = null;
+                sexoValidacao = null;
             }
 
-            return sexoDTInclusao;
+            return sexoInclusao;
         }
 
-        public SexoDataTransfer Alterar(SexoDataTransfer sexoDataTransfer)
+        public SexoTransfer Alterar(SexoTransfer sexoTransfer)
         {
             SexoDataModel sexoDataModel;
             SexoBusiness sexoBusiness;
-            SexoDataTransfer sexoDTValidacao;
-            SexoDataTransfer sexoDTAlteracao;
+            SexoTransfer sexoValidacao;
+            SexoTransfer sexoAlteracao;
 
             try {
                 sexoBusiness = new SexoBusiness();
                 sexoDataModel = new SexoDataModel();
 
-                sexoDataTransfer.Sexo.Alteracao = DateTime.Today;
+                sexoTransfer.Sexo.Alteracao = DateTime.Today;
 
-                sexoDTValidacao = sexoBusiness.Validar(sexoDataTransfer);
+                sexoValidacao = sexoBusiness.Validar(sexoTransfer);
 
-                if (!sexoDTValidacao.Erro) {
-                    if (sexoDTValidacao.Validacao) {
-                        sexoDTAlteracao = sexoDataModel.Alterar(sexoDTValidacao);
+                if (!sexoValidacao.Erro) {
+                    if (sexoValidacao.Validacao) {
+                        sexoAlteracao = sexoDataModel.Alterar(sexoValidacao);
                     } else {
-                        sexoDTAlteracao = new SexoDataTransfer(sexoDTValidacao);
+                        sexoAlteracao = new SexoTransfer(sexoValidacao);
                     }
                 } else {
-                    sexoDTAlteracao = new SexoDataTransfer(sexoDTValidacao);
+                    sexoAlteracao = new SexoTransfer(sexoValidacao);
                 }
             } catch (Exception ex) {
-                sexoDTAlteracao = new SexoDataTransfer();
+                sexoAlteracao = new SexoTransfer();
 
-                sexoDTAlteracao.Validacao = false;
-                sexoDTAlteracao.Erro = true;
-                sexoDTAlteracao.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
+                sexoAlteracao.Validacao = false;
+                sexoAlteracao.Erro = true;
+                sexoAlteracao.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
-                sexoDTValidacao = null;
+                sexoValidacao = null;
             }
 
-            return sexoDTAlteracao;
+            return sexoAlteracao;
         }
 
-        public SexoDataTransfer Excluir(int id)
+        public SexoTransfer Excluir(int id)
         {
             SexoDataModel sexoDataModel;
-            SexoDataTransfer sexoDTExclusao;
+            SexoTransfer sexo;
 
             try {
                 sexoDataModel = new SexoDataModel();
 
-                sexoDTExclusao = sexoDataModel.Excluir(id);
+                sexo = sexoDataModel.Excluir(id);
             } catch (Exception ex) {
-                sexoDTExclusao = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoDTExclusao.Validacao = false;
-                sexoDTExclusao.Erro = true;
-                sexoDTExclusao.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }
 
-            return sexoDTExclusao;
+            return sexo;
         }
 
-        public SexoDataTransfer Listar()
+        public SexoTransfer ConsultarPorId(int id)
         {
             SexoDataModel sexoDataModel;
-            SexoBusiness sexoBusiness;
-            SexoDataTransfer sexoDTLista;
-
-            try {
-                sexoBusiness = new SexoBusiness();
-                sexoDataModel = new SexoDataModel();
-
-                sexoDTLista = sexoDataModel.Listar();
-            } catch (Exception ex) {
-                sexoDTLista = new SexoDataTransfer();
-
-                sexoDTLista.Validacao = false;
-                sexoDTLista.Erro = true;
-                sexoDTLista.IncluirErroMensagem("Erro em SexoModel Listar [" + ex.Message + "]");
-            } finally {
-                sexoDataModel = null;
-                sexoBusiness = null;
-            }
-
-            return sexoDTLista;
-        }
-
-        public SexoDataTransfer ConsultarPorId(int id)
-        {
-            SexoDataModel sexoDataModel;
-            SexoDataTransfer sexoDTForm;
+            SexoTransfer sexo;
             
             try {
                 sexoDataModel = new SexoDataModel();
 
-                sexoDTForm = sexoDataModel.ConsultarPorId(id);
+                sexo = sexoDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                sexoDTForm = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoDTForm.Validacao = false;
-                sexoDTForm.Erro = true;
-                sexoDTForm.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }
 
-            return sexoDTForm;
+            return sexo;
+        }
+
+        public SexoTransfer Consultar(SexoTransfer sexoListaTransfer)
+        {
+            SexoDataModel sexoDataModel;
+            SexoBusiness sexoBusiness;
+            SexoTransfer sexoValidacao;
+            SexoTransfer sexoLista;
+
+            try {
+                sexoBusiness = new SexoBusiness();
+                sexoDataModel = new SexoDataModel();
+
+                sexoValidacao = sexoBusiness.ValidarConsulta(sexoListaTransfer);
+
+                if (!sexoValidacao.Erro) {
+                    if (sexoValidacao.Validacao) {
+                        sexoLista = sexoDataModel.Consultar(sexoValidacao);
+
+                        if (sexoLista != null) {
+                            sexoLista.PaginaAtual = (sexoListaTransfer.PaginaAtual < 1 ? 1 : sexoListaTransfer.PaginaAtual);
+                            sexoLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(sexoLista.TotalRegistros) 
+                                / @Convert.ToDecimal(sexoLista.RegistrosPorPagina)));
+                        }
+                    } else {
+                        sexoLista = new SexoTransfer(sexoValidacao);
+                    }
+                } else {
+                    sexoLista = new SexoTransfer(sexoValidacao);
+                }
+            } catch (Exception ex) {
+                sexoLista = new SexoTransfer();
+
+                sexoLista.Validacao = false;
+                sexoLista.Erro = true;
+                sexoLista.IncluirErroMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
+            } finally {
+                sexoDataModel = null;
+                sexoBusiness = null;
+                sexoValidacao = null;
+            }
+
+            return sexoLista;
         }
     }
 }

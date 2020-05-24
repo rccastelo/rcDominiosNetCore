@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using rcDominiosEntities;
 
-namespace rcDominiosDataTransfers
+namespace rcDominiosTransfers
 {
-    public class PessoaTipoListaTransfer : DataTransfer
+    public class PessoaTipoTransfer : Transfer
     {
+        public PessoaTipoEntity PessoaTipo { get; set; }
+
         public IList<PessoaTipoEntity> PessoaTipoLista { get; set; }
 
         public int PaginaAtual { get; set; }
@@ -43,17 +45,20 @@ namespace rcDominiosDataTransfers
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AlteracaoAte { get; set; }
 
-        public PessoaTipoListaTransfer() 
+        public PessoaTipoTransfer() 
             : base()
         {
         }
 
-        public PessoaTipoListaTransfer(PessoaTipoListaTransfer transfer) 
+        public PessoaTipoTransfer(PessoaTipoTransfer transfer) 
             : base(transfer)
         {
             if (transfer != null) {
                 if (transfer.PessoaTipoLista != null) {
                     this.PessoaTipoLista = new List<PessoaTipoEntity>(transfer.PessoaTipoLista);
+                }
+                if (transfer.PessoaTipo != null) {
+                    this.PessoaTipo = new PessoaTipoEntity(transfer.PessoaTipo);
                 }
                 this.PaginaAtual = transfer.PaginaAtual;
                 this.PaginaInicial = transfer.PaginaInicial;

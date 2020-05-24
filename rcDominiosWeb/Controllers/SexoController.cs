@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class SexoController : Controller
+  public class SexoController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,44 +21,44 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoForm;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
                 if (id > 0) {
-                    sexoForm = sexoModel.ConsultarPorId(id);
+                    sexo = await sexoModel.ConsultarPorId(id);
                 } else {
-                    sexoForm = null;
+                    sexo = null;
                 }
             } catch {
-                sexoForm = new SexoDataTransfer();
+                sexo = new SexoTransfer();
                 
-                sexoForm.Validacao = false;
-                sexoForm.Erro = true;
-                sexoForm.IncluirErroMensagem("Erro em SexoController Form");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Form");
             } finally {
                 sexoModel = null;
             }
 
-            return View(sexoForm);
+            return View(sexo);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoLista;
+            SexoTransfer sexoLista;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoLista = sexoModel.Listar();
+                sexoLista = await sexoModel.Consultar(new SexoTransfer());
             } catch (Exception ex) {
-                sexoLista = new SexoDataTransfer();
+                sexoLista = new SexoTransfer();
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
@@ -70,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(SexoDataTransfer sexoDataTransfer)
+        public async Task<IActionResult> Consulta(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoLista;
+            SexoTransfer sexoLista;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoLista = sexoModel.Consultar(sexoDataTransfer);
+                sexoLista = await sexoModel.Consultar(sexoTransfer);
             } catch (Exception ex) {
-                sexoLista = new SexoDataTransfer();
+                sexoLista = new SexoTransfer();
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(SexoDataTransfer sexoDataTransfer)
+        public async Task<IActionResult> Inclusao(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Incluir(sexoDataTransfer);
+                sexo = await sexoModel.Incluir(sexoTransfer);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Inclusao [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Inclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return View("Form", sexoRetorno);
+            if (sexo.Erro || !sexo.Validacao) {
+                return View("Form", sexo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(SexoDataTransfer sexoDataTransfer)
+        public async Task<IActionResult> Alteracao(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Alterar(sexoDataTransfer);
+                sexo = await sexoModel.Alterar(sexoTransfer);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Alteracao [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Alteracao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return View("Form", sexoRetorno);
+            if (sexo.Erro || !sexo.Validacao) {
+                return View("Form", sexo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Excluir(id);
+                sexo = await sexoModel.Excluir(id);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Exclusao [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Exclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return View("Form", sexoRetorno);
+            if (sexo.Erro || !sexo.Validacao) {
+                return View("Form", sexo);
             } else {
                 return RedirectToAction("Lista");
             }

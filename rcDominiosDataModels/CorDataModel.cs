@@ -1,172 +1,146 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
 {
     public class CorDataModel : DataModel
     {
-        public CorDataTransfer Incluir(CorDataTransfer corDataTransfer)
+        public CorTransfer Incluir(CorTransfer corTransfer)
         {
             CorData corData;
-            CorDataTransfer CorRetorno;
+            CorTransfer cor;
 
             try {
                 corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer(corDataTransfer);
+                cor = new CorTransfer(corTransfer);
 
-                corData.Incluir(corDataTransfer.Cor);
+                corData.Incluir(corTransfer.Cor);
 
                 _contexto.SaveChanges();
 
-                CorRetorno.Cor = new CorEntity(corDataTransfer.Cor);
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
+                cor.Cor = new CorEntity(corTransfer.Cor);
+                cor.Validacao = true;
+                cor.Erro = false;
             } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Incluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorDataModel Incluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
 
-            return CorRetorno;
+            return cor;
         }
 
-        public CorDataTransfer Alterar(CorDataTransfer corDataTransfer)
+        public CorTransfer Alterar(CorTransfer corTransfer)
         {
             CorData corData;
-            CorDataTransfer CorRetorno;
+            CorTransfer cor;
 
             try {
                 corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corData.Alterar(corDataTransfer.Cor);
+                corData.Alterar(corTransfer.Cor);
 
                 _contexto.SaveChanges();
 
-                CorRetorno.Cor = new CorEntity(corDataTransfer.Cor);
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
+                cor.Cor = new CorEntity(corTransfer.Cor);
+                cor.Validacao = true;
+                cor.Erro = false;
             } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Alterar [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorDataModel Alterar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
 
-            return CorRetorno;
+            return cor;
         }
 
-        public CorDataTransfer Excluir(int id)
+        public CorTransfer Excluir(int id)
         {
             CorData corData;
-            CorDataTransfer CorRetorno;
+            CorTransfer cor;
 
             try {
                 corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.Cor = corData.ConsultarPorId(id);
-                corData.Excluir(CorRetorno.Cor);
+                cor.Cor = corData.ConsultarPorId(id);
+                corData.Excluir(cor.Cor);
 
                 _contexto.SaveChanges();
 
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
+                cor.Validacao = true;
+                cor.Erro = false;
             } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Excluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorDataModel Excluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
 
-            return CorRetorno;
+            return cor;
         }
 
-        public CorDataTransfer Listar()
+        public CorTransfer ConsultarPorId(int id)
         {
             CorData corData;
-            CorDataTransfer CorRetorno;
+            CorTransfer cor;
 
             try {
                 corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.CorLista = corData.Listar();
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
+                cor.Cor = corData.ConsultarPorId(id);
+                cor.Validacao = true;
+                cor.Erro = false;
             } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Listar [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
 
-            return CorRetorno;
+            return cor;
         }
 
-        public CorDataTransfer ConsultarPorId(int id)
+        public CorTransfer Consultar(CorTransfer corTransfer)
         {
             CorData corData;
-            CorDataTransfer CorRetorno;
+            CorTransfer corLista;
 
             try {
                 corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer();
 
-                CorRetorno.Cor = corData.ConsultarPorId(id);
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
+                corLista = corData.Consultar(corTransfer);
+                corLista.Validacao = true;
+                corLista.Erro = false;
             } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
+                corLista = new CorTransfer();
 
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
+                corLista.Validacao = false;
+                corLista.Erro = true;
+                corLista.IncluirErroMensagem("Erro em CorDataModel Consultar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
 
-            return CorRetorno;
-        }
-
-        public CorDataTransfer Consultar(CorDataTransfer corDataTransfer)
-        {
-            CorData corData;
-            CorDataTransfer CorRetorno;
-
-            try {
-                corData = new CorData(_contexto);
-                CorRetorno = new CorDataTransfer();
-
-                CorRetorno.CorLista = corData.Consultar(corDataTransfer);
-                CorRetorno.Validacao = true;
-                CorRetorno.Erro = false;
-            } catch (Exception ex) {
-                CorRetorno = new CorDataTransfer();
-
-                CorRetorno.Validacao = false;
-                CorRetorno.Erro = true;
-                CorRetorno.IncluirErroMensagem("Erro em CorDataModel Consultar [" + ex.Message + "]");
-            } finally {
-                corData = null;
-            }
-
-            return CorRetorno;
+            return corLista;
         }
     }
 }

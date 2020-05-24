@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Services
 {
@@ -190,9 +190,9 @@ namespace rcDominiosWeb.Services
             return profissao;
         }
 
-        public async Task<ProfissaoListaTransfer> Consultar(ProfissaoListaTransfer profissaoListaTransfer)
+        public async Task<ProfissaoTransfer> Consultar(ProfissaoTransfer profissaoListaTransfer)
         {
-            ProfissaoListaTransfer profissaoLista = null;
+            ProfissaoTransfer profissaoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
@@ -203,9 +203,9 @@ namespace rcDominiosWeb.Services
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", profissaoListaTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoListaTransfer>().Result;
+                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
-                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoListaTransfer>().Result;
+                    profissaoLista = resposta.Content.ReadAsAsync<ProfissaoTransfer>().Result;
                 } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
                     mensagemRetono = $"Acesso ao serviço {nomeServico} Consultar não autorizado";
                 } else {
@@ -213,14 +213,14 @@ namespace rcDominiosWeb.Services
                 }
 
                 if (!string.IsNullOrEmpty(mensagemRetono)) {
-                    profissaoLista = new ProfissaoListaTransfer();
+                    profissaoLista = new ProfissaoTransfer();
                     
                     profissaoLista.Validacao = false;
                     profissaoLista.Erro = true;
                     profissaoLista.IncluirErroMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
-                profissaoLista = new ProfissaoListaTransfer();
+                profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;

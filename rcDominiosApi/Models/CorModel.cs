@@ -1,158 +1,177 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
     public class CorModel
     {
-        public CorDataTransfer Incluir(CorDataTransfer corDataTransfer)
+        public CorTransfer Incluir(CorTransfer corTransfer)
         {
             CorDataModel corDataModel;
             CorBusiness corBusiness;
-            CorDataTransfer corDTValidacao;
-            CorDataTransfer corDTInclusao;
+            CorTransfer corValidacao;
+            CorTransfer corInclusao;
 
             try {
                 corBusiness = new CorBusiness();
                 corDataModel = new CorDataModel();
 
-                corDataTransfer.Cor.Criacao = DateTime.Today;
-                corDataTransfer.Cor.Alteracao = DateTime.Today;
+                corTransfer.Cor.Criacao = DateTime.Today;
+                corTransfer.Cor.Alteracao = DateTime.Today;
 
-                corDTValidacao = corBusiness.Validar(corDataTransfer);
+                corValidacao = corBusiness.Validar(corTransfer);
 
-                if (!corDTValidacao.Erro) {
-                    if (corDTValidacao.Validacao) {
-                        corDTInclusao = corDataModel.Incluir(corDTValidacao);
+                if (!corValidacao.Erro) {
+                    if (corValidacao.Validacao) {
+                        corInclusao = corDataModel.Incluir(corValidacao);
                     } else {
-                        corDTInclusao = new CorDataTransfer(corDTValidacao);
+                        corInclusao = new CorTransfer(corValidacao);
                     }
                 } else {
-                    corDTInclusao = new CorDataTransfer(corDTValidacao);
+                    corInclusao = new CorTransfer(corValidacao);
                 }
             } catch (Exception ex) {
-                corDTInclusao = new CorDataTransfer();
+                corInclusao = new CorTransfer();
 
-                corDTInclusao.Validacao = false;
-                corDTInclusao.Erro = true;
-                corDTInclusao.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
+                corInclusao.Validacao = false;
+                corInclusao.Erro = true;
+                corInclusao.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
-                corDTValidacao = null;
+                corValidacao = null;
             }
 
-            return corDTInclusao;
+            return corInclusao;
         }
 
-        public CorDataTransfer Alterar(CorDataTransfer corDataTransfer)
+        public CorTransfer Alterar(CorTransfer corTransfer)
         {
             CorDataModel corDataModel;
             CorBusiness corBusiness;
-            CorDataTransfer corDTValidacao;
-            CorDataTransfer corDTAlteracao;
+            CorTransfer corValidacao;
+            CorTransfer corAlteracao;
 
             try {
                 corBusiness = new CorBusiness();
                 corDataModel = new CorDataModel();
 
-                corDataTransfer.Cor.Alteracao = DateTime.Today;
+                corTransfer.Cor.Alteracao = DateTime.Today;
 
-                corDTValidacao = corBusiness.Validar(corDataTransfer);
+                corValidacao = corBusiness.Validar(corTransfer);
 
-                if (!corDTValidacao.Erro) {
-                    if (corDTValidacao.Validacao) {
-                        corDTAlteracao = corDataModel.Alterar(corDTValidacao);
+                if (!corValidacao.Erro) {
+                    if (corValidacao.Validacao) {
+                        corAlteracao = corDataModel.Alterar(corValidacao);
                     } else {
-                        corDTAlteracao = new CorDataTransfer(corDTValidacao);
+                        corAlteracao = new CorTransfer(corValidacao);
                     }
                 } else {
-                    corDTAlteracao = new CorDataTransfer(corDTValidacao);
+                    corAlteracao = new CorTransfer(corValidacao);
                 }
             } catch (Exception ex) {
-                corDTAlteracao = new CorDataTransfer();
+                corAlteracao = new CorTransfer();
 
-                corDTAlteracao.Validacao = false;
-                corDTAlteracao.Erro = true;
-                corDTAlteracao.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
+                corAlteracao.Validacao = false;
+                corAlteracao.Erro = true;
+                corAlteracao.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
-                corDTValidacao = null;
+                corValidacao = null;
             }
 
-            return corDTAlteracao;
+            return corAlteracao;
         }
 
-        public CorDataTransfer Excluir(int id)
+        public CorTransfer Excluir(int id)
         {
             CorDataModel corDataModel;
-            CorDataTransfer corDTExclusao;
+            CorTransfer cor;
 
             try {
                 corDataModel = new CorDataModel();
 
-                corDTExclusao = corDataModel.Excluir(id);
+                cor = corDataModel.Excluir(id);
             } catch (Exception ex) {
-                corDTExclusao = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTExclusao.Validacao = false;
-                corDTExclusao.Erro = true;
-                corDTExclusao.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }
 
-            return corDTExclusao;
+            return cor;
         }
 
-        public CorDataTransfer Listar()
+        public CorTransfer ConsultarPorId(int id)
         {
             CorDataModel corDataModel;
-            CorBusiness corBusiness;
-            CorDataTransfer corDTLista;
-
-            try {
-                corBusiness = new CorBusiness();
-                corDataModel = new CorDataModel();
-
-                corDTLista = corDataModel.Listar();
-            } catch (Exception ex) {
-                corDTLista = new CorDataTransfer();
-
-                corDTLista.Validacao = false;
-                corDTLista.Erro = true;
-                corDTLista.IncluirErroMensagem("Erro em CorModel Listar [" + ex.Message + "]");
-            } finally {
-                corDataModel = null;
-                corBusiness = null;
-            }
-
-            return corDTLista;
-        }
-
-        public CorDataTransfer ConsultarPorId(int id)
-        {
-            CorDataModel corDataModel;
-            CorDataTransfer corDTForm;
+            CorTransfer cor;
             
             try {
                 corDataModel = new CorDataModel();
 
-                corDTForm = corDataModel.ConsultarPorId(id);
+                cor = corDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                corDTForm = new CorDataTransfer();
+                cor = new CorTransfer();
 
-                corDTForm.Validacao = false;
-                corDTForm.Erro = true;
-                corDTForm.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
+                cor.Validacao = false;
+                cor.Erro = true;
+                cor.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }
 
-            return corDTForm;
+            return cor;
+        }
+
+        public CorTransfer Consultar(CorTransfer corListaTransfer)
+        {
+            CorDataModel corDataModel;
+            CorBusiness corBusiness;
+            CorTransfer corValidacao;
+            CorTransfer corLista;
+
+            try {
+                corBusiness = new CorBusiness();
+                corDataModel = new CorDataModel();
+
+                corValidacao = corBusiness.ValidarConsulta(corListaTransfer);
+
+                if (!corValidacao.Erro) {
+                    if (corValidacao.Validacao) {
+                        corLista = corDataModel.Consultar(corValidacao);
+
+                        if (corLista != null) {
+                            corLista.PaginaAtual = (corListaTransfer.PaginaAtual < 1 ? 1 : corListaTransfer.PaginaAtual);
+                            corLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.TotalRegistros) 
+                                / @Convert.ToDecimal(corLista.RegistrosPorPagina)));
+                        }
+                    } else {
+                        corLista = new CorTransfer(corValidacao);
+                    }
+                } else {
+                    corLista = new CorTransfer(corValidacao);
+                }
+            } catch (Exception ex) {
+                corLista = new CorTransfer();
+
+                corLista.Validacao = false;
+                corLista.Erro = true;
+                corLista.IncluirErroMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
+            } finally {
+                corDataModel = null;
+                corBusiness = null;
+                corValidacao = null;
+            }
+
+            return corLista;
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             EnderecoTipoModel enderecoTipoModel;
-            EnderecoTipoDataTransfer enderecoTipoForm;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
                 enderecoTipoModel = new EnderecoTipoModel();
 
                 if (id > 0) {
-                    enderecoTipoForm = enderecoTipoModel.ConsultarPorId(id);
+                    enderecoTipo = enderecoTipoModel.ConsultarPorId(id);
                 } else {
-                    enderecoTipoForm = null;
+                    enderecoTipo = null;
                 }
             } catch (Exception ex) {
-                enderecoTipoForm = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
                 
-                enderecoTipoForm.Validacao = false;
-                enderecoTipoForm.Erro = true;
-                enderecoTipoForm.IncluirErroMensagem("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
 
-            if (enderecoTipoForm.Erro || !enderecoTipoForm.Validacao) {
-                return BadRequest(enderecoTipoForm);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return BadRequest(enderecoTipo);
             } else {
-                return Ok(enderecoTipoForm);
+                return Ok(enderecoTipo);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             EnderecoTipoModel enderecoTipoModel;
-            EnderecoTipoDataTransfer enderecoTipoLista;
+            EnderecoTipoTransfer enderecoTipoLista;
 
             try {
                 enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoTipoLista = enderecoTipoModel.Listar();
+                enderecoTipoLista = enderecoTipoModel.Consultar(new EnderecoTipoTransfer());
             } catch (Exception ex) {
-                enderecoTipoLista = new EnderecoTipoDataTransfer();
+                enderecoTipoLista = new EnderecoTipoTransfer();
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
-            EnderecoTipoDataTransfer enderecoTipoRetorno;
+            EnderecoTipoTransfer enderecoTipoLista;
 
             try {
                 enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoTipoRetorno = enderecoTipoModel.Incluir(enderecoTipoDataTransfer);
+                enderecoTipoLista = enderecoTipoModel.Consultar(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoTipoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipoLista = new EnderecoTipoTransfer();
 
-                enderecoTipoRetorno.Validacao = false;
-                enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
+                enderecoTipoLista.Validacao = false;
+                enderecoTipoLista.Erro = true;
+                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Consultar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
 
-            if (enderecoTipoRetorno.Erro || !enderecoTipoRetorno.Validacao) {
-                return BadRequest(enderecoTipoRetorno);
+            if (enderecoTipoLista.Erro || !enderecoTipoLista.Validacao) {
+                return BadRequest(enderecoTipoLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = enderecoTipoRetorno.EnderecoTipo.Id });
+                return Ok(enderecoTipoLista);
+            }
+        }
 
-                return Created(uri, enderecoTipoRetorno);
+        [HttpPost]
+        public IActionResult Incluir(EnderecoTipoTransfer enderecoTipoTransfer)
+        {
+            EnderecoTipoModel enderecoTipoModel;
+            EnderecoTipoTransfer enderecoTipo;
+
+            try {
+                enderecoTipoModel = new EnderecoTipoModel();
+
+                enderecoTipo = enderecoTipoModel.Incluir(enderecoTipoTransfer);
+            } catch (Exception ex) {
+                enderecoTipo = new EnderecoTipoTransfer();
+
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
+            } finally {
+                enderecoTipoModel = null;
+            }
+
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return BadRequest(enderecoTipo);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = enderecoTipo.EnderecoTipo.Id });
+
+                return Created(uri, enderecoTipo);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public IActionResult Alterar(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
-            EnderecoTipoDataTransfer enderecoTipoRetorno;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
                 enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoTipoRetorno = enderecoTipoModel.Alterar(enderecoTipoDataTransfer);
+                enderecoTipo = enderecoTipoModel.Alterar(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoTipoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoRetorno.Validacao = false;
-                enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
 
-            if (enderecoTipoRetorno.Erro || !enderecoTipoRetorno.Validacao) {
-                return BadRequest(enderecoTipoRetorno);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return BadRequest(enderecoTipo);
             } else {
-                return Ok(enderecoTipoRetorno);
+                return Ok(enderecoTipo);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             EnderecoTipoModel enderecoTipoModel;
-            EnderecoTipoDataTransfer enderecoTipoRetorno;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
                 enderecoTipoModel = new EnderecoTipoModel();
 
-                enderecoTipoRetorno = enderecoTipoModel.Excluir(id);
+                enderecoTipo = enderecoTipoModel.Excluir(id);
             } catch (Exception ex) {
-                enderecoTipoRetorno = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoRetorno.Validacao = false;
-                enderecoTipoRetorno.Erro = true;
-                enderecoTipoRetorno.IncluirErroMensagem("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
 
-            if (enderecoTipoRetorno.Erro || !enderecoTipoRetorno.Validacao) {
-                return BadRequest(enderecoTipoRetorno);
+            if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
+                return BadRequest(enderecoTipo);
             } else {
-                return NoContent();
+                return Ok(enderecoTipo);
             }
         }
     }

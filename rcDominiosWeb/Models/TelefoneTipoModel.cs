@@ -1,195 +1,165 @@
 using System;
-using rcDominiosBusiness;
-using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using System.Threading.Tasks;
+using rcDominiosTransfers;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
     public class TelefoneTipoModel
     {
-        public TelefoneTipoDataTransfer Incluir(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public async Task<TelefoneTipoTransfer> Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
         {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTValidacao;
-            TelefoneTipoDataTransfer telefoneTipoDTInclusao;
+            TelefoneTipoService telefoneTipoService;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoBusiness = new TelefoneTipoBusiness();
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
+                telefoneTipoService = new TelefoneTipoService();
 
-                telefoneTipoDataTransfer.TelefoneTipo.Criacao = DateTime.Today;
-                telefoneTipoDataTransfer.TelefoneTipo.Alteracao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Criacao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipoDTValidacao = telefoneTipoBusiness.Validar(telefoneTipoDataTransfer);
-
-                if (!telefoneTipoDTValidacao.Erro) {
-                    if (telefoneTipoDTValidacao.Validacao) {
-                        telefoneTipoDTInclusao = telefoneTipoDataModel.Incluir(telefoneTipoDTValidacao);
-                    } else {
-                        telefoneTipoDTInclusao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
-                    }
-                } else {
-                    telefoneTipoDTInclusao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
-                }
+                telefoneTipo = await telefoneTipoService.Incluir(telefoneTipoTransfer);
             } catch (Exception ex) {
-                telefoneTipoDTInclusao = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTInclusao.Validacao = false;
-                telefoneTipoDTInclusao.Erro = true;
-                telefoneTipoDTInclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
             } finally {
-                telefoneTipoDataModel = null;
-                telefoneTipoBusiness = null;
-                telefoneTipoDTValidacao = null;
+                telefoneTipoService = null;
             }
 
-            return telefoneTipoDTInclusao;
+            return telefoneTipo;
         }
 
-        public TelefoneTipoDataTransfer Alterar(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public async Task<TelefoneTipoTransfer> Alterar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTValidacao;
-            TelefoneTipoDataTransfer telefoneTipoDTAlteracao;
+            TelefoneTipoService telefoneTipoService;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoBusiness = new TelefoneTipoBusiness();
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
+                telefoneTipoService = new TelefoneTipoService();
 
-                telefoneTipoDataTransfer.TelefoneTipo.Alteracao = DateTime.Today;
+                telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipoDTValidacao = telefoneTipoBusiness.Validar(telefoneTipoDataTransfer);
-
-                if (!telefoneTipoDTValidacao.Erro) {
-                    if (telefoneTipoDTValidacao.Validacao) {
-                        telefoneTipoDTAlteracao = telefoneTipoDataModel.Alterar(telefoneTipoDTValidacao);
-                    } else {
-                        telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
-                    }
-                } else {
-                    telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
-                }
+                telefoneTipo = await telefoneTipoService.Alterar(telefoneTipoTransfer);
             } catch (Exception ex) {
-                telefoneTipoDTAlteracao = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTAlteracao.Validacao = false;
-                telefoneTipoDTAlteracao.Erro = true;
-                telefoneTipoDTAlteracao.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
             } finally {
-                telefoneTipoDataModel = null;
-                telefoneTipoBusiness = null;
-                telefoneTipoDTValidacao = null;
+                telefoneTipoService = null;
             }
 
-            return telefoneTipoDTAlteracao;
+            return telefoneTipo;
         }
 
-        public TelefoneTipoDataTransfer Excluir(int id)
+        public async Task<TelefoneTipoTransfer> Excluir(int id)
         {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoDataTransfer telefoneTipoDTExclusao;
+            TelefoneTipoService telefoneTipoService;
+            TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
+                telefoneTipoService = new TelefoneTipoService();
 
-                telefoneTipoDTExclusao = telefoneTipoDataModel.Excluir(id);
+                telefoneTipo = await telefoneTipoService.Excluir(id);
             } catch (Exception ex) {
-                telefoneTipoDTExclusao = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTExclusao.Validacao = false;
-                telefoneTipoDTExclusao.Erro = true;
-                telefoneTipoDTExclusao.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
             } finally {
-                telefoneTipoDataModel = null;
+                telefoneTipoService = null;
             }
 
-            return telefoneTipoDTExclusao;
+            return telefoneTipo;
         }
 
-        public TelefoneTipoDataTransfer Listar()
+        public async Task<TelefoneTipoTransfer> ConsultarPorId(int id)
         {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTLista;
-
-            try {
-                telefoneTipoBusiness = new TelefoneTipoBusiness();
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
-
-                telefoneTipoDTLista = telefoneTipoDataModel.Listar();
-            } catch (Exception ex) {
-                telefoneTipoDTLista = new TelefoneTipoDataTransfer();
-
-                telefoneTipoDTLista.Validacao = false;
-                telefoneTipoDTLista.Erro = true;
-                telefoneTipoDTLista.IncluirErroMensagem("Erro em TelefoneTipoModel Listar [" + ex.Message + "]");
-            } finally {
-                telefoneTipoDataModel = null;
-                telefoneTipoBusiness = null;
-            }
-
-            return telefoneTipoDTLista;
-        }
-
-        public TelefoneTipoDataTransfer ConsultarPorId(int id)
-        {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoDataTransfer telefoneTipoDTForm;
+            TelefoneTipoService telefoneTipoService;
+            TelefoneTipoTransfer telefoneTipo;
             
             try {
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
+                telefoneTipoService = new TelefoneTipoService();
 
-                telefoneTipoDTForm = telefoneTipoDataModel.ConsultarPorId(id);
+                telefoneTipo = await telefoneTipoService.ConsultarPorId(id);
             } catch (Exception ex) {
-                telefoneTipoDTForm = new TelefoneTipoDataTransfer();
+                telefoneTipo = new TelefoneTipoTransfer();
 
-                telefoneTipoDTForm.Validacao = false;
-                telefoneTipoDTForm.Erro = true;
-                telefoneTipoDTForm.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
+                telefoneTipo.Validacao = false;
+                telefoneTipo.Erro = true;
+                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
-                telefoneTipoDataModel = null;
+                telefoneTipoService = null;
             }
 
-            return telefoneTipoDTForm;
+            return telefoneTipo;
         }
 
-        public TelefoneTipoDataTransfer Consultar(TelefoneTipoDataTransfer telefoneTipoDataTransfer)
+        public async Task<TelefoneTipoTransfer> Consultar(TelefoneTipoTransfer telefoneTipoListaTransfer)
         {
-            TelefoneTipoDataModel telefoneTipoDataModel;
-            TelefoneTipoBusiness telefoneTipoBusiness;
-            TelefoneTipoDataTransfer telefoneTipoDTValidacao;
-            TelefoneTipoDataTransfer telefoneTipoDTConsulta;
+            TelefoneTipoService telefoneTipoService;
+            TelefoneTipoTransfer telefoneTipoLista;
+            int dif = 0;
+            int qtdExibe = 5;
 
             try {
-                telefoneTipoBusiness = new TelefoneTipoBusiness();
-                telefoneTipoDataModel = new TelefoneTipoDataModel();
+                telefoneTipoService = new TelefoneTipoService();
 
-                telefoneTipoDTValidacao = telefoneTipoBusiness.ValidarConsulta(telefoneTipoDataTransfer);
+                telefoneTipoLista = await telefoneTipoService.Consultar(telefoneTipoListaTransfer);
 
-                if (!telefoneTipoDTValidacao.Erro) {
-                    if (telefoneTipoDTValidacao.Validacao) {
-                        telefoneTipoDTConsulta = telefoneTipoDataModel.Consultar(telefoneTipoDTValidacao);
-                    } else {
-                        telefoneTipoDTConsulta = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
+                if (telefoneTipoLista != null) {
+                    if (telefoneTipoLista.TotalRegistros > 1) {
+                        if (telefoneTipoLista.RegistrosPorPagina < 1) {
+                            telefoneTipoLista.RegistrosPorPagina = 30;
+                        } else if (telefoneTipoLista.RegistrosPorPagina > 200) {
+                            telefoneTipoLista.RegistrosPorPagina = 30;
+                        }
+
+                        telefoneTipoLista.PaginaAtual = (telefoneTipoLista.PaginaAtual < 1 ? 1 : telefoneTipoLista.PaginaAtual);
+                        telefoneTipoLista.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.TotalRegistros) 
+                            / @Convert.ToDecimal(telefoneTipoLista.RegistrosPorPagina)));
+                        telefoneTipoLista.TotalPaginas = (telefoneTipoLista.TotalPaginas < 1 ? 1 : telefoneTipoLista.TotalPaginas);
+
+                        qtdExibe = (qtdExibe > telefoneTipoLista.TotalPaginas ? telefoneTipoLista.TotalPaginas : qtdExibe);
+
+                        telefoneTipoLista.PaginaInicial = telefoneTipoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        telefoneTipoLista.PaginaFinal = telefoneTipoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        telefoneTipoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (telefoneTipoLista.PaginaFinal - 1) : telefoneTipoLista.PaginaFinal);
+
+                        if (telefoneTipoLista.PaginaInicial < 1) {
+                            dif = 1 - telefoneTipoLista.PaginaInicial;
+                            telefoneTipoLista.PaginaInicial += dif;
+                            telefoneTipoLista.PaginaFinal += dif;
+                        }
+
+                        if (telefoneTipoLista.PaginaFinal > telefoneTipoLista.TotalPaginas) {
+                            dif = telefoneTipoLista.PaginaFinal - telefoneTipoLista.TotalPaginas;
+                            telefoneTipoLista.PaginaInicial -= dif;
+                            telefoneTipoLista.PaginaFinal -= dif;
+                        }
+
+                        telefoneTipoLista.PaginaInicial = (telefoneTipoLista.PaginaInicial < 1 ? 1 : telefoneTipoLista.PaginaInicial);
+                        telefoneTipoLista.PaginaFinal = (telefoneTipoLista.PaginaFinal > telefoneTipoLista.TotalPaginas ? 
+                            telefoneTipoLista.TotalPaginas : telefoneTipoLista.PaginaFinal);
                     }
-                } else {
-                    telefoneTipoDTConsulta = new TelefoneTipoDataTransfer(telefoneTipoDTValidacao);
                 }
             } catch (Exception ex) {
-                telefoneTipoDTConsulta = new TelefoneTipoDataTransfer();
+                telefoneTipoLista = new TelefoneTipoTransfer();
 
-                telefoneTipoDTConsulta.Validacao = false;
-                telefoneTipoDTConsulta.Erro = true;
-                telefoneTipoDTConsulta.IncluirErroMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
+                telefoneTipoLista.Validacao = false;
+                telefoneTipoLista.Erro = true;
+                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
             } finally {
-                telefoneTipoDataModel = null;
-                telefoneTipoBusiness = null;
-                telefoneTipoDTValidacao = null;
+                telefoneTipoService = null;
             }
 
-            return telefoneTipoDTConsulta;
+            return telefoneTipoLista;
         }
     }
 }

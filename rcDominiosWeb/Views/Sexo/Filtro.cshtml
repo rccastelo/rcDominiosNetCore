@@ -1,4 +1,4 @@
-@model rcDominiosDataTransfers.SexoDataTransfer;
+@model rcDominiosTransfers.SexoTransfer;
 
 @{
     ViewData["Title"] = "";
@@ -9,7 +9,7 @@
         <a class="txtPadraoGrd" asp-controller="Sexo" asp-action="Index">Sexo</a> &nbsp;/&nbsp; Consulta
     </div>
     <br>
-    <form asp-controller="Sexo" asp-action="Consulta" asp-anti-forgery method="POST">
+    <form asp-controller="Sexo" asp-action="Consulta" asp-anti-forgery method="post">
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
@@ -24,7 +24,7 @@
                         &bull; Caracteres válidos: <b>números</b><br>
                         &bull; Aqui pode ser informado um <b>id específico</b> ou o <b>valor mínimo</b> de uma faixa de id para ser utilizado em conjunto com o campo <b>Até</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="6" asp-for="@Model.IdDe">
+                    <input class="form-control" type="number" maxlength="6" asp-for="@Model.IdDe">
                 </div>
             </div>
             <div class="col-2"></div>
@@ -41,14 +41,14 @@
                         &bull; Caracteres válidos: <b>números</b><br>
                         &bull; Aqui pode ser informado o <b>valor máximo</b> de uma faixa de id para ser utilizado em conjunto com o campo <b>De</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="6" asp-for="@Model.IdAte">
+                    <input class="form-control" type="number" maxlength="6" asp-for="@Model.IdAte">
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-12">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Sexo.Descricao">Descrição</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Descricao">Descrição</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popDescricao">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -58,14 +58,14 @@
                         &bull; Tamanho máximo: <b>100</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>acentos</b>, <b>números</b>, <b>traço</b> e <b>espaço em branco</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.Sexo.Descricao">
+                    <input class="form-control" type="text" maxlength="100" asp-for="@Model.Descricao">
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.Sexo.Codigo">Código</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Codigo">Código</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popCodigo">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -75,13 +75,13 @@
                         &bull; Tamanho máximo: <b>10</b> caracteres<br>
                         &bull; Caracteres válidos: <b>letras</b>, <b>números</b> e <b>traço</b><br>
                     </div>
-                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.Sexo.Codigo">
+                    <input class="form-control" type="text" maxlength="10" asp-for="@Model.Codigo">
                 </div>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.AtivoFiltro">Ativo</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Ativo">Ativo</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popAtivo">
                         <i class="iconePopObr fas fa-asterisk"></i>
@@ -89,7 +89,7 @@
                     <div id="popAtivo" class="popMsg">
                         &bull; Campo <span class="text-danger"><b>obrigatório</b></span><br>
                     </div>
-                    <select class="form-control" asp-for="@Model.AtivoFiltro">
+                    <select class="form-control" asp-for="@Model.Ativo">
                         <option value="true">Sim</option>
                         <option value="false">Não</option>
                         <option value="" selected>Todos</option>
@@ -164,6 +164,24 @@
                         &bull; Aqui pode ser informado o <b>valor máximo</b> de uma faixa de datas para ser utilizado em conjunto com o campo <b>De</b><br>
                     </div>
                     <input class="form-control" type="text" maxlength="10" readonly asp-for="@Model.AlteracaoAte">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label class="txtEtiqueta" asp-for="@Model.RegistrosPorPagina">Registros por página</label> &nbsp;
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
+                        data-object-content="#popRegistros">
+                        <i class="iconePopOpc fas fa-question"></i>
+                    </a>
+                    <div id="popRegistros" class="popMsg">
+                        &bull; Campo <span class="corOpcional"><b>opcional</b></span><br>
+                        &bull; Tamanho máximo: <b>3</b> caracteres<br>
+                        &bull; Caracteres válidos: <b>números</b><br>
+                        &bull; Quantidade de registros exibidos por página<br>
+                    </div>
+                    <input class="form-control" type="number" maxlength="3" asp-for="@Model.RegistrosPorPagina">
                 </div>
             </div>
         </div>

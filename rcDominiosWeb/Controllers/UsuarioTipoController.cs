@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class UsuarioTipoController : Controller
+  public class UsuarioTipoController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,44 +21,44 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoForm;
+            UsuarioTipoTransfer usuarioTipo;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
                 if (id > 0) {
-                    usuarioTipoForm = usuarioTipoModel.ConsultarPorId(id);
+                    usuarioTipo = await usuarioTipoModel.ConsultarPorId(id);
                 } else {
-                    usuarioTipoForm = null;
+                    usuarioTipo = null;
                 }
             } catch {
-                usuarioTipoForm = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
                 
-                usuarioTipoForm.Validacao = false;
-                usuarioTipoForm.Erro = true;
-                usuarioTipoForm.IncluirErroMensagem("Erro em UsuarioTipoController Form");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Form");
             } finally {
                 usuarioTipoModel = null;
             }
 
-            return View(usuarioTipoForm);
+            return View(usuarioTipo);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoLista;
+            UsuarioTipoTransfer usuarioTipoLista;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
-                usuarioTipoLista = usuarioTipoModel.Listar();
+                usuarioTipoLista = await usuarioTipoModel.Consultar(new UsuarioTipoTransfer());
             } catch (Exception ex) {
-                usuarioTipoLista = new UsuarioTipoDataTransfer();
+                usuarioTipoLista = new UsuarioTipoTransfer();
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
@@ -70,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public async Task<IActionResult> Consulta(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoLista;
+            UsuarioTipoTransfer usuarioTipoLista;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
-                usuarioTipoLista = usuarioTipoModel.Consultar(usuarioTipoDataTransfer);
+                usuarioTipoLista = await usuarioTipoModel.Consultar(usuarioTipoTransfer);
             } catch (Exception ex) {
-                usuarioTipoLista = new UsuarioTipoDataTransfer();
+                usuarioTipoLista = new UsuarioTipoTransfer();
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public async Task<IActionResult> Inclusao(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoRetorno;
+            UsuarioTipoTransfer usuarioTipo;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
-                usuarioTipoRetorno = usuarioTipoModel.Incluir(usuarioTipoDataTransfer);
+                usuarioTipo = await usuarioTipoModel.Incluir(usuarioTipoTransfer);
             } catch (Exception ex) {
-                usuarioTipoRetorno = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
 
-                usuarioTipoRetorno.Validacao = false;
-                usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.IncluirErroMensagem("Erro em UsuarioTipoController Inclusao [" + ex.Message + "]");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
 
-            if (usuarioTipoRetorno.Erro || !usuarioTipoRetorno.Validacao) {
-                return View("Form", usuarioTipoRetorno);
+            if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
+                return View("Form", usuarioTipo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public async Task<IActionResult> Alteracao(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoRetorno;
+            UsuarioTipoTransfer usuarioTipo;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
-                usuarioTipoRetorno = usuarioTipoModel.Alterar(usuarioTipoDataTransfer);
+                usuarioTipo = await usuarioTipoModel.Alterar(usuarioTipoTransfer);
             } catch (Exception ex) {
-                usuarioTipoRetorno = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
 
-                usuarioTipoRetorno.Validacao = false;
-                usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.IncluirErroMensagem("Erro em UsuarioTipoController Alteracao [" + ex.Message + "]");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Alteracao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
 
-            if (usuarioTipoRetorno.Erro || !usuarioTipoRetorno.Validacao) {
-                return View("Form", usuarioTipoRetorno);
+            if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
+                return View("Form", usuarioTipo);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
             UsuarioTipoModel usuarioTipoModel;
-            UsuarioTipoDataTransfer usuarioTipoRetorno;
+            UsuarioTipoTransfer usuarioTipo;
 
             try {
                 usuarioTipoModel = new UsuarioTipoModel();
 
-                usuarioTipoRetorno = usuarioTipoModel.Excluir(id);
+                usuarioTipo = await usuarioTipoModel.Excluir(id);
             } catch (Exception ex) {
-                usuarioTipoRetorno = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
 
-                usuarioTipoRetorno.Validacao = false;
-                usuarioTipoRetorno.Erro = true;
-                usuarioTipoRetorno.IncluirErroMensagem("Erro em UsuarioTipoController Exclusao [" + ex.Message + "]");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Exclusao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
 
-            if (usuarioTipoRetorno.Erro || !usuarioTipoRetorno.Validacao) {
-                return View("Form", usuarioTipoRetorno);
+            if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
+                return View("Form", usuarioTipo);
             } else {
                 return RedirectToAction("Lista");
             }

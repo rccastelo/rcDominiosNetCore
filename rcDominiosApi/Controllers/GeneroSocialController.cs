@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             GeneroSocialModel generoSocialModel;
-            GeneroSocialDataTransfer generoSocialForm;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialModel = new GeneroSocialModel();
 
                 if (id > 0) {
-                    generoSocialForm = generoSocialModel.ConsultarPorId(id);
+                    generoSocial = generoSocialModel.ConsultarPorId(id);
                 } else {
-                    generoSocialForm = null;
+                    generoSocial = null;
                 }
             } catch (Exception ex) {
-                generoSocialForm = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
                 
-                generoSocialForm.Validacao = false;
-                generoSocialForm.Erro = true;
-                generoSocialForm.IncluirErroMensagem("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
 
-            if (generoSocialForm.Erro || !generoSocialForm.Validacao) {
-                return BadRequest(generoSocialForm);
+            if (generoSocial.Erro || !generoSocial.Validacao) {
+                return BadRequest(generoSocial);
             } else {
-                return Ok(generoSocialForm);
+                return Ok(generoSocial);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             GeneroSocialModel generoSocialModel;
-            GeneroSocialDataTransfer generoSocialLista;
+            GeneroSocialTransfer generoSocialLista;
 
             try {
                 generoSocialModel = new GeneroSocialModel();
 
-                generoSocialLista = generoSocialModel.Listar();
+                generoSocialLista = generoSocialModel.Consultar(new GeneroSocialTransfer());
             } catch (Exception ex) {
-                generoSocialLista = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialTransfer();
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(GeneroSocialDataTransfer generoSocialDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialModel generoSocialModel;
-            GeneroSocialDataTransfer generoSocialRetorno;
+            GeneroSocialTransfer generoSocialLista;
 
             try {
                 generoSocialModel = new GeneroSocialModel();
 
-                generoSocialRetorno = generoSocialModel.Incluir(generoSocialDataTransfer);
+                generoSocialLista = generoSocialModel.Consultar(generoSocialTransfer);
             } catch (Exception ex) {
-                generoSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocialLista = new GeneroSocialTransfer();
 
-                generoSocialRetorno.Validacao = false;
-                generoSocialRetorno.Erro = true;
-                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
 
-            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
-                return BadRequest(generoSocialRetorno);
+            if (generoSocialLista.Erro || !generoSocialLista.Validacao) {
+                return BadRequest(generoSocialLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = generoSocialRetorno.GeneroSocial.Id });
+                return Ok(generoSocialLista);
+            }
+        }
 
-                return Created(uri, generoSocialRetorno);
+        [HttpPost]
+        public IActionResult Incluir(GeneroSocialTransfer generoSocialTransfer)
+        {
+            GeneroSocialModel generoSocialModel;
+            GeneroSocialTransfer generoSocial;
+
+            try {
+                generoSocialModel = new GeneroSocialModel();
+
+                generoSocial = generoSocialModel.Incluir(generoSocialTransfer);
+            } catch (Exception ex) {
+                generoSocial = new GeneroSocialTransfer();
+
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
+            } finally {
+                generoSocialModel = null;
+            }
+
+            if (generoSocial.Erro || !generoSocial.Validacao) {
+                return BadRequest(generoSocial);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = generoSocial.GeneroSocial.Id });
+
+                return Created(uri, generoSocial);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public IActionResult Alterar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialModel generoSocialModel;
-            GeneroSocialDataTransfer generoSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialModel = new GeneroSocialModel();
 
-                generoSocialRetorno = generoSocialModel.Alterar(generoSocialDataTransfer);
+                generoSocial = generoSocialModel.Alterar(generoSocialTransfer);
             } catch (Exception ex) {
-                generoSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialRetorno.Validacao = false;
-                generoSocialRetorno.Erro = true;
-                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
 
-            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
-                return BadRequest(generoSocialRetorno);
+            if (generoSocial.Erro || !generoSocial.Validacao) {
+                return BadRequest(generoSocial);
             } else {
-                return Ok(generoSocialRetorno);
+                return Ok(generoSocial);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             GeneroSocialModel generoSocialModel;
-            GeneroSocialDataTransfer generoSocialRetorno;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialModel = new GeneroSocialModel();
 
-                generoSocialRetorno = generoSocialModel.Excluir(id);
+                generoSocial = generoSocialModel.Excluir(id);
             } catch (Exception ex) {
-                generoSocialRetorno = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialRetorno.Validacao = false;
-                generoSocialRetorno.Erro = true;
-                generoSocialRetorno.IncluirErroMensagem("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
 
-            if (generoSocialRetorno.Erro || !generoSocialRetorno.Validacao) {
-                return BadRequest(generoSocialRetorno);
+            if (generoSocial.Erro || !generoSocial.Validacao) {
+                return BadRequest(generoSocial);
             } else {
-                return NoContent();
+                return Ok(generoSocial);
             }
         }
     }

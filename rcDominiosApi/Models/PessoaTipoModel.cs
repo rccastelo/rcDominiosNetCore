@@ -1,7 +1,7 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
@@ -130,12 +130,12 @@ namespace rcDominiosApi.Models
             return pessoaTipo;
         }
 
-        public PessoaTipoListaTransfer Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public PessoaTipoTransfer Consultar(PessoaTipoTransfer pessoaTipoListaTransfer)
         {
             PessoaTipoDataModel pessoaTipoDataModel;
             PessoaTipoBusiness pessoaTipoBusiness;
-            PessoaTipoListaTransfer pessoaTipoValidacao;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoValidacao;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoBusiness = new PessoaTipoBusiness();
@@ -154,13 +154,13 @@ namespace rcDominiosApi.Models
                                 / @Convert.ToDecimal(pessoaTipoLista.RegistrosPorPagina)));
                         }
                     } else {
-                        pessoaTipoLista = new PessoaTipoListaTransfer(pessoaTipoValidacao);
+                        pessoaTipoLista = new PessoaTipoTransfer(pessoaTipoValidacao);
                     }
                 } else {
-                    pessoaTipoLista = new PessoaTipoListaTransfer(pessoaTipoValidacao);
+                    pessoaTipoLista = new PessoaTipoTransfer(pessoaTipoValidacao);
                 }
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

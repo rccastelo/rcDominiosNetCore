@@ -1,4 +1,4 @@
-namespace rcDominiosDataTransfers
+namespace rcDominiosTransfers
 {
     public class UsuarioRequest
     {

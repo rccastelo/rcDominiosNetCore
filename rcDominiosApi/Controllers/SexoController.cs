@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -15,30 +15,30 @@ namespace rcDominiosApi.Controllers
         public IActionResult ConsultarPorId(int id)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoForm;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
                 if (id > 0) {
-                    sexoForm = sexoModel.ConsultarPorId(id);
+                    sexo = sexoModel.ConsultarPorId(id);
                 } else {
-                    sexoForm = null;
+                    sexo = null;
                 }
             } catch (Exception ex) {
-                sexoForm = new SexoDataTransfer();
+                sexo = new SexoTransfer();
                 
-                sexoForm.Validacao = false;
-                sexoForm.Erro = true;
-                sexoForm.IncluirErroMensagem("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoForm.Erro || !sexoForm.Validacao) {
-                return BadRequest(sexoForm);
+            if (sexo.Erro || !sexo.Validacao) {
+                return BadRequest(sexo);
             } else {
-                return Ok(sexoForm);
+                return Ok(sexo);
             }
         }
 
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoLista;
+            SexoTransfer sexoLista;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoLista = sexoModel.Listar();
+                sexoLista = sexoModel.Consultar(new SexoTransfer());
             } catch (Exception ex) {
-                sexoLista = new SexoDataTransfer();
+                sexoLista = new SexoTransfer();
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
@@ -69,59 +69,86 @@ namespace rcDominiosApi.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Incluir(SexoDataTransfer sexoDataTransfer)
+        [HttpPost("lista")]
+        public IActionResult Consultar(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexoLista;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Incluir(sexoDataTransfer);
+                sexoLista = sexoModel.Consultar(sexoTransfer);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexoLista = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Incluir [" + ex.Message + "]");
+                sexoLista.Validacao = false;
+                sexoLista.Erro = true;
+                sexoLista.IncluirErroMensagem("Erro em SexoController Consultar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return BadRequest(sexoRetorno);
+            if (sexoLista.Erro || !sexoLista.Validacao) {
+                return BadRequest(sexoLista);
             } else {
-                string uri = Url.Action("ConsultarPorId", new { id = sexoRetorno.Sexo.Id });
+                return Ok(sexoLista);
+            }
+        }
 
-                return Created(uri, sexoRetorno);
+        [HttpPost]
+        public IActionResult Incluir(SexoTransfer sexoTransfer)
+        {
+            SexoModel sexoModel;
+            SexoTransfer sexo;
+
+            try {
+                sexoModel = new SexoModel();
+
+                sexo = sexoModel.Incluir(sexoTransfer);
+            } catch (Exception ex) {
+                sexo = new SexoTransfer();
+
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Incluir [" + ex.Message + "]");
+            } finally {
+                sexoModel = null;
+            }
+
+            if (sexo.Erro || !sexo.Validacao) {
+                return BadRequest(sexo);
+            } else {
+                string uri = Url.Action("ConsultarPorId", new { id = sexo.Sexo.Id });
+
+                return Created(uri, sexo);
             }
         }
 
         [HttpPut]
-        public IActionResult Alterar(SexoDataTransfer sexoDataTransfer)
+        public IActionResult Alterar(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Alterar(sexoDataTransfer);
+                sexo = sexoModel.Alterar(sexoTransfer);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Alterar [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Alterar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return BadRequest(sexoRetorno);
+            if (sexo.Erro || !sexo.Validacao) {
+                return BadRequest(sexo);
             } else {
-                return Ok(sexoRetorno);
+                return Ok(sexo);
             }
         }
 
@@ -129,26 +156,26 @@ namespace rcDominiosApi.Controllers
         public IActionResult Excluir(int id)
         {
             SexoModel sexoModel;
-            SexoDataTransfer sexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoModel = new SexoModel();
 
-                sexoRetorno = sexoModel.Excluir(id);
+                sexo = sexoModel.Excluir(id);
             } catch (Exception ex) {
-                sexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoRetorno.Validacao = false;
-                sexoRetorno.Erro = true;
-                sexoRetorno.IncluirErroMensagem("Erro em SexoController Excluir [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoController Excluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
 
-            if (sexoRetorno.Erro || !sexoRetorno.Validacao) {
-                return BadRequest(sexoRetorno);
+            if (sexo.Erro || !sexo.Validacao) {
+                return BadRequest(sexo);
             } else {
-                return NoContent();
+                return Ok(sexo);
             }
         }
     }

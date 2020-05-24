@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
@@ -100,10 +100,10 @@ namespace rcDominiosWeb.Models
             return pessoaTipo;
         }
 
-        public async Task<PessoaTipoListaTransfer> Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public async Task<PessoaTipoTransfer> Consultar(PessoaTipoTransfer pessoaTipoListaTransfer)
         {
             PessoaTipoService pessoaTipoService;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
             int dif = 0;
             int qtdExibe = 5;
 
@@ -150,7 +150,7 @@ namespace rcDominiosWeb.Models
                     }
                 }
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

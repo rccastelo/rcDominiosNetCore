@@ -1,158 +1,177 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
     public class GeneroSocialModel
     {
-        public GeneroSocialDataTransfer Incluir(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public GeneroSocialTransfer Incluir(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialDataModel generoSocialDataModel;
             GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTValidacao;
-            GeneroSocialDataTransfer generoSocialDTInclusao;
+            GeneroSocialTransfer generoSocialValidacao;
+            GeneroSocialTransfer generoSocialInclusao;
 
             try {
                 generoSocialBusiness = new GeneroSocialBusiness();
                 generoSocialDataModel = new GeneroSocialDataModel();
 
-                generoSocialDataTransfer.GeneroSocial.Criacao = DateTime.Today;
-                generoSocialDataTransfer.GeneroSocial.Alteracao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Criacao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocialDTValidacao = generoSocialBusiness.Validar(generoSocialDataTransfer);
+                generoSocialValidacao = generoSocialBusiness.Validar(generoSocialTransfer);
 
-                if (!generoSocialDTValidacao.Erro) {
-                    if (generoSocialDTValidacao.Validacao) {
-                        generoSocialDTInclusao = generoSocialDataModel.Incluir(generoSocialDTValidacao);
+                if (!generoSocialValidacao.Erro) {
+                    if (generoSocialValidacao.Validacao) {
+                        generoSocialInclusao = generoSocialDataModel.Incluir(generoSocialValidacao);
                     } else {
-                        generoSocialDTInclusao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
+                        generoSocialInclusao = new GeneroSocialTransfer(generoSocialValidacao);
                     }
                 } else {
-                    generoSocialDTInclusao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
+                    generoSocialInclusao = new GeneroSocialTransfer(generoSocialValidacao);
                 }
             } catch (Exception ex) {
-                generoSocialDTInclusao = new GeneroSocialDataTransfer();
+                generoSocialInclusao = new GeneroSocialTransfer();
 
-                generoSocialDTInclusao.Validacao = false;
-                generoSocialDTInclusao.Erro = true;
-                generoSocialDTInclusao.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
+                generoSocialInclusao.Validacao = false;
+                generoSocialInclusao.Erro = true;
+                generoSocialInclusao.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;
-                generoSocialDTValidacao = null;
+                generoSocialValidacao = null;
             }
 
-            return generoSocialDTInclusao;
+            return generoSocialInclusao;
         }
 
-        public GeneroSocialDataTransfer Alterar(GeneroSocialDataTransfer generoSocialDataTransfer)
+        public GeneroSocialTransfer Alterar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialDataModel generoSocialDataModel;
             GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTValidacao;
-            GeneroSocialDataTransfer generoSocialDTAlteracao;
+            GeneroSocialTransfer generoSocialValidacao;
+            GeneroSocialTransfer generoSocialAlteracao;
 
             try {
                 generoSocialBusiness = new GeneroSocialBusiness();
                 generoSocialDataModel = new GeneroSocialDataModel();
 
-                generoSocialDataTransfer.GeneroSocial.Alteracao = DateTime.Today;
+                generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocialDTValidacao = generoSocialBusiness.Validar(generoSocialDataTransfer);
+                generoSocialValidacao = generoSocialBusiness.Validar(generoSocialTransfer);
 
-                if (!generoSocialDTValidacao.Erro) {
-                    if (generoSocialDTValidacao.Validacao) {
-                        generoSocialDTAlteracao = generoSocialDataModel.Alterar(generoSocialDTValidacao);
+                if (!generoSocialValidacao.Erro) {
+                    if (generoSocialValidacao.Validacao) {
+                        generoSocialAlteracao = generoSocialDataModel.Alterar(generoSocialValidacao);
                     } else {
-                        generoSocialDTAlteracao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
+                        generoSocialAlteracao = new GeneroSocialTransfer(generoSocialValidacao);
                     }
                 } else {
-                    generoSocialDTAlteracao = new GeneroSocialDataTransfer(generoSocialDTValidacao);
+                    generoSocialAlteracao = new GeneroSocialTransfer(generoSocialValidacao);
                 }
             } catch (Exception ex) {
-                generoSocialDTAlteracao = new GeneroSocialDataTransfer();
+                generoSocialAlteracao = new GeneroSocialTransfer();
 
-                generoSocialDTAlteracao.Validacao = false;
-                generoSocialDTAlteracao.Erro = true;
-                generoSocialDTAlteracao.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
+                generoSocialAlteracao.Validacao = false;
+                generoSocialAlteracao.Erro = true;
+                generoSocialAlteracao.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
                 generoSocialBusiness = null;
-                generoSocialDTValidacao = null;
+                generoSocialValidacao = null;
             }
 
-            return generoSocialDTAlteracao;
+            return generoSocialAlteracao;
         }
 
-        public GeneroSocialDataTransfer Excluir(int id)
+        public GeneroSocialTransfer Excluir(int id)
         {
             GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialDataTransfer generoSocialDTExclusao;
+            GeneroSocialTransfer generoSocial;
 
             try {
                 generoSocialDataModel = new GeneroSocialDataModel();
 
-                generoSocialDTExclusao = generoSocialDataModel.Excluir(id);
+                generoSocial = generoSocialDataModel.Excluir(id);
             } catch (Exception ex) {
-                generoSocialDTExclusao = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTExclusao.Validacao = false;
-                generoSocialDTExclusao.Erro = true;
-                generoSocialDTExclusao.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
             }
 
-            return generoSocialDTExclusao;
+            return generoSocial;
         }
 
-        public GeneroSocialDataTransfer Listar()
+        public GeneroSocialTransfer ConsultarPorId(int id)
         {
             GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialBusiness generoSocialBusiness;
-            GeneroSocialDataTransfer generoSocialDTLista;
-
-            try {
-                generoSocialBusiness = new GeneroSocialBusiness();
-                generoSocialDataModel = new GeneroSocialDataModel();
-
-                generoSocialDTLista = generoSocialDataModel.Listar();
-            } catch (Exception ex) {
-                generoSocialDTLista = new GeneroSocialDataTransfer();
-
-                generoSocialDTLista.Validacao = false;
-                generoSocialDTLista.Erro = true;
-                generoSocialDTLista.IncluirErroMensagem("Erro em GeneroSocialModel Listar [" + ex.Message + "]");
-            } finally {
-                generoSocialDataModel = null;
-                generoSocialBusiness = null;
-            }
-
-            return generoSocialDTLista;
-        }
-
-        public GeneroSocialDataTransfer ConsultarPorId(int id)
-        {
-            GeneroSocialDataModel generoSocialDataModel;
-            GeneroSocialDataTransfer generoSocialDTForm;
+            GeneroSocialTransfer generoSocial;
             
             try {
                 generoSocialDataModel = new GeneroSocialDataModel();
 
-                generoSocialDTForm = generoSocialDataModel.ConsultarPorId(id);
+                generoSocial = generoSocialDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                generoSocialDTForm = new GeneroSocialDataTransfer();
+                generoSocial = new GeneroSocialTransfer();
 
-                generoSocialDTForm.Validacao = false;
-                generoSocialDTForm.Erro = true;
-                generoSocialDTForm.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
+                generoSocial.Validacao = false;
+                generoSocial.Erro = true;
+                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialDataModel = null;
             }
 
-            return generoSocialDTForm;
+            return generoSocial;
+        }
+
+        public GeneroSocialTransfer Consultar(GeneroSocialTransfer generoSocialListaTransfer)
+        {
+            GeneroSocialDataModel generoSocialDataModel;
+            GeneroSocialBusiness generoSocialBusiness;
+            GeneroSocialTransfer generoSocialValidacao;
+            GeneroSocialTransfer generoSocialLista;
+
+            try {
+                generoSocialBusiness = new GeneroSocialBusiness();
+                generoSocialDataModel = new GeneroSocialDataModel();
+
+                generoSocialValidacao = generoSocialBusiness.ValidarConsulta(generoSocialListaTransfer);
+
+                if (!generoSocialValidacao.Erro) {
+                    if (generoSocialValidacao.Validacao) {
+                        generoSocialLista = generoSocialDataModel.Consultar(generoSocialValidacao);
+
+                        if (generoSocialLista != null) {
+                            generoSocialLista.PaginaAtual = (generoSocialListaTransfer.PaginaAtual < 1 ? 1 : generoSocialListaTransfer.PaginaAtual);
+                            generoSocialLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.TotalRegistros) 
+                                / @Convert.ToDecimal(generoSocialLista.RegistrosPorPagina)));
+                        }
+                    } else {
+                        generoSocialLista = new GeneroSocialTransfer(generoSocialValidacao);
+                    }
+                } else {
+                    generoSocialLista = new GeneroSocialTransfer(generoSocialValidacao);
+                }
+            } catch (Exception ex) {
+                generoSocialLista = new GeneroSocialTransfer();
+
+                generoSocialLista.Validacao = false;
+                generoSocialLista.Erro = true;
+                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
+            } finally {
+                generoSocialDataModel = null;
+                generoSocialBusiness = null;
+                generoSocialValidacao = null;
+            }
+
+            return generoSocialLista;
         }
     }
 }

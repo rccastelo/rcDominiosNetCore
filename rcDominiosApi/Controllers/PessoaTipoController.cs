@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Controllers
 {
@@ -46,14 +46,14 @@ namespace rcDominiosApi.Controllers
         public IActionResult Listar()
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = pessoaTipoModel.Consultar(new PessoaTipoListaTransfer());
+                pessoaTipoLista = pessoaTipoModel.Consultar(new PessoaTipoTransfer());
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
@@ -70,17 +70,17 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
-        public IActionResult Consultar(PessoaTipoListaTransfer pessoaTipoListaTransfer)
+        public IActionResult Consultar(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
-            PessoaTipoListaTransfer pessoaTipoLista;
+            PessoaTipoTransfer pessoaTipoLista;
 
             try {
                 pessoaTipoModel = new PessoaTipoModel();
 
-                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipoListaTransfer);
+                pessoaTipoLista = pessoaTipoModel.Consultar(pessoaTipoTransfer);
             } catch (Exception ex) {
-                pessoaTipoLista = new PessoaTipoListaTransfer();
+                pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;

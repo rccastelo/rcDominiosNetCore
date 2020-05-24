@@ -1,158 +1,177 @@
 using System;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 
 namespace rcDominiosApi.Models
 {
     public class UsuarioTipoModel
     {
-        public UsuarioTipoDataTransfer Incluir(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public UsuarioTipoTransfer Incluir(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoDataModel usuarioTipoDataModel;
             UsuarioTipoBusiness usuarioTipoBusiness;
-            UsuarioTipoDataTransfer usuarioTipoDTValidacao;
-            UsuarioTipoDataTransfer usuarioTipoDTInclusao;
+            UsuarioTipoTransfer usuarioTipoValidacao;
+            UsuarioTipoTransfer usuarioTipoInclusao;
 
             try {
                 usuarioTipoBusiness = new UsuarioTipoBusiness();
                 usuarioTipoDataModel = new UsuarioTipoDataModel();
 
-                usuarioTipoDataTransfer.UsuarioTipo.Criacao = DateTime.Today;
-                usuarioTipoDataTransfer.UsuarioTipo.Alteracao = DateTime.Today;
+                usuarioTipoTransfer.UsuarioTipo.Criacao = DateTime.Today;
+                usuarioTipoTransfer.UsuarioTipo.Alteracao = DateTime.Today;
 
-                usuarioTipoDTValidacao = usuarioTipoBusiness.Validar(usuarioTipoDataTransfer);
+                usuarioTipoValidacao = usuarioTipoBusiness.Validar(usuarioTipoTransfer);
 
-                if (!usuarioTipoDTValidacao.Erro) {
-                    if (usuarioTipoDTValidacao.Validacao) {
-                        usuarioTipoDTInclusao = usuarioTipoDataModel.Incluir(usuarioTipoDTValidacao);
+                if (!usuarioTipoValidacao.Erro) {
+                    if (usuarioTipoValidacao.Validacao) {
+                        usuarioTipoInclusao = usuarioTipoDataModel.Incluir(usuarioTipoValidacao);
                     } else {
-                        usuarioTipoDTInclusao = new UsuarioTipoDataTransfer(usuarioTipoDTValidacao);
+                        usuarioTipoInclusao = new UsuarioTipoTransfer(usuarioTipoValidacao);
                     }
                 } else {
-                    usuarioTipoDTInclusao = new UsuarioTipoDataTransfer(usuarioTipoDTValidacao);
+                    usuarioTipoInclusao = new UsuarioTipoTransfer(usuarioTipoValidacao);
                 }
             } catch (Exception ex) {
-                usuarioTipoDTInclusao = new UsuarioTipoDataTransfer();
+                usuarioTipoInclusao = new UsuarioTipoTransfer();
 
-                usuarioTipoDTInclusao.Validacao = false;
-                usuarioTipoDTInclusao.Erro = true;
-                usuarioTipoDTInclusao.IncluirErroMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
+                usuarioTipoInclusao.Validacao = false;
+                usuarioTipoInclusao.Erro = true;
+                usuarioTipoInclusao.IncluirErroMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;
-                usuarioTipoDTValidacao = null;
+                usuarioTipoValidacao = null;
             }
 
-            return usuarioTipoDTInclusao;
+            return usuarioTipoInclusao;
         }
 
-        public UsuarioTipoDataTransfer Alterar(UsuarioTipoDataTransfer usuarioTipoDataTransfer)
+        public UsuarioTipoTransfer Alterar(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoDataModel usuarioTipoDataModel;
             UsuarioTipoBusiness usuarioTipoBusiness;
-            UsuarioTipoDataTransfer usuarioTipoDTValidacao;
-            UsuarioTipoDataTransfer usuarioTipoDTAlteracao;
+            UsuarioTipoTransfer usuarioTipoValidacao;
+            UsuarioTipoTransfer usuarioTipoAlteracao;
 
             try {
                 usuarioTipoBusiness = new UsuarioTipoBusiness();
                 usuarioTipoDataModel = new UsuarioTipoDataModel();
 
-                usuarioTipoDataTransfer.UsuarioTipo.Alteracao = DateTime.Today;
+                usuarioTipoTransfer.UsuarioTipo.Alteracao = DateTime.Today;
 
-                usuarioTipoDTValidacao = usuarioTipoBusiness.Validar(usuarioTipoDataTransfer);
+                usuarioTipoValidacao = usuarioTipoBusiness.Validar(usuarioTipoTransfer);
 
-                if (!usuarioTipoDTValidacao.Erro) {
-                    if (usuarioTipoDTValidacao.Validacao) {
-                        usuarioTipoDTAlteracao = usuarioTipoDataModel.Alterar(usuarioTipoDTValidacao);
+                if (!usuarioTipoValidacao.Erro) {
+                    if (usuarioTipoValidacao.Validacao) {
+                        usuarioTipoAlteracao = usuarioTipoDataModel.Alterar(usuarioTipoValidacao);
                     } else {
-                        usuarioTipoDTAlteracao = new UsuarioTipoDataTransfer(usuarioTipoDTValidacao);
+                        usuarioTipoAlteracao = new UsuarioTipoTransfer(usuarioTipoValidacao);
                     }
                 } else {
-                    usuarioTipoDTAlteracao = new UsuarioTipoDataTransfer(usuarioTipoDTValidacao);
+                    usuarioTipoAlteracao = new UsuarioTipoTransfer(usuarioTipoValidacao);
                 }
             } catch (Exception ex) {
-                usuarioTipoDTAlteracao = new UsuarioTipoDataTransfer();
+                usuarioTipoAlteracao = new UsuarioTipoTransfer();
 
-                usuarioTipoDTAlteracao.Validacao = false;
-                usuarioTipoDTAlteracao.Erro = true;
-                usuarioTipoDTAlteracao.IncluirErroMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
+                usuarioTipoAlteracao.Validacao = false;
+                usuarioTipoAlteracao.Erro = true;
+                usuarioTipoAlteracao.IncluirErroMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
                 usuarioTipoBusiness = null;
-                usuarioTipoDTValidacao = null;
+                usuarioTipoValidacao = null;
             }
 
-            return usuarioTipoDTAlteracao;
+            return usuarioTipoAlteracao;
         }
 
-        public UsuarioTipoDataTransfer Excluir(int id)
+        public UsuarioTipoTransfer Excluir(int id)
         {
             UsuarioTipoDataModel usuarioTipoDataModel;
-            UsuarioTipoDataTransfer usuarioTipoDTExclusao;
+            UsuarioTipoTransfer usuarioTipo;
 
             try {
                 usuarioTipoDataModel = new UsuarioTipoDataModel();
 
-                usuarioTipoDTExclusao = usuarioTipoDataModel.Excluir(id);
+                usuarioTipo = usuarioTipoDataModel.Excluir(id);
             } catch (Exception ex) {
-                usuarioTipoDTExclusao = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
 
-                usuarioTipoDTExclusao.Validacao = false;
-                usuarioTipoDTExclusao.Erro = true;
-                usuarioTipoDTExclusao.IncluirErroMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
             }
 
-            return usuarioTipoDTExclusao;
+            return usuarioTipo;
         }
 
-        public UsuarioTipoDataTransfer Listar()
+        public UsuarioTipoTransfer ConsultarPorId(int id)
         {
             UsuarioTipoDataModel usuarioTipoDataModel;
-            UsuarioTipoBusiness usuarioTipoBusiness;
-            UsuarioTipoDataTransfer usuarioTipoDTLista;
-
-            try {
-                usuarioTipoBusiness = new UsuarioTipoBusiness();
-                usuarioTipoDataModel = new UsuarioTipoDataModel();
-
-                usuarioTipoDTLista = usuarioTipoDataModel.Listar();
-            } catch (Exception ex) {
-                usuarioTipoDTLista = new UsuarioTipoDataTransfer();
-
-                usuarioTipoDTLista.Validacao = false;
-                usuarioTipoDTLista.Erro = true;
-                usuarioTipoDTLista.IncluirErroMensagem("Erro em UsuarioTipoModel Listar [" + ex.Message + "]");
-            } finally {
-                usuarioTipoDataModel = null;
-                usuarioTipoBusiness = null;
-            }
-
-            return usuarioTipoDTLista;
-        }
-
-        public UsuarioTipoDataTransfer ConsultarPorId(int id)
-        {
-            UsuarioTipoDataModel usuarioTipoDataModel;
-            UsuarioTipoDataTransfer usuarioTipoDTForm;
+            UsuarioTipoTransfer usuarioTipo;
             
             try {
                 usuarioTipoDataModel = new UsuarioTipoDataModel();
 
-                usuarioTipoDTForm = usuarioTipoDataModel.ConsultarPorId(id);
+                usuarioTipo = usuarioTipoDataModel.ConsultarPorId(id);
             } catch (Exception ex) {
-                usuarioTipoDTForm = new UsuarioTipoDataTransfer();
+                usuarioTipo = new UsuarioTipoTransfer();
 
-                usuarioTipoDTForm.Validacao = false;
-                usuarioTipoDTForm.Erro = true;
-                usuarioTipoDTForm.IncluirErroMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
+                usuarioTipo.Validacao = false;
+                usuarioTipo.Erro = true;
+                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoDataModel = null;
             }
 
-            return usuarioTipoDTForm;
+            return usuarioTipo;
+        }
+
+        public UsuarioTipoTransfer Consultar(UsuarioTipoTransfer usuarioTipoListaTransfer)
+        {
+            UsuarioTipoDataModel usuarioTipoDataModel;
+            UsuarioTipoBusiness usuarioTipoBusiness;
+            UsuarioTipoTransfer usuarioTipoValidacao;
+            UsuarioTipoTransfer usuarioTipoLista;
+
+            try {
+                usuarioTipoBusiness = new UsuarioTipoBusiness();
+                usuarioTipoDataModel = new UsuarioTipoDataModel();
+
+                usuarioTipoValidacao = usuarioTipoBusiness.ValidarConsulta(usuarioTipoListaTransfer);
+
+                if (!usuarioTipoValidacao.Erro) {
+                    if (usuarioTipoValidacao.Validacao) {
+                        usuarioTipoLista = usuarioTipoDataModel.Consultar(usuarioTipoValidacao);
+
+                        if (usuarioTipoLista != null) {
+                            usuarioTipoLista.PaginaAtual = (usuarioTipoListaTransfer.PaginaAtual < 1 ? 1 : usuarioTipoListaTransfer.PaginaAtual);
+                            usuarioTipoLista.TotalPaginas = 
+                                Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioTipoLista.TotalRegistros) 
+                                / @Convert.ToDecimal(usuarioTipoLista.RegistrosPorPagina)));
+                        }
+                    } else {
+                        usuarioTipoLista = new UsuarioTipoTransfer(usuarioTipoValidacao);
+                    }
+                } else {
+                    usuarioTipoLista = new UsuarioTipoTransfer(usuarioTipoValidacao);
+                }
+            } catch (Exception ex) {
+                usuarioTipoLista = new UsuarioTipoTransfer();
+
+                usuarioTipoLista.Validacao = false;
+                usuarioTipoLista.Erro = true;
+                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
+            } finally {
+                usuarioTipoDataModel = null;
+                usuarioTipoBusiness = null;
+                usuarioTipoValidacao = null;
+            }
+
+            return usuarioTipoLista;
         }
     }
 }

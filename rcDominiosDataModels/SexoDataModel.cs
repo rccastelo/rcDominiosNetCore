@@ -1,172 +1,146 @@
 ﻿using System;
 using rcDominiosDatas;
-using rcDominiosDataTransfers;
+using rcDominiosTransfers;
 using rcDominiosEntities;
 
 namespace rcDominiosDataModels
 {
     public class SexoDataModel : DataModel
     {
-        public SexoDataTransfer Incluir(SexoDataTransfer sexoDataTransfer)
+        public SexoTransfer Incluir(SexoTransfer sexoTransfer)
         {
             SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer(sexoDataTransfer);
+                sexo = new SexoTransfer(sexoTransfer);
 
-                sexoData.Incluir(sexoDataTransfer.Sexo);
+                sexoData.Incluir(sexoTransfer.Sexo);
 
                 _contexto.SaveChanges();
 
-                SexoRetorno.Sexo = new SexoEntity(sexoDataTransfer.Sexo);
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
+                sexo.Sexo = new SexoEntity(sexoTransfer.Sexo);
+                sexo.Validacao = true;
+                sexo.Erro = false;
             } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Incluir [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
 
-            return SexoRetorno;
+            return sexo;
         }
 
-        public SexoDataTransfer Alterar(SexoDataTransfer sexoDataTransfer)
+        public SexoTransfer Alterar(SexoTransfer sexoTransfer)
         {
             SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                sexoData.Alterar(sexoDataTransfer.Sexo);
+                sexoData.Alterar(sexoTransfer.Sexo);
 
                 _contexto.SaveChanges();
 
-                SexoRetorno.Sexo = new SexoEntity(sexoDataTransfer.Sexo);
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
+                sexo.Sexo = new SexoEntity(sexoTransfer.Sexo);
+                sexo.Validacao = true;
+                sexo.Erro = false;
             } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Alterar [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
 
-            return SexoRetorno;
+            return sexo;
         }
 
-        public SexoDataTransfer Excluir(int id)
+        public SexoTransfer Excluir(int id)
         {
             SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.Sexo = sexoData.ConsultarPorId(id);
-                sexoData.Excluir(SexoRetorno.Sexo);
+                sexo.Sexo = sexoData.ConsultarPorId(id);
+                sexoData.Excluir(sexo.Sexo);
 
                 _contexto.SaveChanges();
 
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
+                sexo.Validacao = true;
+                sexo.Erro = false;
             } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Excluir [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
 
-            return SexoRetorno;
+            return sexo;
         }
 
-        public SexoDataTransfer Listar()
+        public SexoTransfer ConsultarPorId(int id)
         {
             SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
+            SexoTransfer sexo;
 
             try {
                 sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.SexoLista = sexoData.Listar();
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
+                sexo.Sexo = sexoData.ConsultarPorId(id);
+                sexo.Validacao = true;
+                sexo.Erro = false;
             } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
+                sexo = new SexoTransfer();
 
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Listar [" + ex.Message + "]");
+                sexo.Validacao = false;
+                sexo.Erro = true;
+                sexo.IncluirErroMensagem("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
 
-            return SexoRetorno;
+            return sexo;
         }
 
-        public SexoDataTransfer ConsultarPorId(int id)
+        public SexoTransfer Consultar(SexoTransfer sexoTransfer)
         {
             SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
+            SexoTransfer sexoLista;
 
             try {
                 sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer();
 
-                SexoRetorno.Sexo = sexoData.ConsultarPorId(id);
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
+                sexoLista = sexoData.Consultar(sexoTransfer);
+                sexoLista.Validacao = true;
+                sexoLista.Erro = false;
             } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
+                sexoLista = new SexoTransfer();
 
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
+                sexoLista.Validacao = false;
+                sexoLista.Erro = true;
+                sexoLista.IncluirErroMensagem("Erro em SexoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
 
-            return SexoRetorno;
-        }
-
-        public SexoDataTransfer Consultar(SexoDataTransfer sexoDataTransfer)
-        {
-            SexoData sexoData;
-            SexoDataTransfer SexoRetorno;
-
-            try {
-                sexoData = new SexoData(_contexto);
-                SexoRetorno = new SexoDataTransfer();
-
-                SexoRetorno.SexoLista = sexoData.Consultar(sexoDataTransfer);
-                SexoRetorno.Validacao = true;
-                SexoRetorno.Erro = false;
-            } catch (Exception ex) {
-                SexoRetorno = new SexoDataTransfer();
-
-                SexoRetorno.Validacao = false;
-                SexoRetorno.Erro = true;
-                SexoRetorno.IncluirErroMensagem("Erro em SexoDataModel Consultar [" + ex.Message + "]");
-            } finally {
-                sexoData = null;
-            }
-
-            return SexoRetorno;
+            return sexoLista;
         }
     }
 }

@@ -1,195 +1,165 @@
 using System;
-using rcDominiosBusiness;
-using rcDominiosDataModels;
-using rcDominiosDataTransfers;
+using System.Threading.Tasks;
+using rcDominiosTransfers;
+using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
     public class EnderecoTipoModel
     {
-        public EnderecoTipoDataTransfer Incluir(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public async Task<EnderecoTipoTransfer> Incluir(EnderecoTipoTransfer enderecoTipoTransfer)
         {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoBusiness enderecoTipoBusiness;
-            EnderecoTipoDataTransfer enderecoTipoDTValidacao;
-            EnderecoTipoDataTransfer enderecoTipoDTInclusao;
+            EnderecoTipoService enderecoTipoService;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoBusiness = new EnderecoTipoBusiness();
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
+                enderecoTipoService = new EnderecoTipoService();
 
-                enderecoTipoDataTransfer.EnderecoTipo.Criacao = DateTime.Today;
-                enderecoTipoDataTransfer.EnderecoTipo.Alteracao = DateTime.Today;
+                enderecoTipoTransfer.EnderecoTipo.Criacao = DateTime.Today;
+                enderecoTipoTransfer.EnderecoTipo.Alteracao = DateTime.Today;
 
-                enderecoTipoDTValidacao = enderecoTipoBusiness.Validar(enderecoTipoDataTransfer);
-
-                if (!enderecoTipoDTValidacao.Erro) {
-                    if (enderecoTipoDTValidacao.Validacao) {
-                        enderecoTipoDTInclusao = enderecoTipoDataModel.Incluir(enderecoTipoDTValidacao);
-                    } else {
-                        enderecoTipoDTInclusao = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
-                    }
-                } else {
-                    enderecoTipoDTInclusao = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
-                }
+                enderecoTipo = await enderecoTipoService.Incluir(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoTipoDTInclusao = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoDTInclusao.Validacao = false;
-                enderecoTipoDTInclusao.Erro = true;
-                enderecoTipoDTInclusao.IncluirErroMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
             } finally {
-                enderecoTipoDataModel = null;
-                enderecoTipoBusiness = null;
-                enderecoTipoDTValidacao = null;
+                enderecoTipoService = null;
             }
 
-            return enderecoTipoDTInclusao;
+            return enderecoTipo;
         }
 
-        public EnderecoTipoDataTransfer Alterar(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public async Task<EnderecoTipoTransfer> Alterar(EnderecoTipoTransfer enderecoTipoTransfer)
         {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoBusiness enderecoTipoBusiness;
-            EnderecoTipoDataTransfer enderecoTipoDTValidacao;
-            EnderecoTipoDataTransfer enderecoTipoDTAlteracao;
+            EnderecoTipoService enderecoTipoService;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoBusiness = new EnderecoTipoBusiness();
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
+                enderecoTipoService = new EnderecoTipoService();
 
-                enderecoTipoDataTransfer.EnderecoTipo.Alteracao = DateTime.Today;
+                enderecoTipoTransfer.EnderecoTipo.Alteracao = DateTime.Today;
 
-                enderecoTipoDTValidacao = enderecoTipoBusiness.Validar(enderecoTipoDataTransfer);
-
-                if (!enderecoTipoDTValidacao.Erro) {
-                    if (enderecoTipoDTValidacao.Validacao) {
-                        enderecoTipoDTAlteracao = enderecoTipoDataModel.Alterar(enderecoTipoDTValidacao);
-                    } else {
-                        enderecoTipoDTAlteracao = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
-                    }
-                } else {
-                    enderecoTipoDTAlteracao = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
-                }
+                enderecoTipo = await enderecoTipoService.Alterar(enderecoTipoTransfer);
             } catch (Exception ex) {
-                enderecoTipoDTAlteracao = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoDTAlteracao.Validacao = false;
-                enderecoTipoDTAlteracao.Erro = true;
-                enderecoTipoDTAlteracao.IncluirErroMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
             } finally {
-                enderecoTipoDataModel = null;
-                enderecoTipoBusiness = null;
-                enderecoTipoDTValidacao = null;
+                enderecoTipoService = null;
             }
 
-            return enderecoTipoDTAlteracao;
+            return enderecoTipo;
         }
 
-        public EnderecoTipoDataTransfer Excluir(int id)
+        public async Task<EnderecoTipoTransfer> Excluir(int id)
         {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoDataTransfer enderecoTipoDTExclusao;
+            EnderecoTipoService enderecoTipoService;
+            EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
+                enderecoTipoService = new EnderecoTipoService();
 
-                enderecoTipoDTExclusao = enderecoTipoDataModel.Excluir(id);
+                enderecoTipo = await enderecoTipoService.Excluir(id);
             } catch (Exception ex) {
-                enderecoTipoDTExclusao = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoDTExclusao.Validacao = false;
-                enderecoTipoDTExclusao.Erro = true;
-                enderecoTipoDTExclusao.IncluirErroMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
             } finally {
-                enderecoTipoDataModel = null;
+                enderecoTipoService = null;
             }
 
-            return enderecoTipoDTExclusao;
+            return enderecoTipo;
         }
 
-        public EnderecoTipoDataTransfer Listar()
+        public async Task<EnderecoTipoTransfer> ConsultarPorId(int id)
         {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoBusiness enderecoTipoBusiness;
-            EnderecoTipoDataTransfer enderecoTipoDTLista;
-
-            try {
-                enderecoTipoBusiness = new EnderecoTipoBusiness();
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
-
-                enderecoTipoDTLista = enderecoTipoDataModel.Listar();
-            } catch (Exception ex) {
-                enderecoTipoDTLista = new EnderecoTipoDataTransfer();
-
-                enderecoTipoDTLista.Validacao = false;
-                enderecoTipoDTLista.Erro = true;
-                enderecoTipoDTLista.IncluirErroMensagem("Erro em EnderecoTipoModel Listar [" + ex.Message + "]");
-            } finally {
-                enderecoTipoDataModel = null;
-                enderecoTipoBusiness = null;
-            }
-
-            return enderecoTipoDTLista;
-        }
-
-        public EnderecoTipoDataTransfer ConsultarPorId(int id)
-        {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoDataTransfer enderecoTipoDTForm;
+            EnderecoTipoService enderecoTipoService;
+            EnderecoTipoTransfer enderecoTipo;
             
             try {
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
+                enderecoTipoService = new EnderecoTipoService();
 
-                enderecoTipoDTForm = enderecoTipoDataModel.ConsultarPorId(id);
+                enderecoTipo = await enderecoTipoService.ConsultarPorId(id);
             } catch (Exception ex) {
-                enderecoTipoDTForm = new EnderecoTipoDataTransfer();
+                enderecoTipo = new EnderecoTipoTransfer();
 
-                enderecoTipoDTForm.Validacao = false;
-                enderecoTipoDTForm.Erro = true;
-                enderecoTipoDTForm.IncluirErroMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
+                enderecoTipo.Validacao = false;
+                enderecoTipo.Erro = true;
+                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
-                enderecoTipoDataModel = null;
+                enderecoTipoService = null;
             }
 
-            return enderecoTipoDTForm;
+            return enderecoTipo;
         }
 
-        public EnderecoTipoDataTransfer Consultar(EnderecoTipoDataTransfer enderecoTipoDataTransfer)
+        public async Task<EnderecoTipoTransfer> Consultar(EnderecoTipoTransfer enderecoTipoListaTransfer)
         {
-            EnderecoTipoDataModel enderecoTipoDataModel;
-            EnderecoTipoBusiness enderecoTipoBusiness;
-            EnderecoTipoDataTransfer enderecoTipoDTValidacao;
-            EnderecoTipoDataTransfer enderecoTipoDTConsulta;
+            EnderecoTipoService enderecoTipoService;
+            EnderecoTipoTransfer enderecoTipoLista;
+            int dif = 0;
+            int qtdExibe = 5;
 
             try {
-                enderecoTipoBusiness = new EnderecoTipoBusiness();
-                enderecoTipoDataModel = new EnderecoTipoDataModel();
+                enderecoTipoService = new EnderecoTipoService();
 
-                enderecoTipoDTValidacao = enderecoTipoBusiness.ValidarConsulta(enderecoTipoDataTransfer);
+                enderecoTipoLista = await enderecoTipoService.Consultar(enderecoTipoListaTransfer);
 
-                if (!enderecoTipoDTValidacao.Erro) {
-                    if (enderecoTipoDTValidacao.Validacao) {
-                        enderecoTipoDTConsulta = enderecoTipoDataModel.Consultar(enderecoTipoDTValidacao);
-                    } else {
-                        enderecoTipoDTConsulta = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
+                if (enderecoTipoLista != null) {
+                    if (enderecoTipoLista.TotalRegistros > 1) {
+                        if (enderecoTipoLista.RegistrosPorPagina < 1) {
+                            enderecoTipoLista.RegistrosPorPagina = 30;
+                        } else if (enderecoTipoLista.RegistrosPorPagina > 200) {
+                            enderecoTipoLista.RegistrosPorPagina = 30;
+                        }
+
+                        enderecoTipoLista.PaginaAtual = (enderecoTipoLista.PaginaAtual < 1 ? 1 : enderecoTipoLista.PaginaAtual);
+                        enderecoTipoLista.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.TotalRegistros) 
+                            / @Convert.ToDecimal(enderecoTipoLista.RegistrosPorPagina)));
+                        enderecoTipoLista.TotalPaginas = (enderecoTipoLista.TotalPaginas < 1 ? 1 : enderecoTipoLista.TotalPaginas);
+
+                        qtdExibe = (qtdExibe > enderecoTipoLista.TotalPaginas ? enderecoTipoLista.TotalPaginas : qtdExibe);
+
+                        enderecoTipoLista.PaginaInicial = enderecoTipoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        enderecoTipoLista.PaginaFinal = enderecoTipoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        enderecoTipoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (enderecoTipoLista.PaginaFinal - 1) : enderecoTipoLista.PaginaFinal);
+
+                        if (enderecoTipoLista.PaginaInicial < 1) {
+                            dif = 1 - enderecoTipoLista.PaginaInicial;
+                            enderecoTipoLista.PaginaInicial += dif;
+                            enderecoTipoLista.PaginaFinal += dif;
+                        }
+
+                        if (enderecoTipoLista.PaginaFinal > enderecoTipoLista.TotalPaginas) {
+                            dif = enderecoTipoLista.PaginaFinal - enderecoTipoLista.TotalPaginas;
+                            enderecoTipoLista.PaginaInicial -= dif;
+                            enderecoTipoLista.PaginaFinal -= dif;
+                        }
+
+                        enderecoTipoLista.PaginaInicial = (enderecoTipoLista.PaginaInicial < 1 ? 1 : enderecoTipoLista.PaginaInicial);
+                        enderecoTipoLista.PaginaFinal = (enderecoTipoLista.PaginaFinal > enderecoTipoLista.TotalPaginas ? 
+                            enderecoTipoLista.TotalPaginas : enderecoTipoLista.PaginaFinal);
                     }
-                } else {
-                    enderecoTipoDTConsulta = new EnderecoTipoDataTransfer(enderecoTipoDTValidacao);
                 }
             } catch (Exception ex) {
-                enderecoTipoDTConsulta = new EnderecoTipoDataTransfer();
+                enderecoTipoLista = new EnderecoTipoTransfer();
 
-                enderecoTipoDTConsulta.Validacao = false;
-                enderecoTipoDTConsulta.Erro = true;
-                enderecoTipoDTConsulta.IncluirErroMensagem("Erro em EnderecoTipoModel Consultar [" + ex.Message + "]");
+                enderecoTipoLista.Validacao = false;
+                enderecoTipoLista.Erro = true;
+                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoModel Consultar [" + ex.Message + "]");
             } finally {
-                enderecoTipoDataModel = null;
-                enderecoTipoBusiness = null;
-                enderecoTipoDTValidacao = null;
+                enderecoTipoService = null;
             }
 
-            return enderecoTipoDTConsulta;
+            return enderecoTipoLista;
         }
     }
 }

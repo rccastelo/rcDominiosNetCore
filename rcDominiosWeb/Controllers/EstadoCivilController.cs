@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using rcDominiosDataTransfers;
 using rcDominiosWeb.Models;
+using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class EstadoCivilController : Controller
+  public class EstadoCivilController : Controller
     {
         [HttpGet, HttpPost]
         public IActionResult Index()
@@ -20,44 +21,44 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Form(int id)
+        public async Task<IActionResult> Form(int id)
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilForm;
+            EstadoCivilTransfer estadoCivil;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
                 if (id > 0) {
-                    estadoCivilForm = estadoCivilModel.ConsultarPorId(id);
+                    estadoCivil = await estadoCivilModel.ConsultarPorId(id);
                 } else {
-                    estadoCivilForm = null;
+                    estadoCivil = null;
                 }
             } catch {
-                estadoCivilForm = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
                 
-                estadoCivilForm.Validacao = false;
-                estadoCivilForm.Erro = true;
-                estadoCivilForm.IncluirErroMensagem("Erro em EstadoCivilController Form");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Form");
             } finally {
                 estadoCivilModel = null;
             }
 
-            return View(estadoCivilForm);
+            return View(estadoCivil);
         }
 
         [HttpGet]
-        public IActionResult Lista()
+        public async Task<IActionResult> Lista()
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilLista;
+            EstadoCivilTransfer estadoCivilLista;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
-                estadoCivilLista = estadoCivilModel.Listar();
+                estadoCivilLista = await estadoCivilModel.Consultar(new EstadoCivilTransfer());
             } catch (Exception ex) {
-                estadoCivilLista = new EstadoCivilDataTransfer();
+                estadoCivilLista = new EstadoCivilTransfer();
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
@@ -70,17 +71,17 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Consulta(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<IActionResult> Consulta(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilLista;
+            EstadoCivilTransfer estadoCivilLista;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
-                estadoCivilLista = estadoCivilModel.Consultar(estadoCivilDataTransfer);
+                estadoCivilLista = await estadoCivilModel.Consultar(estadoCivilTransfer);
             } catch (Exception ex) {
-                estadoCivilLista = new EstadoCivilDataTransfer();
+                estadoCivilLista = new EstadoCivilTransfer();
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
@@ -97,81 +98,81 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inclusao(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<IActionResult> Inclusao(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilRetorno;
+            EstadoCivilTransfer estadoCivil;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
-                estadoCivilRetorno = estadoCivilModel.Incluir(estadoCivilDataTransfer);
+                estadoCivil = await estadoCivilModel.Incluir(estadoCivilTransfer);
             } catch (Exception ex) {
-                estadoCivilRetorno = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilRetorno.Validacao = false;
-                estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Inclusao [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Inclusao [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
 
-            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
-                return View("Form", estadoCivilRetorno);
+            if (estadoCivil.Erro || !estadoCivil.Validacao) {
+                return View("Form", estadoCivil);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpPost]
-        public IActionResult Alteracao(EstadoCivilDataTransfer estadoCivilDataTransfer)
+        public async Task<IActionResult> Alteracao(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilRetorno;
+            EstadoCivilTransfer estadoCivil;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
-                estadoCivilRetorno = estadoCivilModel.Alterar(estadoCivilDataTransfer);
+                estadoCivil = await estadoCivilModel.Alterar(estadoCivilTransfer);
             } catch (Exception ex) {
-                estadoCivilRetorno = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilRetorno.Validacao = false;
-                estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Alteracao [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Alteracao [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
 
-            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
-                return View("Form", estadoCivilRetorno);
+            if (estadoCivil.Erro || !estadoCivil.Validacao) {
+                return View("Form", estadoCivil);
             } else {
                 return RedirectToAction("Lista");
             }
         }
 
         [HttpGet]
-        public IActionResult Exclusao(int id)
+        public async Task<IActionResult> Exclusao(int id)
         {
             EstadoCivilModel estadoCivilModel;
-            EstadoCivilDataTransfer estadoCivilRetorno;
+            EstadoCivilTransfer estadoCivil;
 
             try {
                 estadoCivilModel = new EstadoCivilModel();
 
-                estadoCivilRetorno = estadoCivilModel.Excluir(id);
+                estadoCivil = await estadoCivilModel.Excluir(id);
             } catch (Exception ex) {
-                estadoCivilRetorno = new EstadoCivilDataTransfer();
+                estadoCivil = new EstadoCivilTransfer();
 
-                estadoCivilRetorno.Validacao = false;
-                estadoCivilRetorno.Erro = true;
-                estadoCivilRetorno.IncluirErroMensagem("Erro em EstadoCivilController Exclusao [" + ex.Message + "]");
+                estadoCivil.Validacao = false;
+                estadoCivil.Erro = true;
+                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Exclusao [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
 
-            if (estadoCivilRetorno.Erro || !estadoCivilRetorno.Validacao) {
-                return View("Form", estadoCivilRetorno);
+            if (estadoCivil.Erro || !estadoCivil.Validacao) {
+                return View("Form", estadoCivil);
             } else {
                 return RedirectToAction("Lista");
             }
