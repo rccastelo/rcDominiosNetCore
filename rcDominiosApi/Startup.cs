@@ -52,7 +52,12 @@ namespace rcDominiosApi
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Dominios}/{action=Index}/{id?}");
+            });
         }
     }
 }
