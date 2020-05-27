@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class ContaBancariaController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public ContaBancariaController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancaria;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 if (id > 0) {
                     contaBancaria = await contaBancariaModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancariaLista;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 contaBancariaLista = await contaBancariaModel.Consultar(new ContaBancariaTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancariaLista;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 contaBancariaLista = await contaBancariaModel.Consultar(contaBancariaTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancaria;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 contaBancaria = await contaBancariaModel.Incluir(contaBancariaTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancaria;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 contaBancaria = await contaBancariaModel.Alterar(contaBancariaTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             ContaBancariaTransfer contaBancaria;
 
             try {
-                contaBancariaModel = new ContaBancariaModel();
+                contaBancariaModel = new ContaBancariaModel(httpContext);
 
                 contaBancaria = await contaBancariaModel.Excluir(id);
             } catch (Exception ex) {

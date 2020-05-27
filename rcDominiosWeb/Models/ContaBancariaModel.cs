@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class ContaBancariaModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public ContaBancariaModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<ContaBancariaTransfer> Incluir(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaService contaBancariaService;
             ContaBancariaTransfer contaBancaria;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 contaBancariaService = new ContaBancariaService();
+                autenticaModel = new AutenticaModel(httpContext);
 
                 contaBancariaTransfer.ContaBancaria.Criacao = DateTime.Today;
                 contaBancariaTransfer.ContaBancaria.Alteracao = DateTime.Today;
 
-                contaBancaria = await contaBancariaService.Incluir(contaBancariaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                contaBancaria = await contaBancariaService.Incluir(contaBancariaTransfer, autorizacao);
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaService = null;
+                autenticaModel = null;
             }
 
             return contaBancaria;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             ContaBancariaService contaBancariaService;
             ContaBancariaTransfer contaBancaria;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 contaBancariaService = new ContaBancariaService();
+                autenticaModel = new AutenticaModel(httpContext);
 
                 contaBancariaTransfer.ContaBancaria.Alteracao = DateTime.Today;
 
-                contaBancaria = await contaBancariaService.Alterar(contaBancariaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                contaBancaria = await contaBancariaService.Alterar(contaBancariaTransfer, autorizacao);
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaService = null;
+                autenticaModel = null;
             }
 
             return contaBancaria;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             ContaBancariaService contaBancariaService;
             ContaBancariaTransfer contaBancaria;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 contaBancariaService = new ContaBancariaService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                contaBancaria = await contaBancariaService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                contaBancaria = await contaBancariaService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaService = null;
+                autenticaModel = null;
             }
 
             return contaBancaria;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             ContaBancariaService contaBancariaService;
             ContaBancariaTransfer contaBancaria;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 contaBancariaService = new ContaBancariaService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                contaBancaria = await contaBancariaService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                contaBancaria = await contaBancariaService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaService = null;
+                autenticaModel = null;
             }
 
             return contaBancaria;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             ContaBancariaService contaBancariaService;
             ContaBancariaTransfer contaBancariaLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 contaBancariaService = new ContaBancariaService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                contaBancariaLista = await contaBancariaService.Consultar(contaBancariaListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                contaBancariaLista = await contaBancariaService.Consultar(contaBancariaListaTransfer, autorizacao);
 
                 if (contaBancariaLista != null) {
                     if (contaBancariaLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaModel Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaService = null;
+                autenticaModel = null;
             }
 
             return contaBancariaLista;

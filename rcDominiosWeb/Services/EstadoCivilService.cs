@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "EstadoCivil";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public EstadoCivilService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<EstadoCivilTransfer> Incluir(EstadoCivilTransfer estadoCivilTransfer)
+        public async Task<EstadoCivilTransfer> Incluir(EstadoCivilTransfer estadoCivilTransfer, string autorizacao)
         {
             EstadoCivilTransfer estadoCivil = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", estadoCivilTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return estadoCivil;
         }
 
-        public async Task<EstadoCivilTransfer> Alterar(EstadoCivilTransfer estadoCivilTransfer)
+        public async Task<EstadoCivilTransfer> Alterar(EstadoCivilTransfer estadoCivilTransfer, string autorizacao)
         {
             EstadoCivilTransfer estadoCivil = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", estadoCivilTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return estadoCivil;
         }
 
-        public async Task<EstadoCivilTransfer> Excluir(int id)
+        public async Task<EstadoCivilTransfer> Excluir(int id, string autorizacao)
         {
             EstadoCivilTransfer estadoCivil = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return estadoCivil;
         }
 
-        public async Task<EstadoCivilTransfer> ConsultarPorId(int id)
+        public async Task<EstadoCivilTransfer> ConsultarPorId(int id, string autorizacao)
         {
             EstadoCivilTransfer estadoCivil = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return estadoCivil;
         }
 
-        public async Task<EstadoCivilTransfer> Consultar(EstadoCivilTransfer estadoCivilListaTransfer)
+        public async Task<EstadoCivilTransfer> Consultar(EstadoCivilTransfer estadoCivilListaTransfer, string autorizacao)
         {
             EstadoCivilTransfer estadoCivilLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", estadoCivilListaTransfer);

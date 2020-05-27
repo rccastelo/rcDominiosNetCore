@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class CorModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public CorModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<CorTransfer> Incluir(CorTransfer corTransfer)
         {
             CorService corService;
             CorTransfer cor;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 corService = new CorService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 corTransfer.Cor.Criacao = DateTime.Today;
                 corTransfer.Cor.Alteracao = DateTime.Today;
 
-                cor = await corService.Incluir(corTransfer);
+                cor = await corService.Incluir(corTransfer, autorizacao);
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 cor.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
             } finally {
                 corService = null;
+                autenticaModel = null;
             }
 
             return cor;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             CorService corService;
             CorTransfer cor;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 corService = new CorService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 corTransfer.Cor.Alteracao = DateTime.Today;
 
-                cor = await corService.Alterar(corTransfer);
+                cor = await corService.Alterar(corTransfer, autorizacao);
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 cor.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
             } finally {
                 corService = null;
+                autenticaModel = null;
             }
 
             return cor;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             CorService corService;
             CorTransfer cor;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 corService = new CorService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                cor = await corService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                cor = await corService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 cor.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
             } finally {
                 corService = null;
+                autenticaModel = null;
             }
 
             return cor;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             CorService corService;
             CorTransfer cor;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 corService = new CorService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                cor = await corService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                cor = await corService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 cor.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corService = null;
+                autenticaModel = null;
             }
 
             return cor;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             CorService corService;
             CorTransfer corLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 corService = new CorService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                corLista = await corService.Consultar(corListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                corLista = await corService.Consultar(corListaTransfer, autorizacao);
 
                 if (corLista != null) {
                     if (corLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 corLista.IncluirErroMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
             } finally {
                 corService = null;
+                autenticaModel = null;
             }
 
             return corLista;

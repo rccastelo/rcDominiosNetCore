@@ -3,11 +3,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace rcDominiosWeb.Controllers
 {
-  public class PessoaTipoController : Controller
+    [Authorize]
+    public class PessoaTipoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public PessoaTipoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +37,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipo;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 if (id > 0) {
                     pessoaTipo = await pessoaTipoModel.ConsultarPorId(id);
@@ -54,7 +64,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipoLista;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 pessoaTipoLista = await pessoaTipoModel.Consultar(new PessoaTipoTransfer());
             } catch (Exception ex) {
@@ -77,7 +87,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipoLista;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 pessoaTipoLista = await pessoaTipoModel.Consultar(pessoaTipoTransfer);
             } catch (Exception ex) {
@@ -104,7 +114,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipo;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 pessoaTipo = await pessoaTipoModel.Incluir(pessoaTipoTransfer);
             } catch (Exception ex) {
@@ -131,7 +141,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipo;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 pessoaTipo = await pessoaTipoModel.Alterar(pessoaTipoTransfer);
             } catch (Exception ex) {
@@ -158,7 +168,7 @@ namespace rcDominiosWeb.Controllers
             PessoaTipoTransfer pessoaTipo;
 
             try {
-                pessoaTipoModel = new PessoaTipoModel();
+                pessoaTipoModel = new PessoaTipoModel(httpContext);
 
                 pessoaTipo = await pessoaTipoModel.Excluir(id);
             } catch (Exception ex) {

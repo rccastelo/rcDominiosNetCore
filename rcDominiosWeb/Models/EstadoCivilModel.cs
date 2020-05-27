@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class EstadoCivilModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public EstadoCivilModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<EstadoCivilTransfer> Incluir(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilService estadoCivilService;
             EstadoCivilTransfer estadoCivil;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 estadoCivilService = new EstadoCivilService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 estadoCivilTransfer.EstadoCivil.Criacao = DateTime.Today;
                 estadoCivilTransfer.EstadoCivil.Alteracao = DateTime.Today;
 
-                estadoCivil = await estadoCivilService.Incluir(estadoCivilTransfer);
+                estadoCivil = await estadoCivilService.Incluir(estadoCivilTransfer, autorizacao);
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilService = null;
+                autenticaModel = null;
             }
 
             return estadoCivil;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             EstadoCivilService estadoCivilService;
             EstadoCivilTransfer estadoCivil;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 estadoCivilService = new EstadoCivilService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 estadoCivilTransfer.EstadoCivil.Alteracao = DateTime.Today;
 
-                estadoCivil = await estadoCivilService.Alterar(estadoCivilTransfer);
+                estadoCivil = await estadoCivilService.Alterar(estadoCivilTransfer, autorizacao);
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilService = null;
+                autenticaModel = null;
             }
 
             return estadoCivil;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             EstadoCivilService estadoCivilService;
             EstadoCivilTransfer estadoCivil;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 estadoCivilService = new EstadoCivilService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                estadoCivil = await estadoCivilService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                estadoCivil = await estadoCivilService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilService = null;
+                autenticaModel = null;
             }
 
             return estadoCivil;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             EstadoCivilService estadoCivilService;
             EstadoCivilTransfer estadoCivil;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 estadoCivilService = new EstadoCivilService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                estadoCivil = await estadoCivilService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                estadoCivil = await estadoCivilService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 estadoCivil.IncluirErroMensagem("Erro em EstadoCivilModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilService = null;
+                autenticaModel = null;
             }
 
             return estadoCivil;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             EstadoCivilService estadoCivilService;
             EstadoCivilTransfer estadoCivilLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 estadoCivilService = new EstadoCivilService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                estadoCivilLista = await estadoCivilService.Consultar(estadoCivilListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                estadoCivilLista = await estadoCivilService.Consultar(estadoCivilListaTransfer, autorizacao);
 
                 if (estadoCivilLista != null) {
                     if (estadoCivilLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilModel Consultar [" + ex.Message + "]");
             } finally {
                 estadoCivilService = null;
+                autenticaModel = null;
             }
 
             return estadoCivilLista;

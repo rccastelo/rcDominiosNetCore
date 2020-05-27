@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "TelefoneTipo";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public TelefoneTipoService()
         {
@@ -22,14 +21,14 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<TelefoneTipoTransfer> Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
+        public async Task<TelefoneTipoTransfer> Incluir(TelefoneTipoTransfer telefoneTipoTransfer, string autorizacao)
         {
             TelefoneTipoTransfer telefoneTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
+
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", telefoneTipoTransfer);
@@ -64,14 +63,14 @@ namespace rcDominiosWeb.Services
             return telefoneTipo;
         }
 
-        public async Task<TelefoneTipoTransfer> Alterar(TelefoneTipoTransfer telefoneTipoTransfer)
+        public async Task<TelefoneTipoTransfer> Alterar(TelefoneTipoTransfer telefoneTipoTransfer, string autorizacao)
         {
             TelefoneTipoTransfer telefoneTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
+
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", telefoneTipoTransfer);
@@ -106,14 +105,14 @@ namespace rcDominiosWeb.Services
             return telefoneTipo;
         }
 
-        public async Task<TelefoneTipoTransfer> Excluir(int id)
+        public async Task<TelefoneTipoTransfer> Excluir(int id, string autorizacao)
         {
             TelefoneTipoTransfer telefoneTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
+
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +147,14 @@ namespace rcDominiosWeb.Services
             return telefoneTipo;
         }
 
-        public async Task<TelefoneTipoTransfer> ConsultarPorId(int id)
+        public async Task<TelefoneTipoTransfer> ConsultarPorId(int id, string autorizacao)
         {
             TelefoneTipoTransfer telefoneTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
+
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +189,14 @@ namespace rcDominiosWeb.Services
             return telefoneTipo;
         }
 
-        public async Task<TelefoneTipoTransfer> Consultar(TelefoneTipoTransfer telefoneTipoListaTransfer)
+        public async Task<TelefoneTipoTransfer> Consultar(TelefoneTipoTransfer telefoneTipoListaTransfer, string autorizacao)
         {
             TelefoneTipoTransfer telefoneTipoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
+
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", telefoneTipoListaTransfer);

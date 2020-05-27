@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class ProfissaoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public ProfissaoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 if (id > 0) {
                     profissao = await profissaoModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissaoLista;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 profissaoLista = await profissaoModel.Consultar(new ProfissaoTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissaoLista;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 profissaoLista = await profissaoModel.Consultar(profissaoTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 profissao = await profissaoModel.Incluir(profissaoTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 profissao = await profissaoModel.Alterar(profissaoTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             ProfissaoTransfer profissao;
 
             try {
-                profissaoModel = new ProfissaoModel();
+                profissaoModel = new ProfissaoModel(httpContext);
 
                 profissao = await profissaoModel.Excluir(id);
             } catch (Exception ex) {

@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class UsuarioController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public UsuarioController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuario;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 if (id > 0) {
                     usuario = await usuarioModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuarioLista;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 usuarioLista = await usuarioModel.Consultar(new UsuarioTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuarioLista;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 usuarioLista = await usuarioModel.Consultar(usuarioTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuario;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 usuario = await usuarioModel.Incluir(usuarioTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuario;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 usuario = await usuarioModel.Alterar(usuarioTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTransfer usuario;
 
             try {
-                usuarioModel = new UsuarioModel();
+                usuarioModel = new UsuarioModel(httpContext);
 
                 usuario = await usuarioModel.Excluir(id);
             } catch (Exception ex) {

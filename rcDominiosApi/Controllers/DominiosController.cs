@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace rcDominiosApi.Controllers
 {
-  [ApiController]
+    [ApiController]
     [Route("")]
     public class DominiosController : ControllerBase
     {

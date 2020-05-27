@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class SexoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public SexoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexo;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 if (id > 0) {
                     sexo = await sexoModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexoLista;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 sexoLista = await sexoModel.Consultar(new SexoTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexoLista;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 sexoLista = await sexoModel.Consultar(sexoTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexo;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 sexo = await sexoModel.Incluir(sexoTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexo;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 sexo = await sexoModel.Alterar(sexoTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             SexoTransfer sexo;
 
             try {
-                sexoModel = new SexoModel();
+                sexoModel = new SexoModel(httpContext);
 
                 sexo = await sexoModel.Excluir(id);
             } catch (Exception ex) {

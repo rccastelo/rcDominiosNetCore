@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "GeneroSocial";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public GeneroSocialService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<GeneroSocialTransfer> Incluir(GeneroSocialTransfer generoSocialTransfer)
+        public async Task<GeneroSocialTransfer> Incluir(GeneroSocialTransfer generoSocialTransfer, string autorizacao)
         {
             GeneroSocialTransfer generoSocial = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", generoSocialTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return generoSocial;
         }
 
-        public async Task<GeneroSocialTransfer> Alterar(GeneroSocialTransfer generoSocialTransfer)
+        public async Task<GeneroSocialTransfer> Alterar(GeneroSocialTransfer generoSocialTransfer, string autorizacao)
         {
             GeneroSocialTransfer generoSocial = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", generoSocialTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return generoSocial;
         }
 
-        public async Task<GeneroSocialTransfer> Excluir(int id)
+        public async Task<GeneroSocialTransfer> Excluir(int id, string autorizacao)
         {
             GeneroSocialTransfer generoSocial = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return generoSocial;
         }
 
-        public async Task<GeneroSocialTransfer> ConsultarPorId(int id)
+        public async Task<GeneroSocialTransfer> ConsultarPorId(int id, string autorizacao)
         {
             GeneroSocialTransfer generoSocial = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return generoSocial;
         }
 
-        public async Task<GeneroSocialTransfer> Consultar(GeneroSocialTransfer generoSocialListaTransfer)
+        public async Task<GeneroSocialTransfer> Consultar(GeneroSocialTransfer generoSocialListaTransfer, string autorizacao)
         {
             GeneroSocialTransfer generoSocialLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", generoSocialListaTransfer);

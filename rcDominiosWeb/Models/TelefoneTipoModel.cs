@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class TelefoneTipoModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public TelefoneTipoModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<TelefoneTipoTransfer> Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoService telefoneTipoService;
             TelefoneTipoTransfer telefoneTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 telefoneTipoService = new TelefoneTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 telefoneTipoTransfer.TelefoneTipo.Criacao = DateTime.Today;
                 telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipo = await telefoneTipoService.Incluir(telefoneTipoTransfer);
+                telefoneTipo = await telefoneTipoService.Incluir(telefoneTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
+                autenticaModel = null;
             }
 
             return telefoneTipo;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             TelefoneTipoService telefoneTipoService;
             TelefoneTipoTransfer telefoneTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 telefoneTipoService = new TelefoneTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 telefoneTipoTransfer.TelefoneTipo.Alteracao = DateTime.Today;
 
-                telefoneTipo = await telefoneTipoService.Alterar(telefoneTipoTransfer);
+                telefoneTipo = await telefoneTipoService.Alterar(telefoneTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
+                autenticaModel = null;
             }
 
             return telefoneTipo;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             TelefoneTipoService telefoneTipoService;
             TelefoneTipoTransfer telefoneTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 telefoneTipoService = new TelefoneTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                telefoneTipo = await telefoneTipoService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                telefoneTipo = await telefoneTipoService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
+                autenticaModel = null;
             }
 
             return telefoneTipo;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             TelefoneTipoService telefoneTipoService;
             TelefoneTipoTransfer telefoneTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 telefoneTipoService = new TelefoneTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                telefoneTipo = await telefoneTipoService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                telefoneTipo = await telefoneTipoService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
+                autenticaModel = null;
             }
 
             return telefoneTipo;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             TelefoneTipoService telefoneTipoService;
             TelefoneTipoTransfer telefoneTipoLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 telefoneTipoService = new TelefoneTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                telefoneTipoLista = await telefoneTipoService.Consultar(telefoneTipoListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                telefoneTipoLista = await telefoneTipoService.Consultar(telefoneTipoListaTransfer, autorizacao);
 
                 if (telefoneTipoLista != null) {
                     if (telefoneTipoLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
+                autenticaModel = null;
             }
 
             return telefoneTipoLista;

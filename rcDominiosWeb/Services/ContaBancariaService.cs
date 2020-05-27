@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "ContaBancaria";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public ContaBancariaService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<ContaBancariaTransfer> Incluir(ContaBancariaTransfer contaBancariaTransfer)
+        public async Task<ContaBancariaTransfer> Incluir(ContaBancariaTransfer contaBancariaTransfer, string autorizacao)
         {
             ContaBancariaTransfer contaBancaria = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", contaBancariaTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return contaBancaria;
         }
 
-        public async Task<ContaBancariaTransfer> Alterar(ContaBancariaTransfer contaBancariaTransfer)
+        public async Task<ContaBancariaTransfer> Alterar(ContaBancariaTransfer contaBancariaTransfer, string autorizacao)
         {
             ContaBancariaTransfer contaBancaria = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", contaBancariaTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return contaBancaria;
         }
 
-        public async Task<ContaBancariaTransfer> Excluir(int id)
+        public async Task<ContaBancariaTransfer> Excluir(int id, string autorizacao)
         {
             ContaBancariaTransfer contaBancaria = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return contaBancaria;
         }
 
-        public async Task<ContaBancariaTransfer> ConsultarPorId(int id)
+        public async Task<ContaBancariaTransfer> ConsultarPorId(int id, string autorizacao)
         {
             ContaBancariaTransfer contaBancaria = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return contaBancaria;
         }
 
-        public async Task<ContaBancariaTransfer> Consultar(ContaBancariaTransfer contaBancariaListaTransfer)
+        public async Task<ContaBancariaTransfer> Consultar(ContaBancariaTransfer contaBancariaListaTransfer, string autorizacao)
         {
             ContaBancariaTransfer contaBancariaLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", contaBancariaListaTransfer);

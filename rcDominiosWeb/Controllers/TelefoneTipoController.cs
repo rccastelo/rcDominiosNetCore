@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class TelefoneTipoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public TelefoneTipoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 if (id > 0) {
                     telefoneTipo = await telefoneTipoModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipoLista;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 telefoneTipoLista = await telefoneTipoModel.Consultar(new TelefoneTipoTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipoLista;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 telefoneTipoLista = await telefoneTipoModel.Consultar(telefoneTipoTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 telefoneTipo = await telefoneTipoModel.Incluir(telefoneTipoTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 telefoneTipo = await telefoneTipoModel.Alterar(telefoneTipoTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             TelefoneTipoTransfer telefoneTipo;
 
             try {
-                telefoneTipoModel = new TelefoneTipoModel();
+                telefoneTipoModel = new TelefoneTipoModel(httpContext);
 
                 telefoneTipo = await telefoneTipoModel.Excluir(id);
             } catch (Exception ex) {

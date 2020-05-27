@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class EnderecoTipoModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public EnderecoTipoModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<EnderecoTipoTransfer> Incluir(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoService enderecoTipoService;
             EnderecoTipoTransfer enderecoTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 enderecoTipoService = new EnderecoTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 enderecoTipoTransfer.EnderecoTipo.Criacao = DateTime.Today;
                 enderecoTipoTransfer.EnderecoTipo.Alteracao = DateTime.Today;
 
-                enderecoTipo = await enderecoTipoService.Incluir(enderecoTipoTransfer);
+                enderecoTipo = await enderecoTipoService.Incluir(enderecoTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoService = null;
+                autenticaModel = null;
             }
 
             return enderecoTipo;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             EnderecoTipoService enderecoTipoService;
             EnderecoTipoTransfer enderecoTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 enderecoTipoService = new EnderecoTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 enderecoTipoTransfer.EnderecoTipo.Alteracao = DateTime.Today;
 
-                enderecoTipo = await enderecoTipoService.Alterar(enderecoTipoTransfer);
+                enderecoTipo = await enderecoTipoService.Alterar(enderecoTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoService = null;
+                autenticaModel = null;
             }
 
             return enderecoTipo;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             EnderecoTipoService enderecoTipoService;
             EnderecoTipoTransfer enderecoTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 enderecoTipoService = new EnderecoTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                enderecoTipo = await enderecoTipoService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                enderecoTipo = await enderecoTipoService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoService = null;
+                autenticaModel = null;
             }
 
             return enderecoTipo;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             EnderecoTipoService enderecoTipoService;
             EnderecoTipoTransfer enderecoTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 enderecoTipoService = new EnderecoTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                enderecoTipo = await enderecoTipoService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                enderecoTipo = await enderecoTipoService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoService = null;
+                autenticaModel = null;
             }
 
             return enderecoTipo;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             EnderecoTipoService enderecoTipoService;
             EnderecoTipoTransfer enderecoTipoLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 enderecoTipoService = new EnderecoTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                enderecoTipoLista = await enderecoTipoService.Consultar(enderecoTipoListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                enderecoTipoLista = await enderecoTipoService.Consultar(enderecoTipoListaTransfer, autorizacao);
 
                 if (enderecoTipoLista != null) {
                     if (enderecoTipoLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 enderecoTipoService = null;
+                autenticaModel = null;
             }
 
             return enderecoTipoLista;

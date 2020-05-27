@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class GeneroSocialModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public GeneroSocialModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<GeneroSocialTransfer> Incluir(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialService generoSocialService;
             GeneroSocialTransfer generoSocial;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 generoSocialService = new GeneroSocialService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 generoSocialTransfer.GeneroSocial.Criacao = DateTime.Today;
                 generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocial = await generoSocialService.Incluir(generoSocialTransfer);
+                generoSocial = await generoSocialService.Incluir(generoSocialTransfer, autorizacao);
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
+                autenticaModel = null;
             }
 
             return generoSocial;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             GeneroSocialService generoSocialService;
             GeneroSocialTransfer generoSocial;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 generoSocialService = new GeneroSocialService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 generoSocialTransfer.GeneroSocial.Alteracao = DateTime.Today;
 
-                generoSocial = await generoSocialService.Alterar(generoSocialTransfer);
+                generoSocial = await generoSocialService.Alterar(generoSocialTransfer, autorizacao);
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
+                autenticaModel = null;
             }
 
             return generoSocial;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             GeneroSocialService generoSocialService;
             GeneroSocialTransfer generoSocial;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 generoSocialService = new GeneroSocialService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                generoSocial = await generoSocialService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                generoSocial = await generoSocialService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
+                autenticaModel = null;
             }
 
             return generoSocial;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             GeneroSocialService generoSocialService;
             GeneroSocialTransfer generoSocial;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 generoSocialService = new GeneroSocialService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                generoSocial = await generoSocialService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                generoSocial = await generoSocialService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
+                autenticaModel = null;
             }
 
             return generoSocial;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             GeneroSocialService generoSocialService;
             GeneroSocialTransfer generoSocialLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 generoSocialService = new GeneroSocialService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                generoSocialLista = await generoSocialService.Consultar(generoSocialListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                generoSocialLista = await generoSocialService.Consultar(generoSocialListaTransfer, autorizacao);
 
                 if (generoSocialLista != null) {
                     if (generoSocialLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
+                autenticaModel = null;
             }
 
             return generoSocialLista;

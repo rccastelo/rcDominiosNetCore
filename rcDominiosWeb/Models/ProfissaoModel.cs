@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class ProfissaoModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public ProfissaoModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<ProfissaoTransfer> Incluir(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoService profissaoService;
             ProfissaoTransfer profissao;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 profissaoService = new ProfissaoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 profissaoTransfer.Profissao.Criacao = DateTime.Today;
                 profissaoTransfer.Profissao.Alteracao = DateTime.Today;
 
-                profissao = await profissaoService.Incluir(profissaoTransfer);
+                profissao = await profissaoService.Incluir(profissaoTransfer, autorizacao);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 profissao.IncluirErroMensagem("Erro em ProfissaoModel Incluir [" + ex.Message + "]");
             } finally {
                 profissaoService = null;
+                autenticaModel = null;
             }
 
             return profissao;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             ProfissaoService profissaoService;
             ProfissaoTransfer profissao;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 profissaoService = new ProfissaoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 profissaoTransfer.Profissao.Alteracao = DateTime.Today;
 
-                profissao = await profissaoService.Alterar(profissaoTransfer);
+                profissao = await profissaoService.Alterar(profissaoTransfer, autorizacao);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 profissao.IncluirErroMensagem("Erro em ProfissaoModel Alterar [" + ex.Message + "]");
             } finally {
                 profissaoService = null;
+                autenticaModel = null;
             }
 
             return profissao;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             ProfissaoService profissaoService;
             ProfissaoTransfer profissao;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 profissaoService = new ProfissaoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                profissao = await profissaoService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                profissao = await profissaoService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 profissao.IncluirErroMensagem("Erro em ProfissaoModel Excluir [" + ex.Message + "]");
             } finally {
                 profissaoService = null;
+                autenticaModel = null;
             }
 
             return profissao;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             ProfissaoService profissaoService;
             ProfissaoTransfer profissao;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 profissaoService = new ProfissaoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                profissao = await profissaoService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                profissao = await profissaoService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 profissao.IncluirErroMensagem("Erro em ProfissaoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoService = null;
+                autenticaModel = null;
             }
 
             return profissao;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             ProfissaoService profissaoService;
             ProfissaoTransfer profissaoLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 profissaoService = new ProfissaoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                profissaoLista = await profissaoService.Consultar(profissaoListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                profissaoLista = await profissaoService.Consultar(profissaoListaTransfer, autorizacao);
 
                 if (profissaoLista != null) {
                     if (profissaoLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 profissaoLista.IncluirErroMensagem("Erro em ProfissaoModel Consultar [" + ex.Message + "]");
             } finally {
                 profissaoService = null;
+                autenticaModel = null;
             }
 
             return profissaoLista;

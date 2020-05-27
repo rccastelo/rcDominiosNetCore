@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class UsuarioTipoModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public UsuarioTipoModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<UsuarioTipoTransfer> Incluir(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoService usuarioTipoService;
             UsuarioTipoTransfer usuarioTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 usuarioTipoService = new UsuarioTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 usuarioTipoTransfer.UsuarioTipo.Criacao = DateTime.Today;
                 usuarioTipoTransfer.UsuarioTipo.Alteracao = DateTime.Today;
 
-                usuarioTipo = await usuarioTipoService.Incluir(usuarioTipoTransfer);
+                usuarioTipo = await usuarioTipoService.Incluir(usuarioTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 usuarioTipo = new UsuarioTipoTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
+                autenticaModel = null;
             }
 
             return usuarioTipo;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             UsuarioTipoService usuarioTipoService;
             UsuarioTipoTransfer usuarioTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 usuarioTipoService = new UsuarioTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 usuarioTipoTransfer.UsuarioTipo.Alteracao = DateTime.Today;
 
-                usuarioTipo = await usuarioTipoService.Alterar(usuarioTipoTransfer);
+                usuarioTipo = await usuarioTipoService.Alterar(usuarioTipoTransfer, autorizacao);
             } catch (Exception ex) {
                 usuarioTipo = new UsuarioTipoTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
+                autenticaModel = null;
             }
 
             return usuarioTipo;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             UsuarioTipoService usuarioTipoService;
             UsuarioTipoTransfer usuarioTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 usuarioTipoService = new UsuarioTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                usuarioTipo = await usuarioTipoService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                usuarioTipo = await usuarioTipoService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 usuarioTipo = new UsuarioTipoTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
+                autenticaModel = null;
             }
 
             return usuarioTipo;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             UsuarioTipoService usuarioTipoService;
             UsuarioTipoTransfer usuarioTipo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 usuarioTipoService = new UsuarioTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                usuarioTipo = await usuarioTipoService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                usuarioTipo = await usuarioTipoService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 usuarioTipo = new UsuarioTipoTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
+                autenticaModel = null;
             }
 
             return usuarioTipo;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             UsuarioTipoService usuarioTipoService;
             UsuarioTipoTransfer usuarioTipoLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 usuarioTipoService = new UsuarioTipoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                usuarioTipoLista = await usuarioTipoService.Consultar(usuarioTipoListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                usuarioTipoLista = await usuarioTipoService.Consultar(usuarioTipoListaTransfer, autorizacao);
 
                 if (usuarioTipoLista != null) {
                     if (usuarioTipoLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
+                autenticaModel = null;
             }
 
             return usuarioTipoLista;

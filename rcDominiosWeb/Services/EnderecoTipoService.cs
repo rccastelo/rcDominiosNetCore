@@ -13,8 +13,7 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "EnderecoTipo";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
-
+        
         public EnderecoTipoService()
         {
             httpClient = new HttpClient();
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<EnderecoTipoTransfer> Incluir(EnderecoTipoTransfer enderecoTipoTransfer)
+        public async Task<EnderecoTipoTransfer> Incluir(EnderecoTipoTransfer enderecoTipoTransfer, string autorizacao)
         {
             EnderecoTipoTransfer enderecoTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", enderecoTipoTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return enderecoTipo;
         }
 
-        public async Task<EnderecoTipoTransfer> Alterar(EnderecoTipoTransfer enderecoTipoTransfer)
+        public async Task<EnderecoTipoTransfer> Alterar(EnderecoTipoTransfer enderecoTipoTransfer, string autorizacao)
         {
             EnderecoTipoTransfer enderecoTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", enderecoTipoTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return enderecoTipo;
         }
 
-        public async Task<EnderecoTipoTransfer> Excluir(int id)
+        public async Task<EnderecoTipoTransfer> Excluir(int id, string autorizacao)
         {
             EnderecoTipoTransfer enderecoTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return enderecoTipo;
         }
 
-        public async Task<EnderecoTipoTransfer> ConsultarPorId(int id)
+        public async Task<EnderecoTipoTransfer> ConsultarPorId(int id, string autorizacao)
         {
             EnderecoTipoTransfer enderecoTipo = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return enderecoTipo;
         }
 
-        public async Task<EnderecoTipoTransfer> Consultar(EnderecoTipoTransfer enderecoTipoListaTransfer)
+        public async Task<EnderecoTipoTransfer> Consultar(EnderecoTipoTransfer enderecoTipoListaTransfer, string autorizacao)
         {
             EnderecoTipoTransfer enderecoTipoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", enderecoTipoListaTransfer);

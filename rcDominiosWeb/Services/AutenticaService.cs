@@ -1,7 +1,7 @@
+using System;
+using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using rcDominiosTransfers;
 
 namespace rcDominiosWeb.Services
@@ -10,7 +10,7 @@ namespace rcDominiosWeb.Services
     {
         private string enderecoServico = "http://localhost:5500/";
         private string nomeServico = "Autentica";
-        private HttpClient httpClient;
+        private readonly HttpClient httpClient;
 
         public AutenticaService()
         {
@@ -18,25 +18,45 @@ namespace rcDominiosWeb.Services
             httpClient.BaseAddress = new System.Uri(enderecoServico);
         }
         
-        public async Task<string> Autorizar()
+        public async Task<AutenticaTransfer> Autenticar(AutenticaTransfer autenticaTransfer)
         {
-            string autorizacao = null;
             HttpResponseMessage resposta = null;
-            UsuarioRequest usuarioRequest = new UsuarioRequest() { Apelido = "admin", Senha = "senha" };
+            AutenticaTransfer autentica = null;
+            string mensagemRetono = null;
             
             try {
-                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", usuarioRequest);
+                resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", autenticaTransfer);
 
                 if (resposta.IsSuccessStatusCode) {
-                    autorizacao = await resposta.Content.ReadAsStringAsync();
+                    autentica = resposta.Content.ReadAsAsync<AutenticaTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    autentica = resposta.Content.ReadAsAsync<AutenticaTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    autentica = resposta.Content.ReadAsAsync<AutenticaTransfer>().Result;
+                } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} Autenticar";
                 }
-            } catch {
-                autorizacao = null;
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
+                    autentica = new AutenticaTransfer();
+                    
+                    autentica.Autenticado = false;
+                    autentica.Validacao = false;
+                    autentica.Erro = true;
+                    autentica.IncluirErroMensagem(mensagemRetono);
+                }
+            } catch (Exception ex) {
+                autentica = new AutenticaTransfer();
+
+                autentica.Autenticado = false;
+                autentica.Validacao = false;
+                autentica.Erro = true;
+                autentica.IncluirErroMensagem("Erro em AutenticaService Autenticar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
 
-            return autorizacao;
+            return autentica;
         }
     }
 }

@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class EnderecoTipoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public EnderecoTipoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 if (id > 0) {
                     enderecoTipo = await enderecoTipoModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipoLista;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 enderecoTipoLista = await enderecoTipoModel.Consultar(new EnderecoTipoTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipoLista;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 enderecoTipoLista = await enderecoTipoModel.Consultar(enderecoTipoTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 enderecoTipo = await enderecoTipoModel.Incluir(enderecoTipoTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 enderecoTipo = await enderecoTipoModel.Alterar(enderecoTipoTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             EnderecoTipoTransfer enderecoTipo;
 
             try {
-                enderecoTipoModel = new EnderecoTipoModel();
+                enderecoTipoModel = new EnderecoTipoModel(httpContext);
 
                 enderecoTipo = await enderecoTipoModel.Excluir(id);
             } catch (Exception ex) {

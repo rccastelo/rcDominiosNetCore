@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class CorController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public CorController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer cor;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 if (id > 0) {
                     cor = await corModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer corLista;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 corLista = await corModel.Consultar(new CorTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer corLista;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 corLista = await corModel.Consultar(corTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer cor;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 cor = await corModel.Incluir(corTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer cor;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 cor = await corModel.Alterar(corTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             CorTransfer cor;
 
             try {
-                corModel = new CorModel();
+                corModel = new CorModel(httpContext);
 
                 cor = await corModel.Excluir(id);
             } catch (Exception ex) {

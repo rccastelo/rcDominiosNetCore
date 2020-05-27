@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class UsuarioTipoController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public UsuarioTipoController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipo;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 if (id > 0) {
                     usuarioTipo = await usuarioTipoModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipoLista;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 usuarioTipoLista = await usuarioTipoModel.Consultar(new UsuarioTipoTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipoLista;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 usuarioTipoLista = await usuarioTipoModel.Consultar(usuarioTipoTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipo;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 usuarioTipo = await usuarioTipoModel.Incluir(usuarioTipoTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipo;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 usuarioTipo = await usuarioTipoModel.Alterar(usuarioTipoTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             UsuarioTipoTransfer usuarioTipo;
 
             try {
-                usuarioTipoModel = new UsuarioTipoModel();
+                usuarioTipoModel = new UsuarioTipoModel(httpContext);
 
                 usuarioTipo = await usuarioTipoModel.Excluir(id);
             } catch (Exception ex) {

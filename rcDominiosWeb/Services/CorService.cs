@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "Cor";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public CorService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<CorTransfer> Incluir(CorTransfer corTransfer)
+        public async Task<CorTransfer> Incluir(CorTransfer corTransfer, string autorizacao)
         {
             CorTransfer cor = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", corTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return cor;
         }
 
-        public async Task<CorTransfer> Alterar(CorTransfer corTransfer)
+        public async Task<CorTransfer> Alterar(CorTransfer corTransfer, string autorizacao)
         {
             CorTransfer cor = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", corTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return cor;
         }
 
-        public async Task<CorTransfer> Excluir(int id)
+        public async Task<CorTransfer> Excluir(int id, string autorizacao)
         {
             CorTransfer cor = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return cor;
         }
 
-        public async Task<CorTransfer> ConsultarPorId(int id)
+        public async Task<CorTransfer> ConsultarPorId(int id, string autorizacao)
         {
             CorTransfer cor = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return cor;
         }
 
-        public async Task<CorTransfer> Consultar(CorTransfer corListaTransfer)
+        public async Task<CorTransfer> Consultar(CorTransfer corListaTransfer, string autorizacao)
         {
             CorTransfer corLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", corListaTransfer);

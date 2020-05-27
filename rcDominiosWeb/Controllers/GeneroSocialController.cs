@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class GeneroSocialController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public GeneroSocialController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 if (id > 0) {
                     generoSocial = await generoSocialModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocialLista;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 generoSocialLista = await generoSocialModel.Consultar(new GeneroSocialTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocialLista;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 generoSocialLista = await generoSocialModel.Consultar(generoSocialTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 generoSocial = await generoSocialModel.Incluir(generoSocialTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 generoSocial = await generoSocialModel.Alterar(generoSocialTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             GeneroSocialTransfer generoSocial;
 
             try {
-                generoSocialModel = new GeneroSocialModel();
+                generoSocialModel = new GeneroSocialModel(httpContext);
 
                 generoSocial = await generoSocialModel.Excluir(id);
             } catch (Exception ex) {

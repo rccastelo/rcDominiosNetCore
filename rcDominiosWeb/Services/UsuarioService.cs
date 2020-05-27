@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "Usuario";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public UsuarioService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<UsuarioTransfer> Incluir(UsuarioTransfer usuarioTransfer)
+        public async Task<UsuarioTransfer> Incluir(UsuarioTransfer usuarioTransfer, string autorizacao)
         {
             UsuarioTransfer usuario = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", usuarioTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return usuario;
         }
 
-        public async Task<UsuarioTransfer> Alterar(UsuarioTransfer usuarioTransfer)
+        public async Task<UsuarioTransfer> Alterar(UsuarioTransfer usuarioTransfer, string autorizacao)
         {
             UsuarioTransfer usuario = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", usuarioTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return usuario;
         }
 
-        public async Task<UsuarioTransfer> Excluir(int id)
+        public async Task<UsuarioTransfer> Excluir(int id, string autorizacao)
         {
             UsuarioTransfer usuario = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return usuario;
         }
 
-        public async Task<UsuarioTransfer> ConsultarPorId(int id)
+        public async Task<UsuarioTransfer> ConsultarPorId(int id, string autorizacao)
         {
             UsuarioTransfer usuario = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return usuario;
         }
 
-        public async Task<UsuarioTransfer> Consultar(UsuarioTransfer usuarioListaTransfer)
+        public async Task<UsuarioTransfer> Consultar(UsuarioTransfer usuarioListaTransfer, string autorizacao)
         {
             UsuarioTransfer usuarioLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", usuarioListaTransfer);

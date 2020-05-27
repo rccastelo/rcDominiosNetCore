@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
+using Microsoft.AspNetCore.Http;
 
 namespace rcDominiosWeb.Controllers
 {
   public class EstadoCivilController : Controller
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public EstadoCivilController(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Index()
         {
@@ -27,7 +35,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 if (id > 0) {
                     estadoCivil = await estadoCivilModel.ConsultarPorId(id);
@@ -54,7 +62,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivilLista;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 estadoCivilLista = await estadoCivilModel.Consultar(new EstadoCivilTransfer());
             } catch (Exception ex) {
@@ -77,7 +85,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivilLista;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 estadoCivilLista = await estadoCivilModel.Consultar(estadoCivilTransfer);
             } catch (Exception ex) {
@@ -104,7 +112,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 estadoCivil = await estadoCivilModel.Incluir(estadoCivilTransfer);
             } catch (Exception ex) {
@@ -131,7 +139,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 estadoCivil = await estadoCivilModel.Alterar(estadoCivilTransfer);
             } catch (Exception ex) {
@@ -158,7 +166,7 @@ namespace rcDominiosWeb.Controllers
             EstadoCivilTransfer estadoCivil;
 
             try {
-                estadoCivilModel = new EstadoCivilModel();
+                estadoCivilModel = new EstadoCivilModel(httpContext);
 
                 estadoCivil = await estadoCivilModel.Excluir(id);
             } catch (Exception ex) {

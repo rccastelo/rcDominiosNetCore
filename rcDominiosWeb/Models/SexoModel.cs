@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
@@ -7,18 +8,30 @@ namespace rcDominiosWeb.Models
 {
     public class SexoModel
     {
+        private readonly IHttpContextAccessor httpContext;
+
+        public SexoModel(IHttpContextAccessor accessor)
+        {
+            httpContext = accessor;
+        }
+
         public async Task<SexoTransfer> Incluir(SexoTransfer sexoTransfer)
         {
             SexoService sexoService;
             SexoTransfer sexo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 sexoService = new SexoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 sexoTransfer.Sexo.Criacao = DateTime.Today;
                 sexoTransfer.Sexo.Alteracao = DateTime.Today;
 
-                sexo = await sexoService.Incluir(sexoTransfer);
+                sexo = await sexoService.Incluir(sexoTransfer, autorizacao);
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
@@ -27,6 +40,7 @@ namespace rcDominiosWeb.Models
                 sexo.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoService = null;
+                autenticaModel = null;
             }
 
             return sexo;
@@ -36,13 +50,18 @@ namespace rcDominiosWeb.Models
         {
             SexoService sexoService;
             SexoTransfer sexo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 sexoService = new SexoService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
 
                 sexoTransfer.Sexo.Alteracao = DateTime.Today;
 
-                sexo = await sexoService.Alterar(sexoTransfer);
+                sexo = await sexoService.Alterar(sexoTransfer, autorizacao);
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
@@ -51,6 +70,7 @@ namespace rcDominiosWeb.Models
                 sexo.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoService = null;
+                autenticaModel = null;
             }
 
             return sexo;
@@ -60,11 +80,16 @@ namespace rcDominiosWeb.Models
         {
             SexoService sexoService;
             SexoTransfer sexo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
 
             try {
                 sexoService = new SexoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                sexo = await sexoService.Excluir(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                sexo = await sexoService.Excluir(id, autorizacao);
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
@@ -73,6 +98,7 @@ namespace rcDominiosWeb.Models
                 sexo.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoService = null;
+                autenticaModel = null;
             }
 
             return sexo;
@@ -82,11 +108,16 @@ namespace rcDominiosWeb.Models
         {
             SexoService sexoService;
             SexoTransfer sexo;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             
             try {
                 sexoService = new SexoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                sexo = await sexoService.ConsultarPorId(id);
+                autorizacao = autenticaModel.ObterToken();
+
+                sexo = await sexoService.ConsultarPorId(id, autorizacao);
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
@@ -95,6 +126,7 @@ namespace rcDominiosWeb.Models
                 sexo.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoService = null;
+                autenticaModel = null;
             }
 
             return sexo;
@@ -104,13 +136,18 @@ namespace rcDominiosWeb.Models
         {
             SexoService sexoService;
             SexoTransfer sexoLista;
+            AutenticaModel autenticaModel;
+            string autorizacao;
             int dif = 0;
             int qtdExibe = 5;
 
             try {
                 sexoService = new SexoService();
+                autenticaModel = new AutenticaModel(httpContext);
 
-                sexoLista = await sexoService.Consultar(sexoListaTransfer);
+                autorizacao = autenticaModel.ObterToken();
+
+                sexoLista = await sexoService.Consultar(sexoListaTransfer, autorizacao);
 
                 if (sexoLista != null) {
                     if (sexoLista.TotalRegistros > 0) {
@@ -157,6 +194,7 @@ namespace rcDominiosWeb.Models
                 sexoLista.IncluirErroMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoService = null;
+                autenticaModel = null;
             }
 
             return sexoLista;

@@ -13,7 +13,6 @@ namespace rcDominiosWeb.Services
         private string nomeServico = "Profissao";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
-        private string autorizacao = null;
 
         public ProfissaoService()
         {
@@ -22,14 +21,13 @@ namespace rcDominiosWeb.Services
             autenticaService = new AutenticaService();
         }
 
-        public async Task<ProfissaoTransfer> Incluir(ProfissaoTransfer profissaoTransfer)
+        public async Task<ProfissaoTransfer> Incluir(ProfissaoTransfer profissaoTransfer, string autorizacao)
         {
             ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}", profissaoTransfer);
@@ -64,14 +62,13 @@ namespace rcDominiosWeb.Services
             return profissao;
         }
 
-        public async Task<ProfissaoTransfer> Alterar(ProfissaoTransfer profissaoTransfer)
+        public async Task<ProfissaoTransfer> Alterar(ProfissaoTransfer profissaoTransfer, string autorizacao)
         {
             ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PutAsJsonAsync($"{nomeServico}", profissaoTransfer);
@@ -106,14 +103,13 @@ namespace rcDominiosWeb.Services
             return profissao;
         }
 
-        public async Task<ProfissaoTransfer> Excluir(int id)
+        public async Task<ProfissaoTransfer> Excluir(int id, string autorizacao)
         {
             ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.DeleteAsync($"{nomeServico}/{id}");
@@ -148,14 +144,13 @@ namespace rcDominiosWeb.Services
             return profissao;
         }
 
-        public async Task<ProfissaoTransfer> ConsultarPorId(int id)
+        public async Task<ProfissaoTransfer> ConsultarPorId(int id, string autorizacao)
         {
             ProfissaoTransfer profissao = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.GetAsync($"{nomeServico}/{id}");
@@ -190,14 +185,13 @@ namespace rcDominiosWeb.Services
             return profissao;
         }
 
-        public async Task<ProfissaoTransfer> Consultar(ProfissaoTransfer profissaoListaTransfer)
+        public async Task<ProfissaoTransfer> Consultar(ProfissaoTransfer profissaoListaTransfer, string autorizacao)
         {
             ProfissaoTransfer profissaoLista = null;
             HttpResponseMessage resposta = null;
             string mensagemRetono = null;
             
             try {
-                autorizacao = await autenticaService.Autorizar();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
 
                 resposta = await httpClient.PostAsJsonAsync($"{nomeServico}/lista", profissaoListaTransfer);
