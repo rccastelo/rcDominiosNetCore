@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace rcDominiosWeb.Controllers
 {
-  public class UsuarioController : Controller
+    [Authorize]
+    public class UsuarioController : Controller
     {
         private readonly IHttpContextAccessor httpContext;
 
@@ -16,7 +18,7 @@ namespace rcDominiosWeb.Controllers
             httpContext = accessor;
         }
 
-        [HttpGet, HttpPost]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -79,6 +81,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Consulta(UsuarioTransfer usuarioTransfer)
         {
             UsuarioModel usuarioModel;
@@ -106,6 +109,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Inclusao(UsuarioTransfer usuarioTransfer)
         {
             UsuarioModel usuarioModel;
@@ -133,6 +137,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Alteracao(UsuarioTransfer usuarioTransfer)
         {
             UsuarioModel usuarioModel;

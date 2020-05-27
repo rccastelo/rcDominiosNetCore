@@ -22,6 +22,7 @@
     </div>
     <br>
     <form asp-controller="Profissao" asp-action='@ViewData["Action"]' asp-anti-forgery method="POST">
+        @Html.AntiForgeryToken()
         <div class="form-row">
             <div class="col-5">
                 <div class="form-group">

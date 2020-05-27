@@ -10,6 +10,7 @@
     </div>
     <br>
     <form id="form" asp-controller="TelefoneTipo" asp-action="Consulta" asp-anti-forgery method="post">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="@Model.PaginaAtual">
         <input type="hidden" asp-for="@Model.RegistrosPorPagina">
         <input type="hidden" asp-for="@Model.IdDe">

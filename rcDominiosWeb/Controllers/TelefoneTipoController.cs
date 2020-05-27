@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using rcDominiosWeb.Models;
 using rcDominiosTransfers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace rcDominiosWeb.Controllers
 {
-  public class TelefoneTipoController : Controller
+    [Authorize]
+    public class TelefoneTipoController : Controller
     {
         private readonly IHttpContextAccessor httpContext;
 
@@ -16,7 +18,7 @@ namespace rcDominiosWeb.Controllers
             httpContext = accessor;
         }
 
-        [HttpGet, HttpPost]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -79,6 +81,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Consulta(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
@@ -106,6 +109,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Inclusao(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
@@ -133,6 +137,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Alteracao(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;

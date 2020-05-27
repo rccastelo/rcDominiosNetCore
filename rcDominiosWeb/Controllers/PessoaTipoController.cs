@@ -18,7 +18,7 @@ namespace rcDominiosWeb.Controllers
             httpContext = accessor;
         }
 
-        [HttpGet, HttpPost]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -81,6 +81,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Consulta(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
@@ -108,6 +109,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Inclusao(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
@@ -135,6 +137,7 @@ namespace rcDominiosWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Alteracao(PessoaTipoTransfer pessoaTipoTransfer)
         {
             PessoaTipoModel pessoaTipoModel;
