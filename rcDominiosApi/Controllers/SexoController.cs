@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoController Listar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoController Listar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoController Consultar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoController Consultar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Incluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Incluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Alterar [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Alterar [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Excluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Excluir [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }

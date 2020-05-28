@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController ConsultarPorId [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Listar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoController Listar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Consultar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoController Consultar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Incluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Incluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Alterar [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Alterar [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Excluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Excluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }

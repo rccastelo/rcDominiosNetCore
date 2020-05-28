@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     estadoCivil.Validacao = false;
                     estadoCivil.Erro = true;
-                    estadoCivil.IncluirErroMensagem(mensagemRetono);
+                    estadoCivil.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilService Incluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     estadoCivil.Validacao = false;
                     estadoCivil.Erro = true;
-                    estadoCivil.IncluirErroMensagem(mensagemRetono);
+                    estadoCivil.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilService Alterar [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     estadoCivil.Validacao = false;
                     estadoCivil.Erro = true;
-                    estadoCivil.IncluirErroMensagem(mensagemRetono);
+                    estadoCivil.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilService Excluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     estadoCivil.Validacao = false;
                     estadoCivil.Erro = true;
-                    estadoCivil.IncluirErroMensagem(mensagemRetono);
+                    estadoCivil.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 estadoCivil = new EstadoCivilTransfer();
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilService ConsultarPorId [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     estadoCivilLista.Validacao = false;
                     estadoCivilLista.Erro = true;
-                    estadoCivilLista.IncluirErroMensagem(mensagemRetono);
+                    estadoCivilLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 estadoCivilLista = new EstadoCivilTransfer();
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
-                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilService Consultar [" + ex.Message + "]");
+                estadoCivilLista.IncluirMensagem("Erro em EstadoCivilService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

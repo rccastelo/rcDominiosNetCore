@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoInclusao.Validacao = false;
                 enderecoTipoInclusao.Erro = true;
-                enderecoTipoInclusao.IncluirErroMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
+                enderecoTipoInclusao.IncluirMensagem("Erro em EnderecoTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoAlteracao.Validacao = false;
                 enderecoTipoAlteracao.Erro = true;
-                enderecoTipoAlteracao.IncluirErroMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
+                enderecoTipoAlteracao.IncluirMensagem("Erro em EnderecoTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoModel Consultar [" + ex.Message + "]");
+                enderecoTipoLista.IncluirMensagem("Erro em EnderecoTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 enderecoTipoDataModel = null;
                 enderecoTipoBusiness = null;

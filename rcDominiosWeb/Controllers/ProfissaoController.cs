@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Form");
+                profissao.IncluirMensagem("Erro em ProfissaoController Form");
             } finally {
                 profissaoModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Lista [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoController Lista [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Consulta [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoController Consulta [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Inclusao [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Alteracao [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Exclusao [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }

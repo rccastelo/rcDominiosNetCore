@@ -13,9 +13,11 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="..\rcDominiosTransfers\rcDominiosTransfers.csproj" />
+    <ProjectReference Include="..\rcDominiosDataModels\rcDominiosDataModels.csproj" />
+    <ProjectReference Include="..\rcDominiosBusiness\rcDominiosBusiness.csproj" />
+    <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
   </ItemGroup>
 
 </Project>

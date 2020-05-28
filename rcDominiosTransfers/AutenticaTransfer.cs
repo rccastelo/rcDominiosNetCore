@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace rcDominiosTransfers
 {
     public class AutenticaTransfer : Transfer
@@ -13,6 +15,8 @@ namespace rcDominiosTransfers
         public AutenticaTransfer() 
             : base()
         {
+            this.Autenticado = false;
+            this.Token = null;
         }
 
         public AutenticaTransfer(AutenticaTransfer transfer) 

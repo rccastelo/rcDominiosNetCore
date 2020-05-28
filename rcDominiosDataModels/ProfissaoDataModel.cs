@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Incluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Alterar [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel Excluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoDataModel ConsultarPorId [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoDataModel Consultar [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 profissaoData = null;
             }

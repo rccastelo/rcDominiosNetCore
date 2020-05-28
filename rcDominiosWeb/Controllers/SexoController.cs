@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Form");
+                sexo.IncluirMensagem("Erro em SexoController Form");
             } finally {
                 sexoModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoController Lista [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoController Lista [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoController Consulta [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoController Consulta [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Inclusao [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Inclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Alteracao [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Alteracao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoController Exclusao [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoController Exclusao [" + ex.Message + "]");
             } finally {
                 sexoModel = null;
             }

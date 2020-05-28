@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Listar [" + ex.Message + "]");
+                enderecoTipoLista.IncluirMensagem("Erro em EnderecoTipoController Listar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoController Consultar [" + ex.Message + "]");
+                enderecoTipoLista.IncluirMensagem("Erro em EnderecoTipoController Consultar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoController Incluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoController Alterar [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoController Excluir [" + ex.Message + "]");
             } finally {
                 enderecoTipoModel = null;
             }

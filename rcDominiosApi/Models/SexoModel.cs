@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 sexoInclusao.Validacao = false;
                 sexoInclusao.Erro = true;
-                sexoInclusao.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
+                sexoInclusao.IncluirMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 sexoAlteracao.Validacao = false;
                 sexoAlteracao.Erro = true;
-                sexoAlteracao.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
+                sexoAlteracao.IncluirMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoDataModel = null;
                 sexoBusiness = null;

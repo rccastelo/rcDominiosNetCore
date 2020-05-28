@@ -17,28 +17,28 @@ namespace rcDominiosBusiness
 
                 //-- Descrição do Tipo de Pessoa
                 if (string.IsNullOrEmpty(estadoCivilValidacao.EstadoCivil.Descricao)) {
-                    estadoCivilValidacao.IncluirValidacaoMensagem("Necessário informar a Descrição do Estado Civil");
+                    estadoCivilValidacao.IncluirMensagem("Necessário informar a Descrição do Estado Civil");
                 } else if (estadoCivilValidacao.EstadoCivil.Descricao.Length > 100) {
-                    estadoCivilValidacao.IncluirValidacaoMensagem("Descrição deve ter no máximo 100 caracteres");
+                    estadoCivilValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(estadoCivilValidacao.EstadoCivil.Descricao)) {
-                    estadoCivilValidacao.IncluirValidacaoMensagem("Descrição possui caracteres inválidos");
-                    estadoCivilValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                    estadoCivilValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
+                    estadoCivilValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
 
                 //-- Código do Tipo de Pessoa
                 if (!string.IsNullOrEmpty(estadoCivilValidacao.EstadoCivil.Codigo)) {
                     if (estadoCivilValidacao.EstadoCivil.Codigo.Length > 10) {
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Código deve ter no máximo 10 caracteres");
+                        estadoCivilValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(estadoCivilValidacao.EstadoCivil.Codigo)) {
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Código possui caracteres inválidos");
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e traço");
+                        estadoCivilValidacao.IncluirMensagem("Código possui caracteres inválidos");
+                        estadoCivilValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                     }
                 }
 
                 estadoCivilValidacao.Validacao = true;
 
-                if (estadoCivilValidacao.ValidacaoMensagens != null) {
-                    if (estadoCivilValidacao.ValidacaoMensagens.Count > 0) {
+                if (estadoCivilValidacao.Mensagens != null) {
+                    if (estadoCivilValidacao.Mensagens.Count > 0) {
                         estadoCivilValidacao.Validacao = false;
                     }
                 }
@@ -47,7 +47,7 @@ namespace rcDominiosBusiness
             } catch (Exception ex) {
                 estadoCivilValidacao = new EstadoCivilTransfer();
 
-                estadoCivilValidacao.IncluirErroMensagem("Erro em EstadoCivilBusiness Validar [" + ex.Message + "]");
+                estadoCivilValidacao.IncluirMensagem("Erro em EstadoCivilBusiness Validar [" + ex.Message + "]");
                 estadoCivilValidacao.Validacao = false;
                 estadoCivilValidacao.Erro = true;
             }
@@ -68,59 +68,59 @@ namespace rcDominiosBusiness
 
                     //-- Id
                     if ((estadoCivilValidacao.IdDe <= 0) && (estadoCivilValidacao.IdAte > 0)) {
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
+                        estadoCivilValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
                     } else if ((estadoCivilValidacao.IdDe > 0) && (estadoCivilValidacao.IdAte > 0)) {
                         if (estadoCivilValidacao.IdDe >= estadoCivilValidacao.IdAte) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
+                            estadoCivilValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Descrição do Tipo de Pessoa
                     if (!string.IsNullOrEmpty(estadoCivilValidacao.Descricao)) {
                         if (estadoCivilValidacao.Descricao.Length > 100) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Descrição deve ter no máximo 100 caracteres");
+                            estadoCivilValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
                         } else if (!Validacao.ValidarCharAaBCcNT(estadoCivilValidacao.Descricao)) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Descrição possui caracteres inválidos");
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                            estadoCivilValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
+                            estadoCivilValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
                     //-- Código do Tipo de Pessoa
                     if (!string.IsNullOrEmpty(estadoCivilValidacao.Codigo)) {
                         if (estadoCivilValidacao.Codigo.Length > 10) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Código deve ter no máximo 10 caracteres");
+                            estadoCivilValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
                         } else if(!Validacao.ValidarCharAaNT(estadoCivilValidacao.Codigo)) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Código possui caracteres inválidos");
-                            estadoCivilValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e traço");
+                            estadoCivilValidacao.IncluirMensagem("Código possui caracteres inválidos");
+                            estadoCivilValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
                     if ((estadoCivilValidacao.CriacaoDe == DateTime.MinValue) && (estadoCivilValidacao.CriacaoAte != DateTime.MinValue)) {
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                        estadoCivilValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
                     } else if ((estadoCivilValidacao.CriacaoDe > DateTime.MinValue) && (estadoCivilValidacao.CriacaoAte > DateTime.MinValue)) {
                         if (estadoCivilValidacao.CriacaoDe >= estadoCivilValidacao.CriacaoAte) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
+                            estadoCivilValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
                     if ((estadoCivilValidacao.AlteracaoDe == DateTime.MinValue) && (estadoCivilValidacao.AlteracaoAte != DateTime.MinValue)) {
-                        estadoCivilValidacao.IncluirValidacaoMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                        estadoCivilValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
                     } else if ((estadoCivilValidacao.AlteracaoDe > DateTime.MinValue) && (estadoCivilValidacao.AlteracaoAte > DateTime.MinValue)) {
                         if (estadoCivilValidacao.AlteracaoDe >= estadoCivilValidacao.AlteracaoAte) {
-                            estadoCivilValidacao.IncluirValidacaoMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
+                            estadoCivilValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }
                 } else {
                     estadoCivilValidacao = new EstadoCivilTransfer();
-                    estadoCivilValidacao.IncluirValidacaoMensagem("É necessário informar os dados do Estado Civil");
+                    estadoCivilValidacao.IncluirMensagem("É necessário informar os dados do Estado Civil");
                 }
 
                 estadoCivilValidacao.Validacao = true;
 
-                if (estadoCivilValidacao.ValidacaoMensagens != null) {
-                    if (estadoCivilValidacao.ValidacaoMensagens.Count > 0) {
+                if (estadoCivilValidacao.Mensagens != null) {
+                    if (estadoCivilValidacao.Mensagens.Count > 0) {
                         estadoCivilValidacao.Validacao = false;
                     }
                 }
@@ -129,7 +129,7 @@ namespace rcDominiosBusiness
             } catch (Exception ex) {
                 estadoCivilValidacao = new EstadoCivilTransfer();
 
-                estadoCivilValidacao.IncluirErroMensagem("Erro em EstadoCivilBusiness Validar [" + ex.Message + "]");
+                estadoCivilValidacao.IncluirMensagem("Erro em EstadoCivilBusiness Validar [" + ex.Message + "]");
                 estadoCivilValidacao.Validacao = false;
                 estadoCivilValidacao.Erro = true;
             }

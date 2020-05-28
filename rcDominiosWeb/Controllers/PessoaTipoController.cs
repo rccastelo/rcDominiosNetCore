@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Form");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Form");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Lista [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoController Lista [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoController Consulta [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Inclusao [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Alteracao [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Alteracao [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoController Exclusao [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoController Exclusao [" + ex.Message + "]");
             } finally {
                 pessoaTipoModel = null;
             }

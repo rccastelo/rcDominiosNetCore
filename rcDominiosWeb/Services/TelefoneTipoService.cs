@@ -48,14 +48,14 @@ namespace rcDominiosWeb.Services
                     
                     telefoneTipo.Validacao = false;
                     telefoneTipo.Erro = true;
-                    telefoneTipo.IncluirErroMensagem(mensagemRetono);
+                    telefoneTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoService Incluir [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -90,14 +90,14 @@ namespace rcDominiosWeb.Services
                     
                     telefoneTipo.Validacao = false;
                     telefoneTipo.Erro = true;
-                    telefoneTipo.IncluirErroMensagem(mensagemRetono);
+                    telefoneTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoService Alterar [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -132,14 +132,14 @@ namespace rcDominiosWeb.Services
                     
                     telefoneTipo.Validacao = false;
                     telefoneTipo.Erro = true;
-                    telefoneTipo.IncluirErroMensagem(mensagemRetono);
+                    telefoneTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoService Excluir [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -174,14 +174,14 @@ namespace rcDominiosWeb.Services
                     
                     telefoneTipo.Validacao = false;
                     telefoneTipo.Erro = true;
-                    telefoneTipo.IncluirErroMensagem(mensagemRetono);
+                    telefoneTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 telefoneTipo = new TelefoneTipoTransfer();
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoService ConsultarPorId [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -216,14 +216,14 @@ namespace rcDominiosWeb.Services
                     
                     telefoneTipoLista.Validacao = false;
                     telefoneTipoLista.Erro = true;
-                    telefoneTipoLista.IncluirErroMensagem(mensagemRetono);
+                    telefoneTipoLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 telefoneTipoLista = new TelefoneTipoTransfer();
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoService Consultar [" + ex.Message + "]");
+                telefoneTipoLista.IncluirMensagem("Erro em TelefoneTipoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

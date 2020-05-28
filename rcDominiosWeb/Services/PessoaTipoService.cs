@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    pessoaTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoTransfer();
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Incluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    pessoaTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoTransfer();
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Alterar [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    pessoaTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoTransfer();
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService Excluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     pessoaTipo.Validacao = false;
                     pessoaTipo.Erro = true;
-                    pessoaTipo.IncluirErroMensagem(mensagemRetono);
+                    pessoaTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipo = new PessoaTipoTransfer();
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoService ConsultarPorId [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     pessoaTipoLista.Validacao = false;
                     pessoaTipoLista.Erro = true;
-                    pessoaTipoLista.IncluirErroMensagem(mensagemRetono);
+                    pessoaTipoLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 pessoaTipoLista = new PessoaTipoTransfer();
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoService Consultar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

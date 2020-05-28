@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     profissao.Validacao = false;
                     profissao.Erro = true;
-                    profissao.IncluirErroMensagem(mensagemRetono);
+                    profissao.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoService Incluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     profissao.Validacao = false;
                     profissao.Erro = true;
-                    profissao.IncluirErroMensagem(mensagemRetono);
+                    profissao.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoService Alterar [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     profissao.Validacao = false;
                     profissao.Erro = true;
-                    profissao.IncluirErroMensagem(mensagemRetono);
+                    profissao.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoService Excluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     profissao.Validacao = false;
                     profissao.Erro = true;
-                    profissao.IncluirErroMensagem(mensagemRetono);
+                    profissao.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 profissao = new ProfissaoTransfer();
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoService ConsultarPorId [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     profissaoLista.Validacao = false;
                     profissaoLista.Erro = true;
-                    profissaoLista.IncluirErroMensagem(mensagemRetono);
+                    profissaoLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 profissaoLista = new ProfissaoTransfer();
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoService Consultar [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController ConsultarPorId [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Listar [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoController Listar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoController Consultar [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoController Consultar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Incluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Incluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Alterar [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Alterar [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoController Excluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoController Excluir [" + ex.Message + "]");
             } finally {
                 profissaoModel = null;
             }

@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorDataModel Incluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorDataModel Incluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorDataModel Alterar [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorDataModel Alterar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorDataModel Excluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorDataModel Excluir [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorDataModel Consultar [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorDataModel Consultar [" + ex.Message + "]");
             } finally {
                 corData = null;
             }

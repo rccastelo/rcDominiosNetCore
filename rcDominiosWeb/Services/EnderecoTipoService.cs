@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     enderecoTipo.Validacao = false;
                     enderecoTipo.Erro = true;
-                    enderecoTipo.IncluirErroMensagem(mensagemRetono);
+                    enderecoTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoService Incluir [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     enderecoTipo.Validacao = false;
                     enderecoTipo.Erro = true;
-                    enderecoTipo.IncluirErroMensagem(mensagemRetono);
+                    enderecoTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoService Alterar [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     enderecoTipo.Validacao = false;
                     enderecoTipo.Erro = true;
-                    enderecoTipo.IncluirErroMensagem(mensagemRetono);
+                    enderecoTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoService Excluir [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     enderecoTipo.Validacao = false;
                     enderecoTipo.Erro = true;
-                    enderecoTipo.IncluirErroMensagem(mensagemRetono);
+                    enderecoTipo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 enderecoTipo = new EnderecoTipoTransfer();
 
                 enderecoTipo.Validacao = false;
                 enderecoTipo.Erro = true;
-                enderecoTipo.IncluirErroMensagem("Erro em EnderecoTipoService ConsultarPorId [" + ex.Message + "]");
+                enderecoTipo.IncluirMensagem("Erro em EnderecoTipoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     enderecoTipoLista.Validacao = false;
                     enderecoTipoLista.Erro = true;
-                    enderecoTipoLista.IncluirErroMensagem(mensagemRetono);
+                    enderecoTipoLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 enderecoTipoLista = new EnderecoTipoTransfer();
 
                 enderecoTipoLista.Validacao = false;
                 enderecoTipoLista.Erro = true;
-                enderecoTipoLista.IncluirErroMensagem("Erro em EnderecoTipoService Consultar [" + ex.Message + "]");
+                enderecoTipoLista.IncluirMensagem("Erro em EnderecoTipoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

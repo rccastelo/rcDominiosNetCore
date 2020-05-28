@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using rcDominiosApi.Models;
 using rcDominiosTransfers;
 
 namespace rcDominiosAutentica.Controllers
@@ -12,60 +13,34 @@ namespace rcDominiosAutentica.Controllers
     public class AutenticaController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Autoriza(AutenticaTransfer autenticaTransfer) 
+        public IActionResult Autenticar(AutenticaTransfer autenticaTransfer) 
         {
-            bool valido = false;
+            AutenticaModel autenticaModel = null;
             AutenticaTransfer autentica = null;
 
             try {
-                autentica = new AutenticaTransfer(autenticaTransfer);
-                autentica.Senha = "";
+                autenticaModel = new AutenticaModel();
 
-                if ((autenticaTransfer != null) && (autenticaTransfer is AutenticaTransfer)) {
-                    if ((autenticaTransfer.Apelido == "admin") && (autenticaTransfer.Senha == "senha")) {
-                        valido = true;
+                autentica = autenticaModel.Autenticar(autenticaTransfer);
+
+                if (!autentica.Erro) {
+                    if (autentica.Autenticado) {
+                        return Ok(autentica);
+                    } else {
+                        return Unauthorized(autentica);
                     }
-                }
-
-                if (valido) {
-                    var direitos = new [] {
-                        new Claim(JwtRegisteredClaimNames.Sub, autenticaTransfer.Apelido),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                    };
-
-                    var chave = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("rc-Dominios-Autenticacao"));
-
-                    var credenciais = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
-
-                    var jwtSecurityToken = new JwtSecurityToken(
-                        issuer: "rcDominiosAutentica",
-                        audience: "Postman",
-                        claims: direitos,
-                        signingCredentials: credenciais,
-                        expires: DateTime.Now.AddMinutes(30)
-                    );
-
-                    string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-
-                    autentica.Token = token;
-                    autentica.Autenticado = true;
-                    autentica.Erro = false;
-                    autentica.Validacao = true;
-
-                    return Ok(autentica);
                 } else {
-                    autentica = new AutenticaTransfer(autenticaTransfer);
-
-                    autentica.Autenticado = false;
-                    autentica.Token = "";
-                    autentica.Validacao = false;
-
-                    autentica.IncluirValidacaoMensagem("Usuário e/ou senha informado(s) inválido(s)");
-
-                    return Unauthorized(autentica);
+                    return BadRequest(autentica);
                 }
-            } catch {
+            } catch (Exception ex) {
+                autentica = new AutenticaTransfer();
+
+                autentica.Erro = true;
+                autentica.IncluirMensagem("Erro em AutenticaController Autenticar [" + ex.Message + "]");
+
                 return BadRequest(autentica);
+            } finally {
+                autenticaModel = null;
             }
         }
     }

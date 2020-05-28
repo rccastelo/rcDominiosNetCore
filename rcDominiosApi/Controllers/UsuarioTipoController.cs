@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController ConsultarPorId [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoController Listar [" + ex.Message + "]");
+                usuarioTipoLista.IncluirMensagem("Erro em UsuarioTipoController Listar [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoController Consultar [" + ex.Message + "]");
+                usuarioTipoLista.IncluirMensagem("Erro em UsuarioTipoController Consultar [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Incluir [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Alterar [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Excluir [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }

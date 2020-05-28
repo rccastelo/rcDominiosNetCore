@@ -38,12 +38,12 @@ namespace rcDominiosWeb.Controllers
 
                 autentica.Validacao = false;
                 autentica.Erro = true;
-                autentica.IncluirErroMensagem("Erro em AutenticaController Consulta [" + ex.Message + "]");
+                autentica.IncluirMensagem("Erro em AutenticaController Consulta [" + ex.Message + "]");
             } finally {
                 autenticaModel = null;
             }
 
-            if (autentica.Erro || !autentica.Validacao) {
+            if (autentica.Erro || !autentica.Validacao || !autentica.Autenticado) {
                 return View("Index", autentica);
             } else {
                 return RedirectToAction("Lista");

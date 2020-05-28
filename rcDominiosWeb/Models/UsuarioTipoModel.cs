@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
+                usuarioTipoLista.IncluirMensagem("Erro em UsuarioTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioTipoService = null;
                 autenticaModel = null;

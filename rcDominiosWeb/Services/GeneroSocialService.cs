@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     generoSocial.Validacao = false;
                     generoSocial.Erro = true;
-                    generoSocial.IncluirErroMensagem(mensagemRetono);
+                    generoSocial.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialService Incluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     generoSocial.Validacao = false;
                     generoSocial.Erro = true;
-                    generoSocial.IncluirErroMensagem(mensagemRetono);
+                    generoSocial.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialService Alterar [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     generoSocial.Validacao = false;
                     generoSocial.Erro = true;
-                    generoSocial.IncluirErroMensagem(mensagemRetono);
+                    generoSocial.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialService Excluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     generoSocial.Validacao = false;
                     generoSocial.Erro = true;
-                    generoSocial.IncluirErroMensagem(mensagemRetono);
+                    generoSocial.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 generoSocial = new GeneroSocialTransfer();
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialService ConsultarPorId [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     generoSocialLista.Validacao = false;
                     generoSocialLista.Erro = true;
-                    generoSocialLista.IncluirErroMensagem(mensagemRetono);
+                    generoSocialLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 generoSocialLista = new GeneroSocialTransfer();
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialService Consultar [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

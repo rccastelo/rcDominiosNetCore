@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     usuario.Validacao = false;
                     usuario.Erro = true;
-                    usuario.IncluirErroMensagem(mensagemRetono);
+                    usuario.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioService Incluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     usuario.Validacao = false;
                     usuario.Erro = true;
-                    usuario.IncluirErroMensagem(mensagemRetono);
+                    usuario.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioService Alterar [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     usuario.Validacao = false;
                     usuario.Erro = true;
-                    usuario.IncluirErroMensagem(mensagemRetono);
+                    usuario.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioService Excluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     usuario.Validacao = false;
                     usuario.Erro = true;
-                    usuario.IncluirErroMensagem(mensagemRetono);
+                    usuario.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioService ConsultarPorId [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     usuarioLista.Validacao = false;
                     usuarioLista.Erro = true;
-                    usuarioLista.IncluirErroMensagem(mensagemRetono);
+                    usuarioLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 usuarioLista = new UsuarioTransfer();
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioService Consultar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

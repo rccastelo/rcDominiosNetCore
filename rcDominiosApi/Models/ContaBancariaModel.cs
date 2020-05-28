@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaInclusao.Validacao = false;
                 contaBancariaInclusao.Erro = true;
-                contaBancariaInclusao.IncluirErroMensagem("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
+                contaBancariaInclusao.IncluirMensagem("Erro em ContaBancariaModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaAlteracao.Validacao = false;
                 contaBancariaAlteracao.Erro = true;
-                contaBancariaAlteracao.IncluirErroMensagem("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
+                contaBancariaAlteracao.IncluirMensagem("Erro em ContaBancariaModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaModel Consultar [" + ex.Message + "]");
+                contaBancariaLista.IncluirMensagem("Erro em ContaBancariaModel Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaDataModel = null;
                 contaBancariaBusiness = null;

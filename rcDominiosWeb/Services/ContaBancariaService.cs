@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     contaBancaria.Validacao = false;
                     contaBancaria.Erro = true;
-                    contaBancaria.IncluirErroMensagem(mensagemRetono);
+                    contaBancaria.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaService Incluir [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     contaBancaria.Validacao = false;
                     contaBancaria.Erro = true;
-                    contaBancaria.IncluirErroMensagem(mensagemRetono);
+                    contaBancaria.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaService Alterar [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     contaBancaria.Validacao = false;
                     contaBancaria.Erro = true;
-                    contaBancaria.IncluirErroMensagem(mensagemRetono);
+                    contaBancaria.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaService Excluir [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     contaBancaria.Validacao = false;
                     contaBancaria.Erro = true;
-                    contaBancaria.IncluirErroMensagem(mensagemRetono);
+                    contaBancaria.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 contaBancaria = new ContaBancariaTransfer();
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaService ConsultarPorId [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     contaBancariaLista.Validacao = false;
                     contaBancariaLista.Erro = true;
-                    contaBancariaLista.IncluirErroMensagem(mensagemRetono);
+                    contaBancariaLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 contaBancariaLista = new ContaBancariaTransfer();
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaService Consultar [" + ex.Message + "]");
+                contaBancariaLista.IncluirMensagem("Erro em ContaBancariaService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

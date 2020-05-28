@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Form");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Form");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoController Lista [" + ex.Message + "]");
+                usuarioTipoLista.IncluirMensagem("Erro em UsuarioTipoController Lista [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 usuarioTipoLista.Validacao = false;
                 usuarioTipoLista.Erro = true;
-                usuarioTipoLista.IncluirErroMensagem("Erro em UsuarioTipoController Consulta [" + ex.Message + "]");
+                usuarioTipoLista.IncluirMensagem("Erro em UsuarioTipoController Consulta [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Inclusao [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Alteracao [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Alteracao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 usuarioTipo.Validacao = false;
                 usuarioTipo.Erro = true;
-                usuarioTipo.IncluirErroMensagem("Erro em UsuarioTipoController Exclusao [" + ex.Message + "]");
+                usuarioTipo.IncluirMensagem("Erro em UsuarioTipoController Exclusao [" + ex.Message + "]");
             } finally {
                 usuarioTipoModel = null;
             }

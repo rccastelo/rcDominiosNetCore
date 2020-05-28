@@ -43,7 +43,7 @@ namespace rcDominiosWeb.Services
                     autentica.Autenticado = false;
                     autentica.Validacao = false;
                     autentica.Erro = true;
-                    autentica.IncluirErroMensagem(mensagemRetono);
+                    autentica.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 autentica = new AutenticaTransfer();
@@ -51,7 +51,7 @@ namespace rcDominiosWeb.Services
                 autentica.Autenticado = false;
                 autentica.Validacao = false;
                 autentica.Erro = true;
-                autentica.IncluirErroMensagem("Erro em AutenticaService Autenticar [" + ex.Message + "]");
+                autentica.IncluirMensagem("Erro em AutenticaService Autenticar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     sexo.Validacao = false;
                     sexo.Erro = true;
-                    sexo.IncluirErroMensagem(mensagemRetono);
+                    sexo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoService Incluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     sexo.Validacao = false;
                     sexo.Erro = true;
-                    sexo.IncluirErroMensagem(mensagemRetono);
+                    sexo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoService Alterar [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     sexo.Validacao = false;
                     sexo.Erro = true;
-                    sexo.IncluirErroMensagem(mensagemRetono);
+                    sexo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoService Excluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     sexo.Validacao = false;
                     sexo.Erro = true;
-                    sexo.IncluirErroMensagem(mensagemRetono);
+                    sexo.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 sexo = new SexoTransfer();
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoService ConsultarPorId [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     sexoLista.Validacao = false;
                     sexoLista.Erro = true;
-                    sexoLista.IncluirErroMensagem(mensagemRetono);
+                    sexoLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 sexoLista = new SexoTransfer();
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoService Consultar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

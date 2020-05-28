@@ -48,7 +48,7 @@ namespace rcDominiosWeb.Models
 
                 autentica.Validacao = false;
                 autentica.Erro = true;
-                autentica.IncluirErroMensagem("Erro em AutenticaModel Autenticar [" + ex.Message + "]");
+                autentica.IncluirMensagem("Erro em AutenticaModel Autenticar [" + ex.Message + "]");
             } finally {
                 autenticaService = null;
             }

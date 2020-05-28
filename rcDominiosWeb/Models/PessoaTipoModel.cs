@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoModel Incluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoModel Alterar [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoModel Excluir [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipo.Validacao = false;
                 pessoaTipo.Erro = true;
-                pessoaTipo.IncluirErroMensagem("Erro em PessoaTipoModel ConsultarPorId [" + ex.Message + "]");
+                pessoaTipo.IncluirMensagem("Erro em PessoaTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 pessoaTipoLista.Validacao = false;
                 pessoaTipoLista.Erro = true;
-                pessoaTipoLista.IncluirErroMensagem("Erro em PessoaTipoModel Consultar [" + ex.Message + "]");
+                pessoaTipoLista.IncluirMensagem("Erro em PessoaTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 pessoaTipoService = null;
                 autenticaModel = null;

@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController ConsultarPorId [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorController Listar [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorController Listar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorController Consultar [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorController Consultar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Incluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Incluir [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Alterar [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Alterar [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Excluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Excluir [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }

@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialModel Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialService = null;
                 autenticaModel = null;

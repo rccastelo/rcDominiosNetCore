@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Form");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Form");
             } finally {
                 generoSocialModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Lista [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialController Lista [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Consulta [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialController Consulta [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Inclusao [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Inclusao [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Alteracao [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Alteracao [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Exclusao [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Exclusao [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }

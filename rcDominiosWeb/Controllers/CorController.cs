@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Form");
+                cor.IncluirMensagem("Erro em CorController Form");
             } finally {
                 corModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorController Lista [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorController Lista [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorController Consulta [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorController Consulta [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Inclusao [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Inclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Alteracao [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Alteracao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorController Exclusao [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorController Exclusao [" + ex.Message + "]");
             } finally {
                 corModel = null;
             }

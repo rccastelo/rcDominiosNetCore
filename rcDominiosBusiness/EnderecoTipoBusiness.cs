@@ -17,28 +17,28 @@ namespace rcDominiosBusiness
 
                 //-- Descrição do Tipo de Pessoa
                 if (string.IsNullOrEmpty(enderecoTipoValidacao.EnderecoTipo.Descricao)) {
-                    enderecoTipoValidacao.IncluirValidacaoMensagem("Necessário informar a Descrição do tipo de Endereço");
+                    enderecoTipoValidacao.IncluirMensagem("Necessário informar a Descrição do tipo de Endereço");
                 } else if (enderecoTipoValidacao.EnderecoTipo.Descricao.Length > 100) {
-                    enderecoTipoValidacao.IncluirValidacaoMensagem("Descrição deve ter no máximo 100 caracteres");
+                    enderecoTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(enderecoTipoValidacao.EnderecoTipo.Descricao)) {
-                    enderecoTipoValidacao.IncluirValidacaoMensagem("Descrição possui caracteres inválidos");
-                    enderecoTipoValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                    enderecoTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
+                    enderecoTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                 }
 
                 //-- Código do Tipo de Pessoa
                 if (!string.IsNullOrEmpty(enderecoTipoValidacao.EnderecoTipo.Codigo)) {
                     if (enderecoTipoValidacao.EnderecoTipo.Codigo.Length > 10) {
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Código deve ter no máximo 10 caracteres");
+                        enderecoTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(enderecoTipoValidacao.EnderecoTipo.Codigo)) {
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Código possui caracteres inválidos");
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e traço");
+                        enderecoTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
+                        enderecoTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                     }
                 }
 
                 enderecoTipoValidacao.Validacao = true;
 
-                if (enderecoTipoValidacao.ValidacaoMensagens != null) {
-                    if (enderecoTipoValidacao.ValidacaoMensagens.Count > 0) {
+                if (enderecoTipoValidacao.Mensagens != null) {
+                    if (enderecoTipoValidacao.Mensagens.Count > 0) {
                         enderecoTipoValidacao.Validacao = false;
                     }
                 }
@@ -47,7 +47,7 @@ namespace rcDominiosBusiness
             } catch (Exception ex) {
                 enderecoTipoValidacao = new EnderecoTipoTransfer();
 
-                enderecoTipoValidacao.IncluirErroMensagem("Erro em EnderecoTipoBusiness Validar [" + ex.Message + "]");
+                enderecoTipoValidacao.IncluirMensagem("Erro em EnderecoTipoBusiness Validar [" + ex.Message + "]");
                 enderecoTipoValidacao.Validacao = false;
                 enderecoTipoValidacao.Erro = true;
             }
@@ -68,59 +68,59 @@ namespace rcDominiosBusiness
 
                     //-- Id
                     if ((enderecoTipoValidacao.IdDe <= 0) && (enderecoTipoValidacao.IdAte > 0)) {
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
+                        enderecoTipoValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
                     } else if ((enderecoTipoValidacao.IdDe > 0) && (enderecoTipoValidacao.IdAte > 0)) {
                         if (enderecoTipoValidacao.IdDe >= enderecoTipoValidacao.IdAte) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
+                            enderecoTipoValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Descrição do Tipo de Pessoa
                     if (!string.IsNullOrEmpty(enderecoTipoValidacao.Descricao)) {
                         if (enderecoTipoValidacao.Descricao.Length > 100) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Descrição deve ter no máximo 100 caracteres");
+                            enderecoTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
                         } else if (!Validacao.ValidarCharAaBCcNT(enderecoTipoValidacao.Descricao)) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Descrição possui caracteres inválidos");
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                            enderecoTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
+                            enderecoTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
                     //-- Código do Tipo de Pessoa
                     if (!string.IsNullOrEmpty(enderecoTipoValidacao.Codigo)) {
                         if (enderecoTipoValidacao.Codigo.Length > 10) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Código deve ter no máximo 10 caracteres");
+                            enderecoTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
                         } else if(!Validacao.ValidarCharAaNT(enderecoTipoValidacao.Codigo)) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Código possui caracteres inválidos");
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("Caracteres válidos: letras, números e traço");
+                            enderecoTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
+                            enderecoTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
                     if ((enderecoTipoValidacao.CriacaoDe == DateTime.MinValue) && (enderecoTipoValidacao.CriacaoAte != DateTime.MinValue)) {
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                        enderecoTipoValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
                     } else if ((enderecoTipoValidacao.CriacaoDe > DateTime.MinValue) && (enderecoTipoValidacao.CriacaoAte > DateTime.MinValue)) {
                         if (enderecoTipoValidacao.CriacaoDe >= enderecoTipoValidacao.CriacaoAte) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
+                            enderecoTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
                     if ((enderecoTipoValidacao.AlteracaoDe == DateTime.MinValue) && (enderecoTipoValidacao.AlteracaoAte != DateTime.MinValue)) {
-                        enderecoTipoValidacao.IncluirValidacaoMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
+                        enderecoTipoValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
                     } else if ((enderecoTipoValidacao.AlteracaoDe > DateTime.MinValue) && (enderecoTipoValidacao.AlteracaoAte > DateTime.MinValue)) {
                         if (enderecoTipoValidacao.AlteracaoDe >= enderecoTipoValidacao.AlteracaoAte) {
-                            enderecoTipoValidacao.IncluirValidacaoMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
+                            enderecoTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }
                 } else {
                     enderecoTipoValidacao = new EnderecoTipoTransfer();
-                    enderecoTipoValidacao.IncluirValidacaoMensagem("É necessário informar os dados do Tipo de Endereço");
+                    enderecoTipoValidacao.IncluirMensagem("É necessário informar os dados do Tipo de Endereço");
                 }
 
                 enderecoTipoValidacao.Validacao = true;
 
-                if (enderecoTipoValidacao.ValidacaoMensagens != null) {
-                    if (enderecoTipoValidacao.ValidacaoMensagens.Count > 0) {
+                if (enderecoTipoValidacao.Mensagens != null) {
+                    if (enderecoTipoValidacao.Mensagens.Count > 0) {
                         enderecoTipoValidacao.Validacao = false;
                     }
                 }
@@ -129,7 +129,7 @@ namespace rcDominiosBusiness
             } catch (Exception ex) {
                 enderecoTipoValidacao = new EnderecoTipoTransfer();
 
-                enderecoTipoValidacao.IncluirErroMensagem("Erro em EnderecoTipoBusiness Validar [" + ex.Message + "]");
+                enderecoTipoValidacao.IncluirMensagem("Erro em EnderecoTipoBusiness Validar [" + ex.Message + "]");
                 enderecoTipoValidacao.Validacao = false;
                 enderecoTipoValidacao.Erro = true;
             }

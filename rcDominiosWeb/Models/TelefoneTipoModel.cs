@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoModel Incluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoModel Alterar [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoModel Excluir [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
+                telefoneTipoLista.IncluirMensagem("Erro em TelefoneTipoModel Consultar [" + ex.Message + "]");
             } finally {
                 telefoneTipoService = null;
                 autenticaModel = null;

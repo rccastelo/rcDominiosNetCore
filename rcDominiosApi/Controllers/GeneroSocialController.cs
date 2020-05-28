@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Listar [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialController Listar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialController Consultar [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialController Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialController Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialModel = null;
             }

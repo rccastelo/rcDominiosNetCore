@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Form");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoController Form");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoController Lista [" + ex.Message + "]");
+                telefoneTipoLista.IncluirMensagem("Erro em TelefoneTipoController Lista [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 telefoneTipoLista.Validacao = false;
                 telefoneTipoLista.Erro = true;
-                telefoneTipoLista.IncluirErroMensagem("Erro em TelefoneTipoController Consulta [" + ex.Message + "]");
+                telefoneTipoLista.IncluirMensagem("Erro em TelefoneTipoController Consulta [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Inclusao [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoController Inclusao [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Alteracao [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoController Alteracao [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 telefoneTipo.Validacao = false;
                 telefoneTipo.Erro = true;
-                telefoneTipo.IncluirErroMensagem("Erro em TelefoneTipoController Exclusao [" + ex.Message + "]");
+                telefoneTipo.IncluirMensagem("Erro em TelefoneTipoController Exclusao [" + ex.Message + "]");
             } finally {
                 telefoneTipoModel = null;
             }

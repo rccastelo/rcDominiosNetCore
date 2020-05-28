@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Incluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialDataModel Incluir [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Alterar [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialDataModel Alterar [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel Excluir [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialDataModel Excluir [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 generoSocial.Validacao = false;
                 generoSocial.Erro = true;
-                generoSocial.IncluirErroMensagem("Erro em GeneroSocialDataModel ConsultarPorId [" + ex.Message + "]");
+                generoSocial.IncluirMensagem("Erro em GeneroSocialDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 generoSocialLista.Validacao = false;
                 generoSocialLista.Erro = true;
-                generoSocialLista.IncluirErroMensagem("Erro em GeneroSocialDataModel Consultar [" + ex.Message + "]");
+                generoSocialLista.IncluirMensagem("Erro em GeneroSocialDataModel Consultar [" + ex.Message + "]");
             } finally {
                 generoSocialData = null;
             }

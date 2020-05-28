@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController ConsultarPorId [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
-                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilController Listar [" + ex.Message + "]");
+                estadoCivilLista.IncluirMensagem("Erro em EstadoCivilController Listar [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
-                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilController Consultar [" + ex.Message + "]");
+                estadoCivilLista.IncluirMensagem("Erro em EstadoCivilController Consultar [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Incluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilController Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Alterar [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilController Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilController Excluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilController Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilModel = null;
             }

@@ -136,32 +136,24 @@
     </form>
 </div>
 
-@if (@Model != null) {
-    @if (@Model.Erro || !@Model.Validacao) {
+@if (Model != null) {
+    @if (Model.Erro || !Model.Validacao) {
         <div class="text-danger">
-            @section Scripts {
-                <script>
-                    $('#modalMessages').modal('show');
-                </script>
-            }
-
-            @if (@Model.Erro) {
+            @if (Model.Mensagens != null) {
                 @section Messages {
                     <ul>
-                        @foreach (var msg in @Model.ErroMensagens) {
-                            <li class="p-2">@msg</li>
-                        }
-                    </ul>
-                }
-            } else if (!@Model.Validacao) {
-                @section Messages {
-                    <ul>
-                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                        @foreach (var msg in Model.Mensagens) {
                             <li class="p-2">@msg</li>
                         }
                     </ul>
                 }
             }
         </div>
+
+        @section Scripts {
+            <script>
+                $('#modalMessages').modal('show');
+            </script>
+        }
     }
 }

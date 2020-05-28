@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilDataModel Incluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilDataModel Incluir [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilDataModel Alterar [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilDataModel Alterar [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilDataModel Excluir [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilDataModel Excluir [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 estadoCivil.Validacao = false;
                 estadoCivil.Erro = true;
-                estadoCivil.IncluirErroMensagem("Erro em EstadoCivilDataModel ConsultarPorId [" + ex.Message + "]");
+                estadoCivil.IncluirMensagem("Erro em EstadoCivilDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 estadoCivilLista.Validacao = false;
                 estadoCivilLista.Erro = true;
-                estadoCivilLista.IncluirErroMensagem("Erro em EstadoCivilDataModel Consultar [" + ex.Message + "]");
+                estadoCivilLista.IncluirMensagem("Erro em EstadoCivilDataModel Consultar [" + ex.Message + "]");
             } finally {
                 estadoCivilData = null;
             }

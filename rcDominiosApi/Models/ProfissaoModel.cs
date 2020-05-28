@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 profissaoInclusao.Validacao = false;
                 profissaoInclusao.Erro = true;
-                profissaoInclusao.IncluirErroMensagem("Erro em ProfissaoModel Incluir [" + ex.Message + "]");
+                profissaoInclusao.IncluirMensagem("Erro em ProfissaoModel Incluir [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
                 profissaoBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 profissaoAlteracao.Validacao = false;
                 profissaoAlteracao.Erro = true;
-                profissaoAlteracao.IncluirErroMensagem("Erro em ProfissaoModel Alterar [" + ex.Message + "]");
+                profissaoAlteracao.IncluirMensagem("Erro em ProfissaoModel Alterar [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
                 profissaoBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoModel Excluir [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoModel Excluir [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 profissao.Validacao = false;
                 profissao.Erro = true;
-                profissao.IncluirErroMensagem("Erro em ProfissaoModel ConsultarPorId [" + ex.Message + "]");
+                profissao.IncluirMensagem("Erro em ProfissaoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 profissaoLista.Validacao = false;
                 profissaoLista.Erro = true;
-                profissaoLista.IncluirErroMensagem("Erro em ProfissaoModel Consultar [" + ex.Message + "]");
+                profissaoLista.IncluirMensagem("Erro em ProfissaoModel Consultar [" + ex.Message + "]");
             } finally {
                 profissaoDataModel = null;
                 profissaoBusiness = null;

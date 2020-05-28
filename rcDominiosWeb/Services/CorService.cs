@@ -47,14 +47,14 @@ namespace rcDominiosWeb.Services
                     
                     cor.Validacao = false;
                     cor.Erro = true;
-                    cor.IncluirErroMensagem(mensagemRetono);
+                    cor.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorService Incluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorService Incluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -88,14 +88,14 @@ namespace rcDominiosWeb.Services
                     
                     cor.Validacao = false;
                     cor.Erro = true;
-                    cor.IncluirErroMensagem(mensagemRetono);
+                    cor.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorService Alterar [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorService Alterar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -129,14 +129,14 @@ namespace rcDominiosWeb.Services
                     
                     cor.Validacao = false;
                     cor.Erro = true;
-                    cor.IncluirErroMensagem(mensagemRetono);
+                    cor.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorService Excluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorService Excluir [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -170,14 +170,14 @@ namespace rcDominiosWeb.Services
                     
                     cor.Validacao = false;
                     cor.Erro = true;
-                    cor.IncluirErroMensagem(mensagemRetono);
+                    cor.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 cor = new CorTransfer();
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorService ConsultarPorId [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorService ConsultarPorId [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }
@@ -211,14 +211,14 @@ namespace rcDominiosWeb.Services
                     
                     corLista.Validacao = false;
                     corLista.Erro = true;
-                    corLista.IncluirErroMensagem(mensagemRetono);
+                    corLista.IncluirMensagem(mensagemRetono);
                 }
             } catch (Exception ex) {
                 corLista = new CorTransfer();
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorService Consultar [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorService Consultar [" + ex.Message + "]");
             } finally {
                 resposta = null;
             }

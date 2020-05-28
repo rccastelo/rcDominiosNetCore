@@ -30,7 +30,7 @@ namespace rcDominiosApi.Controllers
                 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioController ConsultarPorId [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioController ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioController Listar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioController Listar [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }
@@ -84,7 +84,7 @@ namespace rcDominiosApi.Controllers
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioController Consultar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioController Consultar [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosApi.Controllers
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioController Incluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioController Incluir [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }
@@ -140,7 +140,7 @@ namespace rcDominiosApi.Controllers
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioController Alterar [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioController Alterar [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }
@@ -167,7 +167,7 @@ namespace rcDominiosApi.Controllers
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioController Excluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioController Excluir [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }

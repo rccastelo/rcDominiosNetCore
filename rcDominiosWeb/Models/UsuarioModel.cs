@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel Incluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel Excluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel ConsultarPorId [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioModel Consultar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioService = null;
                 autenticaModel = null;

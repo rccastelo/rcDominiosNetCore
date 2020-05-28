@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioData = null;
             }

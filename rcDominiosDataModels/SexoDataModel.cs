@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoDataModel Incluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoDataModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoDataModel Alterar [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoDataModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoDataModel Excluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoDataModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoDataModel Consultar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoDataModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoData = null;
             }

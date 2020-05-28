@@ -28,7 +28,7 @@ namespace rcDominiosDataModels
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaDataModel Incluir [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaDataModel Incluir [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -57,7 +57,7 @@ namespace rcDominiosDataModels
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaDataModel Alterar [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaDataModel Alterar [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -86,7 +86,7 @@ namespace rcDominiosDataModels
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaDataModel Excluir [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaDataModel Excluir [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -111,7 +111,7 @@ namespace rcDominiosDataModels
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaDataModel ConsultarPorId [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }
@@ -135,7 +135,7 @@ namespace rcDominiosDataModels
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaDataModel Consultar [" + ex.Message + "]");
+                contaBancariaLista.IncluirMensagem("Erro em ContaBancariaDataModel Consultar [" + ex.Message + "]");
             } finally {
                 contaBancariaData = null;
             }

@@ -49,7 +49,7 @@ namespace rcDominiosWeb.Controllers
                 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Form");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaController Form");
             } finally {
                 contaBancariaModel = null;
             }
@@ -72,7 +72,7 @@ namespace rcDominiosWeb.Controllers
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaController Lista [" + ex.Message + "]");
+                contaBancariaLista.IncluirMensagem("Erro em ContaBancariaController Lista [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -96,7 +96,7 @@ namespace rcDominiosWeb.Controllers
 
                 contaBancariaLista.Validacao = false;
                 contaBancariaLista.Erro = true;
-                contaBancariaLista.IncluirErroMensagem("Erro em ContaBancariaController Consulta [" + ex.Message + "]");
+                contaBancariaLista.IncluirMensagem("Erro em ContaBancariaController Consulta [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -124,7 +124,7 @@ namespace rcDominiosWeb.Controllers
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Inclusao [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaController Inclusao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -152,7 +152,7 @@ namespace rcDominiosWeb.Controllers
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Alteracao [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaController Alteracao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }
@@ -179,7 +179,7 @@ namespace rcDominiosWeb.Controllers
 
                 contaBancaria.Validacao = false;
                 contaBancaria.Erro = true;
-                contaBancaria.IncluirErroMensagem("Erro em ContaBancariaController Exclusao [" + ex.Message + "]");
+                contaBancaria.IncluirMensagem("Erro em ContaBancariaController Exclusao [" + ex.Message + "]");
             } finally {
                 contaBancariaModel = null;
             }

@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 corInclusao.Validacao = false;
                 corInclusao.Erro = true;
-                corInclusao.IncluirErroMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
+                corInclusao.IncluirMensagem("Erro em CorModel Incluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 corAlteracao.Validacao = false;
                 corAlteracao.Erro = true;
-                corAlteracao.IncluirErroMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
+                corAlteracao.IncluirMensagem("Erro em CorModel Alterar [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorModel Excluir [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 cor.Validacao = false;
                 cor.Erro = true;
-                cor.IncluirErroMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
+                cor.IncluirMensagem("Erro em CorModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 corLista.Validacao = false;
                 corLista.Erro = true;
-                corLista.IncluirErroMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
+                corLista.IncluirMensagem("Erro em CorModel Consultar [" + ex.Message + "]");
             } finally {
                 corDataModel = null;
                 corBusiness = null;

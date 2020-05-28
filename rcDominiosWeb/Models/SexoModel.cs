@@ -37,7 +37,7 @@ namespace rcDominiosWeb.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel Incluir [" + ex.Message + "]");
             } finally {
                 sexoService = null;
                 autenticaModel = null;
@@ -67,7 +67,7 @@ namespace rcDominiosWeb.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel Alterar [" + ex.Message + "]");
             } finally {
                 sexoService = null;
                 autenticaModel = null;
@@ -95,7 +95,7 @@ namespace rcDominiosWeb.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel Excluir [" + ex.Message + "]");
             } finally {
                 sexoService = null;
                 autenticaModel = null;
@@ -123,7 +123,7 @@ namespace rcDominiosWeb.Models
 
                 sexo.Validacao = false;
                 sexo.Erro = true;
-                sexo.IncluirErroMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
+                sexo.IncluirMensagem("Erro em SexoModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 sexoService = null;
                 autenticaModel = null;
@@ -191,7 +191,7 @@ namespace rcDominiosWeb.Models
 
                 sexoLista.Validacao = false;
                 sexoLista.Erro = true;
-                sexoLista.IncluirErroMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
+                sexoLista.IncluirMensagem("Erro em SexoModel Consultar [" + ex.Message + "]");
             } finally {
                 sexoService = null;
                 autenticaModel = null;

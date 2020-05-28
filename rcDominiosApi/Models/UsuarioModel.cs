@@ -37,7 +37,7 @@ namespace rcDominiosApi.Models
 
                 usuarioInclusao.Validacao = false;
                 usuarioInclusao.Erro = true;
-                usuarioInclusao.IncluirErroMensagem("Erro em UsuarioModel Incluir [" + ex.Message + "]");
+                usuarioInclusao.IncluirMensagem("Erro em UsuarioModel Incluir [" + ex.Message + "]");
             } finally {
                 usuarioDataModel = null;
                 usuarioBusiness = null;
@@ -76,7 +76,7 @@ namespace rcDominiosApi.Models
 
                 usuarioAlteracao.Validacao = false;
                 usuarioAlteracao.Erro = true;
-                usuarioAlteracao.IncluirErroMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
+                usuarioAlteracao.IncluirMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
             } finally {
                 usuarioDataModel = null;
                 usuarioBusiness = null;
@@ -100,7 +100,7 @@ namespace rcDominiosApi.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel Excluir [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel Excluir [" + ex.Message + "]");
             } finally {
                 usuarioDataModel = null;
             }
@@ -122,7 +122,7 @@ namespace rcDominiosApi.Models
 
                 usuario.Validacao = false;
                 usuario.Erro = true;
-                usuario.IncluirErroMensagem("Erro em UsuarioModel ConsultarPorId [" + ex.Message + "]");
+                usuario.IncluirMensagem("Erro em UsuarioModel ConsultarPorId [" + ex.Message + "]");
             } finally {
                 usuarioDataModel = null;
             }
@@ -171,7 +171,7 @@ namespace rcDominiosApi.Models
 
                 usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
-                usuarioLista.IncluirErroMensagem("Erro em UsuarioModel Consultar [" + ex.Message + "]");
+                usuarioLista.IncluirMensagem("Erro em UsuarioModel Consultar [" + ex.Message + "]");
             } finally {
                 usuarioDataModel = null;
                 usuarioBusiness = null;

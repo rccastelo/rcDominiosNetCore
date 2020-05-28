@@ -195,8 +195,8 @@
             </div>
             <div class="col-2 text-right">
                 <a href="javascript:VerCaracs();"><i class="iconeCaracs fas fa-info-circle"></i></a>
-                @if (@Model != null) {
-                    @if (@Model.Erro || !@Model.Validacao) {
+                @if (Model != null) {
+                    @if (Model.Erro || !Model.Validacao) {
                         <a href="javascript:VerMensagens();"><i class="iconeMsg fas fa-exclamation-circle"></i></a>
                     }
                 }
@@ -205,32 +205,24 @@
     </form>
 </div>
 
-@if (@Model != null) {
-    @if (@Model.Erro || !@Model.Validacao) {
+@if (Model != null) {
+    @if (Model.Erro || !Model.Validacao) {
         <div class="text-danger">
-            @section Scripts {
-                <script>
-                    $('#modalMessages').modal('show');
-                </script>
-            }
-
-            @if (@Model.Erro) {
+            @if (Model.Mensagens != null) {
                 @section Messages {
                     <ul>
-                        @foreach (var msg in @Model.ErroMensagens) {
-                            <li class="p-2">@msg</li>
-                        }
-                    </ul>
-                }
-            } else if (!@Model.Validacao) {
-                @section Messages {
-                    <ul>
-                        @foreach (var msg in @Model.ValidacaoMensagens) {
+                        @foreach (var msg in Model.Mensagens) {
                             <li class="p-2">@msg</li>
                         }
                     </ul>
                 }
             }
         </div>
+
+        @section Scripts {
+            <script>
+                $('#modalMessages').modal('show');
+            </script>
+        }
     }
 }
