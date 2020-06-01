@@ -57,16 +57,19 @@ namespace rcDominiosApi.Models
 
                         autenticaRetorno = new AutenticaTransfer(autenticado);
 
+                        autenticaRetorno.Senha = null;
                         autenticaRetorno.Token = token;
                     } else { //-- não autenticado
                         autenticaRetorno = new AutenticaTransfer(autenticado);
 
                         autenticaRetorno.Token = null;
+                        autenticaRetorno.Senha = null;
 
                         autenticaRetorno.IncluirMensagem("Usuário e/ou senha informado(s) inválido(s)");
                     }
                 } else { //-- inválido
                     autenticaRetorno = new AutenticaTransfer(autenticado);
+                    autenticaRetorno.Senha = null;
                 }
             } catch (Exception ex) {
                 autenticaRetorno = new AutenticaTransfer();
