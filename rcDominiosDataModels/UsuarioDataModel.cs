@@ -11,22 +11,27 @@ namespace rcDominiosDataModels
         {
             UsuarioData usuarioData;
             UsuarioTransfer usuario;
+            UsuarioEntity usuarioExiste;
 
             try {
                 usuarioData = new UsuarioData(_contexto);
                 usuario = new UsuarioTransfer(usuarioTransfer);
 
-                usuarioData.Incluir(usuarioTransfer.Usuario);
+                usuarioExiste = usuarioData.ConsultarPorApelido(usuarioTransfer.Usuario.Apelido);
 
-                _contexto.SaveChanges();
+                if (usuarioExiste == null) {
+                    usuarioData.Incluir(usuarioTransfer.Usuario);
 
-                usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
-                usuario.Validacao = true;
-                usuario.Erro = false;
+                    _contexto.SaveChanges();
+
+                    usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
+                } else {
+                    usuario.Validacao = false;
+                    usuario.IncluirMensagem("Nome de Usuário já cadastrado");
+                }
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioDataModel Incluir [" + ex.Message + "]");
             } finally {
@@ -50,12 +55,9 @@ namespace rcDominiosDataModels
                 _contexto.SaveChanges();
 
                 usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
-                usuario.Validacao = true;
-                usuario.Erro = false;
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
             } finally {
@@ -78,13 +80,9 @@ namespace rcDominiosDataModels
                 usuarioData.Excluir(usuario.Usuario);
 
                 _contexto.SaveChanges();
-
-                usuario.Validacao = true;
-                usuario.Erro = false;
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioDataModel Excluir [" + ex.Message + "]");
             } finally {
@@ -104,12 +102,31 @@ namespace rcDominiosDataModels
                 usuario = new UsuarioTransfer();
 
                 usuario.Usuario = usuarioData.ConsultarPorId(id);
-                usuario.Validacao = true;
-                usuario.Erro = false;
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
+            } finally {
+                usuarioData = null;
+            }
+
+            return usuario;
+        }
+
+        public UsuarioTransfer ConsultarPorApelido(string apelido)
+        {
+            UsuarioData usuarioData;
+            UsuarioTransfer usuario;
+
+            try {
+                usuarioData = new UsuarioData(_contexto);
+                usuario = new UsuarioTransfer();
+
+                usuario.Usuario = usuarioData.ConsultarPorApelido(apelido);
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioDataModel ConsultarPorId [" + ex.Message + "]");
             } finally {
@@ -128,12 +145,9 @@ namespace rcDominiosDataModels
                 usuarioData = new UsuarioData(_contexto);
 
                 usuarioLista = usuarioData.Consultar(usuarioTransfer);
-                usuarioLista.Validacao = true;
-                usuarioLista.Erro = false;
             } catch (Exception ex) {
                 usuarioLista = new UsuarioTransfer();
 
-                usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
                 usuarioLista.IncluirMensagem("Erro em UsuarioDataModel Consultar [" + ex.Message + "]");
             } finally {

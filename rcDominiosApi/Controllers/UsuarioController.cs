@@ -28,7 +28,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
                 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioController ConsultarPorId [" + ex.Message + "]");
             } finally {
@@ -55,7 +54,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuarioLista = new UsuarioTransfer();
 
-                usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
                 usuarioLista.IncluirMensagem("Erro em UsuarioController Listar [" + ex.Message + "]");
             } finally {
@@ -82,7 +80,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuarioLista = new UsuarioTransfer();
 
-                usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
                 usuarioLista.IncluirMensagem("Erro em UsuarioController Consultar [" + ex.Message + "]");
             } finally {
@@ -109,7 +106,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioController Incluir [" + ex.Message + "]");
             } finally {
@@ -138,7 +134,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioController Alterar [" + ex.Message + "]");
             } finally {
@@ -165,7 +160,6 @@ namespace rcDominiosApi.Controllers
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioController Excluir [" + ex.Message + "]");
             } finally {

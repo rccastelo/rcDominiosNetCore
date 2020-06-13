@@ -8,7 +8,7 @@ namespace rcDominiosEntities
         [StringLength(40)]
         public string Apelido { get; set; }
 
-        [StringLength(40)]
+        [StringLength(260)]
         public string Senha { get; set; }
 
         [StringLength(40)]

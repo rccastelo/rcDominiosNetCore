@@ -12,7 +12,7 @@ namespace rcDominiosTransfers
 
         public Transfer()
         {
-            this.Validacao = false;
+            this.Validacao = true;
             this.Erro = false;
         }
 

@@ -14,6 +14,11 @@ namespace rcDominiosDatas
         {
         }
 
+        public UsuarioEntity ConsultarPorApelido(string apelido)
+        {
+            return _contexto.Set<UsuarioEntity>().FirstOrDefault(et => et.Apelido == apelido);
+        }
+
         public UsuarioTransfer Consultar(UsuarioTransfer usuarioTransfer)
         {
             IQueryable<UsuarioEntity> query = _contexto.Set<UsuarioEntity>();

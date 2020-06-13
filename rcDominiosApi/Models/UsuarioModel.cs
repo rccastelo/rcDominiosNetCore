@@ -1,4 +1,6 @@
 using System;
+using System.Security.Cryptography;
+using System.Text;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
 using rcDominiosTransfers;
@@ -25,6 +27,21 @@ namespace rcDominiosApi.Models
 
                 if (!usuarioValidacao.Erro) {
                     if (usuarioValidacao.Validacao) {
+                        //-- Criptografia da senha
+                        string apelidoSenha = (usuarioValidacao.Usuario.Apelido + usuarioValidacao.Usuario.Senha);
+
+                        HashAlgorithm algoritmo = SHA512.Create();
+                        byte[] senhaByte = Encoding.UTF8.GetBytes(apelidoSenha);
+                        byte[] senhaHash = algoritmo.ComputeHash(senhaByte);
+
+                        StringBuilder sbSenhaCripto = new StringBuilder();
+                        foreach (byte caracter in senhaHash) {
+                            sbSenhaCripto.Append(caracter.ToString("X2"));
+                        }
+
+                        usuarioValidacao.Usuario.Senha = sbSenhaCripto.ToString();
+                        //-------------------------
+
                         usuarioInclusao = usuarioDataModel.Incluir(usuarioValidacao);
                     } else {
                         usuarioInclusao = new UsuarioTransfer(usuarioValidacao);
@@ -35,7 +52,6 @@ namespace rcDominiosApi.Models
             } catch (Exception ex) {
                 usuarioInclusao = new UsuarioTransfer();
 
-                usuarioInclusao.Validacao = false;
                 usuarioInclusao.Erro = true;
                 usuarioInclusao.IncluirMensagem("Erro em UsuarioModel Incluir [" + ex.Message + "]");
             } finally {
@@ -64,6 +80,21 @@ namespace rcDominiosApi.Models
 
                 if (!usuarioValidacao.Erro) {
                     if (usuarioValidacao.Validacao) {
+                        //-- Criptografia da senha
+                        string apelidoSenha = (usuarioValidacao.Usuario.Apelido + usuarioValidacao.Usuario.Senha);
+
+                        HashAlgorithm algoritmo = SHA512.Create();
+                        byte[] senhaByte = Encoding.UTF8.GetBytes(apelidoSenha);
+                        byte[] senhaHash = algoritmo.ComputeHash(senhaByte);
+
+                        StringBuilder sbSenhaCripto = new StringBuilder();
+                        foreach (byte caracter in senhaHash) {
+                            sbSenhaCripto.Append(caracter.ToString("X2"));
+                        }
+
+                        usuarioValidacao.Usuario.Senha = sbSenhaCripto.ToString();
+                        //-------------------------
+
                         usuarioAlteracao = usuarioDataModel.Alterar(usuarioValidacao);
                     } else {
                         usuarioAlteracao = new UsuarioTransfer(usuarioValidacao);
@@ -74,7 +105,6 @@ namespace rcDominiosApi.Models
             } catch (Exception ex) {
                 usuarioAlteracao = new UsuarioTransfer();
 
-                usuarioAlteracao.Validacao = false;
                 usuarioAlteracao.Erro = true;
                 usuarioAlteracao.IncluirMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
             } finally {
@@ -98,7 +128,6 @@ namespace rcDominiosApi.Models
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioModel Excluir [" + ex.Message + "]");
             } finally {
@@ -120,7 +149,6 @@ namespace rcDominiosApi.Models
             } catch (Exception ex) {
                 usuario = new UsuarioTransfer();
 
-                usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioModel ConsultarPorId [" + ex.Message + "]");
             } finally {
@@ -169,7 +197,6 @@ namespace rcDominiosApi.Models
             } catch (Exception ex) {
                 usuarioLista = new UsuarioTransfer();
 
-                usuarioLista.Validacao = false;
                 usuarioLista.Erro = true;
                 usuarioLista.IncluirMensagem("Erro em UsuarioModel Consultar [" + ex.Message + "]");
             } finally {

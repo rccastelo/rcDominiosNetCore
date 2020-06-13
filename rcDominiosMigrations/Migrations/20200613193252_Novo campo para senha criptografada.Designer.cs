@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rcDominiosMigrations;
 
 namespace rcDominiosMigrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200613193252_Novo campo para senha criptografada")]
+    partial class Novocampoparasenhacriptografada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,6 +250,9 @@ namespace rcDominiosMigrations.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("Senha")
+                        .HasMaxLength(40);
+
+                    b.Property<string>("SenhaCripto")
                         .HasMaxLength(260);
 
                     b.HasKey("Id");

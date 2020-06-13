@@ -1,6 +1,8 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
@@ -26,6 +28,21 @@ namespace rcDominiosApi.Models
 
                 if (!autenticaValidacao.Erro) {
                     if (autenticaValidacao.Validacao) {
+                        //-- Criptografia da senha
+                        string apelidoSenha = (autenticaTransfer.Apelido + autenticaTransfer.Senha);
+
+                        HashAlgorithm algoritmo = SHA512.Create();
+                        byte[] senhaByte = Encoding.UTF8.GetBytes(apelidoSenha);
+                        byte[] senhaHash = algoritmo.ComputeHash(senhaByte);
+
+                        StringBuilder sbSenhaCripto = new StringBuilder();
+                        foreach (byte caracter in senhaHash) {
+                            sbSenhaCripto.Append(caracter.ToString("X2"));
+                        }
+
+                        autenticaValidacao.Senha = sbSenhaCripto.ToString();
+                        //-------------------------
+
                         autenticado = autenticaDataModel.Autenticar(autenticaValidacao);
                     } else {
                         autenticado = new AutenticaTransfer(autenticaValidacao);
