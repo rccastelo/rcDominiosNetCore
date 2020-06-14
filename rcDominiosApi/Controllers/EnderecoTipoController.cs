@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 enderecoTipoModel = null;
             }
 
+            enderecoTipo.TratarLinks();
+
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return BadRequest(enderecoTipo);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            enderecoTipoLista.TratarLinks();
 
             if (enderecoTipoLista.Erro || !enderecoTipoLista.Validacao) {
                 return BadRequest(enderecoTipoLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 enderecoTipoModel = null;
             }
 
+            enderecoTipoLista.TratarLinks();
+
             if (enderecoTipoLista.Erro || !enderecoTipoLista.Validacao) {
                 return BadRequest(enderecoTipoLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            enderecoTipo.TratarLinks();
 
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return BadRequest(enderecoTipo);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 enderecoTipoModel = null;
             }
 
+            enderecoTipo.TratarLinks();
+
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return BadRequest(enderecoTipo);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            enderecoTipo.TratarLinks();
 
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return BadRequest(enderecoTipo);

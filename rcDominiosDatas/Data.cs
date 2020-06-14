@@ -24,7 +24,7 @@ namespace rcDominiosDatas
             _contexto.Set<EntityType>().Add(entidade);
         }
 
-        public void Alterar(EntityType entidade)
+        public virtual void Alterar(EntityType entidade)
         {
             _contexto.Set<EntityType>().Update(entidade);
         }

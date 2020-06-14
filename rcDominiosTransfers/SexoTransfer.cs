@@ -11,6 +11,47 @@ namespace rcDominiosTransfers
 
         public IList<SexoEntity> Lista { get; set; }
 
+        public object Links { get; set; }
+
+        public void TratarLinks() {
+            string id = ((this.Sexo != null) ? this.Sexo.Id.ToString() : "0");
+
+            var obj = new object[] {
+                new {
+                    info = "Listar", 
+                    uri = "/rcDominiosNet/Sexo", 
+                    method = "GET"
+                },
+                new {
+                    info = "Consultar por id", 
+                    uri = "/rcDominiosNet/Sexo/" + id, 
+                    method = "GET"
+                },
+                new {
+                    info = "Filtrar", 
+                    uri = "/rcDominiosNet/Sexo/lista", 
+                    method = "POST"
+                },
+                new {
+                    info = "Incluir", 
+                    uri = "/rcDominiosNet/Sexo", 
+                    method = "POST"
+                },
+                new {
+                    info = "Alterar", 
+                    uri = "/rcDominiosNet/Sexo", 
+                    method = "PUT"
+                },
+                new {
+                    info = "Excluir por id", 
+                    uri = "/rcDominiosNet/Sexo/" + id,
+                    method = "DELETE"
+                }
+            };
+            
+            this.Links = obj;
+        }
+
         public SexoTransfer() 
             : base()
         {

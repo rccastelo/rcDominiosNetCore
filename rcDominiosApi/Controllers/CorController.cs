@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 corModel = null;
             }
 
+            cor.TratarLinks();
+
             if (cor.Erro || !cor.Validacao) {
                 return BadRequest(cor);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 corModel = null;
             }
+
+            corLista.TratarLinks();
 
             if (corLista.Erro || !corLista.Validacao) {
                 return BadRequest(corLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 corModel = null;
             }
 
+            corLista.TratarLinks();
+
             if (corLista.Erro || !corLista.Validacao) {
                 return BadRequest(corLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 corModel = null;
             }
+
+            cor.TratarLinks();
 
             if (cor.Erro || !cor.Validacao) {
                 return BadRequest(cor);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 corModel = null;
             }
 
+            cor.TratarLinks();
+
             if (cor.Erro || !cor.Validacao) {
                 return BadRequest(cor);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 corModel = null;
             }
+
+            cor.TratarLinks();
 
             if (cor.Erro || !cor.Validacao) {
                 return BadRequest(cor);

@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 generoSocialModel = null;
             }
 
+            generoSocial.TratarLinks();
+
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return BadRequest(generoSocial);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            generoSocialLista.TratarLinks();
 
             if (generoSocialLista.Erro || !generoSocialLista.Validacao) {
                 return BadRequest(generoSocialLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 generoSocialModel = null;
             }
 
+            generoSocialLista.TratarLinks();
+
             if (generoSocialLista.Erro || !generoSocialLista.Validacao) {
                 return BadRequest(generoSocialLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            generoSocial.TratarLinks();
 
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return BadRequest(generoSocial);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 generoSocialModel = null;
             }
 
+            generoSocial.TratarLinks();
+
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return BadRequest(generoSocial);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            generoSocial.TratarLinks();
 
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return BadRequest(generoSocial);

@@ -11,6 +11,47 @@ namespace rcDominiosTransfers
 
         public IList<ContaBancariaEntity> Lista { get; set; }
 
+        public object Links { get; set; }
+
+        public void TratarLinks() {
+            string id = ((this.ContaBancaria != null) ? this.ContaBancaria.Id.ToString() : "0");
+
+            var obj = new object[] {
+                new {
+                    info = "Listar", 
+                    uri = "/rcDominiosNet/ContaBancaria", 
+                    method = "GET"
+                },
+                new {
+                    info = "Consultar por id", 
+                    uri = "/rcDominiosNet/ContaBancaria/" + id, 
+                    method = "GET"
+                },
+                new {
+                    info = "Filtrar", 
+                    uri = "/rcDominiosNet/ContaBancaria/lista", 
+                    method = "POST"
+                },
+                new {
+                    info = "Incluir", 
+                    uri = "/rcDominiosNet/ContaBancaria", 
+                    method = "POST"
+                },
+                new {
+                    info = "Alterar", 
+                    uri = "/rcDominiosNet/ContaBancaria", 
+                    method = "PUT"
+                },
+                new {
+                    info = "Excluir por id", 
+                    uri = "/rcDominiosNet/ContaBancaria/" + id,
+                    method = "DELETE"
+                }
+            };
+            
+            this.Links = obj;
+        }
+
         public ContaBancariaTransfer() 
             : base()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using rcDominiosDatabase;
 using rcDominiosTransfers;
 using rcDominiosEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace rcDominiosDatas
 {
@@ -12,6 +13,14 @@ namespace rcDominiosDatas
         public UsuarioData(DominiosDbContext contexto) 
             : base(contexto)
         {
+        }
+
+        public override void Alterar(UsuarioEntity entidade)
+        {
+            _contexto.Set<UsuarioEntity>().Attach(entidade);
+            _contexto.Entry(entidade).State = EntityState.Modified;
+            _contexto.Entry(entidade).Property(e => e.Senha).IsModified = false;
+            _contexto.SaveChanges();
         }
 
         public UsuarioEntity ConsultarPorApelido(string apelido)

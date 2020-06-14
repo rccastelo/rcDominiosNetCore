@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 profissaoModel = null;
             }
 
+            profissao.TratarLinks();
+
             if (profissao.Erro || !profissao.Validacao) {
                 return BadRequest(profissao);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            profissaoLista.TratarLinks();
 
             if (profissaoLista.Erro || !profissaoLista.Validacao) {
                 return BadRequest(profissaoLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 profissaoModel = null;
             }
 
+            profissaoLista.TratarLinks();
+
             if (profissaoLista.Erro || !profissaoLista.Validacao) {
                 return BadRequest(profissaoLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            profissao.TratarLinks();
 
             if (profissao.Erro || !profissao.Validacao) {
                 return BadRequest(profissao);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 profissaoModel = null;
             }
 
+            profissao.TratarLinks();
+
             if (profissao.Erro || !profissao.Validacao) {
                 return BadRequest(profissao);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            profissao.TratarLinks();
 
             if (profissao.Erro || !profissao.Validacao) {
                 return BadRequest(profissao);

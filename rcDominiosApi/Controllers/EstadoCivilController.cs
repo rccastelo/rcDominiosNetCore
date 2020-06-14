@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 estadoCivilModel = null;
             }
 
+            estadoCivil.TratarLinks();
+
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return BadRequest(estadoCivil);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            estadoCivilLista.TratarLinks();
 
             if (estadoCivilLista.Erro || !estadoCivilLista.Validacao) {
                 return BadRequest(estadoCivilLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 estadoCivilModel = null;
             }
 
+            estadoCivilLista.TratarLinks();
+
             if (estadoCivilLista.Erro || !estadoCivilLista.Validacao) {
                 return BadRequest(estadoCivilLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            estadoCivil.TratarLinks();
 
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return BadRequest(estadoCivil);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 estadoCivilModel = null;
             }
 
+            estadoCivil.TratarLinks();
+
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return BadRequest(estadoCivil);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            estadoCivil.TratarLinks();
 
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return BadRequest(estadoCivil);

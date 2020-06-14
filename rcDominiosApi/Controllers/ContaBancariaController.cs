@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 contaBancariaModel = null;
             }
 
+            contaBancaria.TratarLinks();
+
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return BadRequest(contaBancaria);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            contaBancariaLista.TratarLinks();
 
             if (contaBancariaLista.Erro || !contaBancariaLista.Validacao) {
                 return BadRequest(contaBancariaLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 contaBancariaModel = null;
             }
 
+            contaBancariaLista.TratarLinks();
+
             if (contaBancariaLista.Erro || !contaBancariaLista.Validacao) {
                 return BadRequest(contaBancariaLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            contaBancaria.TratarLinks();
 
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return BadRequest(contaBancaria);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 contaBancariaModel = null;
             }
 
+            contaBancaria.TratarLinks();
+
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return BadRequest(contaBancaria);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            contaBancaria.TratarLinks();
 
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return BadRequest(contaBancaria);

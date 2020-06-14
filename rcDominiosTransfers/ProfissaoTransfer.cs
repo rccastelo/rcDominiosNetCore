@@ -11,6 +11,47 @@ namespace rcDominiosTransfers
 
         public IList<ProfissaoEntity> Lista { get; set; }
 
+        public object Links { get; set; }
+
+        public void TratarLinks() {
+            string id = ((this.Profissao != null) ? this.Profissao.Id.ToString() : "0");
+
+            var obj = new object[] {
+                new {
+                    info = "Listar", 
+                    uri = "/rcDominiosNet/Profissao", 
+                    method = "GET"
+                },
+                new {
+                    info = "Consultar por id", 
+                    uri = "/rcDominiosNet/Profissao/" + id, 
+                    method = "GET"
+                },
+                new {
+                    info = "Filtrar", 
+                    uri = "/rcDominiosNet/Profissao/lista", 
+                    method = "POST"
+                },
+                new {
+                    info = "Incluir", 
+                    uri = "/rcDominiosNet/Profissao", 
+                    method = "POST"
+                },
+                new {
+                    info = "Alterar", 
+                    uri = "/rcDominiosNet/Profissao", 
+                    method = "PUT"
+                },
+                new {
+                    info = "Excluir por id", 
+                    uri = "/rcDominiosNet/Profissao/" + id,
+                    method = "DELETE"
+                }
+            };
+            
+            this.Links = obj;
+        }
+
         public ProfissaoTransfer() 
             : base()
         {

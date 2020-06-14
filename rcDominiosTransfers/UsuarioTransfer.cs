@@ -39,6 +39,47 @@ namespace rcDominiosTransfers
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AlteracaoAte { get; set; }
 
+        public object Links { get; set; }
+
+        public void TratarLinks() {
+            string id = ((this.Usuario != null) ? this.Usuario.Id.ToString() : "0");
+
+            var obj = new object[] {
+                new {
+                    info = "Listar", 
+                    uri = "/rcDominiosNet/Usuario", 
+                    method = "GET"
+                },
+                new {
+                    info = "Consultar por id", 
+                    uri = "/rcDominiosNet/Usuario/" + id, 
+                    method = "GET"
+                },
+                new {
+                    info = "Filtrar", 
+                    uri = "/rcDominiosNet/Usuario/lista", 
+                    method = "POST"
+                },
+                new {
+                    info = "Incluir", 
+                    uri = "/rcDominiosNet/Usuario", 
+                    method = "POST"
+                },
+                new {
+                    info = "Alterar", 
+                    uri = "/rcDominiosNet/Usuario", 
+                    method = "PUT"
+                },
+                new {
+                    info = "Excluir por id", 
+                    uri = "/rcDominiosNet/Usuario/" + id,
+                    method = "DELETE"
+                }
+            };
+            
+            this.Links = obj;
+        }
+
         public UsuarioTransfer() 
             : base()
         {

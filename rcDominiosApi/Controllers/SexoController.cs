@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 sexoModel = null;
             }
 
+            sexo.TratarLinks();
+
             if (sexo.Erro || !sexo.Validacao) {
                 return BadRequest(sexo);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            sexoLista.TratarLinks();
 
             if (sexoLista.Erro || !sexoLista.Validacao) {
                 return BadRequest(sexoLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 sexoModel = null;
             }
 
+            sexoLista.TratarLinks();
+
             if (sexoLista.Erro || !sexoLista.Validacao) {
                 return BadRequest(sexoLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            sexo.TratarLinks();
 
             if (sexo.Erro || !sexo.Validacao) {
                 return BadRequest(sexo);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 sexoModel = null;
             }
 
+            sexo.TratarLinks();
+
             if (sexo.Erro || !sexo.Validacao) {
                 return BadRequest(sexo);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            sexo.TratarLinks();
 
             if (sexo.Erro || !sexo.Validacao) {
                 return BadRequest(sexo);

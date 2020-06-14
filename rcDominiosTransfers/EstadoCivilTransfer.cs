@@ -11,6 +11,47 @@ namespace rcDominiosTransfers
 
         public IList<EstadoCivilEntity> Lista { get; set; }
 
+        public object Links { get; set; }
+
+        public void TratarLinks() {
+            string id = ((this.EstadoCivil != null) ? this.EstadoCivil.Id.ToString() : "0");
+
+            var obj = new object[] {
+                new {
+                    info = "Listar", 
+                    uri = "/rcDominiosNet/EstadoCivil", 
+                    method = "GET"
+                },
+                new {
+                    info = "Consultar por id", 
+                    uri = "/rcDominiosNet/EstadoCivil/" + id, 
+                    method = "GET"
+                },
+                new {
+                    info = "Filtrar", 
+                    uri = "/rcDominiosNet/EstadoCivil/lista", 
+                    method = "POST"
+                },
+                new {
+                    info = "Incluir", 
+                    uri = "/rcDominiosNet/EstadoCivil", 
+                    method = "POST"
+                },
+                new {
+                    info = "Alterar", 
+                    uri = "/rcDominiosNet/EstadoCivil", 
+                    method = "PUT"
+                },
+                new {
+                    info = "Excluir por id", 
+                    uri = "/rcDominiosNet/EstadoCivil/" + id,
+                    method = "DELETE"
+                }
+            };
+            
+            this.Links = obj;
+        }
+
         public EstadoCivilTransfer() 
             : base()
         {

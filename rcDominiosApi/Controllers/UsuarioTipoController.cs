@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 usuarioTipoModel = null;
             }
 
+            usuarioTipo.TratarLinks();
+
             if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
                 return BadRequest(usuarioTipo);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 usuarioTipoModel = null;
             }
+
+            usuarioTipoLista.TratarLinks();
 
             if (usuarioTipoLista.Erro || !usuarioTipoLista.Validacao) {
                 return BadRequest(usuarioTipoLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 usuarioTipoModel = null;
             }
 
+            usuarioTipoLista.TratarLinks();
+
             if (usuarioTipoLista.Erro || !usuarioTipoLista.Validacao) {
                 return BadRequest(usuarioTipoLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 usuarioTipoModel = null;
             }
+
+            usuarioTipo.TratarLinks();
 
             if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
                 return BadRequest(usuarioTipo);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 usuarioTipoModel = null;
             }
 
+            usuarioTipo.TratarLinks();
+
             if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
                 return BadRequest(usuarioTipo);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 usuarioTipoModel = null;
             }
+
+            usuarioTipo.TratarLinks();
 
             if (usuarioTipo.Erro || !usuarioTipo.Validacao) {
                 return BadRequest(usuarioTipo);

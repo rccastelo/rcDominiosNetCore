@@ -35,6 +35,8 @@ namespace rcDominiosApi.Controllers
                 telefoneTipoModel = null;
             }
 
+            telefoneTipo.TratarLinks();
+
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return BadRequest(telefoneTipo);
             } else {
@@ -61,6 +63,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            telefoneTipoLista.TratarLinks();
 
             if (telefoneTipoLista.Erro || !telefoneTipoLista.Validacao) {
                 return BadRequest(telefoneTipoLista);
@@ -89,6 +93,8 @@ namespace rcDominiosApi.Controllers
                 telefoneTipoModel = null;
             }
 
+            telefoneTipoLista.TratarLinks();
+
             if (telefoneTipoLista.Erro || !telefoneTipoLista.Validacao) {
                 return BadRequest(telefoneTipoLista);
             } else {
@@ -115,6 +121,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            telefoneTipo.TratarLinks();
 
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return BadRequest(telefoneTipo);
@@ -145,6 +153,8 @@ namespace rcDominiosApi.Controllers
                 telefoneTipoModel = null;
             }
 
+            telefoneTipo.TratarLinks();
+
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return BadRequest(telefoneTipo);
             } else {
@@ -171,6 +181,8 @@ namespace rcDominiosApi.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            telefoneTipo.TratarLinks();
 
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return BadRequest(telefoneTipo);
