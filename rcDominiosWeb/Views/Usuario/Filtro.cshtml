@@ -204,7 +204,7 @@
         <div class="form-row">
             <div class="col-3">
                 <div class="form-group">
-                    <label class="txtEtiqueta" asp-for="@Model.RegistrosPorPagina">Registros por página</label> &nbsp;
+                    <label class="txtEtiqueta" asp-for="@Model.Paginacao.RegistrosPorPagina">Registros por página</label> &nbsp;
                     <a data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"
                         data-object-content="#popRegistros">
                         <i class="iconePopOpc fas fa-question"></i>
@@ -215,7 +215,7 @@
                         &bull; Caracteres válidos: <b>números</b><br>
                         &bull; Quantidade de registros exibidos por página<br>
                     </div>
-                    <input class="form-control" type="number" maxlength="3" asp-for="@Model.RegistrosPorPagina">
+                    <input class="form-control" type="number" maxlength="3" asp-for="@Model.Paginacao.RegistrosPorPagina">
                 </div>
             </div>
         </div>

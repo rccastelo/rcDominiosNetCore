@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 generoSocialLista = await generoSocialService.Consultar(generoSocialListaTransfer, autorizacao);
 
                 if (generoSocialLista != null) {
-                    if (generoSocialLista.TotalRegistros > 0) {
-                        if (generoSocialLista.RegistrosPorPagina < 1) {
-                            generoSocialLista.RegistrosPorPagina = 30;
-                        } else if (generoSocialLista.RegistrosPorPagina > 200) {
-                            generoSocialLista.RegistrosPorPagina = 30;
+                    if (generoSocialLista.Paginacao.TotalRegistros > 0) {
+                        if (generoSocialLista.Paginacao.RegistrosPorPagina < 1) {
+                            generoSocialLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (generoSocialLista.Paginacao.RegistrosPorPagina > 200) {
+                            generoSocialLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        generoSocialLista.PaginaAtual = (generoSocialLista.PaginaAtual < 1 ? 1 : generoSocialLista.PaginaAtual);
-                        generoSocialLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.TotalRegistros) 
-                            / @Convert.ToDecimal(generoSocialLista.RegistrosPorPagina)));
-                        generoSocialLista.TotalPaginas = (generoSocialLista.TotalPaginas < 1 ? 1 : generoSocialLista.TotalPaginas);
+                        generoSocialLista.Paginacao.PaginaAtual = (generoSocialLista.Paginacao.PaginaAtual < 1 ? 1 : generoSocialLista.Paginacao.PaginaAtual);
+                        generoSocialLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(generoSocialLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(generoSocialLista.Paginacao.RegistrosPorPagina)));
+                        generoSocialLista.Paginacao.TotalPaginas = (generoSocialLista.Paginacao.TotalPaginas < 1 ? 1 : generoSocialLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > generoSocialLista.TotalPaginas ? generoSocialLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > generoSocialLista.Paginacao.TotalPaginas ? generoSocialLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        generoSocialLista.PaginaInicial = generoSocialLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        generoSocialLista.PaginaFinal = generoSocialLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        generoSocialLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (generoSocialLista.PaginaFinal - 1) : generoSocialLista.PaginaFinal);
+                        generoSocialLista.Paginacao.PaginaInicial = generoSocialLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        generoSocialLista.Paginacao.PaginaFinal = generoSocialLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        generoSocialLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (generoSocialLista.Paginacao.PaginaFinal - 1) : generoSocialLista.Paginacao.PaginaFinal);
 
-                        if (generoSocialLista.PaginaInicial < 1) {
-                            dif = 1 - generoSocialLista.PaginaInicial;
-                            generoSocialLista.PaginaInicial += dif;
-                            generoSocialLista.PaginaFinal += dif;
+                        if (generoSocialLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - generoSocialLista.Paginacao.PaginaInicial;
+                            generoSocialLista.Paginacao.PaginaInicial += dif;
+                            generoSocialLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (generoSocialLista.PaginaFinal > generoSocialLista.TotalPaginas) {
-                            dif = generoSocialLista.PaginaFinal - generoSocialLista.TotalPaginas;
-                            generoSocialLista.PaginaInicial -= dif;
-                            generoSocialLista.PaginaFinal -= dif;
+                        if (generoSocialLista.Paginacao.PaginaFinal > generoSocialLista.Paginacao.TotalPaginas) {
+                            dif = generoSocialLista.Paginacao.PaginaFinal - generoSocialLista.Paginacao.TotalPaginas;
+                            generoSocialLista.Paginacao.PaginaInicial -= dif;
+                            generoSocialLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        generoSocialLista.PaginaInicial = (generoSocialLista.PaginaInicial < 1 ? 1 : generoSocialLista.PaginaInicial);
-                        generoSocialLista.PaginaFinal = (generoSocialLista.PaginaFinal > generoSocialLista.TotalPaginas ? 
-                            generoSocialLista.TotalPaginas : generoSocialLista.PaginaFinal);
+                        generoSocialLista.Paginacao.PaginaInicial = (generoSocialLista.Paginacao.PaginaInicial < 1 ? 1 : generoSocialLista.Paginacao.PaginaInicial);
+                        generoSocialLista.Paginacao.PaginaFinal = (generoSocialLista.Paginacao.PaginaFinal > generoSocialLista.Paginacao.TotalPaginas ? 
+                            generoSocialLista.Paginacao.TotalPaginas : generoSocialLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

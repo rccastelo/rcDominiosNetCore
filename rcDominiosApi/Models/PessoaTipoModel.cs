@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         pessoaTipoLista = pessoaTipoDataModel.Consultar(pessoaTipoValidacao);
 
                         if (pessoaTipoLista != null) {
-                            if (pessoaTipoLista.TotalRegistros > 0) {
-                                if (pessoaTipoLista.RegistrosPorPagina < 1) {
-                                    pessoaTipoLista.RegistrosPorPagina = 30;
-                                } else if (pessoaTipoLista.RegistrosPorPagina > 200) {
-                                    pessoaTipoLista.RegistrosPorPagina = 30;
+                            if (pessoaTipoLista.Paginacao.TotalRegistros > 0) {
+                                if (pessoaTipoLista.Paginacao.RegistrosPorPagina < 1) {
+                                    pessoaTipoLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (pessoaTipoLista.Paginacao.RegistrosPorPagina > 200) {
+                                    pessoaTipoLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                pessoaTipoLista.PaginaAtual = (pessoaTipoListaTransfer.PaginaAtual < 1 ? 1 : pessoaTipoListaTransfer.PaginaAtual);
-                                pessoaTipoLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(pessoaTipoLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(pessoaTipoLista.RegistrosPorPagina)));
+                                pessoaTipoLista.Paginacao.PaginaAtual = (pessoaTipoListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : pessoaTipoListaTransfer.Paginacao.PaginaAtual);
+                                pessoaTipoLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(pessoaTipoLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(pessoaTipoLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

@@ -99,23 +99,23 @@ namespace rcDominiosDatas
                 }
             }
             
-            if (usuarioTransfer.RegistrosPorPagina < 1) {
+            if (usuarioTransfer.Paginacao.RegistrosPorPagina < 1) {
                 registrosPorPagina = 30;
-            } else if (usuarioTransfer.RegistrosPorPagina > 200) {
+            } else if (usuarioTransfer.Paginacao.RegistrosPorPagina > 200) {
                 registrosPorPagina = 30;
             } else {
-                registrosPorPagina = usuarioTransfer.RegistrosPorPagina;
+                registrosPorPagina = usuarioTransfer.Paginacao.RegistrosPorPagina;
             }
 
-            pular = (usuarioTransfer.PaginaAtual < 2 ? 0 : usuarioTransfer.PaginaAtual - 1);
+            pular = (usuarioTransfer.Paginacao.PaginaAtual < 2 ? 0 : usuarioTransfer.Paginacao.PaginaAtual - 1);
             pular *= registrosPorPagina;
             
             totalRegistros = query.Count();
             lista = query.Skip(pular).Take(registrosPorPagina).ToList();
 
-            usuarioLista.RegistrosPorPagina = registrosPorPagina;
-            usuarioLista.TotalRegistros = totalRegistros;
-            usuarioLista.UsuarioLista = lista;
+            usuarioLista.Paginacao.RegistrosPorPagina = registrosPorPagina;
+            usuarioLista.Paginacao.TotalRegistros = totalRegistros;
+            usuarioLista.Lista = lista;
 
             return usuarioLista;
         }

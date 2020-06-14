@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 profissaoLista = await profissaoService.Consultar(profissaoListaTransfer, autorizacao);
 
                 if (profissaoLista != null) {
-                    if (profissaoLista.TotalRegistros > 0) {
-                        if (profissaoLista.RegistrosPorPagina < 1) {
-                            profissaoLista.RegistrosPorPagina = 30;
-                        } else if (profissaoLista.RegistrosPorPagina > 200) {
-                            profissaoLista.RegistrosPorPagina = 30;
+                    if (profissaoLista.Paginacao.TotalRegistros > 0) {
+                        if (profissaoLista.Paginacao.RegistrosPorPagina < 1) {
+                            profissaoLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (profissaoLista.Paginacao.RegistrosPorPagina > 200) {
+                            profissaoLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        profissaoLista.PaginaAtual = (profissaoLista.PaginaAtual < 1 ? 1 : profissaoLista.PaginaAtual);
-                        profissaoLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.TotalRegistros) 
-                            / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
-                        profissaoLista.TotalPaginas = (profissaoLista.TotalPaginas < 1 ? 1 : profissaoLista.TotalPaginas);
+                        profissaoLista.Paginacao.PaginaAtual = (profissaoLista.Paginacao.PaginaAtual < 1 ? 1 : profissaoLista.Paginacao.PaginaAtual);
+                        profissaoLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(profissaoLista.Paginacao.RegistrosPorPagina)));
+                        profissaoLista.Paginacao.TotalPaginas = (profissaoLista.Paginacao.TotalPaginas < 1 ? 1 : profissaoLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > profissaoLista.TotalPaginas ? profissaoLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > profissaoLista.Paginacao.TotalPaginas ? profissaoLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        profissaoLista.PaginaInicial = profissaoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        profissaoLista.PaginaFinal = profissaoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        profissaoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (profissaoLista.PaginaFinal - 1) : profissaoLista.PaginaFinal);
+                        profissaoLista.Paginacao.PaginaInicial = profissaoLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        profissaoLista.Paginacao.PaginaFinal = profissaoLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        profissaoLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (profissaoLista.Paginacao.PaginaFinal - 1) : profissaoLista.Paginacao.PaginaFinal);
 
-                        if (profissaoLista.PaginaInicial < 1) {
-                            dif = 1 - profissaoLista.PaginaInicial;
-                            profissaoLista.PaginaInicial += dif;
-                            profissaoLista.PaginaFinal += dif;
+                        if (profissaoLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - profissaoLista.Paginacao.PaginaInicial;
+                            profissaoLista.Paginacao.PaginaInicial += dif;
+                            profissaoLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (profissaoLista.PaginaFinal > profissaoLista.TotalPaginas) {
-                            dif = profissaoLista.PaginaFinal - profissaoLista.TotalPaginas;
-                            profissaoLista.PaginaInicial -= dif;
-                            profissaoLista.PaginaFinal -= dif;
+                        if (profissaoLista.Paginacao.PaginaFinal > profissaoLista.Paginacao.TotalPaginas) {
+                            dif = profissaoLista.Paginacao.PaginaFinal - profissaoLista.Paginacao.TotalPaginas;
+                            profissaoLista.Paginacao.PaginaInicial -= dif;
+                            profissaoLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        profissaoLista.PaginaInicial = (profissaoLista.PaginaInicial < 1 ? 1 : profissaoLista.PaginaInicial);
-                        profissaoLista.PaginaFinal = (profissaoLista.PaginaFinal > profissaoLista.TotalPaginas ? 
-                            profissaoLista.TotalPaginas : profissaoLista.PaginaFinal);
+                        profissaoLista.Paginacao.PaginaInicial = (profissaoLista.Paginacao.PaginaInicial < 1 ? 1 : profissaoLista.Paginacao.PaginaInicial);
+                        profissaoLista.Paginacao.PaginaFinal = (profissaoLista.Paginacao.PaginaFinal > profissaoLista.Paginacao.TotalPaginas ? 
+                            profissaoLista.Paginacao.TotalPaginas : profissaoLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 generoSocialValidacao = new GeneroSocialTransfer(generoSocialTransfer);
-                generoSocialValidacao.GeneroSocial.Descricao = Tratamento.TratarStringNuloBranco(generoSocialValidacao.GeneroSocial.Descricao);
-                generoSocialValidacao.GeneroSocial.Codigo = Tratamento.TratarStringNuloBranco(generoSocialValidacao.GeneroSocial.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Gênero Social
                 if (string.IsNullOrEmpty(generoSocialValidacao.GeneroSocial.Descricao)) {
                     generoSocialValidacao.IncluirMensagem("Necessário informar a Descrição do Gênero Social");
-                } else if (generoSocialValidacao.GeneroSocial.Descricao.Length > 100) {
-                    generoSocialValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((generoSocialValidacao.GeneroSocial.Descricao.Length < 3) || 
+                        (generoSocialValidacao.GeneroSocial.Descricao.Length > 100)) {
+                    generoSocialValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(generoSocialValidacao.GeneroSocial.Descricao)) {
                     generoSocialValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     generoSocialValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(generoSocialValidacao.GeneroSocial.Descricao)) {
+                    generoSocialValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Gênero Social
                 if (!string.IsNullOrEmpty(generoSocialValidacao.GeneroSocial.Codigo)) {
-                    if (generoSocialValidacao.GeneroSocial.Codigo.Length > 10) {
-                        generoSocialValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((generoSocialValidacao.GeneroSocial.Codigo.Length < 3) || 
+                        (generoSocialValidacao.GeneroSocial.Codigo.Length > 10)) {
+                        generoSocialValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(generoSocialValidacao.GeneroSocial.Codigo)) {
                         generoSocialValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         generoSocialValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 generoSocialValidacao = new GeneroSocialTransfer(generoSocialTransfer);
 
                 if (generoSocialValidacao != null) {
-                    generoSocialValidacao.Descricao = Tratamento.TratarStringNuloBranco(generoSocialValidacao.Descricao);
-                    generoSocialValidacao.Codigo = Tratamento.TratarStringNuloBranco(generoSocialValidacao.Codigo);
 
                     //-- Id
-                    if ((generoSocialValidacao.IdDe <= 0) && (generoSocialValidacao.IdAte > 0)) {
+                    if ((generoSocialValidacao.Filtro.IdDe <= 0) && (generoSocialValidacao.Filtro.IdAte > 0)) {
                         generoSocialValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((generoSocialValidacao.IdDe > 0) && (generoSocialValidacao.IdAte > 0)) {
-                        if (generoSocialValidacao.IdDe >= generoSocialValidacao.IdAte) {
+                    } else if ((generoSocialValidacao.Filtro.IdDe > 0) && (generoSocialValidacao.Filtro.IdAte > 0)) {
+                        if (generoSocialValidacao.Filtro.IdDe >= generoSocialValidacao.Filtro.IdAte) {
                             generoSocialValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(generoSocialValidacao.Descricao)) {
-                        if (generoSocialValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Gênero Social
+                    if (!string.IsNullOrEmpty(generoSocialValidacao.Filtro.Descricao)) {
+                        if (generoSocialValidacao.Filtro.Descricao.Length > 100) {
                             generoSocialValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(generoSocialValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(generoSocialValidacao.Filtro.Descricao)) {
                             generoSocialValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             generoSocialValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(generoSocialValidacao.Codigo)) {
-                        if (generoSocialValidacao.Codigo.Length > 10) {
+                    //-- Código de Gênero Social
+                    if (!string.IsNullOrEmpty(generoSocialValidacao.Filtro.Codigo)) {
+                        if (generoSocialValidacao.Filtro.Codigo.Length > 10) {
                             generoSocialValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(generoSocialValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(generoSocialValidacao.Filtro.Codigo)) {
                             generoSocialValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             generoSocialValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((generoSocialValidacao.CriacaoDe == DateTime.MinValue) && (generoSocialValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((generoSocialValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (generoSocialValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         generoSocialValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((generoSocialValidacao.CriacaoDe > DateTime.MinValue) && (generoSocialValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (generoSocialValidacao.CriacaoDe >= generoSocialValidacao.CriacaoAte) {
+                    } else if ((generoSocialValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (generoSocialValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (generoSocialValidacao.Filtro.CriacaoDe >= generoSocialValidacao.Filtro.CriacaoAte) {
                             generoSocialValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((generoSocialValidacao.AlteracaoDe == DateTime.MinValue) && (generoSocialValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((generoSocialValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (generoSocialValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         generoSocialValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((generoSocialValidacao.AlteracaoDe > DateTime.MinValue) && (generoSocialValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (generoSocialValidacao.AlteracaoDe >= generoSocialValidacao.AlteracaoAte) {
+                    } else if ((generoSocialValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (generoSocialValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (generoSocialValidacao.Filtro.AlteracaoDe >= generoSocialValidacao.Filtro.AlteracaoAte) {
                             generoSocialValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

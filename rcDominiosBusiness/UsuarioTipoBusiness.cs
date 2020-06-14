@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 usuarioTipoValidacao = new UsuarioTipoTransfer(usuarioTipoTransfer);
-                usuarioTipoValidacao.UsuarioTipo.Descricao = Tratamento.TratarStringNuloBranco(usuarioTipoValidacao.UsuarioTipo.Descricao);
-                usuarioTipoValidacao.UsuarioTipo.Codigo = Tratamento.TratarStringNuloBranco(usuarioTipoValidacao.UsuarioTipo.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Tipo de Usuário
                 if (string.IsNullOrEmpty(usuarioTipoValidacao.UsuarioTipo.Descricao)) {
                     usuarioTipoValidacao.IncluirMensagem("Necessário informar a Descrição do tipo de Usuário");
-                } else if (usuarioTipoValidacao.UsuarioTipo.Descricao.Length > 100) {
-                    usuarioTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((usuarioTipoValidacao.UsuarioTipo.Descricao.Length < 3) || 
+                        (usuarioTipoValidacao.UsuarioTipo.Descricao.Length > 100)) {
+                    usuarioTipoValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(usuarioTipoValidacao.UsuarioTipo.Descricao)) {
                     usuarioTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     usuarioTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(usuarioTipoValidacao.UsuarioTipo.Descricao)) {
+                    usuarioTipoValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Tipo de Usuário
                 if (!string.IsNullOrEmpty(usuarioTipoValidacao.UsuarioTipo.Codigo)) {
-                    if (usuarioTipoValidacao.UsuarioTipo.Codigo.Length > 10) {
-                        usuarioTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((usuarioTipoValidacao.UsuarioTipo.Codigo.Length < 3) || 
+                        (usuarioTipoValidacao.UsuarioTipo.Codigo.Length > 10)) {
+                        usuarioTipoValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(usuarioTipoValidacao.UsuarioTipo.Codigo)) {
                         usuarioTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         usuarioTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 usuarioTipoValidacao = new UsuarioTipoTransfer(usuarioTipoTransfer);
 
                 if (usuarioTipoValidacao != null) {
-                    usuarioTipoValidacao.Descricao = Tratamento.TratarStringNuloBranco(usuarioTipoValidacao.Descricao);
-                    usuarioTipoValidacao.Codigo = Tratamento.TratarStringNuloBranco(usuarioTipoValidacao.Codigo);
 
                     //-- Id
-                    if ((usuarioTipoValidacao.IdDe <= 0) && (usuarioTipoValidacao.IdAte > 0)) {
+                    if ((usuarioTipoValidacao.Filtro.IdDe <= 0) && (usuarioTipoValidacao.Filtro.IdAte > 0)) {
                         usuarioTipoValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((usuarioTipoValidacao.IdDe > 0) && (usuarioTipoValidacao.IdAte > 0)) {
-                        if (usuarioTipoValidacao.IdDe >= usuarioTipoValidacao.IdAte) {
+                    } else if ((usuarioTipoValidacao.Filtro.IdDe > 0) && (usuarioTipoValidacao.Filtro.IdAte > 0)) {
+                        if (usuarioTipoValidacao.Filtro.IdDe >= usuarioTipoValidacao.Filtro.IdAte) {
                             usuarioTipoValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(usuarioTipoValidacao.Descricao)) {
-                        if (usuarioTipoValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Tipo de Usuário
+                    if (!string.IsNullOrEmpty(usuarioTipoValidacao.Filtro.Descricao)) {
+                        if (usuarioTipoValidacao.Filtro.Descricao.Length > 100) {
                             usuarioTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(usuarioTipoValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(usuarioTipoValidacao.Filtro.Descricao)) {
                             usuarioTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             usuarioTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(usuarioTipoValidacao.Codigo)) {
-                        if (usuarioTipoValidacao.Codigo.Length > 10) {
+                    //-- Código de Tipo de Usuário
+                    if (!string.IsNullOrEmpty(usuarioTipoValidacao.Filtro.Codigo)) {
+                        if (usuarioTipoValidacao.Filtro.Codigo.Length > 10) {
                             usuarioTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(usuarioTipoValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(usuarioTipoValidacao.Filtro.Codigo)) {
                             usuarioTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             usuarioTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((usuarioTipoValidacao.CriacaoDe == DateTime.MinValue) && (usuarioTipoValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((usuarioTipoValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (usuarioTipoValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         usuarioTipoValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((usuarioTipoValidacao.CriacaoDe > DateTime.MinValue) && (usuarioTipoValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (usuarioTipoValidacao.CriacaoDe >= usuarioTipoValidacao.CriacaoAte) {
+                    } else if ((usuarioTipoValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (usuarioTipoValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (usuarioTipoValidacao.Filtro.CriacaoDe >= usuarioTipoValidacao.Filtro.CriacaoAte) {
                             usuarioTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((usuarioTipoValidacao.AlteracaoDe == DateTime.MinValue) && (usuarioTipoValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((usuarioTipoValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (usuarioTipoValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         usuarioTipoValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((usuarioTipoValidacao.AlteracaoDe > DateTime.MinValue) && (usuarioTipoValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (usuarioTipoValidacao.AlteracaoDe >= usuarioTipoValidacao.AlteracaoAte) {
+                    } else if ((usuarioTipoValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (usuarioTipoValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (usuarioTipoValidacao.Filtro.AlteracaoDe >= usuarioTipoValidacao.Filtro.AlteracaoAte) {
                             usuarioTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

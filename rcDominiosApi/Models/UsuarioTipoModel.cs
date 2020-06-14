@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         usuarioTipoLista = usuarioTipoDataModel.Consultar(usuarioTipoValidacao);
 
                         if (usuarioTipoLista != null) {
-                            if (usuarioTipoLista.TotalRegistros > 0) {
-                                if (usuarioTipoLista.RegistrosPorPagina < 1) {
-                                    usuarioTipoLista.RegistrosPorPagina = 30;
-                                } else if (usuarioTipoLista.RegistrosPorPagina > 200) {
-                                    usuarioTipoLista.RegistrosPorPagina = 30;
+                            if (usuarioTipoLista.Paginacao.TotalRegistros > 0) {
+                                if (usuarioTipoLista.Paginacao.RegistrosPorPagina < 1) {
+                                    usuarioTipoLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (usuarioTipoLista.Paginacao.RegistrosPorPagina > 200) {
+                                    usuarioTipoLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                usuarioTipoLista.PaginaAtual = (usuarioTipoListaTransfer.PaginaAtual < 1 ? 1 : usuarioTipoListaTransfer.PaginaAtual);
-                                usuarioTipoLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioTipoLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(usuarioTipoLista.RegistrosPorPagina)));
+                                usuarioTipoLista.Paginacao.PaginaAtual = (usuarioTipoListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : usuarioTipoListaTransfer.Paginacao.PaginaAtual);
+                                usuarioTipoLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioTipoLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(usuarioTipoLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

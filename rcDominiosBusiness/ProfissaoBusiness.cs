@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 profissaoValidacao = new ProfissaoTransfer(profissaoTransfer);
-                profissaoValidacao.Profissao.Descricao = Tratamento.TratarStringNuloBranco(profissaoValidacao.Profissao.Descricao);
-                profissaoValidacao.Profissao.Codigo = Tratamento.TratarStringNuloBranco(profissaoValidacao.Profissao.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Profissão
                 if (string.IsNullOrEmpty(profissaoValidacao.Profissao.Descricao)) {
                     profissaoValidacao.IncluirMensagem("Necessário informar a Descrição da Profissão");
-                } else if (profissaoValidacao.Profissao.Descricao.Length > 100) {
-                    profissaoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((profissaoValidacao.Profissao.Descricao.Length < 3) || 
+                        (profissaoValidacao.Profissao.Descricao.Length > 100)) {
+                    profissaoValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(profissaoValidacao.Profissao.Descricao)) {
                     profissaoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     profissaoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(profissaoValidacao.Profissao.Descricao)) {
+                    profissaoValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Profissão
                 if (!string.IsNullOrEmpty(profissaoValidacao.Profissao.Codigo)) {
-                    if (profissaoValidacao.Profissao.Codigo.Length > 10) {
-                        profissaoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((profissaoValidacao.Profissao.Codigo.Length < 3) || 
+                        (profissaoValidacao.Profissao.Codigo.Length > 10)) {
+                        profissaoValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(profissaoValidacao.Profissao.Codigo)) {
                         profissaoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         profissaoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 profissaoValidacao = new ProfissaoTransfer(profissaoTransfer);
 
                 if (profissaoValidacao != null) {
-                    profissaoValidacao.Descricao = Tratamento.TratarStringNuloBranco(profissaoValidacao.Descricao);
-                    profissaoValidacao.Codigo = Tratamento.TratarStringNuloBranco(profissaoValidacao.Codigo);
 
                     //-- Id
-                    if ((profissaoValidacao.IdDe <= 0) && (profissaoValidacao.IdAte > 0)) {
+                    if ((profissaoValidacao.Filtro.IdDe <= 0) && (profissaoValidacao.Filtro.IdAte > 0)) {
                         profissaoValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((profissaoValidacao.IdDe > 0) && (profissaoValidacao.IdAte > 0)) {
-                        if (profissaoValidacao.IdDe >= profissaoValidacao.IdAte) {
+                    } else if ((profissaoValidacao.Filtro.IdDe > 0) && (profissaoValidacao.Filtro.IdAte > 0)) {
+                        if (profissaoValidacao.Filtro.IdDe >= profissaoValidacao.Filtro.IdAte) {
                             profissaoValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(profissaoValidacao.Descricao)) {
-                        if (profissaoValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Profissão
+                    if (!string.IsNullOrEmpty(profissaoValidacao.Filtro.Descricao)) {
+                        if (profissaoValidacao.Filtro.Descricao.Length > 100) {
                             profissaoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(profissaoValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(profissaoValidacao.Filtro.Descricao)) {
                             profissaoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             profissaoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(profissaoValidacao.Codigo)) {
-                        if (profissaoValidacao.Codigo.Length > 10) {
+                    //-- Código de Profissão
+                    if (!string.IsNullOrEmpty(profissaoValidacao.Filtro.Codigo)) {
+                        if (profissaoValidacao.Filtro.Codigo.Length > 10) {
                             profissaoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(profissaoValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(profissaoValidacao.Filtro.Codigo)) {
                             profissaoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             profissaoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((profissaoValidacao.CriacaoDe == DateTime.MinValue) && (profissaoValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((profissaoValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (profissaoValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         profissaoValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((profissaoValidacao.CriacaoDe > DateTime.MinValue) && (profissaoValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (profissaoValidacao.CriacaoDe >= profissaoValidacao.CriacaoAte) {
+                    } else if ((profissaoValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (profissaoValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (profissaoValidacao.Filtro.CriacaoDe >= profissaoValidacao.Filtro.CriacaoAte) {
                             profissaoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((profissaoValidacao.AlteracaoDe == DateTime.MinValue) && (profissaoValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((profissaoValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (profissaoValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         profissaoValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((profissaoValidacao.AlteracaoDe > DateTime.MinValue) && (profissaoValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (profissaoValidacao.AlteracaoDe >= profissaoValidacao.AlteracaoAte) {
+                    } else if ((profissaoValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (profissaoValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (profissaoValidacao.Filtro.AlteracaoDe >= profissaoValidacao.Filtro.AlteracaoAte) {
                             profissaoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

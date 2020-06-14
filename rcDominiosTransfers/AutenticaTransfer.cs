@@ -12,15 +12,13 @@ namespace rcDominiosTransfers
 
         public bool Autenticado { get; set; }
 
-        public AutenticaTransfer() 
-            : base()
+        public AutenticaTransfer()
         {
             this.Autenticado = false;
             this.Token = null;
         }
 
-        public AutenticaTransfer(AutenticaTransfer transfer) 
-            : base(transfer)
+        public AutenticaTransfer(AutenticaTransfer transfer)
         {
             if (transfer != null) {
                 this.Apelido = transfer.Apelido;

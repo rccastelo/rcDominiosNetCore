@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 enderecoTipoLista = await enderecoTipoService.Consultar(enderecoTipoListaTransfer, autorizacao);
 
                 if (enderecoTipoLista != null) {
-                    if (enderecoTipoLista.TotalRegistros > 0) {
-                        if (enderecoTipoLista.RegistrosPorPagina < 1) {
-                            enderecoTipoLista.RegistrosPorPagina = 30;
-                        } else if (enderecoTipoLista.RegistrosPorPagina > 200) {
-                            enderecoTipoLista.RegistrosPorPagina = 30;
+                    if (enderecoTipoLista.Paginacao.TotalRegistros > 0) {
+                        if (enderecoTipoLista.Paginacao.RegistrosPorPagina < 1) {
+                            enderecoTipoLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (enderecoTipoLista.Paginacao.RegistrosPorPagina > 200) {
+                            enderecoTipoLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        enderecoTipoLista.PaginaAtual = (enderecoTipoLista.PaginaAtual < 1 ? 1 : enderecoTipoLista.PaginaAtual);
-                        enderecoTipoLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.TotalRegistros) 
-                            / @Convert.ToDecimal(enderecoTipoLista.RegistrosPorPagina)));
-                        enderecoTipoLista.TotalPaginas = (enderecoTipoLista.TotalPaginas < 1 ? 1 : enderecoTipoLista.TotalPaginas);
+                        enderecoTipoLista.Paginacao.PaginaAtual = (enderecoTipoLista.Paginacao.PaginaAtual < 1 ? 1 : enderecoTipoLista.Paginacao.PaginaAtual);
+                        enderecoTipoLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(enderecoTipoLista.Paginacao.RegistrosPorPagina)));
+                        enderecoTipoLista.Paginacao.TotalPaginas = (enderecoTipoLista.Paginacao.TotalPaginas < 1 ? 1 : enderecoTipoLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > enderecoTipoLista.TotalPaginas ? enderecoTipoLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > enderecoTipoLista.Paginacao.TotalPaginas ? enderecoTipoLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        enderecoTipoLista.PaginaInicial = enderecoTipoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        enderecoTipoLista.PaginaFinal = enderecoTipoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        enderecoTipoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (enderecoTipoLista.PaginaFinal - 1) : enderecoTipoLista.PaginaFinal);
+                        enderecoTipoLista.Paginacao.PaginaInicial = enderecoTipoLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        enderecoTipoLista.Paginacao.PaginaFinal = enderecoTipoLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        enderecoTipoLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (enderecoTipoLista.Paginacao.PaginaFinal - 1) : enderecoTipoLista.Paginacao.PaginaFinal);
 
-                        if (enderecoTipoLista.PaginaInicial < 1) {
-                            dif = 1 - enderecoTipoLista.PaginaInicial;
-                            enderecoTipoLista.PaginaInicial += dif;
-                            enderecoTipoLista.PaginaFinal += dif;
+                        if (enderecoTipoLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - enderecoTipoLista.Paginacao.PaginaInicial;
+                            enderecoTipoLista.Paginacao.PaginaInicial += dif;
+                            enderecoTipoLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (enderecoTipoLista.PaginaFinal > enderecoTipoLista.TotalPaginas) {
-                            dif = enderecoTipoLista.PaginaFinal - enderecoTipoLista.TotalPaginas;
-                            enderecoTipoLista.PaginaInicial -= dif;
-                            enderecoTipoLista.PaginaFinal -= dif;
+                        if (enderecoTipoLista.Paginacao.PaginaFinal > enderecoTipoLista.Paginacao.TotalPaginas) {
+                            dif = enderecoTipoLista.Paginacao.PaginaFinal - enderecoTipoLista.Paginacao.TotalPaginas;
+                            enderecoTipoLista.Paginacao.PaginaInicial -= dif;
+                            enderecoTipoLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        enderecoTipoLista.PaginaInicial = (enderecoTipoLista.PaginaInicial < 1 ? 1 : enderecoTipoLista.PaginaInicial);
-                        enderecoTipoLista.PaginaFinal = (enderecoTipoLista.PaginaFinal > enderecoTipoLista.TotalPaginas ? 
-                            enderecoTipoLista.TotalPaginas : enderecoTipoLista.PaginaFinal);
+                        enderecoTipoLista.Paginacao.PaginaInicial = (enderecoTipoLista.Paginacao.PaginaInicial < 1 ? 1 : enderecoTipoLista.Paginacao.PaginaInicial);
+                        enderecoTipoLista.Paginacao.PaginaFinal = (enderecoTipoLista.Paginacao.PaginaFinal > enderecoTipoLista.Paginacao.TotalPaginas ? 
+                            enderecoTipoLista.Paginacao.TotalPaginas : enderecoTipoLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

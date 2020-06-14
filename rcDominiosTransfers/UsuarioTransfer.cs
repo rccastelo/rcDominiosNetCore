@@ -9,19 +9,9 @@ namespace rcDominiosTransfers
     {
         public UsuarioEntity Usuario { get; set; }
 
-        public IList<UsuarioEntity> UsuarioLista { get; set; }
+        public IList<UsuarioEntity> Lista { get; set; }
 
-        public int PaginaAtual { get; set; }
-
-        public int PaginaInicial { get; set; }
-
-        public int PaginaFinal { get; set; }
-
-        public int RegistrosPorPagina { get; set; }
-
-        public int TotalRegistros { get; set; }
-
-        public int TotalPaginas { get; set; }
+        public TransferPaginacao Paginacao { get; set; }
 
         public int IdDe { get; set; }
 
@@ -52,24 +42,22 @@ namespace rcDominiosTransfers
         public UsuarioTransfer() 
             : base()
         {
+            this.Paginacao = new TransferPaginacao();
         }
 
         public UsuarioTransfer(UsuarioTransfer transfer) 
             : base(transfer)
         {
             if (transfer != null) {
-                if (transfer.UsuarioLista != null) {
-                    this.UsuarioLista = new List<UsuarioEntity>(transfer.UsuarioLista);
+                if (transfer.Lista != null) {
+                    this.Lista = new List<UsuarioEntity>(transfer.Lista);
                 }
                 if (transfer.Usuario != null) {
                     this.Usuario = new UsuarioEntity(transfer.Usuario);
                 }
-                this.PaginaAtual = transfer.PaginaAtual;
-                this.PaginaInicial = transfer.PaginaInicial;
-                this.PaginaFinal = transfer.PaginaFinal;
-                this.RegistrosPorPagina = transfer.RegistrosPorPagina;
-                this.TotalRegistros = transfer.TotalRegistros;
-                this.TotalPaginas = transfer.TotalPaginas;
+                if (transfer.Paginacao != null) {
+                    this.Paginacao = new TransferPaginacao(transfer.Paginacao);
+                }
                 this.IdDe = transfer.IdDe;
                 this.IdAte = transfer.IdAte;
                 this.Apelido = transfer.Apelido;
@@ -86,11 +74,11 @@ namespace rcDominiosTransfers
 
         public void IncluirUsuario(UsuarioEntity entity) {
             if (entity != null) {
-                if (this.UsuarioLista == null) {
-                    this.UsuarioLista = new List<UsuarioEntity>();
+                if (this.Lista == null) {
+                    this.Lista = new List<UsuarioEntity>();
                 }
 
-                this.UsuarioLista.Add(entity);
+                this.Lista.Add(entity);
             }
         }
     }

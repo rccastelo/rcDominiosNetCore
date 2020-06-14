@@ -84,5 +84,13 @@ namespace rcDominiosUtils
                 return false;
             }
         }
+
+        public static bool ValidarBrancoIniFim(string valor) {
+            if (valor.StartsWith(" ") || valor.EndsWith(" ")) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }

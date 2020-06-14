@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 corLista = await corService.Consultar(corListaTransfer, autorizacao);
 
                 if (corLista != null) {
-                    if (corLista.TotalRegistros > 0) {
-                        if (corLista.RegistrosPorPagina < 1) {
-                            corLista.RegistrosPorPagina = 30;
-                        } else if (corLista.RegistrosPorPagina > 200) {
-                            corLista.RegistrosPorPagina = 30;
+                    if (corLista.Paginacao.TotalRegistros > 0) {
+                        if (corLista.Paginacao.RegistrosPorPagina < 1) {
+                            corLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (corLista.Paginacao.RegistrosPorPagina > 200) {
+                            corLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        corLista.PaginaAtual = (corLista.PaginaAtual < 1 ? 1 : corLista.PaginaAtual);
-                        corLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.TotalRegistros) 
-                            / @Convert.ToDecimal(corLista.RegistrosPorPagina)));
-                        corLista.TotalPaginas = (corLista.TotalPaginas < 1 ? 1 : corLista.TotalPaginas);
+                        corLista.Paginacao.PaginaAtual = (corLista.Paginacao.PaginaAtual < 1 ? 1 : corLista.Paginacao.PaginaAtual);
+                        corLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(corLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(corLista.Paginacao.RegistrosPorPagina)));
+                        corLista.Paginacao.TotalPaginas = (corLista.Paginacao.TotalPaginas < 1 ? 1 : corLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > corLista.TotalPaginas ? corLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > corLista.Paginacao.TotalPaginas ? corLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        corLista.PaginaInicial = corLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        corLista.PaginaFinal = corLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        corLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (corLista.PaginaFinal - 1) : corLista.PaginaFinal);
+                        corLista.Paginacao.PaginaInicial = corLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        corLista.Paginacao.PaginaFinal = corLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        corLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (corLista.Paginacao.PaginaFinal - 1) : corLista.Paginacao.PaginaFinal);
 
-                        if (corLista.PaginaInicial < 1) {
-                            dif = 1 - corLista.PaginaInicial;
-                            corLista.PaginaInicial += dif;
-                            corLista.PaginaFinal += dif;
+                        if (corLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - corLista.Paginacao.PaginaInicial;
+                            corLista.Paginacao.PaginaInicial += dif;
+                            corLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (corLista.PaginaFinal > corLista.TotalPaginas) {
-                            dif = corLista.PaginaFinal - corLista.TotalPaginas;
-                            corLista.PaginaInicial -= dif;
-                            corLista.PaginaFinal -= dif;
+                        if (corLista.Paginacao.PaginaFinal > corLista.Paginacao.TotalPaginas) {
+                            dif = corLista.Paginacao.PaginaFinal - corLista.Paginacao.TotalPaginas;
+                            corLista.Paginacao.PaginaInicial -= dif;
+                            corLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        corLista.PaginaInicial = (corLista.PaginaInicial < 1 ? 1 : corLista.PaginaInicial);
-                        corLista.PaginaFinal = (corLista.PaginaFinal > corLista.TotalPaginas ? 
-                            corLista.TotalPaginas : corLista.PaginaFinal);
+                        corLista.Paginacao.PaginaInicial = (corLista.Paginacao.PaginaInicial < 1 ? 1 : corLista.Paginacao.PaginaInicial);
+                        corLista.Paginacao.PaginaFinal = (corLista.Paginacao.PaginaFinal > corLista.Paginacao.TotalPaginas ? 
+                            corLista.Paginacao.TotalPaginas : corLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

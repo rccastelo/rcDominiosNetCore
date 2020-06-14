@@ -12,14 +12,13 @@ namespace rcDominiosBusiness
 
             try  {
                 autenticaValidacao = new AutenticaTransfer(autenticaTransfer);
-                autenticaValidacao.Apelido = Tratamento.TratarStringNuloBranco(autenticaValidacao.Apelido);
-                autenticaValidacao.Senha = Tratamento.TratarStringNuloBranco(autenticaValidacao.Senha);
 
                 //-- Apelido (Nome de usuário)
                 if (string.IsNullOrEmpty(autenticaValidacao.Apelido)) {
                     autenticaValidacao.IncluirMensagem("Necessário informar o Nome de Usuário");
-                } else if (autenticaValidacao.Apelido.Length > 20) {
-                    autenticaValidacao.IncluirMensagem("Nome de Usuário deve ter no máximo 20 caracteres");
+                } else if ((autenticaValidacao.Apelido.Length < 3) || 
+                        (autenticaValidacao.Apelido.Length > 20)) {
+                    autenticaValidacao.IncluirMensagem("Nome de Usuário deve ter entre 3 e 20 caracteres");
                 } else if (!Validacao.ValidarCharAaN(autenticaValidacao.Apelido)) {
                     autenticaValidacao.IncluirMensagem("Nome de Usuário possui caracteres inválidos");
                     autenticaValidacao.IncluirMensagem("Caracteres válidos: letras e números");
@@ -28,11 +27,14 @@ namespace rcDominiosBusiness
                 //-- Senha
                 if (string.IsNullOrEmpty(autenticaValidacao.Senha)) {
                     autenticaValidacao.IncluirMensagem("Necessário informar a Senha");
-                } else if (autenticaValidacao.Senha.Length > 20) {
-                    autenticaValidacao.IncluirMensagem("Senha deve ter no máximo 20 caracteres");
+                } else if ((autenticaValidacao.Senha.Length < 5) || 
+                        (autenticaValidacao.Senha.Length > 20)) {
+                    autenticaValidacao.IncluirMensagem("Senha deve ter entre 5 e 20 caracteres");
                 } else if (!Validacao.ValidarCharAaBEN(autenticaValidacao.Senha)) {
                     autenticaValidacao.IncluirMensagem("Senha possui caracteres inválidos");
                     autenticaValidacao.IncluirMensagem("Caracteres válidos: letras, números, espaço em branco e especiais");
+                } else if (!Validacao.ValidarBrancoIniFim(autenticaValidacao.Senha)) {
+                    autenticaValidacao.IncluirMensagem("Senha não deve começar ou terminar com espaço em branco");
                 }
 
                 autenticaValidacao.Validacao = true;

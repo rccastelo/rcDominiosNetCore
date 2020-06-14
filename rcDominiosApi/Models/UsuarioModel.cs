@@ -176,16 +176,16 @@ namespace rcDominiosApi.Models
                         usuarioLista = usuarioDataModel.Consultar(usuarioValidacao);
 
                         if (usuarioLista != null) {
-                            if (usuarioLista.TotalRegistros > 0) {
-                                if (usuarioLista.RegistrosPorPagina < 1) {
-                                    usuarioLista.RegistrosPorPagina = 30;
-                                } else if (usuarioLista.RegistrosPorPagina > 200) {
-                                    usuarioLista.RegistrosPorPagina = 30;
+                            if (usuarioLista.Paginacao.TotalRegistros > 0) {
+                                if (usuarioLista.Paginacao.RegistrosPorPagina < 1) {
+                                    usuarioLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (usuarioLista.Paginacao.RegistrosPorPagina > 200) {
+                                    usuarioLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                usuarioLista.PaginaAtual = (usuarioListaTransfer.PaginaAtual < 1 ? 1 : usuarioListaTransfer.PaginaAtual);
-                                usuarioLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(usuarioLista.RegistrosPorPagina)));
+                                usuarioLista.Paginacao.PaginaAtual = (usuarioListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : usuarioListaTransfer.Paginacao.PaginaAtual);
+                                usuarioLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(usuarioLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

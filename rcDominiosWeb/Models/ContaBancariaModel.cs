@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 contaBancariaLista = await contaBancariaService.Consultar(contaBancariaListaTransfer, autorizacao);
 
                 if (contaBancariaLista != null) {
-                    if (contaBancariaLista.TotalRegistros > 0) {
-                        if (contaBancariaLista.RegistrosPorPagina < 1) {
-                            contaBancariaLista.RegistrosPorPagina = 30;
-                        } else if (contaBancariaLista.RegistrosPorPagina > 200) {
-                            contaBancariaLista.RegistrosPorPagina = 30;
+                    if (contaBancariaLista.Paginacao.TotalRegistros > 0) {
+                        if (contaBancariaLista.Paginacao.RegistrosPorPagina < 1) {
+                            contaBancariaLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (contaBancariaLista.Paginacao.RegistrosPorPagina > 200) {
+                            contaBancariaLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        contaBancariaLista.PaginaAtual = (contaBancariaLista.PaginaAtual < 1 ? 1 : contaBancariaLista.PaginaAtual);
-                        contaBancariaLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.TotalRegistros) 
-                            / @Convert.ToDecimal(contaBancariaLista.RegistrosPorPagina)));
-                        contaBancariaLista.TotalPaginas = (contaBancariaLista.TotalPaginas < 1 ? 1 : contaBancariaLista.TotalPaginas);
+                        contaBancariaLista.Paginacao.PaginaAtual = (contaBancariaLista.Paginacao.PaginaAtual < 1 ? 1 : contaBancariaLista.Paginacao.PaginaAtual);
+                        contaBancariaLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(contaBancariaLista.Paginacao.RegistrosPorPagina)));
+                        contaBancariaLista.Paginacao.TotalPaginas = (contaBancariaLista.Paginacao.TotalPaginas < 1 ? 1 : contaBancariaLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > contaBancariaLista.TotalPaginas ? contaBancariaLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > contaBancariaLista.Paginacao.TotalPaginas ? contaBancariaLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        contaBancariaLista.PaginaInicial = contaBancariaLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        contaBancariaLista.PaginaFinal = contaBancariaLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        contaBancariaLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (contaBancariaLista.PaginaFinal - 1) : contaBancariaLista.PaginaFinal);
+                        contaBancariaLista.Paginacao.PaginaInicial = contaBancariaLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        contaBancariaLista.Paginacao.PaginaFinal = contaBancariaLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        contaBancariaLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (contaBancariaLista.Paginacao.PaginaFinal - 1) : contaBancariaLista.Paginacao.PaginaFinal);
 
-                        if (contaBancariaLista.PaginaInicial < 1) {
-                            dif = 1 - contaBancariaLista.PaginaInicial;
-                            contaBancariaLista.PaginaInicial += dif;
-                            contaBancariaLista.PaginaFinal += dif;
+                        if (contaBancariaLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - contaBancariaLista.Paginacao.PaginaInicial;
+                            contaBancariaLista.Paginacao.PaginaInicial += dif;
+                            contaBancariaLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (contaBancariaLista.PaginaFinal > contaBancariaLista.TotalPaginas) {
-                            dif = contaBancariaLista.PaginaFinal - contaBancariaLista.TotalPaginas;
-                            contaBancariaLista.PaginaInicial -= dif;
-                            contaBancariaLista.PaginaFinal -= dif;
+                        if (contaBancariaLista.Paginacao.PaginaFinal > contaBancariaLista.Paginacao.TotalPaginas) {
+                            dif = contaBancariaLista.Paginacao.PaginaFinal - contaBancariaLista.Paginacao.TotalPaginas;
+                            contaBancariaLista.Paginacao.PaginaInicial -= dif;
+                            contaBancariaLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        contaBancariaLista.PaginaInicial = (contaBancariaLista.PaginaInicial < 1 ? 1 : contaBancariaLista.PaginaInicial);
-                        contaBancariaLista.PaginaFinal = (contaBancariaLista.PaginaFinal > contaBancariaLista.TotalPaginas ? 
-                            contaBancariaLista.TotalPaginas : contaBancariaLista.PaginaFinal);
+                        contaBancariaLista.Paginacao.PaginaInicial = (contaBancariaLista.Paginacao.PaginaInicial < 1 ? 1 : contaBancariaLista.Paginacao.PaginaInicial);
+                        contaBancariaLista.Paginacao.PaginaFinal = (contaBancariaLista.Paginacao.PaginaFinal > contaBancariaLista.Paginacao.TotalPaginas ? 
+                            contaBancariaLista.Paginacao.TotalPaginas : contaBancariaLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

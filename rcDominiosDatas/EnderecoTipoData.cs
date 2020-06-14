@@ -25,33 +25,33 @@ namespace rcDominiosDatas
             int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (enderecoTipoTransfer.IdAte <= 0) {
-                if (enderecoTipoTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == enderecoTipoTransfer.IdDe);
+            if (enderecoTipoTransfer.Filtro.IdAte <= 0) {
+                if (enderecoTipoTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id == enderecoTipoTransfer.Filtro.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (enderecoTipoTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= enderecoTipoTransfer.IdDe);
-                    query = query.Where(et => et.Id <= enderecoTipoTransfer.IdAte);
+                if (enderecoTipoTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id >= enderecoTipoTransfer.Filtro.IdDe);
+                    query = query.Where(et => et.Id <= enderecoTipoTransfer.Filtro.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(enderecoTipoTransfer.Descricao));
+            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Filtro.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(enderecoTipoTransfer.Filtro.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(enderecoTipoTransfer.Codigo));
+            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Filtro.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(enderecoTipoTransfer.Filtro.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Ativo)) {
+            if (!string.IsNullOrEmpty(enderecoTipoTransfer.Filtro.Ativo)) {
                 bool ativo = true;
 
-                if (enderecoTipoTransfer.Ativo == "false") {
+                if (enderecoTipoTransfer.Filtro.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -59,48 +59,48 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (enderecoTipoTransfer.CriacaoAte == DateTime.MinValue) {
-                if (enderecoTipoTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == enderecoTipoTransfer.CriacaoDe);
+            if (enderecoTipoTransfer.Filtro.CriacaoAte == DateTime.MinValue) {
+                if (enderecoTipoTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == enderecoTipoTransfer.Filtro.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (enderecoTipoTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= enderecoTipoTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= enderecoTipoTransfer.CriacaoAte);
+                if (enderecoTipoTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= enderecoTipoTransfer.Filtro.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= enderecoTipoTransfer.Filtro.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (enderecoTipoTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (enderecoTipoTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == enderecoTipoTransfer.AlteracaoDe);
+            if (enderecoTipoTransfer.Filtro.AlteracaoAte == DateTime.MinValue) {
+                if (enderecoTipoTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == enderecoTipoTransfer.Filtro.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (enderecoTipoTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= enderecoTipoTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= enderecoTipoTransfer.AlteracaoAte);
+                if (enderecoTipoTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= enderecoTipoTransfer.Filtro.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= enderecoTipoTransfer.Filtro.AlteracaoAte);
                 }
             }
             
-            if (enderecoTipoTransfer.RegistrosPorPagina < 1) {
+            if (enderecoTipoTransfer.Paginacao.RegistrosPorPagina < 1) {
                 registrosPorPagina = 30;
-            } else if (enderecoTipoTransfer.RegistrosPorPagina > 200) {
+            } else if (enderecoTipoTransfer.Paginacao.RegistrosPorPagina > 200) {
                 registrosPorPagina = 30;
             } else {
-                registrosPorPagina = enderecoTipoTransfer.RegistrosPorPagina;
+                registrosPorPagina = enderecoTipoTransfer.Paginacao.RegistrosPorPagina;
             }
 
-            pular = (enderecoTipoTransfer.PaginaAtual < 2 ? 0 : enderecoTipoTransfer.PaginaAtual - 1);
+            pular = (enderecoTipoTransfer.Paginacao.PaginaAtual < 2 ? 0 : enderecoTipoTransfer.Paginacao.PaginaAtual - 1);
             pular *= registrosPorPagina;
             
             totalRegistros = query.Count();
             lista = query.Skip(pular).Take(registrosPorPagina).ToList();
 
-            enderecoTipoLista.RegistrosPorPagina = registrosPorPagina;
-            enderecoTipoLista.TotalRegistros = totalRegistros;
-            enderecoTipoLista.EnderecoTipoLista = lista;
+            enderecoTipoLista.Paginacao.RegistrosPorPagina = registrosPorPagina;
+            enderecoTipoLista.Paginacao.TotalRegistros = totalRegistros;
+            enderecoTipoLista.Lista = lista;
 
             return enderecoTipoLista;
         }

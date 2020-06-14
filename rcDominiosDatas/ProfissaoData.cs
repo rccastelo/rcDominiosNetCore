@@ -25,33 +25,33 @@ namespace rcDominiosDatas
             int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (profissaoTransfer.IdAte <= 0) {
-                if (profissaoTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == profissaoTransfer.IdDe);
+            if (profissaoTransfer.Filtro.IdAte <= 0) {
+                if (profissaoTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id == profissaoTransfer.Filtro.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (profissaoTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= profissaoTransfer.IdDe);
-                    query = query.Where(et => et.Id <= profissaoTransfer.IdAte);
+                if (profissaoTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id >= profissaoTransfer.Filtro.IdDe);
+                    query = query.Where(et => et.Id <= profissaoTransfer.Filtro.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(profissaoTransfer.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(profissaoTransfer.Descricao));
+            if (!string.IsNullOrEmpty(profissaoTransfer.Filtro.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(profissaoTransfer.Filtro.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(profissaoTransfer.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(profissaoTransfer.Codigo));
+            if (!string.IsNullOrEmpty(profissaoTransfer.Filtro.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(profissaoTransfer.Filtro.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(profissaoTransfer.Ativo)) {
+            if (!string.IsNullOrEmpty(profissaoTransfer.Filtro.Ativo)) {
                 bool ativo = true;
 
-                if (profissaoTransfer.Ativo == "false") {
+                if (profissaoTransfer.Filtro.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -59,48 +59,48 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (profissaoTransfer.CriacaoAte == DateTime.MinValue) {
-                if (profissaoTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == profissaoTransfer.CriacaoDe);
+            if (profissaoTransfer.Filtro.CriacaoAte == DateTime.MinValue) {
+                if (profissaoTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == profissaoTransfer.Filtro.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (profissaoTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= profissaoTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= profissaoTransfer.CriacaoAte);
+                if (profissaoTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= profissaoTransfer.Filtro.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= profissaoTransfer.Filtro.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (profissaoTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (profissaoTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == profissaoTransfer.AlteracaoDe);
+            if (profissaoTransfer.Filtro.AlteracaoAte == DateTime.MinValue) {
+                if (profissaoTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == profissaoTransfer.Filtro.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (profissaoTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= profissaoTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= profissaoTransfer.AlteracaoAte);
+                if (profissaoTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= profissaoTransfer.Filtro.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= profissaoTransfer.Filtro.AlteracaoAte);
                 }
             }
             
-            if (profissaoTransfer.RegistrosPorPagina < 1) {
+            if (profissaoTransfer.Paginacao.RegistrosPorPagina < 1) {
                 registrosPorPagina = 30;
-            } else if (profissaoTransfer.RegistrosPorPagina > 200) {
+            } else if (profissaoTransfer.Paginacao.RegistrosPorPagina > 200) {
                 registrosPorPagina = 30;
             } else {
-                registrosPorPagina = profissaoTransfer.RegistrosPorPagina;
+                registrosPorPagina = profissaoTransfer.Paginacao.RegistrosPorPagina;
             }
 
-            pular = (profissaoTransfer.PaginaAtual < 2 ? 0 : profissaoTransfer.PaginaAtual - 1);
+            pular = (profissaoTransfer.Paginacao.PaginaAtual < 2 ? 0 : profissaoTransfer.Paginacao.PaginaAtual - 1);
             pular *= registrosPorPagina;
             
             totalRegistros = query.Count();
             lista = query.Skip(pular).Take(registrosPorPagina).ToList();
 
-            profissaoLista.RegistrosPorPagina = registrosPorPagina;
-            profissaoLista.TotalRegistros = totalRegistros;
-            profissaoLista.ProfissaoLista = lista;
+            profissaoLista.Paginacao.RegistrosPorPagina = registrosPorPagina;
+            profissaoLista.Paginacao.TotalRegistros = totalRegistros;
+            profissaoLista.Lista = lista;
 
             return profissaoLista;
         }

@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         sexoLista = sexoDataModel.Consultar(sexoValidacao);
 
                         if (sexoLista != null) {
-                            if (sexoLista.TotalRegistros > 0) {
-                                if (sexoLista.RegistrosPorPagina < 1) {
-                                    sexoLista.RegistrosPorPagina = 30;
-                                } else if (sexoLista.RegistrosPorPagina > 200) {
-                                    sexoLista.RegistrosPorPagina = 30;
+                            if (sexoLista.Paginacao.TotalRegistros > 0) {
+                                if (sexoLista.Paginacao.RegistrosPorPagina < 1) {
+                                    sexoLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (sexoLista.Paginacao.RegistrosPorPagina > 200) {
+                                    sexoLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                sexoLista.PaginaAtual = (sexoListaTransfer.PaginaAtual < 1 ? 1 : sexoListaTransfer.PaginaAtual);
-                                sexoLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(sexoLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(sexoLista.RegistrosPorPagina)));
+                                sexoLista.Paginacao.PaginaAtual = (sexoListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : sexoListaTransfer.Paginacao.PaginaAtual);
+                                sexoLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(sexoLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(sexoLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

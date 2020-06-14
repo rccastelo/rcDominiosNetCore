@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 telefoneTipoValidacao = new TelefoneTipoTransfer(telefoneTipoTransfer);
-                telefoneTipoValidacao.TelefoneTipo.Descricao = Tratamento.TratarStringNuloBranco(telefoneTipoValidacao.TelefoneTipo.Descricao);
-                telefoneTipoValidacao.TelefoneTipo.Codigo = Tratamento.TratarStringNuloBranco(telefoneTipoValidacao.TelefoneTipo.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Tipo de Telefone
                 if (string.IsNullOrEmpty(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
                     telefoneTipoValidacao.IncluirMensagem("Necessário informar a Descrição do tipo de Telefone");
-                } else if (telefoneTipoValidacao.TelefoneTipo.Descricao.Length > 100) {
-                    telefoneTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((telefoneTipoValidacao.TelefoneTipo.Descricao.Length < 3) || 
+                        (telefoneTipoValidacao.TelefoneTipo.Descricao.Length > 100)) {
+                    telefoneTipoValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
                     telefoneTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     telefoneTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(telefoneTipoValidacao.TelefoneTipo.Descricao)) {
+                    telefoneTipoValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Tipo de Telefone
                 if (!string.IsNullOrEmpty(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
-                    if (telefoneTipoValidacao.TelefoneTipo.Codigo.Length > 10) {
-                        telefoneTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((telefoneTipoValidacao.TelefoneTipo.Codigo.Length < 3) || 
+                        (telefoneTipoValidacao.TelefoneTipo.Codigo.Length > 10)) {
+                        telefoneTipoValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(telefoneTipoValidacao.TelefoneTipo.Codigo)) {
                         telefoneTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         telefoneTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 telefoneTipoValidacao = new TelefoneTipoTransfer(telefoneTipoTransfer);
 
                 if (telefoneTipoValidacao != null) {
-                    telefoneTipoValidacao.Descricao = Tratamento.TratarStringNuloBranco(telefoneTipoValidacao.Descricao);
-                    telefoneTipoValidacao.Codigo = Tratamento.TratarStringNuloBranco(telefoneTipoValidacao.Codigo);
 
                     //-- Id
-                    if ((telefoneTipoValidacao.IdDe <= 0) && (telefoneTipoValidacao.IdAte > 0)) {
+                    if ((telefoneTipoValidacao.Filtro.IdDe <= 0) && (telefoneTipoValidacao.Filtro.IdAte > 0)) {
                         telefoneTipoValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((telefoneTipoValidacao.IdDe > 0) && (telefoneTipoValidacao.IdAte > 0)) {
-                        if (telefoneTipoValidacao.IdDe >= telefoneTipoValidacao.IdAte) {
+                    } else if ((telefoneTipoValidacao.Filtro.IdDe > 0) && (telefoneTipoValidacao.Filtro.IdAte > 0)) {
+                        if (telefoneTipoValidacao.Filtro.IdDe >= telefoneTipoValidacao.Filtro.IdAte) {
                             telefoneTipoValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(telefoneTipoValidacao.Descricao)) {
-                        if (telefoneTipoValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Tipo de Telefone
+                    if (!string.IsNullOrEmpty(telefoneTipoValidacao.Filtro.Descricao)) {
+                        if (telefoneTipoValidacao.Filtro.Descricao.Length > 100) {
                             telefoneTipoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(telefoneTipoValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(telefoneTipoValidacao.Filtro.Descricao)) {
                             telefoneTipoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             telefoneTipoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(telefoneTipoValidacao.Codigo)) {
-                        if (telefoneTipoValidacao.Codigo.Length > 10) {
+                    //-- Código de Tipo de Telefone
+                    if (!string.IsNullOrEmpty(telefoneTipoValidacao.Filtro.Codigo)) {
+                        if (telefoneTipoValidacao.Filtro.Codigo.Length > 10) {
                             telefoneTipoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(telefoneTipoValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(telefoneTipoValidacao.Filtro.Codigo)) {
                             telefoneTipoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             telefoneTipoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((telefoneTipoValidacao.CriacaoDe == DateTime.MinValue) && (telefoneTipoValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((telefoneTipoValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (telefoneTipoValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         telefoneTipoValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((telefoneTipoValidacao.CriacaoDe > DateTime.MinValue) && (telefoneTipoValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (telefoneTipoValidacao.CriacaoDe >= telefoneTipoValidacao.CriacaoAte) {
+                    } else if ((telefoneTipoValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (telefoneTipoValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (telefoneTipoValidacao.Filtro.CriacaoDe >= telefoneTipoValidacao.Filtro.CriacaoAte) {
                             telefoneTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((telefoneTipoValidacao.AlteracaoDe == DateTime.MinValue) && (telefoneTipoValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((telefoneTipoValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (telefoneTipoValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         telefoneTipoValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((telefoneTipoValidacao.AlteracaoDe > DateTime.MinValue) && (telefoneTipoValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (telefoneTipoValidacao.AlteracaoDe >= telefoneTipoValidacao.AlteracaoAte) {
+                    } else if ((telefoneTipoValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (telefoneTipoValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (telefoneTipoValidacao.Filtro.AlteracaoDe >= telefoneTipoValidacao.Filtro.AlteracaoAte) {
                             telefoneTipoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

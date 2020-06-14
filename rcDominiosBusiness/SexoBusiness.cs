@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 sexoValidacao = new SexoTransfer(sexoTransfer);
-                sexoValidacao.Sexo.Descricao = Tratamento.TratarStringNuloBranco(sexoValidacao.Sexo.Descricao);
-                sexoValidacao.Sexo.Codigo = Tratamento.TratarStringNuloBranco(sexoValidacao.Sexo.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Sexo
                 if (string.IsNullOrEmpty(sexoValidacao.Sexo.Descricao)) {
                     sexoValidacao.IncluirMensagem("Necessário informar a Descrição do Sexo");
-                } else if (sexoValidacao.Sexo.Descricao.Length > 100) {
-                    sexoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((sexoValidacao.Sexo.Descricao.Length < 3) || 
+                        (sexoValidacao.Sexo.Descricao.Length > 100)) {
+                    sexoValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(sexoValidacao.Sexo.Descricao)) {
                     sexoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     sexoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(sexoValidacao.Sexo.Descricao)) {
+                    sexoValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Sexo
                 if (!string.IsNullOrEmpty(sexoValidacao.Sexo.Codigo)) {
-                    if (sexoValidacao.Sexo.Codigo.Length > 10) {
-                        sexoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((sexoValidacao.Sexo.Codigo.Length < 3) || 
+                        (sexoValidacao.Sexo.Codigo.Length > 10)) {
+                        sexoValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(sexoValidacao.Sexo.Codigo)) {
                         sexoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         sexoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 sexoValidacao = new SexoTransfer(sexoTransfer);
 
                 if (sexoValidacao != null) {
-                    sexoValidacao.Descricao = Tratamento.TratarStringNuloBranco(sexoValidacao.Descricao);
-                    sexoValidacao.Codigo = Tratamento.TratarStringNuloBranco(sexoValidacao.Codigo);
 
                     //-- Id
-                    if ((sexoValidacao.IdDe <= 0) && (sexoValidacao.IdAte > 0)) {
+                    if ((sexoValidacao.Filtro.IdDe <= 0) && (sexoValidacao.Filtro.IdAte > 0)) {
                         sexoValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((sexoValidacao.IdDe > 0) && (sexoValidacao.IdAte > 0)) {
-                        if (sexoValidacao.IdDe >= sexoValidacao.IdAte) {
+                    } else if ((sexoValidacao.Filtro.IdDe > 0) && (sexoValidacao.Filtro.IdAte > 0)) {
+                        if (sexoValidacao.Filtro.IdDe >= sexoValidacao.Filtro.IdAte) {
                             sexoValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(sexoValidacao.Descricao)) {
-                        if (sexoValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Sexo
+                    if (!string.IsNullOrEmpty(sexoValidacao.Filtro.Descricao)) {
+                        if (sexoValidacao.Filtro.Descricao.Length > 100) {
                             sexoValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(sexoValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(sexoValidacao.Filtro.Descricao)) {
                             sexoValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             sexoValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(sexoValidacao.Codigo)) {
-                        if (sexoValidacao.Codigo.Length > 10) {
+                    //-- Código de Sexo
+                    if (!string.IsNullOrEmpty(sexoValidacao.Filtro.Codigo)) {
+                        if (sexoValidacao.Filtro.Codigo.Length > 10) {
                             sexoValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(sexoValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(sexoValidacao.Filtro.Codigo)) {
                             sexoValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             sexoValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((sexoValidacao.CriacaoDe == DateTime.MinValue) && (sexoValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((sexoValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (sexoValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         sexoValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((sexoValidacao.CriacaoDe > DateTime.MinValue) && (sexoValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (sexoValidacao.CriacaoDe >= sexoValidacao.CriacaoAte) {
+                    } else if ((sexoValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (sexoValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (sexoValidacao.Filtro.CriacaoDe >= sexoValidacao.Filtro.CriacaoAte) {
                             sexoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((sexoValidacao.AlteracaoDe == DateTime.MinValue) && (sexoValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((sexoValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (sexoValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         sexoValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((sexoValidacao.AlteracaoDe > DateTime.MinValue) && (sexoValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (sexoValidacao.AlteracaoDe >= sexoValidacao.AlteracaoAte) {
+                    } else if ((sexoValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (sexoValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (sexoValidacao.Filtro.AlteracaoDe >= sexoValidacao.Filtro.AlteracaoAte) {
                             sexoValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

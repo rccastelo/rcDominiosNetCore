@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         enderecoTipoLista = enderecoTipoDataModel.Consultar(enderecoTipoValidacao);
 
                         if (enderecoTipoLista != null) {
-                            if (enderecoTipoLista.TotalRegistros > 0) {
-                                if (enderecoTipoLista.RegistrosPorPagina < 1) {
-                                    enderecoTipoLista.RegistrosPorPagina = 30;
-                                } else if (enderecoTipoLista.RegistrosPorPagina > 200) {
-                                    enderecoTipoLista.RegistrosPorPagina = 30;
+                            if (enderecoTipoLista.Paginacao.TotalRegistros > 0) {
+                                if (enderecoTipoLista.Paginacao.RegistrosPorPagina < 1) {
+                                    enderecoTipoLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (enderecoTipoLista.Paginacao.RegistrosPorPagina > 200) {
+                                    enderecoTipoLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                enderecoTipoLista.PaginaAtual = (enderecoTipoListaTransfer.PaginaAtual < 1 ? 1 : enderecoTipoListaTransfer.PaginaAtual);
-                                enderecoTipoLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(enderecoTipoLista.RegistrosPorPagina)));
+                                enderecoTipoLista.Paginacao.PaginaAtual = (enderecoTipoListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : enderecoTipoListaTransfer.Paginacao.PaginaAtual);
+                                enderecoTipoLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(enderecoTipoLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(enderecoTipoLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 usuarioLista = await usuarioService.Consultar(usuarioListaTransfer, autorizacao);
 
                 if (usuarioLista != null) {
-                    if (usuarioLista.TotalRegistros > 0) {
-                        if (usuarioLista.RegistrosPorPagina < 1) {
-                            usuarioLista.RegistrosPorPagina = 30;
-                        } else if (usuarioLista.RegistrosPorPagina > 200) {
-                            usuarioLista.RegistrosPorPagina = 30;
+                    if (usuarioLista.Paginacao.TotalRegistros > 0) {
+                        if (usuarioLista.Paginacao.RegistrosPorPagina < 1) {
+                            usuarioLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (usuarioLista.Paginacao.RegistrosPorPagina > 200) {
+                            usuarioLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        usuarioLista.PaginaAtual = (usuarioLista.PaginaAtual < 1 ? 1 : usuarioLista.PaginaAtual);
-                        usuarioLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioLista.TotalRegistros) 
-                            / @Convert.ToDecimal(usuarioLista.RegistrosPorPagina)));
-                        usuarioLista.TotalPaginas = (usuarioLista.TotalPaginas < 1 ? 1 : usuarioLista.TotalPaginas);
+                        usuarioLista.Paginacao.PaginaAtual = (usuarioLista.Paginacao.PaginaAtual < 1 ? 1 : usuarioLista.Paginacao.PaginaAtual);
+                        usuarioLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(usuarioLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(usuarioLista.Paginacao.RegistrosPorPagina)));
+                        usuarioLista.Paginacao.TotalPaginas = (usuarioLista.Paginacao.TotalPaginas < 1 ? 1 : usuarioLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > usuarioLista.TotalPaginas ? usuarioLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > usuarioLista.Paginacao.TotalPaginas ? usuarioLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        usuarioLista.PaginaInicial = usuarioLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        usuarioLista.PaginaFinal = usuarioLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        usuarioLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (usuarioLista.PaginaFinal - 1) : usuarioLista.PaginaFinal);
+                        usuarioLista.Paginacao.PaginaInicial = usuarioLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        usuarioLista.Paginacao.PaginaFinal = usuarioLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        usuarioLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (usuarioLista.Paginacao.PaginaFinal - 1) : usuarioLista.Paginacao.PaginaFinal);
 
-                        if (usuarioLista.PaginaInicial < 1) {
-                            dif = 1 - usuarioLista.PaginaInicial;
-                            usuarioLista.PaginaInicial += dif;
-                            usuarioLista.PaginaFinal += dif;
+                        if (usuarioLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - usuarioLista.Paginacao.PaginaInicial;
+                            usuarioLista.Paginacao.PaginaInicial += dif;
+                            usuarioLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (usuarioLista.PaginaFinal > usuarioLista.TotalPaginas) {
-                            dif = usuarioLista.PaginaFinal - usuarioLista.TotalPaginas;
-                            usuarioLista.PaginaInicial -= dif;
-                            usuarioLista.PaginaFinal -= dif;
+                        if (usuarioLista.Paginacao.PaginaFinal > usuarioLista.Paginacao.TotalPaginas) {
+                            dif = usuarioLista.Paginacao.PaginaFinal - usuarioLista.Paginacao.TotalPaginas;
+                            usuarioLista.Paginacao.PaginaInicial -= dif;
+                            usuarioLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        usuarioLista.PaginaInicial = (usuarioLista.PaginaInicial < 1 ? 1 : usuarioLista.PaginaInicial);
-                        usuarioLista.PaginaFinal = (usuarioLista.PaginaFinal > usuarioLista.TotalPaginas ? 
-                            usuarioLista.TotalPaginas : usuarioLista.PaginaFinal);
+                        usuarioLista.Paginacao.PaginaInicial = (usuarioLista.Paginacao.PaginaInicial < 1 ? 1 : usuarioLista.Paginacao.PaginaInicial);
+                        usuarioLista.Paginacao.PaginaFinal = (usuarioLista.Paginacao.PaginaFinal > usuarioLista.Paginacao.TotalPaginas ? 
+                            usuarioLista.Paginacao.TotalPaginas : usuarioLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

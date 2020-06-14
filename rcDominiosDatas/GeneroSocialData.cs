@@ -25,33 +25,33 @@ namespace rcDominiosDatas
             int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (generoSocialTransfer.IdAte <= 0) {
-                if (generoSocialTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == generoSocialTransfer.IdDe);
+            if (generoSocialTransfer.Filtro.IdAte <= 0) {
+                if (generoSocialTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id == generoSocialTransfer.Filtro.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (generoSocialTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= generoSocialTransfer.IdDe);
-                    query = query.Where(et => et.Id <= generoSocialTransfer.IdAte);
+                if (generoSocialTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id >= generoSocialTransfer.Filtro.IdDe);
+                    query = query.Where(et => et.Id <= generoSocialTransfer.Filtro.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(generoSocialTransfer.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(generoSocialTransfer.Descricao));
+            if (!string.IsNullOrEmpty(generoSocialTransfer.Filtro.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(generoSocialTransfer.Filtro.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(generoSocialTransfer.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(generoSocialTransfer.Codigo));
+            if (!string.IsNullOrEmpty(generoSocialTransfer.Filtro.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(generoSocialTransfer.Filtro.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(generoSocialTransfer.Ativo)) {
+            if (!string.IsNullOrEmpty(generoSocialTransfer.Filtro.Ativo)) {
                 bool ativo = true;
 
-                if (generoSocialTransfer.Ativo == "false") {
+                if (generoSocialTransfer.Filtro.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -59,48 +59,48 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (generoSocialTransfer.CriacaoAte == DateTime.MinValue) {
-                if (generoSocialTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == generoSocialTransfer.CriacaoDe);
+            if (generoSocialTransfer.Filtro.CriacaoAte == DateTime.MinValue) {
+                if (generoSocialTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == generoSocialTransfer.Filtro.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (generoSocialTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= generoSocialTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= generoSocialTransfer.CriacaoAte);
+                if (generoSocialTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= generoSocialTransfer.Filtro.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= generoSocialTransfer.Filtro.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (generoSocialTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (generoSocialTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == generoSocialTransfer.AlteracaoDe);
+            if (generoSocialTransfer.Filtro.AlteracaoAte == DateTime.MinValue) {
+                if (generoSocialTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == generoSocialTransfer.Filtro.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (generoSocialTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= generoSocialTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= generoSocialTransfer.AlteracaoAte);
+                if (generoSocialTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= generoSocialTransfer.Filtro.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= generoSocialTransfer.Filtro.AlteracaoAte);
                 }
             }
             
-            if (generoSocialTransfer.RegistrosPorPagina < 1) {
+            if (generoSocialTransfer.Paginacao.RegistrosPorPagina < 1) {
                 registrosPorPagina = 30;
-            } else if (generoSocialTransfer.RegistrosPorPagina > 200) {
+            } else if (generoSocialTransfer.Paginacao.RegistrosPorPagina > 200) {
                 registrosPorPagina = 30;
             } else {
-                registrosPorPagina = generoSocialTransfer.RegistrosPorPagina;
+                registrosPorPagina = generoSocialTransfer.Paginacao.RegistrosPorPagina;
             }
 
-            pular = (generoSocialTransfer.PaginaAtual < 2 ? 0 : generoSocialTransfer.PaginaAtual - 1);
+            pular = (generoSocialTransfer.Paginacao.PaginaAtual < 2 ? 0 : generoSocialTransfer.Paginacao.PaginaAtual - 1);
             pular *= registrosPorPagina;
             
             totalRegistros = query.Count();
             lista = query.Skip(pular).Take(registrosPorPagina).ToList();
 
-            generoSocialLista.RegistrosPorPagina = registrosPorPagina;
-            generoSocialLista.TotalRegistros = totalRegistros;
-            generoSocialLista.GeneroSocialLista = lista;
+            generoSocialLista.Paginacao.RegistrosPorPagina = registrosPorPagina;
+            generoSocialLista.Paginacao.TotalRegistros = totalRegistros;
+            generoSocialLista.Lista = lista;
 
             return generoSocialLista;
         }

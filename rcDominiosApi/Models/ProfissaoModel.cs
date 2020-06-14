@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         profissaoLista = profissaoDataModel.Consultar(profissaoValidacao);
 
                         if (profissaoLista != null) {
-                            if (profissaoLista.TotalRegistros > 0) {
-                                if (profissaoLista.RegistrosPorPagina < 1) {
-                                    profissaoLista.RegistrosPorPagina = 30;
-                                } else if (profissaoLista.RegistrosPorPagina > 200) {
-                                    profissaoLista.RegistrosPorPagina = 30;
+                            if (profissaoLista.Paginacao.TotalRegistros > 0) {
+                                if (profissaoLista.Paginacao.RegistrosPorPagina < 1) {
+                                    profissaoLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (profissaoLista.Paginacao.RegistrosPorPagina > 200) {
+                                    profissaoLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                profissaoLista.PaginaAtual = (profissaoListaTransfer.PaginaAtual < 1 ? 1 : profissaoListaTransfer.PaginaAtual);
-                                profissaoLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(profissaoLista.RegistrosPorPagina)));
+                                profissaoLista.Paginacao.PaginaAtual = (profissaoListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : profissaoListaTransfer.Paginacao.PaginaAtual);
+                                profissaoLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(profissaoLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(profissaoLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {

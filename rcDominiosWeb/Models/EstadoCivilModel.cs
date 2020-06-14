@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 estadoCivilLista = await estadoCivilService.Consultar(estadoCivilListaTransfer, autorizacao);
 
                 if (estadoCivilLista != null) {
-                    if (estadoCivilLista.TotalRegistros > 0) {
-                        if (estadoCivilLista.RegistrosPorPagina < 1) {
-                            estadoCivilLista.RegistrosPorPagina = 30;
-                        } else if (estadoCivilLista.RegistrosPorPagina > 200) {
-                            estadoCivilLista.RegistrosPorPagina = 30;
+                    if (estadoCivilLista.Paginacao.TotalRegistros > 0) {
+                        if (estadoCivilLista.Paginacao.RegistrosPorPagina < 1) {
+                            estadoCivilLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (estadoCivilLista.Paginacao.RegistrosPorPagina > 200) {
+                            estadoCivilLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        estadoCivilLista.PaginaAtual = (estadoCivilLista.PaginaAtual < 1 ? 1 : estadoCivilLista.PaginaAtual);
-                        estadoCivilLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(estadoCivilLista.TotalRegistros) 
-                            / @Convert.ToDecimal(estadoCivilLista.RegistrosPorPagina)));
-                        estadoCivilLista.TotalPaginas = (estadoCivilLista.TotalPaginas < 1 ? 1 : estadoCivilLista.TotalPaginas);
+                        estadoCivilLista.Paginacao.PaginaAtual = (estadoCivilLista.Paginacao.PaginaAtual < 1 ? 1 : estadoCivilLista.Paginacao.PaginaAtual);
+                        estadoCivilLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(estadoCivilLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(estadoCivilLista.Paginacao.RegistrosPorPagina)));
+                        estadoCivilLista.Paginacao.TotalPaginas = (estadoCivilLista.Paginacao.TotalPaginas < 1 ? 1 : estadoCivilLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > estadoCivilLista.TotalPaginas ? estadoCivilLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > estadoCivilLista.Paginacao.TotalPaginas ? estadoCivilLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        estadoCivilLista.PaginaInicial = estadoCivilLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        estadoCivilLista.PaginaFinal = estadoCivilLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        estadoCivilLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (estadoCivilLista.PaginaFinal - 1) : estadoCivilLista.PaginaFinal);
+                        estadoCivilLista.Paginacao.PaginaInicial = estadoCivilLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        estadoCivilLista.Paginacao.PaginaFinal = estadoCivilLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        estadoCivilLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (estadoCivilLista.Paginacao.PaginaFinal - 1) : estadoCivilLista.Paginacao.PaginaFinal);
 
-                        if (estadoCivilLista.PaginaInicial < 1) {
-                            dif = 1 - estadoCivilLista.PaginaInicial;
-                            estadoCivilLista.PaginaInicial += dif;
-                            estadoCivilLista.PaginaFinal += dif;
+                        if (estadoCivilLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - estadoCivilLista.Paginacao.PaginaInicial;
+                            estadoCivilLista.Paginacao.PaginaInicial += dif;
+                            estadoCivilLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (estadoCivilLista.PaginaFinal > estadoCivilLista.TotalPaginas) {
-                            dif = estadoCivilLista.PaginaFinal - estadoCivilLista.TotalPaginas;
-                            estadoCivilLista.PaginaInicial -= dif;
-                            estadoCivilLista.PaginaFinal -= dif;
+                        if (estadoCivilLista.Paginacao.PaginaFinal > estadoCivilLista.Paginacao.TotalPaginas) {
+                            dif = estadoCivilLista.Paginacao.PaginaFinal - estadoCivilLista.Paginacao.TotalPaginas;
+                            estadoCivilLista.Paginacao.PaginaInicial -= dif;
+                            estadoCivilLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        estadoCivilLista.PaginaInicial = (estadoCivilLista.PaginaInicial < 1 ? 1 : estadoCivilLista.PaginaInicial);
-                        estadoCivilLista.PaginaFinal = (estadoCivilLista.PaginaFinal > estadoCivilLista.TotalPaginas ? 
-                            estadoCivilLista.TotalPaginas : estadoCivilLista.PaginaFinal);
+                        estadoCivilLista.Paginacao.PaginaInicial = (estadoCivilLista.Paginacao.PaginaInicial < 1 ? 1 : estadoCivilLista.Paginacao.PaginaInicial);
+                        estadoCivilLista.Paginacao.PaginaFinal = (estadoCivilLista.Paginacao.PaginaFinal > estadoCivilLista.Paginacao.TotalPaginas ? 
+                            estadoCivilLista.Paginacao.TotalPaginas : estadoCivilLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

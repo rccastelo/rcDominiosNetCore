@@ -16,10 +16,10 @@ $('[data-toggle="popover"]').popover(
     }
 );
 
-$('#CriacaoDe').click(function() { $(this).val(""); });
-$('#CriacaoAte').click(function() { $(this).val(""); });
-$('#AlteracaoDe').click(function() { $(this).val(""); });
-$('#AlteracaoAte').click(function() { $(this).val(""); });
+$('#Filtro_CriacaoDe').click(function() { $(this).val(""); });
+$('#Filtro_CriacaoAte').click(function() { $(this).val(""); });
+$('#Filtro_AlteracaoDe').click(function() { $(this).val(""); });
+$('#Filtro_AlteracaoAte').click(function() { $(this).val(""); });
 
 var cfgCalendar = {
     dateFormat: "dd/mm/yy",
@@ -30,14 +30,14 @@ var cfgCalendar = {
     monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
 };
 
-$('#CriacaoDe').datepicker(cfgCalendar);
-$('#CriacaoAte').datepicker(cfgCalendar);
-$('#AlteracaoDe').datepicker(cfgCalendar);
-$('#AlteracaoAte').datepicker(cfgCalendar);
+$('#Filtro_CriacaoDe').datepicker(cfgCalendar);
+$('#Filtro_CriacaoAte').datepicker(cfgCalendar);
+$('#Filtro_AlteracaoDe').datepicker(cfgCalendar);
+$('#Filtro_AlteracaoAte').datepicker(cfgCalendar);
 
 function paginar(pagina) {
     var form = document.getElementById("form");
-    var paginaAtual = document.getElementById("PaginaAtual");
+    var paginaAtual = document.getElementById("Paginacao_PaginaAtual");
 
     paginaAtual.value = pagina;
     

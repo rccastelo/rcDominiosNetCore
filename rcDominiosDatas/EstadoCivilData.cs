@@ -25,33 +25,33 @@ namespace rcDominiosDatas
             int totalRegistros = 0;
 
             //-- Se IdAte não informado, procura Id específico
-            if (estadoCivilTransfer.IdAte <= 0) {
-                if (estadoCivilTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id == estadoCivilTransfer.IdDe);
+            if (estadoCivilTransfer.Filtro.IdAte <= 0) {
+                if (estadoCivilTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id == estadoCivilTransfer.Filtro.IdDe);
                 }
             } else {
                 //-- Se IdDe e IdAte informados, procura faixa de Id
-                if (estadoCivilTransfer.IdDe > 0) {
-                    query = query.Where(et => et.Id >= estadoCivilTransfer.IdDe);
-                    query = query.Where(et => et.Id <= estadoCivilTransfer.IdAte);
+                if (estadoCivilTransfer.Filtro.IdDe > 0) {
+                    query = query.Where(et => et.Id >= estadoCivilTransfer.Filtro.IdDe);
+                    query = query.Where(et => et.Id <= estadoCivilTransfer.Filtro.IdAte);
                 }
             }
 
             //-- Descrição
-            if (!string.IsNullOrEmpty(estadoCivilTransfer.Descricao)) {
-                query = query.Where(et => et.Descricao.Contains(estadoCivilTransfer.Descricao));
+            if (!string.IsNullOrEmpty(estadoCivilTransfer.Filtro.Descricao)) {
+                query = query.Where(et => et.Descricao.Contains(estadoCivilTransfer.Filtro.Descricao));
             }
 
             //-- Código
-            if (!string.IsNullOrEmpty(estadoCivilTransfer.Codigo)) {
-                query = query.Where(et => et.Codigo.Contains(estadoCivilTransfer.Codigo));
+            if (!string.IsNullOrEmpty(estadoCivilTransfer.Filtro.Codigo)) {
+                query = query.Where(et => et.Codigo.Contains(estadoCivilTransfer.Filtro.Codigo));
             }
             
             //-- Ativo
-            if (!string.IsNullOrEmpty(estadoCivilTransfer.Ativo)) {
+            if (!string.IsNullOrEmpty(estadoCivilTransfer.Filtro.Ativo)) {
                 bool ativo = true;
 
-                if (estadoCivilTransfer.Ativo == "false") {
+                if (estadoCivilTransfer.Filtro.Ativo == "false") {
                     ativo = false;
                 }
 
@@ -59,48 +59,48 @@ namespace rcDominiosDatas
             }
 
             //-- Se CriacaoAte não informado, procura Data de Criação específica
-            if (estadoCivilTransfer.CriacaoAte == DateTime.MinValue) {
-                if (estadoCivilTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao == estadoCivilTransfer.CriacaoDe);
+            if (estadoCivilTransfer.Filtro.CriacaoAte == DateTime.MinValue) {
+                if (estadoCivilTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao == estadoCivilTransfer.Filtro.CriacaoDe);
                 }
             } else {
                 //-- Se CriacaoDe e CriacaoAte informados, procura faixa de Data de Criação
-                if (estadoCivilTransfer.CriacaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Criacao >= estadoCivilTransfer.CriacaoDe);
-                    query = query.Where(et => et.Criacao <= estadoCivilTransfer.CriacaoAte);
+                if (estadoCivilTransfer.Filtro.CriacaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Criacao >= estadoCivilTransfer.Filtro.CriacaoDe);
+                    query = query.Where(et => et.Criacao <= estadoCivilTransfer.Filtro.CriacaoAte);
                 }
             }
 
             //-- Se AlteracaoAte não informado, procura Data de Alteração específica
-            if (estadoCivilTransfer.AlteracaoAte == DateTime.MinValue) {
-                if (estadoCivilTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao == estadoCivilTransfer.AlteracaoDe);
+            if (estadoCivilTransfer.Filtro.AlteracaoAte == DateTime.MinValue) {
+                if (estadoCivilTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao == estadoCivilTransfer.Filtro.AlteracaoDe);
                 }
             } else {
                 //-- Se AlteracaoDe e AlteracaoAte informados, procura faixa de Data de Alteração
-                if (estadoCivilTransfer.AlteracaoDe != DateTime.MinValue) {
-                    query = query.Where(et => et.Alteracao >= estadoCivilTransfer.AlteracaoDe);
-                    query = query.Where(et => et.Alteracao <= estadoCivilTransfer.AlteracaoAte);
+                if (estadoCivilTransfer.Filtro.AlteracaoDe != DateTime.MinValue) {
+                    query = query.Where(et => et.Alteracao >= estadoCivilTransfer.Filtro.AlteracaoDe);
+                    query = query.Where(et => et.Alteracao <= estadoCivilTransfer.Filtro.AlteracaoAte);
                 }
             }
             
-            if (estadoCivilTransfer.RegistrosPorPagina < 1) {
+            if (estadoCivilTransfer.Paginacao.RegistrosPorPagina < 1) {
                 registrosPorPagina = 30;
-            } else if (estadoCivilTransfer.RegistrosPorPagina > 200) {
+            } else if (estadoCivilTransfer.Paginacao.RegistrosPorPagina > 200) {
                 registrosPorPagina = 30;
             } else {
-                registrosPorPagina = estadoCivilTransfer.RegistrosPorPagina;
+                registrosPorPagina = estadoCivilTransfer.Paginacao.RegistrosPorPagina;
             }
 
-            pular = (estadoCivilTransfer.PaginaAtual < 2 ? 0 : estadoCivilTransfer.PaginaAtual - 1);
+            pular = (estadoCivilTransfer.Paginacao.PaginaAtual < 2 ? 0 : estadoCivilTransfer.Paginacao.PaginaAtual - 1);
             pular *= registrosPorPagina;
             
             totalRegistros = query.Count();
             lista = query.Skip(pular).Take(registrosPorPagina).ToList();
 
-            estadoCivilLista.RegistrosPorPagina = registrosPorPagina;
-            estadoCivilLista.TotalRegistros = totalRegistros;
-            estadoCivilLista.EstadoCivilLista = lista;
+            estadoCivilLista.Paginacao.RegistrosPorPagina = registrosPorPagina;
+            estadoCivilLista.Paginacao.TotalRegistros = totalRegistros;
+            estadoCivilLista.Lista = lista;
 
             return estadoCivilLista;
         }

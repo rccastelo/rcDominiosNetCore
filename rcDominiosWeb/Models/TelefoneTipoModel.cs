@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 telefoneTipoLista = await telefoneTipoService.Consultar(telefoneTipoListaTransfer, autorizacao);
 
                 if (telefoneTipoLista != null) {
-                    if (telefoneTipoLista.TotalRegistros > 0) {
-                        if (telefoneTipoLista.RegistrosPorPagina < 1) {
-                            telefoneTipoLista.RegistrosPorPagina = 30;
-                        } else if (telefoneTipoLista.RegistrosPorPagina > 200) {
-                            telefoneTipoLista.RegistrosPorPagina = 30;
+                    if (telefoneTipoLista.Paginacao.TotalRegistros > 0) {
+                        if (telefoneTipoLista.Paginacao.RegistrosPorPagina < 1) {
+                            telefoneTipoLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (telefoneTipoLista.Paginacao.RegistrosPorPagina > 200) {
+                            telefoneTipoLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        telefoneTipoLista.PaginaAtual = (telefoneTipoLista.PaginaAtual < 1 ? 1 : telefoneTipoLista.PaginaAtual);
-                        telefoneTipoLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.TotalRegistros) 
-                            / @Convert.ToDecimal(telefoneTipoLista.RegistrosPorPagina)));
-                        telefoneTipoLista.TotalPaginas = (telefoneTipoLista.TotalPaginas < 1 ? 1 : telefoneTipoLista.TotalPaginas);
+                        telefoneTipoLista.Paginacao.PaginaAtual = (telefoneTipoLista.Paginacao.PaginaAtual < 1 ? 1 : telefoneTipoLista.Paginacao.PaginaAtual);
+                        telefoneTipoLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(telefoneTipoLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(telefoneTipoLista.Paginacao.RegistrosPorPagina)));
+                        telefoneTipoLista.Paginacao.TotalPaginas = (telefoneTipoLista.Paginacao.TotalPaginas < 1 ? 1 : telefoneTipoLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > telefoneTipoLista.TotalPaginas ? telefoneTipoLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > telefoneTipoLista.Paginacao.TotalPaginas ? telefoneTipoLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        telefoneTipoLista.PaginaInicial = telefoneTipoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        telefoneTipoLista.PaginaFinal = telefoneTipoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        telefoneTipoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (telefoneTipoLista.PaginaFinal - 1) : telefoneTipoLista.PaginaFinal);
+                        telefoneTipoLista.Paginacao.PaginaInicial = telefoneTipoLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        telefoneTipoLista.Paginacao.PaginaFinal = telefoneTipoLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        telefoneTipoLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (telefoneTipoLista.Paginacao.PaginaFinal - 1) : telefoneTipoLista.Paginacao.PaginaFinal);
 
-                        if (telefoneTipoLista.PaginaInicial < 1) {
-                            dif = 1 - telefoneTipoLista.PaginaInicial;
-                            telefoneTipoLista.PaginaInicial += dif;
-                            telefoneTipoLista.PaginaFinal += dif;
+                        if (telefoneTipoLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - telefoneTipoLista.Paginacao.PaginaInicial;
+                            telefoneTipoLista.Paginacao.PaginaInicial += dif;
+                            telefoneTipoLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (telefoneTipoLista.PaginaFinal > telefoneTipoLista.TotalPaginas) {
-                            dif = telefoneTipoLista.PaginaFinal - telefoneTipoLista.TotalPaginas;
-                            telefoneTipoLista.PaginaInicial -= dif;
-                            telefoneTipoLista.PaginaFinal -= dif;
+                        if (telefoneTipoLista.Paginacao.PaginaFinal > telefoneTipoLista.Paginacao.TotalPaginas) {
+                            dif = telefoneTipoLista.Paginacao.PaginaFinal - telefoneTipoLista.Paginacao.TotalPaginas;
+                            telefoneTipoLista.Paginacao.PaginaInicial -= dif;
+                            telefoneTipoLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        telefoneTipoLista.PaginaInicial = (telefoneTipoLista.PaginaInicial < 1 ? 1 : telefoneTipoLista.PaginaInicial);
-                        telefoneTipoLista.PaginaFinal = (telefoneTipoLista.PaginaFinal > telefoneTipoLista.TotalPaginas ? 
-                            telefoneTipoLista.TotalPaginas : telefoneTipoLista.PaginaFinal);
+                        telefoneTipoLista.Paginacao.PaginaInicial = (telefoneTipoLista.Paginacao.PaginaInicial < 1 ? 1 : telefoneTipoLista.Paginacao.PaginaInicial);
+                        telefoneTipoLista.Paginacao.PaginaFinal = (telefoneTipoLista.Paginacao.PaginaFinal > telefoneTipoLista.Paginacao.TotalPaginas ? 
+                            telefoneTipoLista.Paginacao.TotalPaginas : telefoneTipoLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

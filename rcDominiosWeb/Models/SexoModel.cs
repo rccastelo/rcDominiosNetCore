@@ -150,40 +150,40 @@ namespace rcDominiosWeb.Models
                 sexoLista = await sexoService.Consultar(sexoListaTransfer, autorizacao);
 
                 if (sexoLista != null) {
-                    if (sexoLista.TotalRegistros > 0) {
-                        if (sexoLista.RegistrosPorPagina < 1) {
-                            sexoLista.RegistrosPorPagina = 30;
-                        } else if (sexoLista.RegistrosPorPagina > 200) {
-                            sexoLista.RegistrosPorPagina = 30;
+                    if (sexoLista.Paginacao.TotalRegistros > 0) {
+                        if (sexoLista.Paginacao.RegistrosPorPagina < 1) {
+                            sexoLista.Paginacao.RegistrosPorPagina = 30;
+                        } else if (sexoLista.Paginacao.RegistrosPorPagina > 200) {
+                            sexoLista.Paginacao.RegistrosPorPagina = 30;
                         }
 
-                        sexoLista.PaginaAtual = (sexoLista.PaginaAtual < 1 ? 1 : sexoLista.PaginaAtual);
-                        sexoLista.TotalPaginas = 
-                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(sexoLista.TotalRegistros) 
-                            / @Convert.ToDecimal(sexoLista.RegistrosPorPagina)));
-                        sexoLista.TotalPaginas = (sexoLista.TotalPaginas < 1 ? 1 : sexoLista.TotalPaginas);
+                        sexoLista.Paginacao.PaginaAtual = (sexoLista.Paginacao.PaginaAtual < 1 ? 1 : sexoLista.Paginacao.PaginaAtual);
+                        sexoLista.Paginacao.TotalPaginas = 
+                            Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(sexoLista.Paginacao.TotalRegistros) 
+                            / @Convert.ToDecimal(sexoLista.Paginacao.RegistrosPorPagina)));
+                        sexoLista.Paginacao.TotalPaginas = (sexoLista.Paginacao.TotalPaginas < 1 ? 1 : sexoLista.Paginacao.TotalPaginas);
 
-                        qtdExibe = (qtdExibe > sexoLista.TotalPaginas ? sexoLista.TotalPaginas : qtdExibe);
+                        qtdExibe = (qtdExibe > sexoLista.Paginacao.TotalPaginas ? sexoLista.Paginacao.TotalPaginas : qtdExibe);
 
-                        sexoLista.PaginaInicial = sexoLista.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        sexoLista.PaginaFinal = sexoLista.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
-                        sexoLista.PaginaFinal = ((qtdExibe % 2) == 0 ? (sexoLista.PaginaFinal - 1) : sexoLista.PaginaFinal);
+                        sexoLista.Paginacao.PaginaInicial = sexoLista.Paginacao.PaginaAtual - (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        sexoLista.Paginacao.PaginaFinal = sexoLista.Paginacao.PaginaAtual + (Convert.ToInt32(Math.Floor(qtdExibe / 2.0)));
+                        sexoLista.Paginacao.PaginaFinal = ((qtdExibe % 2) == 0 ? (sexoLista.Paginacao.PaginaFinal - 1) : sexoLista.Paginacao.PaginaFinal);
 
-                        if (sexoLista.PaginaInicial < 1) {
-                            dif = 1 - sexoLista.PaginaInicial;
-                            sexoLista.PaginaInicial += dif;
-                            sexoLista.PaginaFinal += dif;
+                        if (sexoLista.Paginacao.PaginaInicial < 1) {
+                            dif = 1 - sexoLista.Paginacao.PaginaInicial;
+                            sexoLista.Paginacao.PaginaInicial += dif;
+                            sexoLista.Paginacao.PaginaFinal += dif;
                         }
 
-                        if (sexoLista.PaginaFinal > sexoLista.TotalPaginas) {
-                            dif = sexoLista.PaginaFinal - sexoLista.TotalPaginas;
-                            sexoLista.PaginaInicial -= dif;
-                            sexoLista.PaginaFinal -= dif;
+                        if (sexoLista.Paginacao.PaginaFinal > sexoLista.Paginacao.TotalPaginas) {
+                            dif = sexoLista.Paginacao.PaginaFinal - sexoLista.Paginacao.TotalPaginas;
+                            sexoLista.Paginacao.PaginaInicial -= dif;
+                            sexoLista.Paginacao.PaginaFinal -= dif;
                         }
 
-                        sexoLista.PaginaInicial = (sexoLista.PaginaInicial < 1 ? 1 : sexoLista.PaginaInicial);
-                        sexoLista.PaginaFinal = (sexoLista.PaginaFinal > sexoLista.TotalPaginas ? 
-                            sexoLista.TotalPaginas : sexoLista.PaginaFinal);
+                        sexoLista.Paginacao.PaginaInicial = (sexoLista.Paginacao.PaginaInicial < 1 ? 1 : sexoLista.Paginacao.PaginaInicial);
+                        sexoLista.Paginacao.PaginaFinal = (sexoLista.Paginacao.PaginaFinal > sexoLista.Paginacao.TotalPaginas ? 
+                            sexoLista.Paginacao.TotalPaginas : sexoLista.Paginacao.PaginaFinal);
                     }
                 }
             } catch (Exception ex) {

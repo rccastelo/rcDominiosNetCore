@@ -12,23 +12,25 @@ namespace rcDominiosBusiness
 
             try  {
                 contaBancariaValidacao = new ContaBancariaTransfer(contaBancariaTransfer);
-                contaBancariaValidacao.ContaBancaria.Descricao = Tratamento.TratarStringNuloBranco(contaBancariaValidacao.ContaBancaria.Descricao);
-                contaBancariaValidacao.ContaBancaria.Codigo = Tratamento.TratarStringNuloBranco(contaBancariaValidacao.ContaBancaria.Codigo);
 
-                //-- Descrição do Tipo de Pessoa
+                //-- Descrição de Conta Bancaria
                 if (string.IsNullOrEmpty(contaBancariaValidacao.ContaBancaria.Descricao)) {
                     contaBancariaValidacao.IncluirMensagem("Necessário informar a Descrição do tipo de Conta Bancária");
-                } else if (contaBancariaValidacao.ContaBancaria.Descricao.Length > 100) {
-                    contaBancariaValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
+                } else if ((contaBancariaValidacao.ContaBancaria.Descricao.Length < 3) || 
+                        (contaBancariaValidacao.ContaBancaria.Descricao.Length > 100)) {
+                    contaBancariaValidacao.IncluirMensagem("Descrição deve ter entre 3 e 100 caracteres");
                 } else if (!Validacao.ValidarCharAaBCcNT(contaBancariaValidacao.ContaBancaria.Descricao)) {
                     contaBancariaValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                     contaBancariaValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
+                } else if (!Validacao.ValidarBrancoIniFim(contaBancariaValidacao.ContaBancaria.Descricao)) {
+                    contaBancariaValidacao.IncluirMensagem("Descrição não deve começar ou terminar com espaço em branco");
                 }
 
-                //-- Código do Tipo de Pessoa
+                //-- Código de Conta Bancaria
                 if (!string.IsNullOrEmpty(contaBancariaValidacao.ContaBancaria.Codigo)) {
-                    if (contaBancariaValidacao.ContaBancaria.Codigo.Length > 10) {
-                        contaBancariaValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
+                    if ((contaBancariaValidacao.ContaBancaria.Codigo.Length < 3) || 
+                        (contaBancariaValidacao.ContaBancaria.Codigo.Length > 10)) {
+                        contaBancariaValidacao.IncluirMensagem("Código deve ter entre 3 e 10 caracteres");
                     } else if(!Validacao.ValidarCharAaNT(contaBancariaValidacao.ContaBancaria.Codigo)) {
                         contaBancariaValidacao.IncluirMensagem("Código possui caracteres inválidos");
                         contaBancariaValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
@@ -63,52 +65,50 @@ namespace rcDominiosBusiness
                 contaBancariaValidacao = new ContaBancariaTransfer(contaBancariaTransfer);
 
                 if (contaBancariaValidacao != null) {
-                    contaBancariaValidacao.Descricao = Tratamento.TratarStringNuloBranco(contaBancariaValidacao.Descricao);
-                    contaBancariaValidacao.Codigo = Tratamento.TratarStringNuloBranco(contaBancariaValidacao.Codigo);
 
                     //-- Id
-                    if ((contaBancariaValidacao.IdDe <= 0) && (contaBancariaValidacao.IdAte > 0)) {
+                    if ((contaBancariaValidacao.Filtro.IdDe <= 0) && (contaBancariaValidacao.Filtro.IdAte > 0)) {
                         contaBancariaValidacao.IncluirMensagem("Informe apenas o Id (De) para consultar um Id específico, ou os valores De e Até para consultar uma faixa de Id");
-                    } else if ((contaBancariaValidacao.IdDe > 0) && (contaBancariaValidacao.IdAte > 0)) {
-                        if (contaBancariaValidacao.IdDe >= contaBancariaValidacao.IdAte) {
+                    } else if ((contaBancariaValidacao.Filtro.IdDe > 0) && (contaBancariaValidacao.Filtro.IdAte > 0)) {
+                        if (contaBancariaValidacao.Filtro.IdDe >= contaBancariaValidacao.Filtro.IdAte) {
                             contaBancariaValidacao.IncluirMensagem("O valor mínimo (De) do Id deve ser menor que o valor máximo (Até)");
                         }
                     }
 
-                    //-- Descrição do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(contaBancariaValidacao.Descricao)) {
-                        if (contaBancariaValidacao.Descricao.Length > 100) {
+                    //-- Descrição de Conta Bancaria
+                    if (!string.IsNullOrEmpty(contaBancariaValidacao.Filtro.Descricao)) {
+                        if (contaBancariaValidacao.Filtro.Descricao.Length > 100) {
                             contaBancariaValidacao.IncluirMensagem("Descrição deve ter no máximo 100 caracteres");
-                        } else if (!Validacao.ValidarCharAaBCcNT(contaBancariaValidacao.Descricao)) {
+                        } else if (!Validacao.ValidarCharAaBCcNT(contaBancariaValidacao.Filtro.Descricao)) {
                             contaBancariaValidacao.IncluirMensagem("Descrição possui caracteres inválidos");
                             contaBancariaValidacao.IncluirMensagem("Caracteres válidos: letras, acentos, números, traço e espaço em branco");
                         }
                     }
 
-                    //-- Código do Tipo de Pessoa
-                    if (!string.IsNullOrEmpty(contaBancariaValidacao.Codigo)) {
-                        if (contaBancariaValidacao.Codigo.Length > 10) {
+                    //-- Código de Conta Bancaria
+                    if (!string.IsNullOrEmpty(contaBancariaValidacao.Filtro.Codigo)) {
+                        if (contaBancariaValidacao.Filtro.Codigo.Length > 10) {
                             contaBancariaValidacao.IncluirMensagem("Código deve ter no máximo 10 caracteres");
-                        } else if(!Validacao.ValidarCharAaNT(contaBancariaValidacao.Codigo)) {
+                        } else if(!Validacao.ValidarCharAaNT(contaBancariaValidacao.Filtro.Codigo)) {
                             contaBancariaValidacao.IncluirMensagem("Código possui caracteres inválidos");
                             contaBancariaValidacao.IncluirMensagem("Caracteres válidos: letras, números e traço");
                         }
                     }
 
                     //-- Data de Criação
-                    if ((contaBancariaValidacao.CriacaoDe == DateTime.MinValue) && (contaBancariaValidacao.CriacaoAte != DateTime.MinValue)) {
+                    if ((contaBancariaValidacao.Filtro.CriacaoDe == DateTime.MinValue) && (contaBancariaValidacao.Filtro.CriacaoAte != DateTime.MinValue)) {
                         contaBancariaValidacao.IncluirMensagem("Informe apenas a Data de Criação (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((contaBancariaValidacao.CriacaoDe > DateTime.MinValue) && (contaBancariaValidacao.CriacaoAte > DateTime.MinValue)) {
-                        if (contaBancariaValidacao.CriacaoDe >= contaBancariaValidacao.CriacaoAte) {
+                    } else if ((contaBancariaValidacao.Filtro.CriacaoDe > DateTime.MinValue) && (contaBancariaValidacao.Filtro.CriacaoAte > DateTime.MinValue)) {
+                        if (contaBancariaValidacao.Filtro.CriacaoDe >= contaBancariaValidacao.Filtro.CriacaoAte) {
                             contaBancariaValidacao.IncluirMensagem("O valor mínimo (De) da Data de Criação deve ser menor que o valor máximo (Até)");
                         }
                     }
 
                     //-- Data de Alteração
-                    if ((contaBancariaValidacao.AlteracaoDe == DateTime.MinValue) && (contaBancariaValidacao.AlteracaoAte != DateTime.MinValue)) {
+                    if ((contaBancariaValidacao.Filtro.AlteracaoDe == DateTime.MinValue) && (contaBancariaValidacao.Filtro.AlteracaoAte != DateTime.MinValue)) {
                         contaBancariaValidacao.IncluirMensagem("Informe apenas a Data de Alteração (De) para consultar uma data específica, ou os valores De e Até para consultar uma faixa de datas");
-                    } else if ((contaBancariaValidacao.AlteracaoDe > DateTime.MinValue) && (contaBancariaValidacao.AlteracaoAte > DateTime.MinValue)) {
-                        if (contaBancariaValidacao.AlteracaoDe >= contaBancariaValidacao.AlteracaoAte) {
+                    } else if ((contaBancariaValidacao.Filtro.AlteracaoDe > DateTime.MinValue) && (contaBancariaValidacao.Filtro.AlteracaoAte > DateTime.MinValue)) {
+                        if (contaBancariaValidacao.Filtro.AlteracaoDe >= contaBancariaValidacao.Filtro.AlteracaoAte) {
                             contaBancariaValidacao.IncluirMensagem("O valor mínimo (De) da Data de Alteração deve ser menor que o valor máximo (Até)");
                         }
                     }

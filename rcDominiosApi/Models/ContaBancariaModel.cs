@@ -148,16 +148,16 @@ namespace rcDominiosApi.Models
                         contaBancariaLista = contaBancariaDataModel.Consultar(contaBancariaValidacao);
 
                         if (contaBancariaLista != null) {
-                            if (contaBancariaLista.TotalRegistros > 0) {
-                                if (contaBancariaLista.RegistrosPorPagina < 1) {
-                                    contaBancariaLista.RegistrosPorPagina = 30;
-                                } else if (contaBancariaLista.RegistrosPorPagina > 200) {
-                                    contaBancariaLista.RegistrosPorPagina = 30;
+                            if (contaBancariaLista.Paginacao.TotalRegistros > 0) {
+                                if (contaBancariaLista.Paginacao.RegistrosPorPagina < 1) {
+                                    contaBancariaLista.Paginacao.RegistrosPorPagina = 30;
+                                } else if (contaBancariaLista.Paginacao.RegistrosPorPagina > 200) {
+                                    contaBancariaLista.Paginacao.RegistrosPorPagina = 30;
                                 }
-                                contaBancariaLista.PaginaAtual = (contaBancariaListaTransfer.PaginaAtual < 1 ? 1 : contaBancariaListaTransfer.PaginaAtual);
-                                contaBancariaLista.TotalPaginas = 
-                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.TotalRegistros) 
-                                    / @Convert.ToDecimal(contaBancariaLista.RegistrosPorPagina)));
+                                contaBancariaLista.Paginacao.PaginaAtual = (contaBancariaListaTransfer.Paginacao.PaginaAtual < 1 ? 1 : contaBancariaListaTransfer.Paginacao.PaginaAtual);
+                                contaBancariaLista.Paginacao.TotalPaginas = 
+                                    Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(contaBancariaLista.Paginacao.TotalRegistros) 
+                                    / @Convert.ToDecimal(contaBancariaLista.Paginacao.RegistrosPorPagina)));
                             }
                         }
                     } else {
