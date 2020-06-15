@@ -22,6 +22,7 @@ namespace rcDominiosApi.Models
 
                 usuarioTransfer.Usuario.Criacao = DateTime.Today;
                 usuarioTransfer.Usuario.Alteracao = DateTime.Today;
+                usuarioTransfer.TipoAcao = "Inclusao";
 
                 usuarioValidacao = usuarioBusiness.Validar(usuarioTransfer);
 
@@ -75,6 +76,7 @@ namespace rcDominiosApi.Models
                 usuarioDataModel = new UsuarioDataModel();
 
                 usuarioTransfer.Usuario.Alteracao = DateTime.Today;
+                usuarioTransfer.TipoAcao = "Alteracao";
 
                 usuarioValidacao = usuarioBusiness.Validar(usuarioTransfer);
 

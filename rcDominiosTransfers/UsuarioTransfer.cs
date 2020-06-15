@@ -9,6 +9,8 @@ namespace rcDominiosTransfers
     {
         public UsuarioEntity Usuario { get; set; }
 
+        public string TipoAcao { get; set; }
+
         public IList<UsuarioEntity> Lista { get; set; }
 
         public TransferPaginacao Paginacao { get; set; }
@@ -99,6 +101,7 @@ namespace rcDominiosTransfers
                 if (transfer.Paginacao != null) {
                     this.Paginacao = new TransferPaginacao(transfer.Paginacao);
                 }
+                this.TipoAcao = transfer.TipoAcao;
                 this.IdDe = transfer.IdDe;
                 this.IdAte = transfer.IdAte;
                 this.Apelido = transfer.Apelido;
