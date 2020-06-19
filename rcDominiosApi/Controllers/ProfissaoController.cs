@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar Profissão",
+            Description = "[pt-BR] Filtrar Profissão. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Profession. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 200)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;

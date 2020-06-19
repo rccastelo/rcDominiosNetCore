@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar Cores",
+            Description = "[pt-BR] Filtrar Cores. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Colors. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 200)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(CorTransfer corTransfer)
         {
             CorModel corModel;

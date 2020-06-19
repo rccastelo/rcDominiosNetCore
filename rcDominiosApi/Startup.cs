@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace rcDominiosApi
 {
@@ -46,25 +45,25 @@ namespace rcDominiosApi
             services.AddSwaggerGen(options => {
                 options.SwaggerDoc("doc", new OpenApiInfo { 
                     Title = "rcDominiosApi",
-                    Description = "Documentação da Api rcDominiosApi", 
+                    Description = "API para gerenciamento das informações dos domínios.", 
                     Version = "1.0" 
                 });
 
                 OpenApiSecurityScheme esquema = new OpenApiSecurityScheme {
                     Description = "Autenticação utilizando Bearer. Exemplo: \"bearer {token}\"",
                     In = ParameterLocation.Header,
-                    Name = "Papagaio",
+                    Name = "Autenticacao",
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",
                     Scheme = "bearer"
                 };
 
-                options.AddSecurityDefinition("Graviola", esquema);
+                options.AddSecurityDefinition("Bearer", esquema);
                 
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement {
                     {
                         new OpenApiSecurityScheme {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Graviola" }
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
                         },
                         new[] { "readAccess", "writeAccess" }
                     }

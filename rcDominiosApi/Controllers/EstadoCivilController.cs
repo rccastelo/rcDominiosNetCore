@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar Estado Civil",
+            Description = "[pt-BR] Filtrar Estado Civil. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Marital status. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilModel), 200)]
+        [ProducesResponseType(typeof(EstadoCivilModel), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;

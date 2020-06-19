@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace rcDominiosAutentica
 {
@@ -44,6 +45,16 @@ namespace rcDominiosAutentica
                     ValidAudience = "Postman"
                 };
             });
+
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("doc", new OpenApiInfo { 
+                    Title = "rcDominiosAutentica",
+                    Description = "API de autenticação para o sistema de gerenciamento de domínios.", 
+                    Version = "1.0" 
+                });
+
+                options.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +67,9 @@ namespace rcDominiosAutentica
             app.UseCors("MyPolicy");
             
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(ui => ui.SwaggerEndpoint("/swagger/doc/swagger.json", "doc"));
         }
     }
 }

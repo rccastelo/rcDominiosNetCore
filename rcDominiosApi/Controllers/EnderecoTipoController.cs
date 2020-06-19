@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar tipos de Endereço",
+            Description = "[pt-BR] Filtrar tipos de Endereço. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Address types. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 200)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;

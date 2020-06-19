@@ -96,6 +96,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar tipos de Conta Bancária",
+            Description = "[pt-BR] Filtrar tipos de Conta Bancária. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Bank Account types. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 200)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;

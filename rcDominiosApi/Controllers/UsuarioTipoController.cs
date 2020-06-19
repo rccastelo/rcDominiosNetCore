@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar tipos de Usuário",
+            Description = "[pt-BR] Filtrar tipos de Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Filter User types. Authentication token is required.",
+            Tags = new[] { "UsuarioTipo" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;

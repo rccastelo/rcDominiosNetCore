@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar Sexo",
+            Description = "[pt-BR] Filtrar Sexo. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Gender. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 200)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosAutentica.Controllers
 {
@@ -13,6 +14,16 @@ namespace rcDominiosAutentica.Controllers
     public class AutenticaController : ControllerBase
     {
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Autenticar usuário",
+            Description = "[pt-BR] Autenticar usuário. \n\n " +
+                "[en-US] User authentication.",
+            Tags = new[] { "Autentica" }
+        )]
+        [ProducesResponseType(typeof(AutenticaTransfer), 200)]
+        [ProducesResponseType(typeof(AutenticaTransfer), 400)]
+        [ProducesResponseType(typeof(AutenticaTransfer), 401)]
+        [ProducesResponseType(500)]
         public IActionResult Autenticar(AutenticaTransfer autenticaTransfer) 
         {
             AutenticaModel autenticaModel = null;

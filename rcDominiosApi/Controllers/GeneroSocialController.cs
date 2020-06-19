@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar Gênero Social",
+            Description = "[pt-BR] Filtrar Gênero Social. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Social Gender. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 200)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialModel generoSocialModel;

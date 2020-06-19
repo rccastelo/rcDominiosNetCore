@@ -95,6 +95,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost("lista")]
+        [SwaggerOperation(
+            Summary = "Filtrar tipos de Telefone",
+            Description = "[pt-BR] Filtrar tipos de Telefone. Requer token de autenticação. \n\n " +
+                "[en-US] Filter Phone types. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 200)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Consultar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
