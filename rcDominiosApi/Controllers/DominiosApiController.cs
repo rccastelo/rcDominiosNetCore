@@ -5,14 +5,14 @@ namespace rcDominiosApi.Controllers
 {
     [ApiController]
     [Route("")]
-    public class DominiosController : ControllerBase
+    public class DominiosApiController : ControllerBase
     {
         [HttpGet]
         [SwaggerOperation(
-            Summary = "API de Domínios",
-            Description = "[pt-BR] API de Domínios. \n\n " +
-                "[en-US] Domains API. ",
-            Tags = new[] { "Domínios" }
+            Summary = "API para gerenciamento das informações dos domínios.",
+            Description = "[pt-BR] API para gerenciamento das informações dos domínios. \n\n " +
+                "[en-US] API for managing domain information. ",
+            Tags = new[] { "rcDominiosApi" }
         )]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
