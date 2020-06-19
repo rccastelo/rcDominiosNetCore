@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class CorController : Controller
+    public class CorController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public CorController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 corModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(cor);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 corModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(corLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 corModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (corLista.Erro || !corLista.Validacao) {
                 return View("Filtro", corLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 corModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (cor.Erro || !cor.Validacao) {
                 return View("Form", cor);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 corModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (cor.Erro || !cor.Validacao) {
                 return View("Form", cor);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 corModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (cor.Erro || !cor.Validacao) {
                 return View("Form", cor);

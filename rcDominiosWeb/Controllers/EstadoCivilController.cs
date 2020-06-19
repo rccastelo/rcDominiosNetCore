@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class EstadoCivilController : Controller
+    public class EstadoCivilController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public EstadoCivilController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 estadoCivilModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(estadoCivil);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(estadoCivilLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (estadoCivilLista.Erro || !estadoCivilLista.Validacao) {
                 return View("Filtro", estadoCivilLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 estadoCivilModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return View("Form", estadoCivil);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 estadoCivilModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return View("Form", estadoCivil);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 estadoCivilModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (estadoCivil.Erro || !estadoCivil.Validacao) {
                 return View("Form", estadoCivil);

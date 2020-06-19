@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class ContaBancariaController : Controller
+    public class ContaBancariaController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public ContaBancariaController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 contaBancariaModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(contaBancaria);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(contaBancariaLista);
         }
@@ -101,6 +107,8 @@ namespace rcDominiosWeb.Controllers
                 contaBancariaModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+            
             if (contaBancariaLista.Erro || !contaBancariaLista.Validacao) {
                 return View("Filtro", contaBancariaLista);
             } else {
@@ -128,6 +136,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return View("Form", contaBancaria);
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 contaBancariaModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return View("Form", contaBancaria);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 contaBancariaModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (contaBancaria.Erro || !contaBancaria.Validacao) {
                 return View("Form", contaBancaria);

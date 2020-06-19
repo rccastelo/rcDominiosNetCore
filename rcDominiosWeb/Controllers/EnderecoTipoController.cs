@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class EnderecoTipoController : Controller
+    public class EnderecoTipoController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public EnderecoTipoController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 enderecoTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(enderecoTipo);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(enderecoTipoLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (enderecoTipoLista.Erro || !enderecoTipoLista.Validacao) {
                 return View("Filtro", enderecoTipoLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 enderecoTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return View("Form", enderecoTipo);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 enderecoTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return View("Form", enderecoTipo);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 enderecoTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (enderecoTipo.Erro || !enderecoTipo.Validacao) {
                 return View("Form", enderecoTipo);

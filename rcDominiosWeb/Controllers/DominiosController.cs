@@ -8,13 +8,11 @@ using rcDominiosWeb.Models;
 
 namespace rcDominiosWeb.Controllers
 {
-    public class DominiosController : Controller
+    public class DominiosController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public DominiosController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
@@ -46,6 +44,8 @@ namespace rcDominiosWeb.Controllers
             if (autentica.Erro || !autentica.Validacao || !autentica.Autenticado) {
                 return View("Index", autentica);
             } else {
+                ViewData["Usuario"] = UsuarioNome;
+                
                 return RedirectToAction("Lista");
             }
         }
@@ -55,12 +55,25 @@ namespace rcDominiosWeb.Controllers
         public IActionResult Lista()
         {
             AutenticaModel autenticaModel;
+            string token = "";
 
-            autenticaModel = new AutenticaModel(httpContext);
+            try {
+                autenticaModel = new AutenticaModel(httpContext);
 
-            string token = autenticaModel.ObterToken();
+                token = autenticaModel.ObterToken();
+            } catch {
+                token = "";
+            } finally {
+                autenticaModel = null;
+            }
 
-            return View();
+            if (string.IsNullOrEmpty(token)) {
+                return RedirectToAction("Sair");
+            } else {
+                ViewData["Usuario"] = UsuarioNome;
+
+                return View();
+            }
         }
 
         [HttpGet]

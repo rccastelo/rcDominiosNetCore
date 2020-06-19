@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class GeneroSocialController : Controller
+    public class GeneroSocialController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public GeneroSocialController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 generoSocialModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(generoSocial);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(generoSocialLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (generoSocialLista.Erro || !generoSocialLista.Validacao) {
                 return View("Filtro", generoSocialLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 generoSocialModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return View("Form", generoSocial);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 generoSocialModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return View("Form", generoSocial);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 generoSocialModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (generoSocial.Erro || !generoSocial.Validacao) {
                 return View("Form", generoSocial);

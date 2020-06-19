@@ -58,10 +58,28 @@ namespace rcDominiosWeb.Models
 
         public string ObterToken() 
         {
-            string usuario = httpContext.HttpContext.User.Claims.First(c => c.Type == "usuario").Value;
-            string token = httpContext.HttpContext.User.Claims.First(c => c.Type == "token").Value;
+            string token = "";
+
+            try {
+                token = httpContext.HttpContext.User.Claims.First(c => c.Type == "token").Value;
+            } catch {
+                token = "";
+            }
 
             return token;
+        }
+
+        public string ObterUsuario() 
+        {
+            string usuario = "";
+
+            try {
+                usuario = httpContext.HttpContext.User.Claims.First(c => c.Type == "usuario").Value;
+            } catch {
+                usuario = "";
+            }
+
+            return usuario;
         }
 
         public void Sair() 

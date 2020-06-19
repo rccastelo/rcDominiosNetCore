@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class SexoController : Controller
+    public class SexoController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public SexoController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 sexoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(sexo);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(sexoLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (sexoLista.Erro || !sexoLista.Validacao) {
                 return View("Filtro", sexoLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 sexoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (sexo.Erro || !sexo.Validacao) {
                 return View("Form", sexo);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 sexoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (sexo.Erro || !sexo.Validacao) {
                 return View("Form", sexo);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 sexoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (sexo.Erro || !sexo.Validacao) {
                 return View("Form", sexo);

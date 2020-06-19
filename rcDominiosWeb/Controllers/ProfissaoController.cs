@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class ProfissaoController : Controller
+    public class ProfissaoController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public ProfissaoController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 profissaoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(profissao);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(profissaoLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (profissaoLista.Erro || !profissaoLista.Validacao) {
                 return View("Filtro", profissaoLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 profissaoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (profissao.Erro || !profissao.Validacao) {
                 return View("Form", profissao);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 profissaoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (profissao.Erro || !profissao.Validacao) {
                 return View("Form", profissao);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 profissaoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (profissao.Erro || !profissao.Validacao) {
                 return View("Form", profissao);

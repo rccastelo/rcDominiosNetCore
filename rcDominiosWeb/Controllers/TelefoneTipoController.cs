@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 namespace rcDominiosWeb.Controllers
 {
     [Authorize]
-    public class TelefoneTipoController : Controller
+    public class TelefoneTipoController : ControllerDominios
     {
-        private readonly IHttpContextAccessor httpContext;
-
         public TelefoneTipoController(IHttpContextAccessor accessor)
+            :base(accessor)
         {
-            httpContext = accessor;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Filtro()
         {
+            ViewData["Usuario"] = UsuarioNome;
+
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace rcDominiosWeb.Controllers
                 telefoneTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             return View(telefoneTipo);
         }
 
@@ -76,6 +80,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             return View(telefoneTipoLista);
         }
@@ -100,6 +106,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (telefoneTipoLista.Erro || !telefoneTipoLista.Validacao) {
                 return View("Filtro", telefoneTipoLista);
@@ -129,6 +137,8 @@ namespace rcDominiosWeb.Controllers
                 telefoneTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return View("Form", telefoneTipo);
             } else {
@@ -157,6 +167,8 @@ namespace rcDominiosWeb.Controllers
                 telefoneTipoModel = null;
             }
 
+            ViewData["Usuario"] = UsuarioNome;
+
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return View("Form", telefoneTipo);
             } else {
@@ -183,6 +195,8 @@ namespace rcDominiosWeb.Controllers
             } finally {
                 telefoneTipoModel = null;
             }
+
+            ViewData["Usuario"] = UsuarioNome;
 
             if (telefoneTipo.Erro || !telefoneTipo.Validacao) {
                 return View("Form", telefoneTipo);
