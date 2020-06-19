@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace rcDominiosApi
 {
@@ -40,6 +42,36 @@ namespace rcDominiosApi
                     ValidAudience = "Postman"
                 };
             });
+
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("doc", new OpenApiInfo { 
+                    Title = "rcDominiosApi",
+                    Description = "Documentação da Api rcDominiosApi", 
+                    Version = "1.0" 
+                });
+
+                OpenApiSecurityScheme esquema = new OpenApiSecurityScheme {
+                    Description = "Autenticação utilizando Bearer. Exemplo: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Papagaio",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                };
+
+                options.AddSecurityDefinition("Graviola", esquema);
+                
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Graviola" }
+                        },
+                        new[] { "readAccess", "writeAccess" }
+                    }
+                });
+
+                options.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +90,9 @@ namespace rcDominiosApi
                     name: "default",
                     template: "{controller=Dominios}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(ui => ui.SwaggerEndpoint("/swagger/doc/swagger.json", "doc"));
         }
     }
 }

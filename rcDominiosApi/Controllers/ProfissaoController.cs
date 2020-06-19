@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class ProfissaoController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Profissão pelo Id",
+            Description = "[pt-BR] Consultar Profissão pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Profession by Id. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 200)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             ProfissaoModel profissaoModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Profissão",
+            Description = "[pt-BR] Listar Profissão. Requer token de autenticação. \n\n " +
+                "[en-US] List Profession. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 200)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             ProfissaoModel profissaoModel;

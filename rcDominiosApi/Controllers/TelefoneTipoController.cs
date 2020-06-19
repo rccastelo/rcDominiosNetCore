@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class TelefoneTipoController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar tipo de Telefone pelo Id",
+            Description = "[pt-BR] Consultar tipo de Telefone pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Phone type by Id. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 200)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             TelefoneTipoModel telefoneTipoModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar tipos de Telefone",
+            Description = "[pt-BR] Listar tipos de Telefone. Requer token de autenticação. \n\n " +
+                "[en-US] List Phone types. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 200)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             TelefoneTipoModel telefoneTipoModel;

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class GeneroSocialController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Gênero Social pelo Id",
+            Description = "[pt-BR] Consultar Gênero Social pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Social Gender by Id. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 200)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             GeneroSocialModel generoSocialModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Gênero Social",
+            Description = "[pt-BR] Listar Gênero Social. Requer token de autenticação. \n\n " +
+                "[en-US] List Social Gender. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 200)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             GeneroSocialModel generoSocialModel;

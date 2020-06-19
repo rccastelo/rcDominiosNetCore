@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class CorController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Cor pelo Id",
+            Description = "[pt-BR] Consultar Cor pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Color by Id. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 200)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             CorModel corModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Cores",
+            Description = "[pt-BR] Listar Cores. Requer token de autenticação. \n\n " +
+                "[en-US] List Colors. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 200)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             CorModel corModel;

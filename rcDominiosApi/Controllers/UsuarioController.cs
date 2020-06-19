@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class UsuarioController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Usuário pelo Id",
+            Description = "[pt-BR] Consultar Usuário pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult User by Id. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             UsuarioModel usuarioModel;
@@ -44,6 +55,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Usuário",
+            Description = "[pt-BR] Listar Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] List User. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             UsuarioModel usuarioModel;

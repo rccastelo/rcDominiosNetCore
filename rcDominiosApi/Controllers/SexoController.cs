@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class SexoController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Sexo pelo Id",
+            Description = "[pt-BR] Consultar Sexo pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Gender by Id. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 200)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             SexoModel sexoModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Sexo",
+            Description = "[pt-BR] Listar Sexo. Requer token de autenticação. \n\n " +
+                "[en-US] List Gender. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 200)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             SexoModel sexoModel;

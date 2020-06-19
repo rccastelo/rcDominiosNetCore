@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class EnderecoTipoController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar tipo de Endereço pelo Id",
+            Description = "[pt-BR] Consultar tipo de Endereço pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Address type by Id. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 200)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             EnderecoTipoModel enderecoTipoModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar tipos de Endereço",
+            Description = "[pt-BR] Listar tipos de Endereço. Requer token de autenticação. \n\n " +
+                "[en-US] List Address types. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 200)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             EnderecoTipoModel enderecoTipoModel;

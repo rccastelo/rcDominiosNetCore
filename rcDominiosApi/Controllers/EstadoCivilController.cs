@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class EstadoCivilController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar Estado Civil pelo Id",
+            Description = "[pt-BR] Consultar Estado Civil pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Marital status by Id. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 200)]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             EstadoCivilModel estadoCivilModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar Estado Civil",
+            Description = "[pt-BR] Listar Estado Civil. Requer token de autenticação. \n\n " +
+                "[en-US] List Marital status. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilModel), 200)]
+        [ProducesResponseType(typeof(EstadoCivilModel), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             EstadoCivilModel estadoCivilModel;

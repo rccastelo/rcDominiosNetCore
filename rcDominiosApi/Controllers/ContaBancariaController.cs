@@ -1,8 +1,10 @@
 using System;
+using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +14,16 @@ namespace rcDominiosApi.Controllers
     public class ContaBancariaController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar tipo de Conta Bancária pelo Id",
+            Description = "[pt-BR] Consultar tipo de Conta Bancária pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Bank Account type by Id. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 200)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             ContaBancariaModel contaBancariaModel;
@@ -45,6 +57,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar tipos de Conta Bancária",
+            Description = "[pt-BR] Listar tipos de Conta Bancária. Requer token de autenticação. \n\n " +
+                "[en-US] List Bank Account types. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 200)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             ContaBancariaModel contaBancariaModel;

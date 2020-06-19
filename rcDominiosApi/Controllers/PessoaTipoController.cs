@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using rcDominiosApi.Models;
 using rcDominiosTransfers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace rcDominiosApi.Controllers
 {
@@ -12,6 +13,16 @@ namespace rcDominiosApi.Controllers
     public class PessoaTipoController : ControllerBase
     {
         [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Consultar tipo de Pessoa pelo Id",
+            Description = "[pt-BR] Consultar tipo de Pessoa pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Consult Person type by Id. Authentication token is required.",
+            Tags = new[] { "PessoaTipo" }
+        )]
+        [ProducesResponseType(typeof(PessoaTipoTransfer), 200)]
+        [ProducesResponseType(typeof(PessoaTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult ConsultarPorId(int id)
         {
             PessoaTipoModel pessoaTipoModel;
@@ -45,6 +56,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Listar tipos de Pessoa",
+            Description = "[pt-BR] Listar tipos de Pessoa. Requer token de autenticação. \n\n " +
+                "[en-US] List Person types. Authentication token is required.",
+            Tags = new[] { "PessoaTipo" }
+        )]
+        [ProducesResponseType(typeof(PessoaTipoTransfer), 200)]
+        [ProducesResponseType(typeof(PessoaTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Listar()
         {
             PessoaTipoModel pessoaTipoModel;
