@@ -131,6 +131,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Usuário",
+            Description = "[pt-BR] Incluir Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Add User. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 201)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(UsuarioTransfer usuarioTransfer)
         {
             UsuarioModel usuarioModel;
@@ -161,6 +171,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Usuário",
+            Description = "[pt-BR] Alterar Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Update User. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(UsuarioTransfer usuarioTransfer)
         {
             UsuarioModel usuarioModel;
@@ -189,6 +209,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Usuário pelo Id",
+            Description = "[pt-BR] Excluir Usuário pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete User by Id. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             UsuarioModel usuarioModel;

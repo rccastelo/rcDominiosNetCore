@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir tipo de Telefone",
+            Description = "[pt-BR] Incluir tipo de Telefone. Requer token de autenticação. \n\n " +
+                "[en-US] Add Phone type. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 201)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar tipo de Telefone",
+            Description = "[pt-BR] Alterar tipo de Telefone. Requer token de autenticação. \n\n " +
+                "[en-US] Update Phone type. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 200)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(TelefoneTipoTransfer telefoneTipoTransfer)
         {
             TelefoneTipoModel telefoneTipoModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir tipo de Telefone pelo Id",
+            Description = "[pt-BR] Excluir tipo de Telefone pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Phone type by Id. Authentication token is required.",
+            Tags = new[] { "TelefoneTipo" }
+        )]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 200)]
+        [ProducesResponseType(typeof(TelefoneTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             TelefoneTipoModel telefoneTipoModel;

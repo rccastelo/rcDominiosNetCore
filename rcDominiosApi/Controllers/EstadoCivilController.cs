@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Estado Civil",
+            Description = "[pt-BR] Incluir Estado Civil. Requer token de autenticação. \n\n " +
+                "[en-US] Add Marital status. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 201)]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Estado Civil",
+            Description = "[pt-BR] Alterar Estado Civil. Requer token de autenticação. \n\n " +
+                "[en-US] Update Marital status. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 200)]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(EstadoCivilTransfer estadoCivilTransfer)
         {
             EstadoCivilModel estadoCivilModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Estado Civil pelo Id",
+            Description = "[pt-BR] Excluir Estado Civil pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Marital status by Id. Authentication token is required.",
+            Tags = new[] { "EstadoCivil" }
+        )]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 200)]
+        [ProducesResponseType(typeof(EstadoCivilTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             EstadoCivilModel estadoCivilModel;

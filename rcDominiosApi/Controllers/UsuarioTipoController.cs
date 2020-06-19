@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir tipo de Usuário",
+            Description = "[pt-BR] Incluir tipo de Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Add User type. Authentication token is required.",
+            Tags = new[] { "UsuarioTipo" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 201)]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar tipo de Usuário",
+            Description = "[pt-BR] Alterar tipo de Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Update User type. Authentication token is required.",
+            Tags = new[] { "UsuarioTipo" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(UsuarioTipoTransfer usuarioTipoTransfer)
         {
             UsuarioTipoModel usuarioTipoModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir tipo de Usuário pelo Id",
+            Description = "[pt-BR] Excluir tipo de Usuário pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete User type by Id. Authentication token is required.",
+            Tags = new[] { "UsuarioTipo" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             UsuarioTipoModel usuarioTipoModel;

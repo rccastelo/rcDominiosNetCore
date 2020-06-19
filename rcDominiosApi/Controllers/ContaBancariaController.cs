@@ -135,6 +135,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir tipo de Conta Bancária",
+            Description = "[pt-BR] Incluir tipo de Conta Bancária. Requer token de autenticação. \n\n " +
+                "[en-US] Add Bank Account type. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 201)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
@@ -166,6 +176,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar tipo de Conta Bancária",
+            Description = "[pt-BR] Alterar tipo de Conta Bancária. Requer token de autenticação. \n\n " +
+                "[en-US] Update Bank Account type. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 200)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(ContaBancariaTransfer contaBancariaTransfer)
         {
             ContaBancariaModel contaBancariaModel;
@@ -195,6 +215,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir tipo de Conta Bancária pelo Id",
+            Description = "[pt-BR] Excluir tipo de Conta Bancária pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Bank Account type by Id. Authentication token is required.",
+            Tags = new[] { "ContaBancaria" }
+        )]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 200)]
+        [ProducesResponseType(typeof(ContaBancariaTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             ContaBancariaModel contaBancariaModel;

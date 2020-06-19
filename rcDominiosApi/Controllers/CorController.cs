@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Cor",
+            Description = "[pt-BR] Incluir Cor. Requer token de autenticação. \n\n " +
+                "[en-US] Add Color. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 201)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(CorTransfer corTransfer)
         {
             CorModel corModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Cor",
+            Description = "[pt-BR] Alterar Cor. Requer token de autenticação. \n\n " +
+                "[en-US] Update Color. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 200)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(CorTransfer corTransfer)
         {
             CorModel corModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Cor pelo Id",
+            Description = "[pt-BR] Excluir Cor pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Color by Id. Authentication token is required.",
+            Tags = new[] { "Cor" }
+        )]
+        [ProducesResponseType(typeof(CorTransfer), 200)]
+        [ProducesResponseType(typeof(CorTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             CorModel corModel;

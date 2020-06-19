@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Profissão",
+            Description = "[pt-BR] Incluir Profissão. Requer token de autenticação. \n\n " +
+                "[en-US] Add Profession. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 201)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Profissão",
+            Description = "[pt-BR] Alterar Profissão. Requer token de autenticação. \n\n " +
+                "[en-US] Update Profession. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 200)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(ProfissaoTransfer profissaoTransfer)
         {
             ProfissaoModel profissaoModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Profissão pelo Id",
+            Description = "[pt-BR] Excluir Profissão pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Profession by Id. Authentication token is required.",
+            Tags = new[] { "Profissao" }
+        )]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 200)]
+        [ProducesResponseType(typeof(ProfissaoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             ProfissaoModel profissaoModel;

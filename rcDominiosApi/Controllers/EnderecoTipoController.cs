@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir tipo de Endereço",
+            Description = "[pt-BR] Incluir tipo de Endereço. Requer token de autenticação. \n\n " +
+                "[en-US] Add Address type. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 201)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar tipo de Endereço",
+            Description = "[pt-BR] Alterar tipo de Endereço. Requer token de autenticação. \n\n " +
+                "[en-US] Update Address type. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 200)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(EnderecoTipoTransfer enderecoTipoTransfer)
         {
             EnderecoTipoModel enderecoTipoModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir tipo de Endereço pelo Id",
+            Description = "[pt-BR] Excluir tipo de Endereço pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Address type by Id. Authentication token is required.",
+            Tags = new[] { "EnderecoTipo" }
+        )]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 200)]
+        [ProducesResponseType(typeof(EnderecoTipoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             EnderecoTipoModel enderecoTipoModel;

@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Sexo",
+            Description = "[pt-BR] Incluir Sexo. Requer token de autenticação. \n\n " +
+                "[en-US] Add Gender. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 201)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Sexo",
+            Description = "[pt-BR] Alterar Sexo. Requer token de autenticação. \n\n " +
+                "[en-US] Update Gender. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 200)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(SexoTransfer sexoTransfer)
         {
             SexoModel sexoModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Sexo pelo Id",
+            Description = "[pt-BR] Excluir Sexo pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Gender by Id. Authentication token is required.",
+            Tags = new[] { "Sexo" }
+        )]
+        [ProducesResponseType(typeof(SexoTransfer), 200)]
+        [ProducesResponseType(typeof(SexoTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             SexoModel sexoModel;

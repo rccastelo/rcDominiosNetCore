@@ -134,6 +134,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Incluir Gênero Social",
+            Description = "[pt-BR] Incluir Gênero Social. Requer token de autenticação. \n\n " +
+                "[en-US] Add Social Gender. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 201)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Incluir(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialModel generoSocialModel;
@@ -165,6 +175,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Alterar Gênero Social",
+            Description = "[pt-BR] Alterar Gênero Social. Requer token de autenticação. \n\n " +
+                "[en-US] Update Social Gender. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 200)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Alterar(GeneroSocialTransfer generoSocialTransfer)
         {
             GeneroSocialModel generoSocialModel;
@@ -194,6 +214,16 @@ namespace rcDominiosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Excluir Gênero Social pelo Id",
+            Description = "[pt-BR] Excluir Gênero Social pelo Id. Requer token de autenticação. \n\n " +
+                "[en-US] Delete Social Gender by Id. Authentication token is required.",
+            Tags = new[] { "GeneroSocial" }
+        )]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 200)]
+        [ProducesResponseType(typeof(GeneroSocialTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public IActionResult Excluir(int id)
         {
             GeneroSocialModel generoSocialModel;
