@@ -26,9 +26,13 @@ namespace rcDominiosAutentica
                     AllowAnyMethod().
                     AllowAnyHeader();
             }));
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.Configure<IISOptions>(options => {
+                options.ForwardClientCertificate = false;
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+  
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = "JwtBearer";
                 options.DefaultChallengeScheme = "JwtBearer";
@@ -69,7 +73,7 @@ namespace rcDominiosAutentica
             app.UseMvc();
 
             app.UseSwagger();
-            app.UseSwaggerUI(ui => ui.SwaggerEndpoint("/swagger/doc/swagger.json", "doc"));
+            app.UseSwaggerUI(ui => ui.SwaggerEndpoint("../swagger/doc/swagger.json", "doc"));
         }
     }
 }

@@ -74,11 +74,11 @@
                 @if (@Model.Lista != null) {
                     @foreach (var item in @Model.Lista) {
                         <tr class="row tabLinha">
-                            <td class="col-1"><a class="txtPadrao" href="/Profissao/Form/@item.Id">@item.Id</a></td>
-                            <td class="col-5"><a class="txtPadrao" href="/Profissao/Form/@item.Id">@item.Descricao</a></td>
-                            <td class="col-2"><a class="txtPadrao" href="/Profissao/Form/@item.Id">@item.Codigo</a></td>
-                            <td class="col-2"><a class="txtPadrao" href="/Profissao/Form/@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
-                            <td class="col-2"><a class="btn btn-primary" href="/Profissao/Form/@item.Id"><i class="fas fa-search-plus"></i> 
+                            <td class="col-1"><a class="txtPadrao" asp-controller="Profissao" asp-action="Form" asp-route-id="@item.Id">@item.Id</a></td>
+                            <td class="col-5"><a class="txtPadrao" asp-controller="Profissao" asp-action="Form" asp-route-id="@item.Id">@item.Descricao</a></td>
+                            <td class="col-2"><a class="txtPadrao" asp-controller="Profissao" asp-action="Form" asp-route-id="@item.Id">@item.Codigo</a></td>
+                            <td class="col-2"><a class="txtPadrao" asp-controller="Profissao" asp-action="Form" asp-route-id="@item.Id">@(item.Ativo ? "Sim" : "Não")</a></td>
+                            <td class="col-2"><a class="btn btn-primary" asp-controller="Profissao" asp-action="Form" asp-route-id="@item.Id"><i class="fas fa-search-plus"></i> 
                                 &nbsp;Detalhe</a></td>
                         </tr>
                     }
@@ -130,7 +130,7 @@
         }
         <br>
         <div>
-            <a class="btn btn-secondary btn-lg" href="/Profissao"><i class="fas fa-arrow-circle-left"></i> 
+            <a class="btn btn-secondary btn-lg" asp-controller="Profissao" asp-action="Index"><i class="fas fa-arrow-circle-left"></i> 
                     &nbsp;Voltar</a>
         </div>
     </form>

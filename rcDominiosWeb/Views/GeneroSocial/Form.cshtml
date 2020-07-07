@@ -128,10 +128,10 @@
                     <button class="btn btn-lg mr-2 btn-success"><i class="fas fa-save"></i> &nbsp;Incluir</button>
                 } else if(ViewData["Action"].ToString() == "Alteracao") {
                     <button class="btn btn-lg mr-2 btn-alternative"><i class="fas fa-sync-alt"></i> &nbsp;Alterar</button>
-                    <a class="btn btn-danger btn-lg m-2" href="/GeneroSocial/Exclusao/@Model.GeneroSocial.Id"><i class="fas fa-trash"></i> 
+                    <a class="btn btn-danger btn-lg m-2" asp-controller="GeneroSocial" asp-action="Exclusao" asp-route-id="@Model.GeneroSocial.Id"><i class="fas fa-trash"></i> 
                         &nbsp;Excluir</a>
                 }
-                <a class="btn btn-secondary btn-lg m-2" href="/GeneroSocial"><i class="fas fa-arrow-circle-left"></i> 
+                <a class="btn btn-secondary btn-lg m-2" asp-controller="GeneroSocial" asp-action="Index"><i class="fas fa-arrow-circle-left"></i> 
                     &nbsp;Voltar</a>
             </div>
             <div class="col-2 text-right">

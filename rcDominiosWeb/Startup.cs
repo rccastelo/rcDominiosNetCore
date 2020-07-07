@@ -35,6 +35,16 @@ namespace rcDominiosWeb
                     options.LoginPath = "/Dominios/Index";
                 });
 
+            // services.Configure<IISServerOptions>(options => 
+            // {
+            //     options.AutomaticAuthentication = false;
+            // });
+
+            services.Configure<IISOptions>(options => 
+            {
+                options.ForwardClientCertificate = false;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

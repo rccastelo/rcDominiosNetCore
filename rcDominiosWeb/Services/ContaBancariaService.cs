@@ -9,7 +9,8 @@ namespace rcDominiosWeb.Services
 {
   public class ContaBancariaService
     {
-        private string enderecoServico = "http://localhost:5600/";
+        //private string enderecoServico = @"http://localhost:5600/";
+        private string enderecoServico = "http://localhost/rcDominiosApiNetCore/";
         private string nomeServico = "ContaBancaria";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;

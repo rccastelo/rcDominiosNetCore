@@ -9,7 +9,7 @@ namespace rcDominiosWeb.Services
 {
   public class CorService
     {
-        private string enderecoServico = "http://localhost:5600/";
+        private string enderecoServico = "http://localhost/rcDominiosApiNetCore/";
         private string nomeServico = "Cor";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;
