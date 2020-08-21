@@ -9,7 +9,7 @@ namespace rcDominiosWeb.Services
   public class AutenticaService
     {
         //private string enderecoServico = "http://localhost:5500/";
-        private string enderecoServico = "http://localhost/rcDominiosAutenticaNetCore/Autentica";
+        private string enderecoServico = "http://110.120.0.107/rcDominiosAutenticaNetCore/";
         private string nomeServico = "Autentica";
         private readonly HttpClient httpClient;
 

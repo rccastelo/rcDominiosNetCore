@@ -103,6 +103,47 @@ namespace rcDominiosWeb.Services
             return usuario;
         }
 
+        public async Task<UsuarioTransfer> AlterarSenha(UsuarioTransfer usuarioTransfer, string autorizacao)
+        {
+            UsuarioTransfer usuario = null;
+            HttpResponseMessage resposta = null;
+            string mensagemRetono = null;
+            
+            try {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", autorizacao);
+
+                resposta = await httpClient.PutAsJsonAsync($"{nomeServico}/senha", usuarioTransfer);
+
+                if (resposta.IsSuccessStatusCode) {
+                    usuario = resposta.Content.ReadAsAsync<UsuarioTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.BadRequest) {
+                    usuario = resposta.Content.ReadAsAsync<UsuarioTransfer>().Result;
+                } else if (resposta.StatusCode == HttpStatusCode.Unauthorized) {
+                    mensagemRetono = $"Acesso ao serviço {nomeServico} AlterarSenha não autorizado";
+                } else {
+                    mensagemRetono = $"Não foi possível acessar o serviço {nomeServico} AlterarSenha";
+                }
+
+                if (!string.IsNullOrEmpty(mensagemRetono)) {
+                    usuario = new UsuarioTransfer();
+                    
+                    usuario.Validacao = false;
+                    usuario.Erro = true;
+                    usuario.IncluirMensagem(mensagemRetono);
+                }
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioService Alterar [" + ex.Message + "]");
+            } finally {
+                resposta = null;
+            }
+
+            return usuario;
+        }
+
         public async Task<UsuarioTransfer> Excluir(int id, string autorizacao)
         {
             UsuarioTransfer usuario = null;

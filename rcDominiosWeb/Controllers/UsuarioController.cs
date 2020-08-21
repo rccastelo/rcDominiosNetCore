@@ -32,6 +32,15 @@ namespace rcDominiosWeb.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult Senha()
+        {
+            ViewData["Usuario"] = UsuarioNome;
+
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Form(int id)
         {
@@ -163,6 +172,36 @@ namespace rcDominiosWeb.Controllers
                 usuario.Validacao = false;
                 usuario.Erro = true;
                 usuario.IncluirMensagem("Erro em UsuarioController Alteracao [" + ex.Message + "]");
+            } finally {
+                usuarioModel = null;
+            }
+
+            ViewData["Usuario"] = UsuarioNome;
+
+            if (usuario.Erro || !usuario.Validacao) {
+                return View("Form", usuario);
+            } else {
+                return RedirectToAction("Lista");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AlteracaoSenha(UsuarioTransfer usuarioTransfer)
+        {
+            UsuarioModel usuarioModel;
+            UsuarioTransfer usuario;
+
+            try {
+                usuarioModel = new UsuarioModel(httpContext);
+
+                usuario = await usuarioModel.AlterarSenha(usuarioTransfer);
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioController AlteracaoSenha [" + ex.Message + "]");
             } finally {
                 usuarioModel = null;
             }

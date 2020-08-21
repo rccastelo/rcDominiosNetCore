@@ -76,6 +76,36 @@ namespace rcDominiosWeb.Models
             return usuario;
         }
 
+        public async Task<UsuarioTransfer> AlterarSenha(UsuarioTransfer usuarioTransfer)
+        {
+            UsuarioService usuarioService;
+            UsuarioTransfer usuario;
+            AutenticaModel autenticaModel;
+            string autorizacao;
+
+            try {
+                usuarioService = new UsuarioService();
+                autenticaModel = new AutenticaModel(httpContext);
+
+                autorizacao = autenticaModel.ObterToken();
+
+                usuarioTransfer.Usuario.Alteracao = DateTime.Today;
+
+                usuario = await usuarioService.AlterarSenha(usuarioTransfer, autorizacao);
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
+                usuario.Validacao = false;
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioModel AlterarSenha [" + ex.Message + "]");
+            } finally {
+                usuarioService = null;
+                autenticaModel = null;
+            }
+
+            return usuario;
+        }
+
         public async Task<UsuarioTransfer> Excluir(int id)
         {
             UsuarioService usuarioService;

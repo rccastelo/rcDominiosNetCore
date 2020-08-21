@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rcDominiosAutentica", "rcDo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rcDominiosTransfers", "rcDominiosTransfers\rcDominiosTransfers.csproj", "{527A6A3A-6DF7-47C5-9F33-429E0C1BEF1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rcDominiosCriptografia", "rcDominiosCriptografia\rcDominiosCriptografia.csproj", "{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -196,5 +198,17 @@ Global
 		{527A6A3A-6DF7-47C5-9F33-429E0C1BEF1E}.Release|x64.Build.0 = Release|Any CPU
 		{527A6A3A-6DF7-47C5-9F33-429E0C1BEF1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{527A6A3A-6DF7-47C5-9F33-429E0C1BEF1E}.Release|x86.Build.0 = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|x64.Build.0 = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F0D05A0-BB70-4109-B7DF-64734A95EC8A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

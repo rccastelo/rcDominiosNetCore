@@ -67,6 +67,32 @@ namespace rcDominiosDataModels
             return usuario;
         }
 
+        public UsuarioTransfer AlterarSenha(UsuarioTransfer usuarioTransfer)
+        {
+            UsuarioData usuarioData;
+            UsuarioTransfer usuario;
+
+            try {
+                usuarioData = new UsuarioData(_contexto);
+                usuario = new UsuarioTransfer();
+
+                usuarioData.AlterarSenha(usuarioTransfer.Usuario);
+
+                _contexto.SaveChanges();
+
+                usuario.Usuario = new UsuarioEntity(usuarioTransfer.Usuario);
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioDataModel Alterar [" + ex.Message + "]");
+            } finally {
+                usuarioData = null;
+            }
+
+            return usuario;
+        }
+
         public UsuarioTransfer Excluir(int id)
         {
             UsuarioData usuarioData;

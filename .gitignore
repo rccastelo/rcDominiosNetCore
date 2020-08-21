@@ -2,4 +2,9 @@
 **/bin
 **/obj
 appsettings.*
-dbRcDominios.udl
+*.udl
+rcDominiosApi_pub
+rcDominiosAutentica_docker
+rcDominiosAutentica_pub
+rcDominiosWeb_docker
+rcDominiosWeb_pub

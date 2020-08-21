@@ -1,6 +1,5 @@
 using System;
-using System.Security.Cryptography;
-using System.Text;
+using rcDominiosCriptografia;
 using rcDominiosBusiness;
 using rcDominiosDataModels;
 using rcDominiosTransfers;
@@ -31,16 +30,9 @@ namespace rcDominiosApi.Models
                         //-- Criptografia da senha
                         string apelidoSenha = (usuarioValidacao.Usuario.Apelido + usuarioValidacao.Usuario.Senha);
 
-                        HashAlgorithm algoritmo = SHA512.Create();
-                        byte[] senhaByte = Encoding.UTF8.GetBytes(apelidoSenha);
-                        byte[] senhaHash = algoritmo.ComputeHash(senhaByte);
+                        string apelidoSenhaCripto = Criptografia.CriptravarSHA512(apelidoSenha);
 
-                        StringBuilder sbSenhaCripto = new StringBuilder();
-                        foreach (byte caracter in senhaHash) {
-                            sbSenhaCripto.Append(caracter.ToString("X2"));
-                        }
-
-                        usuarioValidacao.Usuario.Senha = sbSenhaCripto.ToString();
+                        usuarioValidacao.Usuario.Senha = apelidoSenhaCripto;
                         //-------------------------
 
                         usuarioInclusao = usuarioDataModel.Incluir(usuarioValidacao);
@@ -82,21 +74,44 @@ namespace rcDominiosApi.Models
 
                 if (!usuarioValidacao.Erro) {
                     if (usuarioValidacao.Validacao) {
-                        //-- Criptografia da senha
-                        string apelidoSenha = (usuarioValidacao.Usuario.Apelido + usuarioValidacao.Usuario.Senha);
+                        usuarioAlteracao = usuarioDataModel.Alterar(usuarioValidacao);
+                    } else {
+                        usuarioAlteracao = new UsuarioTransfer(usuarioValidacao);
+                    }
+                } else {
+                    usuarioAlteracao = new UsuarioTransfer(usuarioValidacao);
+                }
+            } catch (Exception ex) {
+                usuarioAlteracao = new UsuarioTransfer();
 
-                        HashAlgorithm algoritmo = SHA512.Create();
-                        byte[] senhaByte = Encoding.UTF8.GetBytes(apelidoSenha);
-                        byte[] senhaHash = algoritmo.ComputeHash(senhaByte);
+                usuarioAlteracao.Erro = true;
+                usuarioAlteracao.IncluirMensagem("Erro em UsuarioModel Alterar [" + ex.Message + "]");
+            } finally {
+                usuarioDataModel = null;
+                usuarioBusiness = null;
+                usuarioValidacao = null;
+            }
 
-                        StringBuilder sbSenhaCripto = new StringBuilder();
-                        foreach (byte caracter in senhaHash) {
-                            sbSenhaCripto.Append(caracter.ToString("X2"));
-                        }
+            return usuarioAlteracao;
+        }
 
-                        usuarioValidacao.Usuario.Senha = sbSenhaCripto.ToString();
-                        //-------------------------
+        public UsuarioTransfer AlterarSenha(UsuarioTransfer usuarioTransfer)
+        {
+            UsuarioDataModel usuarioDataModel;
+            UsuarioBusiness usuarioBusiness;
+            UsuarioTransfer usuarioValidacao;
+            UsuarioTransfer usuarioAlteracao;
 
+            try {
+                usuarioBusiness = new UsuarioBusiness();
+                usuarioDataModel = new UsuarioDataModel();
+
+                usuarioTransfer.Usuario.Alteracao = DateTime.Today;
+
+                usuarioValidacao = usuarioBusiness.Validar(usuarioTransfer);
+
+                if (!usuarioValidacao.Erro) {
+                    if (usuarioValidacao.Validacao) {
                         usuarioAlteracao = usuarioDataModel.Alterar(usuarioValidacao);
                     } else {
                         usuarioAlteracao = new UsuarioTransfer(usuarioValidacao);

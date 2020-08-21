@@ -85,6 +85,43 @@ namespace rcDominiosBusiness
             return usuarioValidacao;
         }
 
+        public UsuarioTransfer ValidarSenha(UsuarioTransfer usuarioTransfer) 
+        {
+            UsuarioTransfer usuarioValidacao;
+
+            try  {
+                usuarioValidacao = new UsuarioTransfer(usuarioTransfer);
+
+                //-- Senha
+                if (string.IsNullOrEmpty(usuarioValidacao.Usuario.Senha)) {
+                    usuarioValidacao.IncluirMensagem("Necessário informar a Senha");
+                } else if ((usuarioValidacao.Usuario.Senha.Length < 5) || 
+                        (usuarioValidacao.Usuario.Senha.Length > 20)) {
+                    usuarioValidacao.IncluirMensagem("Senha deve ter entre 5 e 20 caracteres");
+                } else if (!Validacao.ValidarCharAaBEN(usuarioValidacao.Usuario.Senha)) {
+                    usuarioValidacao.IncluirMensagem("Senha possui caracteres inválidos");
+                    usuarioValidacao.IncluirMensagem("Caracteres válidos: letras, números, espaço em branco e especiais");
+                } else if (!Validacao.ValidarBrancoIniFim(usuarioValidacao.Usuario.Senha)) {
+                    usuarioValidacao.IncluirMensagem("Senha não deve começar ou terminar com espaço em branco");
+                }
+
+                usuarioValidacao.Validacao = true;
+
+                if (usuarioValidacao.Mensagens != null) {
+                    if (usuarioValidacao.Mensagens.Count > 0) {
+                        usuarioValidacao.Validacao = false;
+                    }
+                }
+            } catch (Exception ex) {
+                usuarioValidacao = new UsuarioTransfer();
+
+                usuarioValidacao.IncluirMensagem("Erro em UsuarioBusiness ValidarSenha [" + ex.Message + "]");
+                usuarioValidacao.Erro = true;
+            }
+
+            return usuarioValidacao;
+        }
+
         public UsuarioTransfer ValidarConsulta(UsuarioTransfer usuarioTransfer) 
         {
             UsuarioTransfer usuarioValidacao;

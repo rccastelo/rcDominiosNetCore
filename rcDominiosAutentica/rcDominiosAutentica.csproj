@@ -20,6 +20,7 @@
     <ProjectReference Include="..\rcDominiosDataModels\rcDominiosDataModels.csproj" />
     <ProjectReference Include="..\rcDominiosBusiness\rcDominiosBusiness.csproj" />
     <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
+    <ProjectReference Include="..\rcDominiosCriptografia\rcDominiosCriptografia.csproj" />
   </ItemGroup>
 
 </Project>

@@ -208,6 +208,44 @@ namespace rcDominiosApi.Controllers
             }
         }
 
+        [HttpPut("senha")]
+        [SwaggerOperation(
+            Summary = "Alterar Senha de Usuário",
+            Description = "[pt-BR] Alterar Senha de Usuário. Requer token de autenticação. \n\n " +
+                "[en-US] Update User Password. Authentication token is required.",
+            Tags = new[] { "Usuario" }
+        )]
+        [ProducesResponseType(typeof(UsuarioTransfer), 200)]
+        [ProducesResponseType(typeof(UsuarioTransfer), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public IActionResult AlterarSenha(UsuarioTransfer usuarioTransfer)
+        {
+            UsuarioModel usuarioModel;
+            UsuarioTransfer usuario;
+
+            try {
+                usuarioModel = new UsuarioModel();
+
+                usuario = usuarioModel.AlterarSenha(usuarioTransfer);
+            } catch (Exception ex) {
+                usuario = new UsuarioTransfer();
+
+                usuario.Erro = true;
+                usuario.IncluirMensagem("Erro em UsuarioController AlterarSenha [" + ex.Message + "]");
+            } finally {
+                usuarioModel = null;
+            }
+
+            usuario.TratarLinks();
+
+            if (usuario.Erro || !usuario.Validacao) {
+                return BadRequest(usuario);
+            } else {
+                return Ok(usuario);
+            }
+        }
+
         [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Excluir Usuário pelo Id",

@@ -23,6 +23,14 @@ namespace rcDominiosDatas
             _contexto.SaveChanges();
         }
 
+        public void AlterarSenha(UsuarioEntity entidade)
+        {
+            _contexto.Set<UsuarioEntity>().Attach(entidade);
+            _contexto.Entry(entidade).State = EntityState.Unchanged;
+            _contexto.Entry(entidade).Property(e => e.Senha).IsModified = true;
+            _contexto.SaveChanges();
+        }
+
         public UsuarioEntity ConsultarPorApelido(string apelido)
         {
             return _contexto.Set<UsuarioEntity>().FirstOrDefault(et => et.Apelido == apelido);
