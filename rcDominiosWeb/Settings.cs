@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace rcDominiosDatabase
+namespace rcDominiosWeb
 {
      public class Settings
     {

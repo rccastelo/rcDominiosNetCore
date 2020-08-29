@@ -3,13 +3,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using rcDominiosTransfers;
+using rcDominiosUtils;
 
 namespace rcDominiosWeb.Services
 {
   public class AutenticaService
     {
-        //private string enderecoServico = "http://localhost:5500/";
-        private string enderecoServico = "http://110.120.0.107/rcDominiosAutenticaNetCore/";
+        private string enderecoServico = Settings.GetSetting(Dominios.servicoAutenticaEndereco.ToString());
         private string nomeServico = "Autentica";
         private readonly HttpClient httpClient;
 

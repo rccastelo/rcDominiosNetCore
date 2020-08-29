@@ -4,13 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using rcDominiosTransfers;
+using rcDominiosUtils;
 
 namespace rcDominiosWeb.Services
 {
   public class ContaBancariaService
     {
-        //private string enderecoServico = @"http://localhost:5600/";
-        private string enderecoServico = "http://localhost/rcDominiosApiNetCore/";
+        private string enderecoServico = Settings.GetSetting(Dominios.servicoApiEndereco.ToString());
         private string nomeServico = "ContaBancaria";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;

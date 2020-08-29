@@ -3,20 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>aspnet-usersecrets-ce345b64-19cf-4972-b34f-d16f2e7976ed</UserSecretsId>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="..\rcDominiosTransfers\rcDominiosTransfers.csproj" />
     <ProjectReference Include="..\rcDominiosDataModels\rcDominiosDataModels.csproj" />
     <ProjectReference Include="..\rcDominiosBusiness\rcDominiosBusiness.csproj" />
     <ProjectReference Include="..\rcDominiosEntities\rcDominiosEntities.csproj" />
+    <ProjectReference Include="..\rcDominiosUtils\rcDominiosUtils.csproj" />
   </ItemGroup>
 
 </Project>

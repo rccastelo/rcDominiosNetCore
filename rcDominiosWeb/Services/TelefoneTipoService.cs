@@ -4,12 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using rcDominiosTransfers;
+using rcDominiosUtils;
 
 namespace rcDominiosWeb.Services
 {
   public class TelefoneTipoService
     {
-        private string enderecoServico = "http://localhost/rcDominiosApiNetCore/";
+        private string enderecoServico = Settings.GetSetting(Dominios.servicoApiEndereco.ToString());
         private string nomeServico = "TelefoneTipo";
         private HttpClient httpClient = null;
         AutenticaService autenticaService = null;

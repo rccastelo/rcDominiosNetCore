@@ -6,7 +6,7 @@ namespace rcDominiosDatabase
     public class DominiosDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlServer(Settings.GetDbConnectionString());
+            optionsBuilder.UseSqlServer(Settings.GetConnectionString());
         }
 
         public DbSet<PessoaTipoEntity> PessoaTipo { get; set; }
