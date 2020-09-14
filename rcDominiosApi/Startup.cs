@@ -43,10 +43,10 @@ namespace rcDominiosApi
           ValidateAudience = true,
           ValidateLifetime = true,
           ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("rc-Dominios-Autenticacao")),
+          IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("rc-chave-autenticacao")),
           ClockSkew = TimeSpan.FromMinutes(5),
-          ValidIssuer = "rcDominiosAutentica",
-          ValidAudience = "Postman"
+          ValidIssuer = "rc-issuer",
+          ValidAudience = "rc-audience"
         };
       });
 

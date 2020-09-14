@@ -4,15 +4,16 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using rcDominiosTransfers;
 using rcDominiosWeb.Services;
 
 namespace rcDominiosWeb.Models
 {
-    public class AutenticaModel
+  public class AutenticaModel
     {
+        private readonly string cookieRcDominios = "CookieRcDominios";
+
         private readonly IHttpContextAccessor httpContext;
 
         public AutenticaModel(IHttpContextAccessor accessor)
@@ -37,10 +38,10 @@ namespace rcDominiosWeb.Models
                             new Claim("token", autentica.Token)
                         };
 
-                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, cookieRcDominios);
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                        await httpContext.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+                        await httpContext.HttpContext.SignInAsync(cookieRcDominios, claimsPrincipal);
                     }
                 }
             } catch (Exception ex) {
@@ -84,7 +85,7 @@ namespace rcDominiosWeb.Models
 
         public void Sair() 
         {
-            httpContext.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            httpContext.HttpContext.SignOutAsync(cookieRcDominios);
         }
     }
 }
