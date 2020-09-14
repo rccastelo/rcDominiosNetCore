@@ -50,13 +50,13 @@ namespace rcDominiosApi.Models
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                         };
 
-                        var chave = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("rc-Dominios-Autenticacao"));
+                        var chave = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("rc-chave-autenticacao"));
 
                         var credenciais = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
 
                         var jwtSecurityToken = new JwtSecurityToken(
-                            issuer: "rcDominiosAutentica",
-                            audience: "Postman",
+                            issuer: "rc-issuer",
+                            audience: "rc-audience",
                             claims: direitos,
                             signingCredentials: credenciais,
                             expires: DateTime.Now.AddMinutes(30)

@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +31,7 @@ namespace rcDominiosWeb
             //services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication("CookieRcDominios")
                 .AddCookie(options => {
                     options.LoginPath = "/Dominios/Index";
                 });
